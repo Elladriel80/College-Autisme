@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Royaume du Savoir — Académie des Mages</title>
+<style>
+  :root{
+    --bg:#1a1633;        /* nuit profonde, violet */
+    --bg2:#241d4a;
+    --panel:#2c2456;
+    --panel2:#352b66;
+    --ink:#f3eefc;
+    --muted:#b9aee0;
+    --gold:#f2c14e;
+    --gold-soft:#ffe5a0;
+    --teal:#46c8c0;
+    --rose:#e87fb0;
+    --green:#6fdc8c;
+    --red-soft:#ff9d9d;
+    --border:#473a85;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+    background:radial-gradient(1200px 800px at 70% -10%, #3a2f73 0%, var(--bg) 55%);
+    color:var(--ink);
+    min-height:100vh;
+    line-height:1.5;
+  }
+  body.calme *{animation:none !important; transition:none !important}
+  .wrap{max-width:1040px;margin:0 auto;padding:18px}
+
+  /* Top bar */
+  .topbar{
+    display:flex;align-items:center;gap:14px;
+    background:linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--border);border-radius:var(--radius);
+    padding:12px 16px;box-shadow:var(--shadow);position:sticky;top:10px;z-index:50;
+    flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+  .brand .logo{width:34px;height:34px;display:grid;place-items:center;
+    background:radial-gradient(circle at 30% 30%,#6c5cd6,#3a2f73);border-radius:10px;font-size:20px}
+  .stats{display:flex;gap:10px;flex-wrap:wrap;margin-left:auto}
+  .chip{display:flex;align-items:center;gap:6px;background:var(--bg2);
+    border:1px solid var(--border);border-radius:999px;padding:6px 12px;font-weight:700;font-size:14px}
+  .chip .ic{font-size:16px}
+  .lvlbar{height:8px;background:var(--bg);border-radius:999px;overflow:hidden;width:120px;border:1px solid var(--border)}
+  .lvlbar > i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));width:0%}
+
+  button{font-family:inherit;cursor:pointer}
+  .btn{
+    background:linear-gradient(180deg,var(--gold-soft),var(--gold));
+    color:#3a2a05;border:none;border-radius:12px;padding:12px 18px;font-weight:800;font-size:16px;
+    box-shadow:0 4px 0 #c79a2e;transition:transform .08s ease, box-shadow .08s ease;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn:active{transform:translateY(2px);box-shadow:0 1px 0 #c79a2e}
+  .btn.ghost{background:var(--panel2);color:var(--ink);box-shadow:0 4px 0 #1c1740;border:1px solid var(--border)}
+  .btn.big{font-size:18px;padding:14px 26px}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);
+    border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);margin-top:18px}
+  h1,h2,h3{margin:0 0 10px}
+  h1{font-size:30px}
+  .muted{color:var(--muted)}
+  .center{text-align:center}
+
+  /* Avatar choice */
+  .grid{display:grid;gap:14px}
+  .avatars{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+  .avatar{background:var(--bg2);border:2px solid var(--border);border-radius:16px;padding:16px;text-align:center;cursor:pointer;transition:border-color .12s}
+  .avatar:hover{border-color:var(--gold)}
+  .avatar.sel{border-color:var(--gold);box-shadow:0 0 0 3px rgba(242,193,78,.25)}
+  .avatar .face{font-size:46px}
+  .avatar .nm{font-weight:700;margin-top:6px}
+  input.text{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);
+    background:var(--bg);color:var(--ink);font-size:16px}
+
+  /* Map / regions */
+  .regions{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .region{position:relative;border-radius:16px;padding:18px;border:1px solid var(--border);
+    background:var(--bg2);cursor:pointer;overflow:hidden;transition:transform .12s}
+  .region:hover{transform:translateY(-3px)}
+  .region .rico{font-size:40px}
+  .region h3{margin:8px 0 4px}
+  .region .prog{height:8px;background:var(--bg);border-radius:999px;margin-top:12px;overflow:hidden;border:1px solid var(--border)}
+  .region .prog > i{display:block;height:100%;width:0%}
+  .region .pct{font-size:13px;margin-top:6px;font-weight:700}
+
+  /* Quest list */
+  .quests{display:flex;flex-direction:column;gap:10px}
+  .quest{display:flex;align-items:center;gap:14px;background:var(--bg2);border:1px solid var(--border);
+    border-radius:14px;padding:14px 16px}
+  .quest .qix{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;
+    background:var(--panel2);border:1px solid var(--border);flex:0 0 auto}
+  .quest .qmeta{flex:1}
+  .quest .qmeta .qt{font-weight:700}
+  .quest .stars{letter-spacing:2px;color:var(--gold);font-size:16px}
+  .quest.locked{opacity:.55}
+  .quest.done .qix{background:linear-gradient(180deg,var(--green),#3aa85e);color:#06351a;border-color:#3aa85e}
+
+  /* Lesson */
+  .lesson .cours{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin:12px 0}
+  .lesson .cours b{color:var(--gold-soft)}
+  .qbox{margin-top:8px}
+  .qtext{font-size:19px;font-weight:700;margin:14px 0}
+  .options{display:grid;gap:10px}
+  .opt{text-align:left;background:var(--bg2);border:2px solid var(--border);border-radius:12px;
+    padding:13px 16px;font-size:16px;color:var(--ink);transition:border-color .1s, background .1s}
+  .opt:hover{border-color:var(--teal)}
+  .opt.correct{border-color:var(--green);background:rgba(111,220,140,.16)}
+  .opt.wrong{border-color:var(--red-soft);background:rgba(255,157,157,.14)}
+  .opt:disabled{cursor:default}
+  .feedback{margin-top:14px;border-radius:12px;padding:14px 16px;font-weight:600;display:none}
+  .feedback.ok{display:block;background:rgba(111,220,140,.14);border:1px solid var(--green)}
+  .feedback.no{display:block;background:rgba(255,157,157,.12);border:1px solid var(--red-soft)}
+  .feedback .lab{font-weight:800;display:block;margin-bottom:4px}
+  .progress-quest{height:10px;background:var(--bg);border-radius:999px;overflow:hidden;border:1px solid var(--border);margin:10px 0 4px}
+  .progress-quest > i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));width:0%;transition:width .3s}
+
+  /* Badges */
+  .badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+  .badge{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center}
+  .badge.lock{opacity:.4}
+  .badge .bic{font-size:34px}
+  .badge .bn{font-weight:700;margin-top:6px;font-size:14px}
+
+  .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);
+    background:linear-gradient(180deg,#3a2f73,#241d4a);border:1px solid var(--gold);
+    border-radius:14px;padding:14px 22px;font-weight:800;box-shadow:var(--shadow);opacity:0;
+    transition:opacity .25s, transform .25s;z-index:200;display:flex;align-items:center;gap:10px}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .spacer{flex:1}
+  .small{font-size:13px}
+  .pill{display:inline-block;background:var(--bg2);border:1px solid var(--border);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;margin-right:6px}
+  .hide{display:none !important}
+  a.link{color:var(--teal);cursor:pointer;text-decoration:underline}
+  .footnote{margin-top:24px;font-size:12px;color:var(--muted);text-align:center}
+  .levelup{font-size:22px}
+  @keyframes pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+  .pop{animation:pop .35s ease}
+
+  /* Royaume */
+  .kingdom{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);margin-top:14px;
+    background:linear-gradient(180deg,#3a2f73 0%, #5a4aa0 40%, #7c6bbf 60%, #6a9a5a 60%, #4f7d44 100%);
+    min-height:230px}
+  .kingdom .sun{position:absolute;top:16px;right:24px;font-size:38px;filter:drop-shadow(0 0 10px rgba(255,220,120,.6))}
+  .kingdom .ground{position:absolute;left:0;right:0;bottom:0;height:40%;
+    background:linear-gradient(180deg,#5d8a4f,#3f6b39)}
+  .kingdom .scene{position:absolute;left:0;right:0;bottom:8%;display:flex;align-items:flex-end;
+    justify-content:center;gap:6px;flex-wrap:wrap;padding:0 14px}
+  .kingdom .bld{font-size:40px;line-height:1;filter:drop-shadow(0 4px 4px rgba(0,0,0,.35))}
+  .kingdom .bld.ghost{opacity:.18;filter:grayscale(1)}
+  .kingdom .castle{font-size:60px}
+  .kingdom .kcount{position:absolute;top:12px;left:16px;background:rgba(20,16,45,.6);
+    border:1px solid var(--border);border-radius:999px;padding:5px 12px;font-weight:700;font-size:14px}
+  .shop{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+  .shopitem{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center}
+  .shopitem .si{font-size:34px}
+  .shopitem .snm{font-weight:700;margin:6px 0 2px}
+  .shopitem.built{border-color:var(--green)}
+  .shopitem .cost{font-weight:800;color:var(--gold);margin:6px 0}
+
+  /* Cartes mentales & vidéos */
+  a.btn{display:inline-block;text-decoration:none;text-align:center}
+  .mindmap-box{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:10px;margin-top:8px}
+  .mindmap-box svg{display:block;margin:0 auto}
+  .res-title{margin-top:18px;display:flex;align-items:center;gap:8px;font-size:17px;font-weight:800}
+  .video-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:14px;overflow:hidden;
+    border:1px solid var(--border);margin-top:8px;background:#000}
+  .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar" id="topbar">
+    <div class="brand"><span class="logo">🪄</span><span>Le Royaume du Savoir</span></div>
+    <div class="stats" id="stats"></div>
+  </div>
+  <div id="app"></div>
+  <div class="footnote">
+    Programme du Cycle 4 (5ᵉ → 4ᵉ → 3ᵉ) de l'Éducation nationale française · Prototype ·
+    <a class="link" id="resetBtn">Réinitialiser la progression</a> ·
+    <a class="link" id="calmeBtn">Mode calme (réduire animations)</a>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================================
+   LE ROYAUME DU SAVOIR — prototype d'apprentissage gamifié (Brevet / Cycle 4)
+   Conçu pour une enfant autiste de 5e : structure prévisible, renforcement
+   positif, thème fantastique, une tâche à la fois, encouragements constants.
+   ========================================================================= */
+
+/* ----------------------------- CONTENU --------------------------------- */
+/* Chaque matière = une "région" du royaume. Chaque leçon = une "quête".
+   Types de questions : 'qcm' (un seul choix), 'vf' (vrai/faux),
+   'saisie' (réponse à taper, plusieurs formes acceptées).
+   Le contenu suit le programme de 5e (Cycle 4) et est facile à étendre. */
+
+const CONTENT = {
+  subjects: [
+    {
+      id:"maths", name:"Mathématiques", region:"Les Tours de Calcul", icon:"🗼", color:"#46c8c0",
+      lessons:[
+        {
+          id:"m1", title:"Les nombres relatifs",
+          cours:"Un <b>nombre relatif</b> peut être positif (ex : +5) ou négatif (ex : -3). " +
+                "Pour <b>additionner</b> deux nombres de même signe, on additionne et on garde le signe. " +
+                "De signes différents : on soustrait et on garde le signe du plus grand. " +
+                "Soustraire revient à ajouter l'opposé : 2 − (−3) = 2 + 3 = 5.",
+          questions:[
+            {type:"qcm", q:"Combien fait (−7) + (−5) ?", options:["−12","−2","+12","+2"], answer:0,
+             explain:"Même signe (négatifs) : on additionne 7+5=12 et on garde le signe −. Donc −12."},
+            {type:"qcm", q:"Combien fait (−8) + 3 ?", options:["−11","−5","+5","+11"], answer:1,
+             explain:"Signes différents : 8−3=5, on garde le signe du plus grand (8, négatif). Donc −5."},
+            {type:"saisie", q:"Calcule : 4 − (−6) =", answer:["10","+10"],
+             explain:"Soustraire un négatif = additionner : 4 + 6 = 10."},
+            {type:"qcm", q:"Quel est l'opposé de −9 ?", options:["+9","−9","0","1/9"], answer:0,
+             explain:"L'opposé de −9 est +9 (ils sont symétriques par rapport à 0)."},
+            {type:"vf", q:"Sur une droite graduée, −5 est situé à gauche de −2.", answer:true,
+             explain:"Plus un négatif est grand en valeur, plus il est à gauche : −5 < −2."}
+          ]
+        },
+        {
+          id:"m2", title:"Les fractions",
+          cours:"Pour <b>additionner</b> des fractions, il faut le <b>même dénominateur</b>. " +
+                "Ex : 1/2 + 1/3 → on met sur 6 : 3/6 + 2/6 = 5/6. " +
+                "Prendre une fraction « de » un nombre = multiplier : 3/4 de 20 = 3×20/4 = 15.",
+          questions:[
+            {type:"qcm", q:"Combien fait 1/2 + 1/3 ?", options:["2/5","5/6","1/6","2/6"], answer:1,
+             explain:"On met sur 6 : 3/6 + 2/6 = 5/6."},
+            {type:"saisie", q:"Combien vaut 3/4 de 20 ? (réponds par un nombre)", answer:["15"],
+             explain:"3/4 de 20 = 3 × 20 ÷ 4 = 60 ÷ 4 = 15."},
+            {type:"qcm", q:"Quelle fraction est égale à 1/2 ?", options:["3/5","4/8","2/5","5/9"], answer:1,
+             explain:"4/8 se simplifie en 1/2 (on divise haut et bas par 4)."},
+            {type:"saisie", q:"Simplifie 6/9 (écris sous la forme a/b la plus simple).", answer:["2/3"],
+             explain:"On divise par 3 : 6÷3 / 9÷3 = 2/3."},
+            {type:"qcm", q:"Combien fait 5/6 − 1/6 ?", options:["4/6","4/0","6/6","4/12"], answer:0,
+             explain:"Même dénominateur : 5−1 = 4, donc 4/6 (que l'on peut simplifier en 2/3)."}
+          ]
+        },
+        {
+          id:"m3", title:"La proportionnalité & les pourcentages",
+          cours:"Deux grandeurs sont <b>proportionnelles</b> si on passe de l'une à l'autre en multipliant " +
+                "toujours par le même nombre (le coefficient). Un <b>pourcentage</b> : 25 % d'un nombre = " +
+                "25/100 × ce nombre. Ex : 25 % de 80 = 20.",
+          questions:[
+            {type:"saisie", q:"Calcule 25 % de 80.", answer:["20"],
+             explain:"25 % = 25/100 = 1/4. Donc 80 ÷ 4 = 20."},
+            {type:"qcm", q:"3 stylos coûtent 6 €. Combien coûtent 5 stylos (même prix unitaire) ?",
+             options:["9 €","10 €","11 €","12 €"], answer:1,
+             explain:"1 stylo = 6 ÷ 3 = 2 €. Donc 5 × 2 = 10 €."},
+            {type:"saisie", q:"Calcule 10 % de 250.", answer:["25"],
+             explain:"10 % = diviser par 10 : 250 ÷ 10 = 25."},
+            {type:"qcm", q:"Un t-shirt à 40 € baisse de 50 %. Nouveau prix ?",
+             options:["10 €","20 €","30 €","35 €"], answer:1,
+             explain:"50 % de 40 = 20 € de réduction. 40 − 20 = 20 €."},
+            {type:"vf", q:"Dans un tableau de proportionnalité, on passe d'une ligne à l'autre en multipliant par un même coefficient.",
+             answer:true, explain:"C'est exactement la définition de la proportionnalité."}
+          ]
+        },
+        {
+          id:"m4", title:"Géométrie : angles & triangles",
+          cours:"Dans tout triangle, la <b>somme des angles vaut 180°</b>. " +
+                "L'<b>aire d'un triangle</b> = (base × hauteur) ÷ 2. " +
+                "Deux angles <b>complémentaires</b> font 90°, deux angles <b>supplémentaires</b> font 180°.",
+          questions:[
+            {type:"saisie", q:"Un triangle a deux angles de 60° et 70°. Quel est le 3ᵉ angle (en degrés) ?",
+             answer:["50","50°"], explain:"180 − 60 − 70 = 50°."},
+            {type:"qcm", q:"Aire d'un triangle de base 8 cm et hauteur 5 cm ?",
+             options:["13 cm²","20 cm²","40 cm²","26 cm²"], answer:1,
+             explain:"(8 × 5) ÷ 2 = 40 ÷ 2 = 20 cm²."},
+            {type:"qcm", q:"Deux angles supplémentaires ont pour somme :",
+             options:["90°","180°","360°","45°"], answer:1,
+             explain:"Supplémentaires = 180°. (Complémentaires = 90°.)"},
+            {type:"saisie", q:"Un angle mesure 35°. Quel est son complément (en degrés) ?",
+             answer:["55","55°"], explain:"Complémentaires font 90° : 90 − 35 = 55°."},
+            {type:"vf", q:"Un triangle peut avoir deux angles droits.", answer:false,
+             explain:"Non : deux angles droits feraient déjà 180°, il ne resterait rien pour le 3ᵉ."}
+          ]
+        },
+        {
+          id:"m5", niveau:"4e", title:"Développer & réduire (calcul littéral)",
+          cours:"La <b>distributivité</b> : k(a + b) = k×a + k×b. Ex : 3(x + 4) = 3x + 12. " +
+                "<b>Réduire</b>, c'est regrouper les termes semblables : 3x + 2x = 5x.",
+          questions:[
+            {type:"qcm", q:"Développe 3(x + 4).", options:["3x + 4","3x + 12","x + 12","7x"], answer:1,
+             explain:"3×x + 3×4 = 3x + 12."},
+            {type:"saisie", q:"Développe 2(a + 5). (écris le résultat)", answer:["2a+10","2a + 10"],
+             explain:"2×a + 2×5 = 2a + 10."},
+            {type:"qcm", q:"Développe 5(2x − 3).", options:["10x − 3","7x − 15","10x − 15","10x − 8"], answer:2,
+             explain:"5×2x − 5×3 = 10x − 15."},
+            {type:"saisie", q:"Réduis : 3x + 2x =", answer:["5x"], explain:"On additionne les coefficients : (3+2)x = 5x."},
+            {type:"vf", q:"L'égalité k(a + b) = ka + kb s'appelle la distributivité.", answer:true,
+             explain:"Oui, c'est la propriété de distributivité de la multiplication sur l'addition."}
+          ]
+        },
+        {
+          id:"m6", niveau:"4e", title:"Les équations du premier degré",
+          cours:"Résoudre une <b>équation</b>, c'est trouver la valeur de l'inconnue (souvent x). " +
+                "On fait la même opération des deux côtés du signe =. " +
+                "Ex : x + 5 = 12 → x = 12 − 5 = 7.",
+          questions:[
+            {type:"saisie", q:"Résous : x + 5 = 12. x =", answer:["7"], explain:"x = 12 − 5 = 7."},
+            {type:"saisie", q:"Résous : 3x = 15. x =", answer:["5"], explain:"x = 15 ÷ 3 = 5."},
+            {type:"qcm", q:"Résous : 2x + 1 = 9.", options:["x = 3","x = 4","x = 5","x = 8"], answer:1,
+             explain:"2x = 9 − 1 = 8, donc x = 8 ÷ 2 = 4."},
+            {type:"saisie", q:"Résous : x − 4 = 10. x =", answer:["14"], explain:"x = 10 + 4 = 14."},
+            {type:"vf", q:"Pour résoudre 2x = 10, on divise les deux côtés par 2.", answer:true,
+             explain:"Oui : x = 10 ÷ 2 = 5."}
+          ]
+        },
+        {
+          id:"m7", niveau:"4e", title:"Le théorème de Pythagore",
+          cours:"Dans un <b>triangle rectangle</b>, le côté opposé à l'angle droit est l'<b>hypoténuse</b> " +
+                "(le plus long). Le théorème de Pythagore dit : (hypoténuse)² = (côté)² + (côté)². " +
+                "Ex : côtés 3 et 4 → hypoténuse² = 9 + 16 = 25 → hypoténuse = 5.",
+          questions:[
+            {type:"qcm", q:"Dans un triangle rectangle, le côté opposé à l'angle droit s'appelle :",
+             options:["la base","l'hypoténuse","la hauteur","le sommet"], answer:1,
+             explain:"L'hypoténuse est le côté opposé à l'angle droit (et le plus long)."},
+            {type:"saisie", q:"Triangle rectangle de côtés 3 et 4. Longueur de l'hypoténuse ?",
+             answer:["5"], explain:"3² + 4² = 9 + 16 = 25, et √25 = 5."},
+            {type:"saisie", q:"Triangle rectangle de côtés 6 et 8. Longueur de l'hypoténuse ?",
+             answer:["10"], explain:"6² + 8² = 36 + 64 = 100, et √100 = 10."},
+            {type:"vf", q:"Le théorème de Pythagore ne s'utilise que dans les triangles rectangles.", answer:true,
+             explain:"Oui : il faut un angle droit pour l'appliquer."},
+            {type:"qcm", q:"Le théorème de Pythagore s'écrit :",
+             options:["hyp² = côté² + côté²","hyp = côté + côté","hyp² = côté × côté","hyp = côté²"], answer:0,
+             explain:"Le carré de l'hypoténuse = somme des carrés des deux autres côtés."}
+          ]
+        },
+        {
+          id:"m8", niveau:"4e", title:"Les puissances",
+          cours:"Une <b>puissance</b> est une multiplication répétée : 2³ = 2×2×2 = 8. " +
+                "Le petit nombre (l'exposant) indique combien de fois on multiplie. " +
+                "Pour 10 : 10² = 100, 10³ = 1000 (autant de zéros que l'exposant).",
+          questions:[
+            {type:"saisie", q:"Combien vaut 2³ ?", answer:["8"], explain:"2×2×2 = 8."},
+            {type:"saisie", q:"Combien vaut 5² ?", answer:["25"], explain:"5×5 = 25."},
+            {type:"qcm", q:"Combien vaut 10⁴ ?", options:["100","1000","10000","100000"], answer:2,
+             explain:"10⁴ = 1 suivi de 4 zéros = 10000."},
+            {type:"saisie", q:"Combien vaut 2⁴ ?", answer:["16"], explain:"2×2×2×2 = 16."},
+            {type:"vf", q:"10³ = 1000.", answer:true, explain:"10×10×10 = 1000 (3 zéros)."}
+          ]
+        }
+      ]
+    },
+    {
+      id:"francais", name:"Français", region:"La Bibliothèque Enchantée", icon:"📜", color:"#e87fb0",
+      lessons:[
+        {
+          id:"f1", title:"Les classes de mots",
+          cours:"Chaque mot appartient à une <b>classe</b> : le <b>nom</b> (dragon), le <b>déterminant</b> (le, un, ma), " +
+                "l'<b>adjectif</b> (puissant), le <b>verbe</b> (voler), l'<b>adverbe</b> (vite), le <b>pronom</b> (il, elle).",
+          questions:[
+            {type:"qcm", q:"Dans « le dragon vole », quelle est la classe du mot « dragon » ?",
+             options:["Verbe","Nom","Adjectif","Adverbe"], answer:1,
+             explain:"« dragon » désigne un être : c'est un nom."},
+            {type:"qcm", q:"Dans « une potion magique », le mot « magique » est :",
+             options:["un nom","un déterminant","un adjectif","un verbe"], answer:2,
+             explain:"« magique » précise le nom « potion » : c'est un adjectif qualificatif."},
+            {type:"qcm", q:"Le mot « rapidement » est :",
+             options:["un adjectif","un adverbe","un nom","un pronom"], answer:1,
+             explain:"Il se termine souvent en -ment et modifie un verbe : c'est un adverbe."},
+            {type:"qcm", q:"Dans « elle court », « elle » est :",
+             options:["un nom","un verbe","un pronom","un adverbe"], answer:2,
+             explain:"« elle » remplace un nom : c'est un pronom personnel."},
+            {type:"vf", q:"Dans « le », nous avons un déterminant.", answer:true,
+             explain:"« le » accompagne un nom : c'est un déterminant (article défini)."}
+          ]
+        },
+        {
+          id:"f2", title:"Conjugaison : présent de l'indicatif",
+          cours:"Au <b>présent</b>, les verbes du 1ᵉʳ groupe (-er) se terminent par " +
+                "-e, -es, -e, -ons, -ez, -ent. Attention aux verbes irréguliers : " +
+                "être (je suis, tu es, il est…), avoir (j'ai, tu as, il a…), aller (je vais, tu vas, il va…).",
+          questions:[
+            {type:"saisie", q:"Conjugue « chanter » à la 1ʳᵉ personne du singulier au présent : je …",
+             answer:["chante","je chante"], explain:"1ᵉʳ groupe : je chante (terminaison -e)."},
+            {type:"qcm", q:"« Nous (être) … des magiciens. » Quelle forme ?",
+             options:["sommes","êtes","sont","es"], answer:0,
+             explain:"Verbe être au présent : nous sommes."},
+            {type:"saisie", q:"Conjugue « finir » : tu … (présent)", answer:["finis","tu finis"],
+             explain:"2ᵉ groupe : tu finis (terminaison -is)."},
+            {type:"qcm", q:"« Ils (avoir) … faim. »",
+             options:["a","as","ont","avons"], answer:2,
+             explain:"Verbe avoir, 3ᵉ pers. pluriel : ils ont."},
+            {type:"saisie", q:"Conjugue « aller » : je … (présent)", answer:["vais","je vais"],
+             explain:"Verbe irrégulier aller : je vais."}
+          ]
+        },
+        {
+          id:"f3", title:"Les figures de style",
+          cours:"Une <b>comparaison</b> rapproche deux éléments avec un mot-outil (comme, tel, semblable à) : " +
+                "« fort <b>comme</b> un lion ». Une <b>métaphore</b> fait la même chose <i>sans</i> mot-outil : " +
+                "« cet homme est un lion ». La <b>personnification</b> donne des traits humains à une chose : " +
+                "« le vent murmure ».",
+          questions:[
+            {type:"qcm", q:"« Ses yeux brillaient comme des étoiles. » Quelle figure ?",
+             options:["Métaphore","Comparaison","Personnification","Aucune"], answer:1,
+             explain:"Présence du mot-outil « comme » → comparaison."},
+            {type:"qcm", q:"« La lune souriait dans le ciel. » Quelle figure ?",
+             options:["Comparaison","Métaphore","Personnification","Hyperbole"], answer:2,
+             explain:"On prête une action humaine (sourire) à la lune → personnification."},
+            {type:"qcm", q:"« Cet enfant est un vrai soleil. » Quelle figure ?",
+             options:["Comparaison","Métaphore","Personnification","Aucune"], answer:1,
+             explain:"Rapprochement sans mot-outil → métaphore."},
+            {type:"vf", q:"Une comparaison utilise toujours un mot-outil comme « comme » ou « tel ».",
+             answer:true, explain:"C'est ce qui la distingue de la métaphore."},
+            {type:"qcm", q:"« Il pleut des cordes. » est plutôt :",
+             options:["une personnification","une expression imagée (métaphore)","une comparaison","une rime"],
+             answer:1, explain:"Image forte sans mot-outil → métaphore (expression figurée)."}
+          ]
+        },
+        {
+          id:"f4", niveau:"4e", title:"Discours direct et discours indirect",
+          cours:"Le <b>discours direct</b> rapporte les paroles exactes, avec des guillemets : " +
+                "Il dit : « Je viens. » Le <b>discours indirect</b> les intègre dans la phrase, sans guillemets : " +
+                "Il dit qu'il vient.",
+          questions:[
+            {type:"qcm", q:"« Elle déclara : “Je suis prête.” » Ce sont des paroles au discours :",
+             options:["direct","indirect","narratif","poétique"], answer:0,
+             explain:"Paroles exactes + guillemets → discours direct."},
+            {type:"qcm", q:"Quelle phrase est au discours indirect ?",
+             options:["Il dit : « J'ai faim. »","Il dit qu'il a faim.","« J'ai faim », dit-il.","Il crie : « Au secours ! »"],
+             answer:1, explain:"Pas de guillemets, paroles intégrées avec « que » → discours indirect."},
+            {type:"vf", q:"Le discours direct utilise des guillemets.", answer:true,
+             explain:"Oui : les guillemets (et parfois les tirets) signalent les paroles exactes."},
+            {type:"qcm", q:"Au discours direct, quel signe annonce souvent les paroles ?",
+             options:["la virgule","les deux-points (:)","le point-virgule","les parenthèses"], answer:1,
+             explain:"Les deux-points introduisent les paroles, suivis des guillemets."}
+          ]
+        },
+        {
+          id:"f5", niveau:"4e", title:"Les propositions subordonnées",
+          cours:"Une phrase complexe contient plusieurs verbes conjugués. La <b>proposition subordonnée relative</b> " +
+                "complète un nom et commence par un <b>pronom relatif</b> (qui, que, dont, où). " +
+                "Ex : Le livre <i>que je lis</i> est passionnant.",
+          questions:[
+            {type:"qcm", q:"Dans « Le chevalier qui arrive est courageux », « qui arrive » est une proposition :",
+             options:["principale","subordonnée relative","indépendante","interrogative"], answer:1,
+             explain:"Elle complète le nom « chevalier » et commence par « qui » → subordonnée relative."},
+            {type:"qcm", q:"Lequel est un pronom relatif ?",
+             options:["et","mais","dont","très"], answer:2,
+             explain:"« dont » est un pronom relatif (comme qui, que, où)."},
+            {type:"vf", q:"Une proposition relative complète un nom (son antécédent).", answer:true,
+             explain:"Oui : elle apporte une information sur le nom qui la précède."},
+            {type:"qcm", q:"« La ville où je suis né est belle. » Le mot relatif est :",
+             options:["ville","où","belle","suis"], answer:1,
+             explain:"« où » introduit la subordonnée relative et indique le lieu."}
+          ]
+        },
+        {
+          id:"f6", niveau:"4e", title:"Passé simple et imparfait (récit)",
+          cours:"Dans un récit au passé, l'<b>imparfait</b> décrit le décor et les actions qui durent " +
+                "(il faisait nuit, elle marchait). Le <b>passé simple</b> exprime les actions brèves de premier plan " +
+                "(soudain, il bondit).",
+          questions:[
+            {type:"qcm", q:"« Il marchait quand, soudain, il tomba. » Quel verbe est au passé simple ?",
+             options:["marchait","tomba","quand","soudain"], answer:1,
+             explain:"« tomba » = action brève et soudaine → passé simple. « marchait » = imparfait."},
+            {type:"saisie", q:"Conjugue « chanter » à l'imparfait : il …", answer:["chantait","il chantait"],
+             explain:"Imparfait, 1ᵉʳ groupe : il chantait (terminaison -ait)."},
+            {type:"qcm", q:"L'imparfait sert surtout à :",
+             options:["décrire et exprimer la durée","raconter une action brève","poser une question","donner un ordre"],
+             answer:0, explain:"L'imparfait décrit le décor et les actions qui durent."},
+            {type:"saisie", q:"Conjugue « finir » au passé simple : il …", answer:["finit","il finit"],
+             explain:"Passé simple, 2ᵉ groupe : il finit."}
+          ]
+        }
+      ]
+    },
+    {
+      id:"histgeo", name:"Histoire-Géo & EMC", region:"Le Donjon du Temps", icon:"🏰", color:"#f2c14e",
+      lessons:[
+        {
+          id:"h1", title:"Le Moyen Âge : la féodalité",
+          cours:"Au Moyen Âge (Ve–XVe s.), la <b>société féodale</b> repose sur des liens : le <b>seigneur</b> " +
+                "donne une terre (le fief) à son <b>vassal</b> qui jure fidélité. Les <b>paysans</b> travaillent " +
+                "la terre du seigneur. Le <b>château fort</b> protège et symbolise le pouvoir.",
+          questions:[
+            {type:"qcm", q:"Le vassal jure fidélité à son seigneur lors d'une cérémonie appelée :",
+             options:["le sacre","l'hommage","le baptême","le tournoi"], answer:1,
+             explain:"L'« hommage » est la cérémonie où le vassal devient l'homme de son seigneur."},
+            {type:"qcm", q:"La terre donnée par le seigneur au vassal s'appelle :",
+             options:["le fief","la dîme","le donjon","la corvée"], answer:0,
+             explain:"Le fief est la terre concédée en échange de fidélité et de service."},
+            {type:"vf", q:"Au Moyen Âge, la majorité de la population était composée de paysans.",
+             answer:true, explain:"Oui, la société est très majoritairement rurale et paysanne."},
+            {type:"qcm", q:"Le travail gratuit que les paysans devaient au seigneur s'appelle :",
+             options:["la dîme","la corvée","la taille","le cens"], answer:1,
+             explain:"La corvée = travail gratuit (la dîme et la taille sont des impôts)."}
+          ]
+        },
+        {
+          id:"h2", title:"Naissance et expansion de l'islam",
+          cours:"L'islam naît au VIIᵉ siècle en Arabie. En <b>622</b>, Mahomet quitte La Mecque pour Médine : " +
+                "c'est l'<b>Hégire</b>, point de départ du calendrier musulman. Le livre sacré est le <b>Coran</b>. " +
+                "L'empire musulman s'étend ensuite très rapidement.",
+          questions:[
+            {type:"saisie", q:"En quelle année a lieu l'Hégire (départ de Mahomet vers Médine) ?",
+             answer:["622"], explain:"622 : départ de La Mecque vers Médine, début du calendrier musulman."},
+            {type:"qcm", q:"Le livre sacré des musulmans est :",
+             options:["la Bible","le Coran","la Torah","les Védas"], answer:1,
+             explain:"Le Coran est le texte sacré de l'islam."},
+            {type:"qcm", q:"L'islam apparaît au VIIᵉ siècle dans quelle région ?",
+             options:["en Égypte","en Arabie","en Espagne","en Perse"], answer:1,
+             explain:"Il naît en Arabie (villes de La Mecque et Médine)."},
+            {type:"vf", q:"Après sa naissance, l'empire musulman s'est étendu très rapidement.",
+             answer:true, explain:"En un siècle, il s'étend de l'Espagne à l'Inde."}
+          ]
+        },
+        {
+          id:"h3", title:"Géo : richesse et pauvreté dans le monde",
+          cours:"Le monde est marqué par de fortes <b>inégalités</b> de développement. On mesure la richesse " +
+                "d'un pays avec le <b>PIB</b>, et le développement humain (santé, éducation, niveau de vie) " +
+                "avec l'<b>IDH</b>. Les écarts existent entre pays, mais aussi à l'intérieur d'un même pays.",
+          questions:[
+            {type:"qcm", q:"L'indicateur qui mesure santé, éducation et niveau de vie s'appelle :",
+             options:["le PIB","l'IDH","le SMIC","le PNB"], answer:1,
+             explain:"IDH = Indice de Développement Humain (santé, éducation, revenu)."},
+            {type:"vf", q:"Les inégalités de richesse existent seulement entre les pays, jamais à l'intérieur d'un pays.",
+             answer:false, explain:"Faux : il y a aussi de grandes inégalités à l'intérieur d'un même pays."},
+            {type:"qcm", q:"Le PIB mesure surtout :",
+             options:["le bonheur","la richesse produite par un pays","la population","la surface"], answer:1,
+             explain:"Le PIB = valeur des richesses produites dans un pays."}
+          ]
+        },
+        {
+          id:"h4", title:"EMC : respect et lutte contre le harcèlement",
+          cours:"En EMC, on apprend les valeurs de la République : <b>liberté, égalité, fraternité</b> et la " +
+                "<b>laïcité</b>. Le <b>respect</b> d'autrui est essentiel. Le <b>harcèlement</b> est interdit : " +
+                "face à une situation, il faut en parler à un adulte de confiance.",
+          questions:[
+            {type:"qcm", q:"La devise de la République française est :",
+             options:["Liberté, Égalité, Fraternité","Travail, Famille, Patrie","Paix, Amour, Joie","Ordre et Progrès"],
+             answer:0, explain:"Liberté, Égalité, Fraternité."},
+            {type:"vf", q:"Si on est témoin de harcèlement, le mieux est d'en parler à un adulte de confiance.",
+             answer:true, explain:"Oui : en parler (adulte, numéro dédié) aide à protéger la victime."},
+            {type:"qcm", q:"La laïcité, c'est notamment :",
+             options:["interdire toutes les religions","la liberté de croire ou non, et la neutralité de l'école",
+                      "obliger une religion","supprimer les fêtes"], answer:1,
+             explain:"La laïcité garantit la liberté de conscience et la neutralité de l'État/l'école."}
+          ]
+        },
+        {
+          id:"h5", niveau:"4e", title:"Les Lumières & la Révolution française",
+          cours:"Au XVIIIᵉ siècle, les philosophes des <b>Lumières</b> (Voltaire, Rousseau, Montesquieu) défendent " +
+                "la <b>raison</b>, la <b>liberté</b> et l'égalité. En <b>1789</b>, la Révolution française éclate : " +
+                "prise de la Bastille le <b>14 juillet 1789</b> et Déclaration des Droits de l'Homme et du Citoyen.",
+          questions:[
+            {type:"saisie", q:"En quelle année commence la Révolution française ?", answer:["1789"],
+             explain:"1789 : prise de la Bastille et Déclaration des Droits de l'Homme."},
+            {type:"qcm", q:"La prise de la Bastille a eu lieu le :",
+             options:["14 juillet 1789","11 novembre 1918","8 mai 1945","1ᵉʳ janvier 1800"], answer:0,
+             explain:"Le 14 juillet 1789, devenu fête nationale française."},
+            {type:"qcm", q:"Les philosophes des Lumières défendent surtout :",
+             options:["le pouvoir absolu du roi","la raison et la liberté","la guerre","le silence"], answer:1,
+             explain:"Ils défendent la raison, la liberté, la tolérance et l'égalité."},
+            {type:"vf", q:"Avant 1789, la France était une monarchie absolue.", answer:true,
+             explain:"Oui : le roi détenait tous les pouvoirs (monarchie absolue de droit divin)."},
+            {type:"qcm", q:"Le texte de 1789 qui proclame les droits fondamentaux s'appelle :",
+             options:["la Constitution de 1958","la Déclaration des Droits de l'Homme et du Citoyen",
+                      "le Code civil","l'Édit de Nantes"], answer:1,
+             explain:"La Déclaration des Droits de l'Homme et du Citoyen (août 1789)."}
+          ]
+        },
+        {
+          id:"h6", niveau:"4e", title:"La traite négrière et l'esclavage",
+          cours:"Au XVIIIᵉ siècle, le <b>commerce triangulaire</b> relie trois continents : depuis l'Europe, " +
+                "on échange des marchandises en <b>Afrique</b> contre des esclaves, déportés vers les " +
+                "<b>Amériques</b> pour travailler dans les plantations. C'est la <b>traite négrière</b>.",
+          questions:[
+            {type:"qcm", q:"Le commerce triangulaire reliait :",
+             options:["Europe, Afrique, Amérique","Asie, Europe, Océanie","France, Italie, Espagne","trois villes"],
+             answer:0, explain:"Europe → Afrique → Amériques, en triangle."},
+            {type:"vf", q:"La traite négrière déportait des Africains réduits en esclavage vers les Amériques.",
+             answer:true, explain:"Oui, pour travailler de force dans les plantations."},
+            {type:"qcm", q:"Les esclaves étaient surtout forcés de travailler :",
+             options:["dans les écoles","dans les plantations","dans les châteaux d'Europe","dans l'armée"],
+             answer:1, explain:"Notamment dans les plantations de sucre, café, coton."}
+          ]
+        },
+        {
+          id:"h7", niveau:"4e", title:"Géo : l'urbanisation du monde",
+          cours:"Aujourd'hui, plus de la moitié de l'humanité vit en ville. Les très grandes villes, qui " +
+                "concentrent population et activités, sont des <b>métropoles</b>. Les villes s'étendent de plus " +
+                "en plus loin : c'est l'<b>étalement urbain</b>.",
+          questions:[
+            {type:"qcm", q:"Une très grande ville qui concentre population et activités est :",
+             options:["un village","une métropole","un hameau","une ferme"], answer:1,
+             explain:"Une métropole concentre population, économie et pouvoirs."},
+            {type:"vf", q:"Plus de la moitié de l'humanité vit aujourd'hui dans des villes.", answer:true,
+             explain:"Oui : le monde est majoritairement urbain depuis les années 2000."},
+            {type:"qcm", q:"L'extension de la ville sur les espaces autour s'appelle :",
+             options:["l'étalement urbain","la désertification","la jachère","l'érosion"], answer:0,
+             explain:"L'étalement urbain : la ville s'étend en périphérie."}
+          ]
+        }
+      ]
+    },
+    {
+      id:"sciences", name:"Sciences (PC · SVT · Techno)", region:"Le Laboratoire Alchimique", icon:"⚗️", color:"#6fdc8c",
+      lessons:[
+        {
+          id:"s1", title:"Physique-Chimie : les états de la matière",
+          cours:"La matière existe en 3 <b>états</b> : <b>solide</b> (forme propre), <b>liquide</b> (prend la forme " +
+                "du récipient), <b>gaz</b> (occupe tout l'espace). Les changements d'état ont des noms : " +
+                "<b>fusion</b> (solide→liquide), <b>solidification</b> (liquide→solide), <b>vaporisation</b> " +
+                "(liquide→gaz), <b>liquéfaction</b> (gaz→liquide).",
+          questions:[
+            {type:"qcm", q:"Le passage de l'état solide à l'état liquide s'appelle :",
+             options:["la fusion","la vaporisation","la solidification","la condensation"], answer:0,
+             explain:"Solide → liquide = fusion (ex : la glace qui fond)."},
+            {type:"qcm", q:"L'eau qui bout et devient vapeur, c'est :",
+             options:["la fusion","la vaporisation","la solidification","la fonte"], answer:1,
+             explain:"Liquide → gaz = vaporisation."},
+            {type:"saisie", q:"À quelle température (en °C) l'eau pure gèle-t-elle ?",
+             answer:["0","0°","0 °c","0°c"], explain:"L'eau pure se solidifie à 0 °C."},
+            {type:"vf", q:"Un gaz prend la forme et occupe tout le volume de son récipient.",
+             answer:true, explain:"Oui : un gaz n'a ni forme ni volume propres."},
+            {type:"saisie", q:"À quelle température (en °C) l'eau pure bout-elle au niveau de la mer ?",
+             answer:["100","100°","100°c","100 °c"], explain:"L'eau pure bout à 100 °C (pression normale)."}
+          ]
+        },
+        {
+          id:"s2", title:"Physique : les circuits électriques",
+          cours:"Un <b>circuit</b> simple comprend un générateur (pile), des fils et un récepteur (lampe). " +
+                "En <b>série</b>, les composants sont sur une seule boucle : si une lampe s'éteint, l'autre aussi. " +
+                "En <b>dérivation</b> (parallèle), chaque lampe est sur sa propre branche : elles sont indépendantes.",
+          questions:[
+            {type:"qcm", q:"Dans un circuit en série de 2 lampes, si une lampe est dévissée :",
+             options:["l'autre brille plus","l'autre s'éteint aussi","rien ne change","le circuit explose"], answer:1,
+             explain:"En série il n'y a qu'une boucle : couper en un point éteint tout."},
+            {type:"qcm", q:"Le composant qui fournit l'énergie au circuit est :",
+             options:["la lampe","l'interrupteur","la pile (générateur)","le fil"], answer:2,
+             explain:"La pile est le générateur : elle fournit l'énergie électrique."},
+            {type:"vf", q:"Dans un circuit en dérivation, chaque lampe fonctionne indépendamment des autres.",
+             answer:true, explain:"Oui : chaque branche est indépendante."},
+            {type:"qcm", q:"À quoi sert un interrupteur ?",
+             options:["à éclairer","à ouvrir ou fermer le circuit","à produire l'énergie","à mesurer la tension"],
+             answer:1, explain:"L'interrupteur ouvre (coupe) ou ferme (laisse passer) le circuit."}
+          ]
+        },
+        {
+          id:"s3", title:"SVT : le corps humain et la digestion",
+          cours:"La <b>digestion</b> transforme les aliments en nutriments, qui passent dans le sang au niveau " +
+                "de l'<b>intestin grêle</b>. Le trajet : bouche → œsophage → estomac → intestin grêle → gros intestin. " +
+                "Les nutriments servent à fournir de l'énergie et à construire le corps.",
+          questions:[
+            {type:"qcm", q:"Où la plupart des nutriments passent-ils dans le sang ?",
+             options:["dans l'estomac","dans l'intestin grêle","dans la bouche","dans les poumons"], answer:1,
+             explain:"L'intestin grêle est le lieu principal de l'absorption des nutriments."},
+            {type:"qcm", q:"Quel est le bon ordre du trajet des aliments ?",
+             options:["bouche → estomac → œsophage → intestin","bouche → œsophage → estomac → intestin",
+                      "estomac → bouche → intestin","bouche → intestin → estomac"], answer:1,
+             explain:"Bouche → œsophage → estomac → intestin grêle → gros intestin."},
+            {type:"vf", q:"La digestion transforme les aliments en nutriments utilisables par le corps.",
+             answer:true, explain:"Oui : c'est le rôle de la digestion."},
+            {type:"qcm", q:"Les nutriments servent notamment à :",
+             options:["fournir de l'énergie au corps","colorer la peau","faire pousser les cheveux uniquement","rien"],
+             answer:0, explain:"Ils fournissent de l'énergie et les matériaux pour le corps."}
+          ]
+        },
+        {
+          id:"s4", niveau:"4e", title:"Chimie : atomes et molécules",
+          cours:"Toute la matière est faite de minuscules grains : les <b>atomes</b>. Quand des atomes " +
+                "s'assemblent, ils forment une <b>molécule</b>. Ex : l'eau a pour formule <b>H₂O</b> " +
+                "(2 atomes d'hydrogène + 1 atome d'oxygène).",
+          questions:[
+            {type:"qcm", q:"La matière est composée de minuscules grains appelés :",
+             options:["cellules","atomes","planètes","cristaux"], answer:1,
+             explain:"Les atomes sont les constituants de base de la matière."},
+            {type:"qcm", q:"Quelle est la formule chimique de l'eau ?",
+             options:["O₂","CO₂","H₂O","NaCl"], answer:2,
+             explain:"H₂O : 2 hydrogènes + 1 oxygène."},
+            {type:"vf", q:"Une molécule est un assemblage d'atomes.", answer:true,
+             explain:"Oui : plusieurs atomes liés forment une molécule."},
+            {type:"qcm", q:"Le symbole chimique de l'oxygène est :",
+             options:["O","Ox","Og","H"], answer:0, explain:"L'oxygène a pour symbole O."}
+          ]
+        },
+        {
+          id:"s5", niveau:"4e", title:"Physique : la lumière",
+          cours:"La <b>lumière blanche</b> (celle du Soleil) est en réalité composée de <b>plusieurs couleurs</b> : " +
+                "on le voit dans un arc-en-ciel. La lumière se propage en <b>ligne droite</b> et très vite : " +
+                "environ <b>300 000 km/s</b>.",
+          questions:[
+            {type:"qcm", q:"La lumière blanche est composée :",
+             options:["d'une seule couleur","de plusieurs couleurs","de son","de chaleur uniquement"], answer:1,
+             explain:"Elle est composée de plusieurs couleurs (le spectre), visibles dans l'arc-en-ciel."},
+            {type:"vf", q:"Dans un milieu homogène, la lumière se propage en ligne droite.", answer:true,
+             explain:"Oui : c'est la propagation rectiligne de la lumière."},
+            {type:"qcm", q:"La vitesse de la lumière est d'environ :",
+             options:["300 km/h","30 km/s","300 000 km/s","3 km/s"], answer:2,
+             explain:"Environ 300 000 km par seconde : extrêmement rapide."},
+            {type:"qcm", q:"Quel phénomène montre que la lumière blanche contient plusieurs couleurs ?",
+             options:["l'écho","l'arc-en-ciel","l'ombre","l'aimant"], answer:1,
+             explain:"L'arc-en-ciel décompose la lumière blanche en couleurs."}
+          ]
+        },
+        {
+          id:"s6", niveau:"4e", title:"SVT : volcans et séismes",
+          cours:"La Terre est active à l'intérieur. Un <b>séisme</b> (tremblement de terre) vient de la cassure " +
+                "brutale des roches le long d'une <b>faille</b>. La <b>lave</b> d'un volcan provient du <b>magma</b> " +
+                "(roche fondue en profondeur). Séismes et volcans se concentrent aux <b>frontières des plaques</b>.",
+          questions:[
+            {type:"qcm", q:"La lave d'un volcan provient :",
+             options:["de la pluie","du magma (roche fondue)","du vent","de la mer"], answer:1,
+             explain:"Le magma, roche fondue en profondeur, devient lave en surface."},
+            {type:"qcm", q:"Un séisme est provoqué par :",
+             options:["le vent","la cassure brutale des roches","la pluie","la lune"], answer:1,
+             explain:"La rupture des roches le long d'une faille libère de l'énergie : c'est le séisme."},
+            {type:"vf", q:"Les volcans et les séismes se concentrent surtout aux frontières des plaques.",
+             answer:true, explain:"Oui : c'est là que la croûte terrestre est la plus active."},
+            {type:"qcm", q:"La roche fondue présente en profondeur s'appelle :",
+             options:["le sable","le magma","le granite froid","la glace"], answer:1,
+             explain:"Le magma est la roche en fusion sous la surface."}
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+/* Avatars (thème fantastique) */
+const AVATARS = [
+  {id:"mage", face:"🧙‍♀️", nm:"Mage"},
+  {id:"fee", face:"🧚", nm:"Fée"},
+  {id:"dragon", face:"🐉", nm:"Dragonne"},
+  {id:"licorne", face:"🦄", nm:"Licorne"},
+  {id:"hibou", face:"🦉", nm:"Hibou sage"},
+  {id:"chat", face:"🐈‍⬛", nm:"Chat magique"}
+];
+
+/* Badges */
+const BADGES = [
+  {id:"premiere", icon:"✨", nm:"Première quête", test:s=>questsDone(s)>=1},
+  {id:"cinq", icon:"⭐", nm:"5 quêtes réussies", test:s=>questsDone(s)>=5},
+  {id:"parfait", icon:"💯", nm:"Un sans-faute", test:s=>Object.values(s.scores||{}).some(v=>v.stars===3)},
+  {id:"serie3", icon:"🔥", nm:"Série de 3 jours", test:s=>(s.streak||0)>=3},
+  {id:"niveau5", icon:"🏅", nm:"Mage niveau 5", test:s=>levelInfo(s.xp).level>=5},
+  {id:"maths", icon:"🗼", nm:"Tours de Calcul", test:s=>regionComplete(s,"maths")},
+  {id:"francais", icon:"📜", nm:"Bibliothèque", test:s=>regionComplete(s,"francais")},
+  {id:"explorateur", icon:"🗺️", nm:"Touche-à-tout", test:s=>subjectsTouched(s)>=3}
+];
+
+/* Constructions du royaume (achetées avec des cristaux 💎) */
+const BUILDINGS = [
+  {id:"chaumiere", icon:"🏠", nm:"Chaumière",          cost:20},
+  {id:"foret",     icon:"🌳", nm:"Forêt enchantée",    cost:30},
+  {id:"fontaine",  icon:"⛲", nm:"Fontaine de cristal", cost:45},
+  {id:"tour",      icon:"🗼", nm:"Tour du mage",        cost:60},
+  {id:"pont",      icon:"🌉", nm:"Pont d'argent",       cost:75},
+  {id:"biblio",    icon:"🏛️", nm:"Grande bibliothèque", cost:100},
+  {id:"arcenciel", icon:"🌈", nm:"Arc-en-ciel",         cost:120},
+  {id:"dragon",    icon:"🐉", nm:"Antre du dragon",     cost:150},
+  {id:"observatoire", icon:"🔭", nm:"Observatoire",     cost:180},
+  {id:"palais",    icon:"👑", nm:"Palais royal",        cost:250}
+];
+
+/* ----------------------------- ÉTAT ------------------------------------ */
+const SAVE_KEY = "royaume_savoir_v1";
+let STATE = loadState();
+
+function defaultState(){
+  return {
+    setup:false, avatar:null, name:"",
+    xp:0, crystals:0, streak:0, lastDay:null,
+    scores:{},            // lessonId -> {stars, best}
+    diagnosticDone:false, diagnostic:{}, // subjectId -> {right,total}
+    badges:[], buildings:[]
+  };
+}
+function loadState(){
+  try{
+    const raw = localStorage.getItem(SAVE_KEY);
+    if(raw){ return Object.assign(defaultState(), JSON.parse(raw)); }
+  }catch(e){}
+  return defaultState();
+}
+function save(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(STATE)); }catch(e){} }
+
+/* ------------------------- HELPERS / CALCULS --------------------------- */
+function allLessons(){ return CONTENT.subjects.flatMap(s=>s.lessons.map(l=>({...l, subjectId:s.id}))); }
+function lessonById(id){ return allLessons().find(l=>l.id===id); }
+function subjectById(id){ return CONTENT.subjects.find(s=>s.id===id); }
+function questsDone(s){ return Object.values(s.scores||{}).filter(v=>v.stars>0).length; }
+function subjectsTouched(s){
+  const done = Object.keys(s.scores||{});
+  return CONTENT.subjects.filter(sub=>sub.lessons.some(l=>done.includes(l.id))).length;
+}
+function regionComplete(s,subId){
+  const sub = subjectById(subId);
+  return sub.lessons.every(l=> (s.scores[l.id]&&s.scores[l.id].stars>0));
+}
+function regionProgress(subId){
+  const sub = subjectById(subId);
+  const done = sub.lessons.filter(l=>STATE.scores[l.id]&&STATE.scores[l.id].stars>0).length;
+  return {done, total:sub.lessons.length, pct: Math.round(100*done/sub.lessons.length)};
+}
+/* Niveau de mage : seuils croissants doux */
+function levelInfo(xp){
+  let level=1, need=100, acc=0;
+  while(xp >= acc+need){ acc+=need; level++; need=Math.round(need*1.25); }
+  return {level, into: xp-acc, need, pct: Math.round(100*(xp-acc)/need)};
+}
+function todayStr(){ const d=new Date(); return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(); }
+function touchStreak(){
+  const t=todayStr();
+  if(STATE.lastDay===t) return;
+  const y=new Date(); y.setDate(y.getDate()-1);
+  const ystr=y.getFullYear()+"-"+(y.getMonth()+1)+"-"+y.getDate();
+  STATE.streak = (STATE.lastDay===ystr)? (STATE.streak||0)+1 : 1;
+  STATE.lastDay=t;
+}
+
+/* ---------------- CARTES MENTALES & VIDÉOS ----------------------------- */
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+/* Extrait les notions-clés (mots en gras) du cours pour bâtir la carte mentale */
+function extractKeyTerms(html){
+  const terms=[]; const re=/<b>(.*?)<\/b>/g; let m;
+  while((m=re.exec(html))){
+    let t=m[1].replace(/<[^>]+>/g,"").trim();
+    if(t && t.toLowerCase()!=="le grimoire :" && !terms.includes(t)) terms.push(t);
+  }
+  return terms.slice(0,6);
+}
+function wrapText(s,max){
+  const words=String(s).split(" "); const lines=[]; let cur="";
+  words.forEach(w=>{ if((cur+" "+w).trim().length>max){ if(cur)lines.push(cur); cur=w; } else cur=(cur+" "+w).trim(); });
+  if(cur) lines.push(cur); return lines;
+}
+/* Génère une carte mentale radiale en SVG à partir des notions-clés de la leçon */
+function mindmapSVG(lesson){
+  const sub=subjectById(lesson.subjectId); const color=sub.color;
+  const terms=extractKeyTerms(lesson.cours);
+  const cx=260, cy=170, rx=185, ry=120, n=Math.max(terms.length,1);
+  let nodes="";
+  terms.forEach((t,i)=>{
+    const ang=(-90 + i*(360/n))*Math.PI/180;
+    const x=cx+rx*Math.cos(ang), y=cy+ry*Math.sin(ang);
+    const lines=wrapText(t,16);
+    const w=Math.min(160, Math.max(64, t.length*7+16)), h=18*lines.length+14;
+    nodes+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${color}" stroke-width="2" opacity="0.55"/>`;
+    nodes+=`<rect x="${x-w/2}" y="${y-h/2}" width="${w}" height="${h}" rx="10" fill="#2c2456" stroke="${color}" stroke-width="1.5"/>`;
+    lines.forEach((ln,li)=>{
+      const ty=y-(lines.length-1)*9+li*18+4;
+      nodes+=`<text x="${x}" y="${ty}" text-anchor="middle" font-size="12" fill="#f3eefc" font-weight="600">${esc(ln)}</text>`;
+    });
+  });
+  const tl=wrapText(lesson.title,18); let title="";
+  tl.forEach((ln,li)=>{
+    const ty=cy-(tl.length-1)*10+li*20+5;
+    title+=`<text x="${cx}" y="${ty}" text-anchor="middle" font-size="15" fill="#1a1633" font-weight="800">${esc(ln)}</text>`;
+  });
+  return `<svg viewBox="0 0 520 340" width="100%" style="max-height:340px" xmlns="http://www.w3.org/2000/svg">
+    ${nodes}
+    <ellipse cx="${cx}" cy="${cy}" rx="98" ry="58" fill="${color}"/>
+    ${title}
+  </svg>`;
+}
+/* Chaînes YouTube de qualité par matière (recherche ciblée = toujours à jour) */
+const VIDEO_CHANNELS = {
+  maths:[{nm:"J'ai compris Maths", q:"jaicompris maths"},{nm:"Yvan Monka (maths et tiques)", q:"Yvan Monka maths et tiques"}],
+  francais:[{nm:"Les Bons Profs", q:"les bons profs français collège"},{nm:"Lumni", q:"Lumni français collège"}],
+  histgeo:[{nm:"Les Bons Profs", q:"les bons profs histoire géographie collège"},{nm:"Lumni", q:"Lumni histoire géographie collège"}],
+  sciences:[{nm:"Les Bons Profs", q:"les bons profs physique chimie SVT collège"},{nm:"Lumni", q:"Lumni sciences collège"}]
+};
+function videoButtons(lesson){
+  const chans=VIDEO_CHANNELS[lesson.subjectId]||[];
+  const niveau=lesson.niveau||"5e";
+  return chans.map(c=>{
+    const url="https://www.youtube.com/results?search_query="+encodeURIComponent(c.q+" "+lesson.title+" "+niveau);
+    return `<a class="btn ghost" href="${url}" target="_blank" rel="noopener">🔎 ${c.nm}</a>`;
+  }).join("");
+}
+/* Vidéo vérifiée par leçon (identifiants YouTube réels, chaînes de qualité).
+   Maths : Yvan Monka & J'ai compris · Français : Les Bons Profs & chaînes reconnues
+   Histoire-Géo : SchoolMouv & Les Bons Profs · Sciences : Mathrix, Madame SVT, etc. */
+const LESSON_VIDEOS = {
+  m1:"YivvFtSuzno", m2:"m0HUFgWbgsA", m3:"w1MxZGHJQbs", m4:"T4J7tNykV-o",
+  m5:"zRBOouW-O1c", m6:"4zq4HrA7LU4", m7:"M9sceJ8gzNc", m8:"IxCzv5FPJ3s",
+  f1:"npDXLK_LZcE", f2:"1XG6A8G-Yac", f3:"tNXTELm4WuI", f4:"GWkl7ycY-84",
+  f5:"lhqJp-12A2c", f6:"KbITPXzPXBA",
+  h1:"tqxB6qDrHss", h2:"BaW1TnRliMc", h3:"9kU2nYwgiL4", h5:"weOZNOyT5Vg",
+  h6:"0US35GLxQN0", h7:"UG4XF1lZizo",
+  s1:"9SB6bi1cQeg", s2:"TOb__D84Loo", s3:"WLhhNrJdRCM", s4:"E_Y4P0pL7KQ",
+  s5:"NxWLSaCQOF4", s6:"YGPQjtPP9og"
+  /* h4 (EMC) : pas de vidéo fixée → repli recherche ciblée */
+};
+function videoSection(lesson){
+  const id=LESSON_VIDEOS[lesson.id];
+  if(id){
+    return `<div class="video-wrap">
+        <iframe src="https://www.youtube-nocookie.com/embed/${id}?rel=0" title="Vidéo de la leçon"
+          loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+      <p class="small muted" style="margin:8px 0 4px">Tu veux d'autres explications ? Ouvre une chaîne de qualité :</p>
+      <div class="row">${videoButtons(lesson)}</div>`;
+  }
+  return `<p class="small muted" style="margin:2px 0 8px">Voici des chaînes de qualité (s'ouvrent dans ton navigateur) :</p>
+    <div class="row">${videoButtons(lesson)}</div>`;
+}
+
+/* ------------------------------- UI ------------------------------------ */
+const app = document.getElementById("app");
+const statsEl = document.getElementById("stats");
+
+function renderStats(){
+  if(!STATE.setup){ statsEl.innerHTML=""; return; }
+  const li = levelInfo(STATE.xp);
+  statsEl.innerHTML = `
+    <div class="chip" title="Niveau de mage"><span class="ic">🏅</span> Niv. ${li.level}
+      <span class="lvlbar"><i style="width:${li.pct}%"></i></span></div>
+    <div class="chip" title="Cristaux"><span class="ic">💎</span> ${STATE.crystals}</div>
+    <div class="chip" title="Points d'expérience"><span class="ic">⚡</span> ${STATE.xp} XP</div>
+    <div class="chip" title="Série de jours"><span class="ic">🔥</span> ${STATE.streak||0} j</div>
+    <button class="btn ghost small" id="homeBtn">🗺️ Carte</button>`;
+  const hb=document.getElementById("homeBtn"); if(hb) hb.onclick=renderMap;
+}
+
+function toast(msg, big){
+  const t=document.getElementById("toast");
+  t.innerHTML = msg;
+  t.classList.toggle("levelup", !!big);
+  t.classList.add("show");
+  clearTimeout(t._t);
+  t._t=setTimeout(()=>t.classList.remove("show"), 2600);
+}
+
+/* ---- Écran d'accueil / création d'avatar ---- */
+function renderWelcome(){
+  app.innerHTML = `
+  <div class="card center">
+    <h1>🪄 Bienvenue dans le Royaume du Savoir</h1>
+    <p class="muted" style="max-width:640px;margin:0 auto 8px">
+      Une académie magique où chaque chose apprise rend ton avatar plus puissant et fait grandir ton royaume.
+      Réussis des quêtes, gagne des cristaux 💎 et de l'expérience ⚡, et prépare le Brevet en t'amusant.
+    </p>
+    <h3 style="margin-top:18px">Choisis ton avatar</h3>
+    <div class="grid avatars" id="avs"></div>
+    <div style="max-width:360px;margin:18px auto 0">
+      <input class="text" id="nameInput" placeholder="Ton nom de mage (ex : Luna)" maxlength="20"/>
+    </div>
+    <div style="margin-top:18px">
+      <button class="btn big" id="startBtn" disabled>Entrer dans le royaume →</button>
+    </div>
+  </div>`;
+  const avs=document.getElementById("avs");
+  let chosen=null;
+  AVATARS.forEach(a=>{
+    const d=document.createElement("div");
+    d.className="avatar"; d.innerHTML=`<div class="face">${a.face}</div><div class="nm">${a.nm}</div>`;
+    d.onclick=()=>{ chosen=a.id; [...avs.children].forEach(c=>c.classList.remove("sel")); d.classList.add("sel"); check(); };
+    avs.appendChild(d);
+  });
+  const name=document.getElementById("nameInput");
+  const start=document.getElementById("startBtn");
+  function check(){ start.disabled = !(chosen && name.value.trim().length>0); }
+  name.oninput=check;
+  start.onclick=()=>{
+    STATE.avatar=chosen; STATE.name=name.value.trim(); STATE.setup=true;
+    touchStreak(); save(); renderStats();
+    renderDiagnosticIntro();
+  };
+}
+
+/* ---- Test de niveau (diagnostic) ---- */
+function buildDiagnostic(){
+  // 1 question représentative par matière (la 1ère de la 1ère leçon)
+  return CONTENT.subjects.map(s=>{
+    const l=s.lessons[0];
+    return {subjectId:s.id, subjectName:s.name, icon:s.icon, lesson:l.title, q:l.questions[0]};
+  });
+}
+function renderDiagnosticIntro(){
+  app.innerHTML=`
+  <div class="card center">
+    <h1>🔮 Le Test de l'Oracle</h1>
+    <p class="muted" style="max-width:620px;margin:0 auto">
+      Avant de commencer ton aventure, l'Oracle va te poser <b>une petite question par matière</b>
+      pour découvrir tes points forts. Ce n'est pas une note : c'est juste pour bien te guider.
+      Réponds tranquillement — chaque réponse fait briller une étoile ⭐.
+    </p>
+    <div style="margin-top:18px">
+      <button class="btn big" id="goDiag">Commencer le test 🔮</button>
+      <button class="btn ghost" id="skipDiag">Passer pour l'instant</button>
+    </div>
+  </div>`;
+  document.getElementById("goDiag").onclick=()=>runDiagnostic();
+  document.getElementById("skipDiag").onclick=()=>{ STATE.diagnosticDone=true; save(); renderMap(); };
+}
+function runDiagnostic(){
+  const items=buildDiagnostic();
+  let i=0; const result={};
+  function step(){
+    if(i>=items.length){ finish(); return; }
+    const it=items[i];
+    renderSingleQuestion({
+      header:`🔮 Test de l'Oracle — ${it.icon} ${it.subjectName}`,
+      sub:`Question ${i+1} sur ${items.length}`,
+      question:it.q,
+      onAnswer:(correct)=>{
+        result[it.subjectId]={right:(result[it.subjectId]?.right||0)+(correct?1:0), total:1, name:it.subjectName};
+      },
+      onNext:()=>{ i++; step(); },
+      lastLabel: (i===items.length-1)?"Voir mon profil ✨":"Question suivante →"
+    });
+  }
+  function finish(){
+    STATE.diagnostic=result; STATE.diagnosticDone=true; save();
+    const lines=CONTENT.subjects.map(s=>{
+      const r=result[s.id]; const ok=r&&r.right>0;
+      return `<div class="quest"><div class="qix">${s.icon}</div>
+        <div class="qmeta"><div class="qt">${s.name}</div>
+        <div class="small muted">${ok?"Belle base ! On consolidera ✨":"À travailler en priorité — on va t'aider 💪"}</div></div>
+        <div class="stars">${ok?"⭐":"☆"}</div></div>`;
+    }).join("");
+    app.innerHTML=`
+      <div class="card">
+        <h1 class="center">✨ Ton profil de départ</h1>
+        <p class="center muted">L'Oracle a parlé. Voici où tu en es — et tout va progresser !</p>
+        <div class="quests" style="margin-top:14px">${lines}</div>
+        <div class="center" style="margin-top:18px">
+          <button class="btn big" id="toMap">Découvrir le royaume 🗺️</button>
+        </div>
+      </div>`;
+    document.getElementById("toMap").onclick=renderMap;
+    addXP(20,"Test terminé"); save();
+  }
+  step();
+}
+
+/* ---- Carte du royaume (matières) ---- */
+function renderMap(){
+  renderStats();
+  const regions=CONTENT.subjects.map(s=>{
+    const p=regionProgress(s.id);
+    const complete = p.pct===100;
+    return `<div class="region" data-sub="${s.id}" style="border-color:${complete?s.color:'var(--border)'}">
+        <div class="rico">${s.icon}</div>
+        <h3>${s.region}</h3>
+        <div class="small muted">${s.name}</div>
+        <div class="prog"><i style="width:${p.pct}%;background:${s.color}"></i></div>
+        <div class="pct" style="color:${s.color}">${p.done}/${p.total} quêtes · ${p.pct}%${complete?" 👑":""}</div>
+      </div>`;
+  }).join("");
+  const li=levelInfo(STATE.xp);
+  const av=AVATARS.find(a=>a.id===STATE.avatar);
+  app.innerHTML=`
+    <div class="card">
+      <div class="row">
+        <div style="font-size:40px">${av?av.face:"🧙‍♀️"}</div>
+        <div>
+          <h2 style="margin-bottom:2px">${STATE.name}, mage de niveau ${li.level}</h2>
+          <div class="small muted">Choisis une région à explorer. Chaque quête réussie fait grandir ton royaume.</div>
+        </div>
+        <div class="spacer"></div>
+        <button class="btn ghost" id="kingdomBtn">🏰 Mon royaume</button>
+        <button class="btn ghost" id="badgesBtn">🏅 Mes badges</button>
+      </div>
+      <div class="grid regions" style="margin-top:16px">${regions}</div>
+    </div>`;
+  app.querySelectorAll(".region").forEach(r=>{
+    r.onclick=()=>renderRegion(r.dataset.sub);
+  });
+  document.getElementById("badgesBtn").onclick=renderBadges;
+  document.getElementById("kingdomBtn").onclick=renderKingdom;
+}
+
+/* ---- Mon Royaume : décor évolutif + boutique ---- */
+function renderKingdomScene(){
+  const built = STATE.buildings||[];
+  // les constructions s'affichent dans l'ordre de la liste ; le château est toujours là
+  const items = BUILDINGS.map(b=>{
+    const has = built.includes(b.id);
+    return `<span class="bld ${has?'':'ghost'}" title="${b.nm}">${b.icon}</span>`;
+  }).join("");
+  return `<div class="kingdom">
+      <div class="sun">☀️</div>
+      <div class="kcount">🏰 ${built.length}/${BUILDINGS.length} constructions</div>
+      <div class="ground"></div>
+      <div class="scene"><span class="bld castle" title="Château royal">🏯</span>${items}</div>
+    </div>`;
+}
+function renderKingdom(){
+  renderStats();
+  const built = STATE.buildings||[];
+  const shop = BUILDINGS.map(b=>{
+    const has = built.includes(b.id);
+    const afford = STATE.crystals >= b.cost;
+    const btn = has
+      ? `<div class="pill" style="color:var(--green)">✓ Construit</div>`
+      : `<button class="btn ${afford?'':'ghost'}" data-build="${b.id}" ${afford?'':'disabled'}>💎 ${b.cost}</button>`;
+    return `<div class="shopitem ${has?'built':''}">
+        <div class="si">${b.icon}</div>
+        <div class="snm">${b.nm}</div>
+        <div class="cost">${has?'':'Coût : '+b.cost+' 💎'}</div>
+        ${btn}
+      </div>`;
+  }).join("");
+  app.innerHTML = `
+    <div class="card">
+      <div class="row">
+        <h2>🏰 Mon royaume</h2>
+        <div class="spacer"></div>
+        <span class="chip">💎 ${STATE.crystals}</span>
+        <button class="btn ghost" id="back">← Carte</button>
+      </div>
+      <p class="small muted">Gagne des cristaux 💎 en réussissant des quêtes, puis construis ton royaume.
+        Plus tu apprends, plus il s'agrandit !</p>
+      ${renderKingdomScene()}
+      <h3 style="margin-top:18px">🛠️ Boutique des bâtisseurs</h3>
+      <div class="shop">${shop}</div>
+    </div>`;
+  document.getElementById("back").onclick=renderMap;
+  app.querySelectorAll("[data-build]").forEach(btn=>{
+    btn.onclick=()=>{
+      const b=BUILDINGS.find(x=>x.id===btn.dataset.build);
+      if(!b || STATE.crystals < b.cost || STATE.buildings.includes(b.id)) return;
+      STATE.crystals -= b.cost;
+      STATE.buildings.push(b.id);
+      save(); renderStats();
+      toast(`${b.icon} ${b.nm} construit ! Ton royaume grandit 🎉`, true);
+      renderKingdom();
+    };
+  });
+}
+
+/* ---- Liste des quêtes d'une matière ---- */
+function renderRegion(subId){
+  const sub=subjectById(subId);
+  let prevDone=true, curNiveau=null;
+  const items=sub.lessons.map((l,idx)=>{
+    const niveau = l.niveau || "5e";
+    let header="";
+    if(niveau!==curNiveau){
+      curNiveau=niveau;
+      header=`<div class="small muted" style="margin:14px 0 2px;font-weight:800;letter-spacing:.5px">
+        📚 NIVEAU ${niveau.toUpperCase()}</div>`;
+    }
+    const sc=STATE.scores[l.id];
+    const done = sc && sc.stars>0;
+    const locked = !prevDone && !done; // déblocage progressif
+    const stars = done? "★".repeat(sc.stars)+"☆".repeat(3-sc.stars) : "☆☆☆";
+    const cls = done?"quest done":(locked?"quest locked":"quest");
+    const html = header + `<div class="${cls}" data-l="${locked?'':l.id}">
+        <div class="qix">${done?"✓":idx+1}</div>
+        <div class="qmeta"><div class="qt">${l.title}</div>
+          <div class="small muted">${locked?"🔒 Termine la quête précédente pour débloquer":(l.questions.length+" questions")}</div>
+        </div>
+        <div class="stars">${stars}</div>
+      </div>`;
+    prevDone = done; // la suivante n'est déverrouillée que si celle-ci est faite
+    return html;
+  }).join("");
+  app.innerHTML=`
+    <div class="card">
+      <div class="row">
+        <div style="font-size:38px">${sub.icon}</div>
+        <div><h2 style="margin-bottom:2px">${sub.region}</h2>
+          <div class="small muted">${sub.name}</div></div>
+        <div class="spacer"></div>
+        <button class="btn ghost" id="back">← Carte</button>
+      </div>
+      <div class="quests" style="margin-top:16px">${items}</div>
+    </div>`;
+  document.getElementById("back").onclick=renderMap;
+  app.querySelectorAll(".quest").forEach(q=>{
+    if(q.dataset.l){ q.style.cursor="pointer"; q.onclick=()=>renderLesson(q.dataset.l); }
+  });
+}
+
+/* ---- Une leçon (cours + série de questions) ---- */
+function renderLesson(lessonId){
+  const l=lessonById(lessonId);
+  const sub=subjectById(l.subjectId);
+  app.innerHTML=`
+  <div class="card lesson">
+    <div class="row">
+      <div style="font-size:30px">${sub.icon}</div>
+      <div><div class="small muted">${sub.region}</div><h2 style="margin:0">${l.title}</h2></div>
+      <div class="spacer"></div>
+      <button class="btn ghost" id="back">← Quitter</button>
+    </div>
+    <div class="cours">📖 <b>Le grimoire :</b> ${l.cours}</div>
+
+    <div class="res-title">🧠 Carte mentale</div>
+    <p class="small muted" style="margin:2px 0 0">Les idées importantes de la leçon, d'un seul coup d'œil.</p>
+    <div class="mindmap-box">${mindmapSVG(l)}</div>
+
+    <div class="res-title">📺 Vidéo de la leçon</div>
+    <p class="small muted" style="margin:2px 0 8px">Une vidéo d'une chaîne reconnue, à regarder directement dans l'app.</p>
+    ${videoSection(l)}
+
+    <div class="center" style="margin-top:20px"><button class="btn big" id="startQuest">Commencer la quête ⚔️</button></div>
+  </div>`;
+  document.getElementById("back").onclick=()=>renderRegion(l.subjectId);
+  document.getElementById("startQuest").onclick=()=>playQuest(l);
+}
+
+function playQuest(l){
+  let i=0, right=0;
+  const total=l.questions.length;
+  function step(){
+    if(i>=total){ finish(); return; }
+    const q=l.questions[i];
+    renderSingleQuestion({
+      header:`${subjectById(l.subjectId).icon} ${l.title}`,
+      sub:`Question ${i+1} sur ${total}`,
+      progress: Math.round(100*i/total),
+      question:q,
+      onAnswer:(correct)=>{ if(correct){ right++; addXP(10,"+10 XP"); } },
+      onNext:()=>{ i++; step(); },
+      lastLabel:(i===total-1)?"Terminer la quête 🏆":"Question suivante →"
+    });
+  }
+  function finish(){
+    const ratio=right/total;
+    const stars = ratio>=1?3 : ratio>=0.7?2 : ratio>0?1:0;
+    const prev = STATE.scores[l.id];
+    const isNew = !prev || prev.stars===0;
+    const best = Math.max(prev?prev.stars:0, stars);
+    STATE.scores[l.id]={stars, best, right, total};
+    // récompenses
+    let gainXp = right*2 + (stars===3?20:stars===2?10:0);
+    let gainCr = stars*5 + (isNew?5:0);
+    STATE.crystals += gainCr;
+    touchStreak();
+    addXP(gainXp, null, true);
+    checkBadges();
+    save(); renderStats();
+
+    const av=AVATARS.find(a=>a.id===STATE.avatar);
+    const msg = stars===3?"Parfait ! Sans-faute ! 🌟" : stars===2?"Très bien joué ! 👏" : stars===1?"Bien, tu progresses ! 💪":"Ce n'est pas grave, on réessaie ensemble 🤝";
+    app.innerHTML=`
+      <div class="card center">
+        <div class="pop" style="font-size:60px">${av?av.face:"🧙‍♀️"}</div>
+        <h1>Quête terminée !</h1>
+        <div class="stars pop" style="font-size:40px;color:var(--gold)">${"★".repeat(stars)}${"☆".repeat(3-stars)}</div>
+        <p style="font-size:19px;font-weight:700">${msg}</p>
+        <p class="muted">Tu as réussi <b>${right}/${total}</b> questions.</p>
+        <div class="row" style="justify-content:center;margin:10px 0 4px">
+          <span class="chip">⚡ +${gainXp} XP</span>
+          <span class="chip">💎 +${gainCr} cristaux</span>
+        </div>
+        <div class="row" style="justify-content:center;margin-top:18px">
+          <button class="btn" id="again">↺ Refaire</button>
+          <button class="btn" id="next">Quête suivante / Carte →</button>
+        </div>
+      </div>`;
+    document.getElementById("again").onclick=()=>playQuest(l);
+    document.getElementById("next").onclick=()=>renderRegion(l.subjectId);
+  }
+  step();
+}
+
+/* ---- Rendu générique d'une question (réutilisé par diag + quêtes) ---- */
+function renderSingleQuestion(cfg){
+  const q=cfg.question;
+  let answered=false;
+  const progBar = (cfg.progress!=null)? `<div class="progress-quest"><i style="width:${cfg.progress}%"></i></div>`:"";
+  let body="";
+  if(q.type==="qcm"){
+    body=`<div class="options">`+q.options.map((o,idx)=>`<button class="opt" data-i="${idx}">${o}</button>`).join("")+`</div>`;
+  } else if(q.type==="vf"){
+    body=`<div class="options">
+      <button class="opt" data-i="true">✅ Vrai</button>
+      <button class="opt" data-i="false">❌ Faux</button></div>`;
+  } else if(q.type==="saisie"){
+    body=`<div class="row"><input class="text" id="saisie" placeholder="Tape ta réponse ici" autocomplete="off"/>
+          <button class="btn" id="valid">Valider</button></div>`;
+  }
+  app.innerHTML=`
+   <div class="card">
+     <div class="row"><div class="small muted">${cfg.header}</div><div class="spacer"></div>
+       <div class="pill">${cfg.sub}</div></div>
+     ${progBar}
+     <div class="qtext">${q.q}</div>
+     <div class="qbox">${body}</div>
+     <div class="feedback" id="fb"></div>
+     <div class="center" id="nextWrap" style="margin-top:16px"></div>
+   </div>`;
+
+  const fb=document.getElementById("fb");
+  function reveal(correct){
+    if(answered) return; answered=true;
+    if(correct){
+      fb.className="feedback ok";
+      fb.innerHTML=`<span class="lab">✅ Bravo !</span>${q.explain||""}`;
+    }else{
+      fb.className="feedback no";
+      fb.innerHTML=`<span class="lab">🤝 Presque ! Regarde :</span>${q.explain||""}`;
+    }
+    cfg.onAnswer(correct);
+    save();
+    const nw=document.getElementById("nextWrap");
+    nw.innerHTML=`<button class="btn big" id="nextBtn">${cfg.lastLabel||"Suivant →"}</button>`;
+    document.getElementById("nextBtn").onclick=cfg.onNext;
+  }
+
+  if(q.type==="qcm"){
+    app.querySelectorAll(".opt").forEach(btn=>{
+      btn.onclick=()=>{
+        const idx=parseInt(btn.dataset.i,10);
+        const correct = idx===q.answer;
+        app.querySelectorAll(".opt").forEach((b,bi)=>{
+          b.disabled=true;
+          if(bi===q.answer) b.classList.add("correct");
+          else if(bi===idx) b.classList.add("wrong");
+        });
+        reveal(correct);
+      };
+    });
+  } else if(q.type==="vf"){
+    app.querySelectorAll(".opt").forEach(btn=>{
+      btn.onclick=()=>{
+        const val = btn.dataset.i==="true";
+        const correct = val===q.answer;
+        app.querySelectorAll(".opt").forEach(b=>{
+          b.disabled=true;
+          const bv=b.dataset.i==="true";
+          if(bv===q.answer) b.classList.add("correct");
+          else if(bv===val) b.classList.add("wrong");
+        });
+        reveal(correct);
+      };
+    });
+  } else if(q.type==="saisie"){
+    const inp=document.getElementById("saisie");
+    const norm=s=>String(s).trim().toLowerCase().replace(/\s+/g,"").replace(",",".");
+    function validate(){
+      const user=norm(inp.value);
+      if(user==="") return;
+      const ok = q.answer.map(norm).includes(user);
+      inp.disabled=true; document.getElementById("valid").disabled=true;
+      reveal(ok);
+    }
+    document.getElementById("valid").onclick=validate;
+    inp.addEventListener("keydown",e=>{ if(e.key==="Enter") validate(); });
+    inp.focus();
+  }
+}
+
+/* ---- XP / niveau ---- */
+function addXP(amount, flash, silent){
+  const before=levelInfo(STATE.xp).level;
+  STATE.xp += amount;
+  const after=levelInfo(STATE.xp).level;
+  renderStats();
+  if(flash && !silent) toast(`⚡ ${flash}`);
+  if(after>before){ setTimeout(()=>toast(`🎉 Niveau ${after} atteint, ${STATE.name} !`, true), 400); }
+}
+
+/* ---- Badges ---- */
+function checkBadges(){
+  BADGES.forEach(b=>{
+    if(!STATE.badges.includes(b.id) && b.test(STATE)){
+      STATE.badges.push(b.id);
+      setTimeout(()=>toast(`${b.icon} Badge débloqué : ${b.nm} !`, true), 700);
+    }
+  });
+}
+function renderBadges(){
+  const cells=BADGES.map(b=>{
+    const got=STATE.badges.includes(b.id);
+    return `<div class="badge ${got?'':'lock'}"><div class="bic">${got?b.icon:"🔒"}</div>
+      <div class="bn">${b.nm}</div></div>`;
+  }).join("");
+  app.innerHTML=`
+    <div class="card">
+      <div class="row"><h2>🏅 Mes badges</h2><div class="spacer"></div>
+        <button class="btn ghost" id="back">← Carte</button></div>
+      <p class="muted small">Tu as débloqué ${STATE.badges.length} badge(s) sur ${BADGES.length}. Continue d'explorer !</p>
+      <div class="badges" style="margin-top:12px">${cells}</div>
+    </div>`;
+  document.getElementById("back").onclick=renderMap;
+}
+
+/* ---- Boot ---- */
+function boot(){
+  renderStats();
+  if(!STATE.setup){ renderWelcome(); }
+  else { touchStreak(); save(); if(!STATE.diagnosticDone) renderDiagnosticIntro(); else renderMap(); }
+}
+
+document.getElementById("resetBtn").onclick=()=>{
+  if(confirm("Réinitialiser toute la progression ? Cette action est définitive.")){
+    localStorage.removeItem(SAVE_KEY); STATE=defaultState(); boot();
+  }
+};
+document.getElementById("calmeBtn").onclick=()=>{
+  document.body.classList.toggle("calme");
+  toast(document.body.classList.contains("calme")?"🌙 Mode calme activé":"✨ Animations réactivées");
+};
+
+boot();
+</script>
+</body>
+</html>
