@@ -177,6 +177,25 @@
   .video-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:14px;overflow:hidden;
     border:1px solid var(--border);margin-top:8px;background:#000}
   .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* Landing page */
+  .hero{background:radial-gradient(700px 320px at 50% -25%, rgba(108,92,214,.55), transparent),
+    linear-gradient(180deg,var(--panel),var(--panel2));}
+  .hero .tag{display:inline-block;background:var(--bg2);border:1px solid var(--border);border-radius:999px;
+    padding:5px 14px;font-weight:700;font-size:13px;color:var(--gold-soft);margin-bottom:10px}
+  .section-title{font-size:23px;font-weight:800;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:14px}
+  .step{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px;text-align:center}
+  .step .num{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;margin:0 auto 8px;
+    font-weight:800;background:linear-gradient(180deg,var(--gold-soft),var(--gold));color:#3a2a05}
+  .step .si{font-size:30px}
+  .step .st{font-weight:700;margin-top:4px}
+  .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+  .feat .f{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px}
+  .feat .f .fi{font-size:26px}
+  .feat .f .ft{font-weight:700;margin:4px 0 2px}
+  .demo-q{max-width:540px;margin:0 auto}
+  .parent-note{background:var(--bg2);border:1px dashed var(--border);border-radius:14px;padding:16px;margin-top:14px}
 </style>
 </head>
 <body>
@@ -770,9 +789,15 @@ const BUILDINGS = [
   {id:"palais",    icon:"👑", nm:"Palais royal",        cost:250}
 ];
 
-/* ----------------------------- ÉTAT ------------------------------------ */
-const SAVE_KEY = "royaume_savoir_v1";
-let STATE = loadState();
+/* ----------------------------- COMPTES & ÉTAT -------------------------- */
+/* Comptes locaux multi-profils. Chaque profil a son propre état de jeu.
+   Stockage local (sur l'appareil) : aucun envoi de données. Le code PIN
+   sert au confort (plusieurs enfants), ce n'est pas une sécurité forte. */
+const PROFILES_KEY = "rds_profiles";
+const ACTIVE_KEY   = "rds_active";
+const SAVE_PREFIX  = "rds_save_";
+let STATE = defaultState();   // état du profil actif (chargé après connexion)
+let ACTIVE = null;            // id du profil actif
 
 function defaultState(){
   return {
@@ -783,14 +808,45 @@ function defaultState(){
     badges:[], buildings:[]
   };
 }
+function loadProfiles(){
+  try{ return JSON.parse(localStorage.getItem(PROFILES_KEY)) || []; }catch(e){ return []; }
+}
+function saveProfiles(list){ try{ localStorage.setItem(PROFILES_KEY, JSON.stringify(list)); }catch(e){} }
+function profileById(id){ return loadProfiles().find(p=>p.id===id); }
 function loadState(){
+  if(!ACTIVE) return defaultState();
   try{
-    const raw = localStorage.getItem(SAVE_KEY);
+    const raw = localStorage.getItem(SAVE_PREFIX+ACTIVE);
     if(raw){ return Object.assign(defaultState(), JSON.parse(raw)); }
   }catch(e){}
   return defaultState();
 }
-function save(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(STATE)); }catch(e){} }
+function save(){ if(!ACTIVE) return; try{ localStorage.setItem(SAVE_PREFIX+ACTIVE, JSON.stringify(STATE)); }catch(e){} }
+function setActive(id){ ACTIVE=id; try{ localStorage.setItem(ACTIVE_KEY, id||""); }catch(e){} }
+function logoutProfile(){ ACTIVE=null; try{ localStorage.removeItem(ACTIVE_KEY); }catch(e){} STATE=defaultState(); }
+function createProfile(name, avatar, pin){
+  const id = "p"+Date.now()+Math.floor(Math.random()*1000);
+  const list = loadProfiles();
+  list.push({id, name, avatar, pin: pin||null});
+  saveProfiles(list);
+  setActive(id);
+  STATE = defaultState();
+  STATE.setup=true; STATE.name=name; STATE.avatar=avatar;
+  touchStreak(); save();
+  return id;
+}
+function deleteProfile(id){
+  saveProfiles(loadProfiles().filter(p=>p.id!==id));
+  try{ localStorage.removeItem(SAVE_PREFIX+id); }catch(e){}
+  if(ACTIVE===id) logoutProfile();
+}
+function enterProfile(id){
+  setActive(id);
+  STATE = loadState();
+  const p = profileById(id);
+  if(p){ STATE.name=p.name; STATE.avatar=p.avatar; STATE.setup=true; }
+  touchStreak(); save();
+}
 
 /* ------------------------- HELPERS / CALCULS --------------------------- */
 function allLessons(){ return CONTENT.subjects.flatMap(s=>s.lessons.map(l=>({...l, subjectId:s.id}))); }
@@ -920,16 +976,21 @@ const app = document.getElementById("app");
 const statsEl = document.getElementById("stats");
 
 function renderStats(){
-  if(!STATE.setup){ statsEl.innerHTML=""; return; }
+  if(!STATE.setup || !ACTIVE){ statsEl.innerHTML=""; return; }
   const li = levelInfo(STATE.xp);
+  const av = AVATARS.find(a=>a.id===STATE.avatar);
   statsEl.innerHTML = `
+    <div class="chip" title="Profil">${av?av.face:"🧙‍♀️"} ${esc(STATE.name)}</div>
     <div class="chip" title="Niveau de mage"><span class="ic">🏅</span> Niv. ${li.level}
       <span class="lvlbar"><i style="width:${li.pct}%"></i></span></div>
     <div class="chip" title="Cristaux"><span class="ic">💎</span> ${STATE.crystals}</div>
     <div class="chip" title="Points d'expérience"><span class="ic">⚡</span> ${STATE.xp} XP</div>
     <div class="chip" title="Série de jours"><span class="ic">🔥</span> ${STATE.streak||0} j</div>
-    <button class="btn ghost small" id="homeBtn">🗺️ Carte</button>`;
+    <button class="btn ghost small" id="homeBtn">🗺️ Carte</button>
+    <button class="btn ghost small" id="switchBtn">👤 Changer</button>`;
   const hb=document.getElementById("homeBtn"); if(hb) hb.onclick=renderMap;
+  const sb=document.getElementById("switchBtn");
+  if(sb) sb.onclick=()=>{ save(); logoutProfile(); renderStats(); renderLanding(); };
 }
 
 function toast(msg, big){
@@ -941,26 +1002,213 @@ function toast(msg, big){
   t._t=setTimeout(()=>t.classList.remove("show"), 2600);
 }
 
-/* ---- Écran d'accueil / création d'avatar ---- */
-function renderWelcome(){
+/* ---- Page d'accueil + sélection de profil ---- */
+function goAfterLogin(){
+  renderStats();
+  if(!STATE.diagnosticDone) renderDiagnosticIntro(); else renderMap();
+}
+function renderLanding(){
+  renderStats();
+  const profiles = loadProfiles();
+  const cards = profiles.map(p=>{
+    const av = AVATARS.find(a=>a.id===p.avatar);
+    return `<div class="avatar" data-pid="${p.id}">
+        <div class="face">${av?av.face:"🧙‍♀️"}</div>
+        <div class="nm">${esc(p.name)}</div>
+        <div class="small muted">${p.pin?"🔒 protégé":"clique pour entrer"}</div>
+      </div>`;
+  }).join("");
+
+  // Bloc connexion / création (réutilisé en haut et en bas)
+  const heroCTA = profiles.length ? `
+      <h3 style="margin-top:18px">Qui joue aujourd'hui ?</h3>
+      <div class="grid avatars" id="plist">${cards}</div>
+      <div style="margin-top:16px"><button class="btn big" id="newAcc">➕ Nouveau compte</button></div>
+      <div style="margin-top:8px"><a class="link small" id="manageAcc">Gérer les comptes</a></div>`
+    : `<div style="margin-top:20px"><button class="btn big" id="newAcc">✨ Créer mon compte</button></div>`;
+
+  // Les 4 matières
+  const subjectsHTML = CONTENT.subjects.map(s=>{
+    const nb = s.lessons.length;
+    return `<div class="region" style="cursor:default;border-color:${s.color}">
+        <div class="rico">${s.icon}</div>
+        <h3>${s.region}</h3>
+        <div class="small muted">${s.name}</div>
+        <div class="pct" style="color:${s.color}">${nb} quêtes</div>
+      </div>`;
+  }).join("");
+
+  // Fonctionnalités
+  const feats = [
+    ["🎯","Test de niveau","L'Oracle situe son niveau en douceur, sans note ni échec."],
+    ["🧠","Cartes mentales","Chaque leçon résume ses idées-clés dans une carte mentale visuelle."],
+    ["📺","Vidéos de cours","Une vidéo d'une chaîne reconnue (Yvan Monka, Les Bons Profs…) dans chaque leçon."],
+    ["🏰","Royaume à bâtir","Les cristaux gagnés servent à construire un royaume qui s'agrandit."],
+    ["🏅","Badges & niveaux","XP, niveaux de mage, séries de jours et badges à débloquer."],
+    ["🌙","Pensé pour l'autisme","Structure prévisible, une tâche à la fois, ton bienveillant, mode calme."]
+  ].map(f=>`<div class="f"><div class="fi">${f[0]}</div><div class="ft">${f[1]}</div>
+      <div class="small muted">${f[2]}</div></div>`).join("");
+
+  // Badges d'exemple
+  const badgeDemo = BADGES.slice(0,4).map(b=>`<div class="badge">
+      <div class="bic">${b.icon}</div><div class="bn">${b.nm}</div></div>`).join("");
+
+  // Question d'exemple (démo)
+  const demo = {
+    q:"🪄 Sortilège de calcul : combien fait (−7) + (−5) ?",
+    options:["−12","−2","+12"], answer:0,
+    explain:"Deux nombres négatifs : on additionne 7 + 5 = 12 et on garde le signe −. Donc <b>−12</b> !"
+  };
+  const demoOpts = demo.options.map((o,i)=>`<button class="opt demo-opt" data-i="${i}">${o}</button>`).join("");
+
   app.innerHTML = `
-  <div class="card center">
-    <h1>🪄 Bienvenue dans le Royaume du Savoir</h1>
-    <p class="muted" style="max-width:640px;margin:0 auto 8px">
-      Une académie magique où chaque chose apprise rend ton avatar plus puissant et fait grandir ton royaume.
-      Réussis des quêtes, gagne des cristaux 💎 et de l'expérience ⚡, et prépare le Brevet en t'amusant.
+  <div class="card center hero">
+    <span class="tag">🎓 Préparer le Brevet en s'amusant</span>
+    <div style="font-size:58px" class="pop">🏰</div>
+    <h1>Le Royaume du Savoir</h1>
+    <p class="muted" style="max-width:680px;margin:0 auto 4px">
+      Une académie magique où ta fille apprend à son rythme, progresse sur le programme officiel
+      (Cycle 4 : 5ᵉ → 4ᵉ → 3ᵉ) et gagne des récompenses à chaque réussite. Pensée spécialement
+      pour un apprentissage clair, motivant et rassurant.
     </p>
-    <h3 style="margin-top:18px">Choisis ton avatar</h3>
-    <div class="grid avatars" id="avs"></div>
-    <div style="max-width:360px;margin:18px auto 0">
-      <input class="text" id="nameInput" placeholder="Ton nom de mage (ex : Luna)" maxlength="20"/>
+    ${heroCTA}
+  </div>
+
+  <div class="card">
+    <div class="section-title">⚙️ Comment ça marche</div>
+    <p class="muted small">Toujours le même déroulé, simple et prévisible.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div class="si">🧙‍♀️</div><div class="st">Je crée mon mage</div>
+        <div class="small muted">Avatar, nom, et un code si je veux.</div></div>
+      <div class="step"><div class="num">2</div><div class="si">🔮</div><div class="st">L'Oracle me situe</div>
+        <div class="small muted">Un petit test doux, sans note.</div></div>
+      <div class="step"><div class="num">3</div><div class="si">⚔️</div><div class="st">Je fais des quêtes</div>
+        <div class="small muted">Cours, carte mentale, vidéo, exercices.</div></div>
+      <div class="step"><div class="num">4</div><div class="si">💎</div><div class="st">Je fais grandir mon royaume</div>
+        <div class="small muted">Je gagne XP, cristaux et badges.</div></div>
     </div>
-    <div style="margin-top:18px">
-      <button class="btn big" id="startBtn" disabled>Entrer dans le royaume →</button>
+  </div>
+
+  <div class="card">
+    <div class="section-title">📚 Ce que l'on travaille</div>
+    <p class="muted small">Les 4 matières évaluées au Brevet, chacune une région magique à explorer.</p>
+    <div class="grid regions" style="margin-top:12px">${subjectsHTML}</div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">✨ Essaie une question, comme dans le jeu</div>
+    <p class="muted small">Clique sur une réponse : le retour est toujours bienveillant.</p>
+    <div class="demo-q">
+      <div class="qtext">${demo.q}</div>
+      <div class="options">${demoOpts}</div>
+      <div class="feedback" id="demoFb"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">🧠 Une carte mentale dans chaque leçon</div>
+    <p class="muted small">Exemple généré automatiquement pour la leçon « Les fractions ».</p>
+    <div class="mindmap-box">${mindmapSVG(lessonById("m2"))}</div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">🏅 On gagne des badges</div>
+    <p class="muted small">Des récompenses qui célèbrent chaque progrès.</p>
+    <div class="badges" style="margin-top:12px">${badgeDemo}</div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">🌟 Tout ce que propose l'app</div>
+    <div class="feat">${feats}</div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">👨‍👩‍👧 Pour les parents</div>
+    <div class="parent-note">
+      Application <b>gratuite</b>, qui fonctionne sur PC et tablette. Les comptes et la progression sont
+      enregistrés <b>localement</b> sur l'appareil (aucune donnée envoyée). Le contenu suit le programme de
+      l'Éducation nationale ; les vidéos pointent vers des chaînes pédagogiques reconnues. Un <b>mode calme</b>
+      réduit les animations si besoin.
+    </div>
+    <div class="center" style="margin-top:16px">
+      <button class="btn big" id="newAcc2">✨ Créer un compte et commencer</button>
     </div>
   </div>`;
-  const avs=document.getElementById("avs");
-  let chosen=null;
+
+  // Handlers
+  const bind = id => { const el=document.getElementById(id); if(el) el.onclick=renderCreateAccount; };
+  bind("newAcc"); bind("newAcc2");
+  const mg=document.getElementById("manageAcc"); if(mg) mg.onclick=renderManageAccounts;
+  app.querySelectorAll("[data-pid]").forEach(c=> c.onclick=()=>loginProfile(c.dataset.pid));
+  // Démo interactive
+  app.querySelectorAll(".demo-opt").forEach((b,i)=>{
+    b.onclick=()=>{
+      app.querySelectorAll(".demo-opt").forEach((x,j)=>{
+        x.disabled=true;
+        if(j===demo.answer) x.classList.add("correct");
+        else if(j===i) x.classList.add("wrong");
+      });
+      const fb=document.getElementById("demoFb"); const ok=i===demo.answer;
+      fb.className="feedback "+(ok?"ok":"no");
+      fb.innerHTML=(ok?'<span class="lab">✅ Bravo !</span>':'<span class="lab">🤝 Presque !</span>')+demo.explain;
+    };
+  });
+}
+function loginProfile(id){
+  const p=profileById(id); if(!p) return;
+  if(p.pin){ renderPinEntry(p); }
+  else { enterProfile(id); goAfterLogin(); }
+}
+function renderPinEntry(p){
+  const av=AVATARS.find(a=>a.id===p.avatar);
+  app.innerHTML=`
+  <div class="card center">
+    <div style="font-size:48px">${av?av.face:"🧙‍♀️"}</div>
+    <h2 style="margin:6px 0">${esc(p.name)}</h2>
+    <p class="muted">Entre ton code à 4 chiffres</p>
+    <div style="max-width:220px;margin:0 auto">
+      <input class="text" id="pinIn" inputmode="numeric" maxlength="4" placeholder="••••"
+        style="text-align:center;font-size:26px;letter-spacing:10px"/>
+    </div>
+    <div class="feedback no" id="pinErr" style="margin-top:10px">Code incorrect, réessaie.</div>
+    <div class="row" style="justify-content:center;margin-top:16px">
+      <button class="btn" id="pinOk">Entrer →</button>
+      <button class="btn ghost" id="pinBack">← Retour</button>
+    </div>
+  </div>`;
+  const inp=document.getElementById("pinIn");
+  document.getElementById("pinErr").style.display="none";
+  inp.addEventListener("input",()=>{ inp.value=inp.value.replace(/\D/g,""); });
+  function tryPin(){
+    if(inp.value===p.pin){ enterProfile(p.id); goAfterLogin(); }
+    else { document.getElementById("pinErr").style.display="block"; inp.value=""; inp.focus(); }
+  }
+  document.getElementById("pinOk").onclick=tryPin;
+  inp.addEventListener("keydown",e=>{ if(e.key==="Enter") tryPin(); });
+  document.getElementById("pinBack").onclick=renderLanding;
+  inp.focus();
+}
+function renderCreateAccount(){
+  app.innerHTML=`
+  <div class="card center">
+    <h1>✨ Créer mon compte</h1>
+    <p class="muted">Choisis ton avatar, ton nom de mage, et un code si tu veux protéger ton compte.</p>
+    <h3 style="margin-top:14px">Ton avatar</h3>
+    <div class="grid avatars" id="avs"></div>
+    <div style="max-width:360px;margin:16px auto 0">
+      <input class="text" id="nameInput" placeholder="Ton nom de mage (ex : Luna)" maxlength="20"/>
+    </div>
+    <div style="max-width:360px;margin:12px auto 0">
+      <input class="text" id="pinInput" inputmode="numeric" maxlength="4"
+        placeholder="Code à 4 chiffres (optionnel)" style="text-align:center;letter-spacing:6px"/>
+      <div class="small muted" style="margin-top:4px">Laisse vide pour entrer sans code.</div>
+    </div>
+    <div class="row" style="justify-content:center;margin-top:18px">
+      <button class="btn big" id="createBtn" disabled>Créer mon compte →</button>
+      <button class="btn ghost" id="backBtn">← Retour</button>
+    </div>
+  </div>`;
+  const avs=document.getElementById("avs"); let chosen=null;
   AVATARS.forEach(a=>{
     const d=document.createElement("div");
     d.className="avatar"; d.innerHTML=`<div class="face">${a.face}</div><div class="nm">${a.nm}</div>`;
@@ -968,14 +1216,44 @@ function renderWelcome(){
     avs.appendChild(d);
   });
   const name=document.getElementById("nameInput");
-  const start=document.getElementById("startBtn");
-  function check(){ start.disabled = !(chosen && name.value.trim().length>0); }
+  const pin=document.getElementById("pinInput");
+  const create=document.getElementById("createBtn");
+  function check(){ create.disabled = !(chosen && name.value.trim().length>0); }
   name.oninput=check;
-  start.onclick=()=>{
-    STATE.avatar=chosen; STATE.name=name.value.trim(); STATE.setup=true;
-    touchStreak(); save(); renderStats();
-    renderDiagnosticIntro();
+  pin.addEventListener("input",()=>{ pin.value=pin.value.replace(/\D/g,""); });
+  create.onclick=()=>{
+    const pinVal=pin.value.trim();
+    if(pinVal && pinVal.length!==4){ toast("Le code doit faire 4 chiffres (ou rester vide)."); return; }
+    createProfile(name.value.trim(), chosen, pinVal||null);
+    goAfterLogin();
   };
+  document.getElementById("backBtn").onclick=renderLanding;
+}
+function renderManageAccounts(){
+  const profiles=loadProfiles();
+  const rows=profiles.map(p=>{
+    const av=AVATARS.find(a=>a.id===p.avatar);
+    return `<div class="quest"><div class="qix">${av?av.face:"🧙‍♀️"}</div>
+        <div class="qmeta"><div class="qt">${esc(p.name)}</div>
+          <div class="small muted">${p.pin?"🔒 protégé par code":"sans code"}</div></div>
+        <button class="btn ghost small" data-del="${p.id}">🗑️ Supprimer</button></div>`;
+  }).join("");
+  app.innerHTML=`
+  <div class="card">
+    <div class="row"><h2>👥 Gérer les comptes</h2><div class="spacer"></div>
+      <button class="btn ghost" id="back">← Retour</button></div>
+    <p class="small muted">Supprimer un compte efface définitivement sa progression.</p>
+    <div class="quests" style="margin-top:12px">${rows||'<p class="muted">Aucun compte.</p>'}</div>
+  </div>`;
+  document.getElementById("back").onclick=renderLanding;
+  app.querySelectorAll("[data-del]").forEach(b=>{
+    b.onclick=()=>{
+      const p=profileById(b.dataset.del);
+      if(p && confirm("Supprimer le compte de "+p.name+" et toute sa progression ?")){
+        deleteProfile(b.dataset.del); renderManageAccounts();
+      }
+    };
+  });
 }
 
 /* ---- Test de niveau (diagnostic) ---- */
@@ -1392,14 +1670,25 @@ function renderBadges(){
 
 /* ---- Boot ---- */
 function boot(){
-  renderStats();
-  if(!STATE.setup){ renderWelcome(); }
-  else { touchStreak(); save(); if(!STATE.diagnosticDone) renderDiagnosticIntro(); else renderMap(); }
+  let active="";
+  try{ active = localStorage.getItem(ACTIVE_KEY) || ""; }catch(e){}
+  if(active && profileById(active)){
+    enterProfile(active);
+    goAfterLogin();
+  } else {
+    logoutProfile();
+    renderStats();
+    renderLanding();
+  }
 }
 
 document.getElementById("resetBtn").onclick=()=>{
-  if(confirm("Réinitialiser toute la progression ? Cette action est définitive.")){
-    localStorage.removeItem(SAVE_KEY); STATE=defaultState(); boot();
+  if(!ACTIVE){ toast("Crée d'abord un compte."); return; }
+  if(confirm("Réinitialiser la progression de ce profil ? (Le compte est conservé.)")){
+    const p=profileById(ACTIVE);
+    STATE=defaultState(); STATE.setup=true;
+    if(p){ STATE.name=p.name; STATE.avatar=p.avatar; }
+    save(); boot();
   }
 };
 document.getElementById("calmeBtn").onclick=()=>{

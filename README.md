@@ -8,6 +8,7 @@ Application d'apprentissage **gamifiée** pour préparer le **Diplôme National 
 
 ## ✨ Fonctionnalités
 
+- **Page d'accueil et comptes personnalisés** : plusieurs profils (ta fille, un frère/une sœur…), chacun avec sa progression, son avatar et un **code PIN optionnel**. Comptes enregistrés localement sur l'appareil, sans envoi de données.
 - **Création d'avatar** (mage, fée, dragonne…) et nom de magicien·ne.
 - **Test de l'Oracle** : un diagnostic doux pour situer le niveau, sans mise en échec.
 - **Carte du royaume** : chaque matière est une région magique à explorer.
