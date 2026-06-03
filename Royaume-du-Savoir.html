@@ -511,6 +511,60 @@ const CONTENT = {
             {type:"saisie", q:"Combien vaut 2⁴ ?", answer:["16"], explain:"2×2×2×2 = 16."},
             {type:"vf", q:"10³ = 1000.", answer:true, explain:"10×10×10 = 1000 (3 zéros)."}
           ]
+        },
+        {
+          id:"m11", niveau:"3e", title:"Le théorème de Thalès",
+          cours:"Le théorème de <b>Thalès</b> s'utilise avec des <b>droites parallèles</b> qui coupent deux droites sécantes. " +
+                "Il donne des <b>rapports égaux</b> entre les longueurs : AB/AB' = AC/AC' = BC/B'C'. " +
+                "On s'en sert pour calculer une <b>longueur manquante</b>.",
+          questions:[
+            {type:"qcm", q:"Le théorème de Thalès s'utilise surtout avec des droites :",
+             options:["parallèles","perpendiculaires","courbes","verticales"], answer:0,
+             explain:"Thalès repose sur deux droites parallèles coupant deux sécantes."},
+            {type:"saisie", q:"Configuration de Thalès : AB/AB' = AC/AC'. Si AB=3, AB'=6 et AC=4, combien vaut AC' ?",
+             answer:["8"], explain:"3/6 = 4/AC' donc AC' = 4×6÷3 = 8."},
+            {type:"saisie", q:"Toujours avec AB=2, AB'=6 et BC=5 : combien vaut B'C' ?",
+             answer:["15"], explain:"2/6 = 5/B'C' donc B'C' = 5×6÷2 = 15."},
+            {type:"vf", q:"Le théorème de Thalès permet de calculer une longueur grâce à des rapports égaux.", answer:true,
+             explain:"Oui : dans cette configuration, les rapports de longueurs sont égaux."},
+            {type:"qcm", q:"Thalès sert surtout à :",
+             options:["calculer une longueur manquante (avec des parallèles)","calculer l'aire d'un disque","mesurer un angle droit","résoudre une équation"], answer:0,
+             explain:"On l'utilise pour trouver une longueur inconnue dans une figure avec des parallèles."}
+          ]
+        },
+        {
+          id:"m12", niveau:"3e", title:"Fonctions linéaires et affines",
+          cours:"Une <b>fonction linéaire</b> s'écrit f(x) = a×x : sa courbe est une <b>droite passant par l'origine</b>. " +
+                "Une <b>fonction affine</b> s'écrit f(x) = a×x + b, où a est le <b>coefficient directeur</b> et b l'<b>ordonnée à l'origine</b>.",
+          questions:[
+            {type:"qcm", q:"Une fonction linéaire a pour forme :",
+             options:["f(x) = ax + b","f(x) = ax","f(x) = x²","f(x) = a/x"], answer:1,
+             explain:"Linéaire : f(x) = ax (sans + b) ; sa droite passe par l'origine."},
+            {type:"saisie", q:"Soit f(x) = 3x. Combien vaut f(4) ?", answer:["12"], explain:"f(4) = 3×4 = 12."},
+            {type:"saisie", q:"Soit g(x) = 2x + 1. Combien vaut g(5) ?", answer:["11"], explain:"g(5) = 2×5 + 1 = 11."},
+            {type:"qcm", q:"Dans f(x) = ax + b, le nombre b est :",
+             options:["le coefficient directeur","l'ordonnée à l'origine","la pente","l'abscisse"], answer:1,
+             explain:"b est l'ordonnée à l'origine ; a est le coefficient directeur."},
+            {type:"vf", q:"La représentation d'une fonction linéaire est une droite qui passe par l'origine.", answer:true,
+             explain:"Oui : f(0) = 0, donc la droite passe par le point (0 ; 0)."}
+          ]
+        },
+        {
+          id:"m13", niveau:"3e", title:"La notation scientifique",
+          cours:"La <b>notation scientifique</b> écrit un nombre sous la forme a × 10ⁿ, où a est compris <b>entre 1 et 10</b>. " +
+                "Elle sert à écrire facilement les très <b>grands</b> et très <b>petits</b> nombres. Ex : 32 000 = 3,2 × 10⁴.",
+          questions:[
+            {type:"qcm", q:"La notation scientifique de 32 000 est :",
+             options:["3,2 × 10⁴","3,2 × 10³","32 × 10²","3,2 × 10⁵"], answer:0,
+             explain:"3,2 × 10⁴ = 32 000, et 3,2 est bien compris entre 1 et 10."},
+            {type:"qcm", q:"Dans « a × 10ⁿ », le nombre a doit être :",
+             options:["compris entre 1 et 10","plus grand que 100","négatif","égal à 0"], answer:0,
+             explain:"En notation scientifique, 1 ≤ a < 10."},
+            {type:"saisie", q:"Combien vaut 5 × 10² ?", answer:["500"], explain:"5 × 100 = 500."},
+            {type:"saisie", q:"Combien vaut 7 × 10³ ?", answer:["7000"], explain:"7 × 1000 = 7000."},
+            {type:"vf", q:"La notation scientifique facilite l'écriture des très grands et très petits nombres.", answer:true,
+             explain:"C'est justement son intérêt principal."}
+          ]
         }
       ]
     },
@@ -659,6 +713,69 @@ const CONTENT = {
              answer:0, explain:"L'imparfait décrit le décor et les actions qui durent."},
             {type:"saisie", q:"Conjugue « finir » au passé simple : il …", answer:["finit","il finit"],
              explain:"Passé simple, 2ᵉ groupe : il finit."}
+          ]
+        },
+        {
+          id:"f9", niveau:"3e", title:"Les figures de style",
+          cours:"Une <b>comparaison</b> rapproche deux éléments avec un outil (comme, tel, pareil à). " +
+                "Une <b>métaphore</b> fait ce rapprochement sans outil. La <b>personnification</b> prête une action humaine à une chose. " +
+                "L'<b>hyperbole</b> exagère pour frapper l'esprit.",
+          questions:[
+            {type:"qcm", q:"« Il est fort comme un lion » est une :",
+             options:["métaphore","comparaison","personnification","hyperbole"], answer:1,
+             explain:"Il y a l'outil « comme » : c'est une comparaison."},
+            {type:"qcm", q:"« Cet homme est un lion » (sans outil) est une :",
+             options:["comparaison","métaphore","litote","énumération"], answer:1,
+             explain:"Rapprochement sans outil de comparaison : c'est une métaphore."},
+            {type:"qcm", q:"« Le vent murmure dans les arbres » : on prête une action humaine au vent, c'est une :",
+             options:["personnification","comparaison","hyperbole","métonymie"], answer:0,
+             explain:"On donne une action humaine (murmurer) à une chose : personnification."},
+            {type:"qcm", q:"« Je te l'ai dit mille fois ! » : cette exagération est une :",
+             options:["hyperbole","litote","comparaison","allitération"], answer:0,
+             explain:"L'exagération volontaire est une hyperbole."},
+            {type:"vf", q:"Dans une comparaison, on utilise un outil comme « comme », « tel » ou « pareil à ».", answer:true,
+             explain:"Oui : c'est ce qui distingue la comparaison de la métaphore."}
+          ]
+        },
+        {
+          id:"f10", niveau:"3e", title:"Voix active et voix passive",
+          cours:"À la <b>voix active</b>, le sujet fait l'action (« Le chat mange la souris »). À la <b>voix passive</b>, le sujet <b>subit</b> l'action " +
+                "(« La souris est mangée par le chat »). On forme la voix passive avec l'auxiliaire <b>être</b> + participe passé ; le <b>complément d'agent</b> est introduit par « par ».",
+          questions:[
+            {type:"qcm", q:"« La souris est mangée par le chat » est à la voix :",
+             options:["active","passive","impérative","interrogative"], answer:1,
+             explain:"Le sujet (la souris) subit l'action : voix passive."},
+            {type:"qcm", q:"Voix active correspondant à « Le gâteau est mangé par Léa » :",
+             options:["Léa mange le gâteau","Le gâteau mange Léa","Léa est mangée","Le gâteau est bon"], answer:0,
+             explain:"À l'actif, le sujet qui agit (Léa) fait l'action : « Léa mange le gâteau »."},
+            {type:"vf", q:"À la voix passive, le sujet subit l'action au lieu de la faire.", answer:true,
+             explain:"C'est la définition de la voix passive."},
+            {type:"qcm", q:"Dans une phrase passive, le complément d'agent est souvent introduit par :",
+             options:["« par »","« pour »","« sans »","« chez »"], answer:0,
+             explain:"Ex : « … par le chat ». Le complément d'agent suit « par »."},
+            {type:"saisie", q:"À la voix passive, on utilise l'auxiliaire (le verbe) … + le participe passé.",
+             answer:["être","etre","le verbe être","verbe être"], explain:"Voix passive = être + participe passé (ex : est mangée)."}
+          ]
+        },
+        {
+          id:"f11", niveau:"3e", title:"Argumenter : thèse, arguments, exemples",
+          cours:"Dans un texte argumentatif, la <b>thèse</b> est l'opinion défendue. Un <b>argument</b> est une idée qui soutient la thèse, " +
+                "et un <b>exemple</b> l'illustre. Les <b>connecteurs logiques</b> (d'abord, car, donc, par exemple, enfin) relient les idées.",
+          questions:[
+            {type:"qcm", q:"L'opinion que l'on défend dans un texte argumentatif s'appelle :",
+             options:["la thèse","l'argument","l'exemple","la morale"], answer:0,
+             explain:"La thèse est l'opinion défendue par l'auteur."},
+            {type:"qcm", q:"Une idée qui soutient et justifie la thèse est :",
+             options:["un argument","un personnage","une rime","un dialogue"], answer:0,
+             explain:"L'argument soutient la thèse ; l'exemple l'illustre."},
+            {type:"qcm", q:"Le connecteur « par exemple » introduit :",
+             options:["un exemple","une conclusion","une opposition","une question"], answer:0,
+             explain:"« Par exemple » annonce une illustration concrète."},
+            {type:"qcm", q:"Le connecteur logique « donc » exprime :",
+             options:["une conséquence","une cause","une comparaison","un lieu"], answer:0,
+             explain:"« Donc » introduit une conséquence (alors que « car » introduit une cause)."},
+            {type:"vf", q:"Un exemple sert à illustrer un argument et à le rendre plus convaincant.", answer:true,
+             explain:"Oui : l'exemple rend l'argument concret et crédible."}
           ]
         }
       ]
@@ -815,6 +932,65 @@ const CONTENT = {
              options:["l'étalement urbain","la désertification","la jachère","l'érosion"], answer:0,
              explain:"L'étalement urbain : la ville s'étend en périphérie."}
           ]
+        },
+        {
+          id:"h10", niveau:"3e", title:"La Première Guerre mondiale (1914-1918)",
+          cours:"La <b>Première Guerre mondiale</b> oppose de 1914 à 1918 la Triple-Entente (France, Royaume-Uni, Russie) aux Empires centraux. " +
+                "Les soldats combattent dans des <b>tranchées</b>, notamment lors de la terrible bataille de <b>Verdun</b> (1916). " +
+                "L'<b>armistice</b> est signé le 11 novembre 1918.",
+          questions:[
+            {type:"saisie", q:"En quelle année a commencé la Première Guerre mondiale ?", answer:["1914"],
+             explain:"La guerre éclate en 1914."},
+            {type:"saisie", q:"En quelle année s'est-elle terminée ?", answer:["1918"],
+             explain:"Elle se termine en 1918 (armistice le 11 novembre)."},
+            {type:"qcm", q:"L'armistice de la Première Guerre mondiale a été signé le :",
+             options:["11 novembre 1918","14 juillet 1789","8 mai 1945","1er septembre 1939"], answer:0,
+             explain:"Le 11 novembre 1918 — d'où le jour férié de commémoration."},
+            {type:"qcm", q:"Les soldats combattaient souvent depuis des :",
+             options:["tranchées","châteaux forts","pyramides","gratte-ciels"], answer:0,
+             explain:"La guerre des tranchées caractérise ce conflit."},
+            {type:"vf", q:"La bataille de Verdun (1916) est une bataille très meurtrière de la Première Guerre mondiale.", answer:true,
+             explain:"Verdun (1916) est l'une des batailles les plus meurtrières de 14-18."}
+          ]
+        },
+        {
+          id:"h11", niveau:"3e", title:"La Seconde Guerre mondiale (1939-1945)",
+          cours:"La <b>Seconde Guerre mondiale</b> dure de 1939 à 1945. En France, le général <b>de Gaulle</b> lance l'appel du 18 juin 1940 à résister. " +
+                "Le régime nazi commet un génocide, la <b>Shoah</b>. En Europe, l'Allemagne capitule le <b>8 mai 1945</b>.",
+          questions:[
+            {type:"saisie", q:"En quelle année a commencé la Seconde Guerre mondiale ?", answer:["1939"],
+             explain:"La guerre commence en 1939 (invasion de la Pologne)."},
+            {type:"saisie", q:"En quelle année s'est-elle terminée ?", answer:["1945"],
+             explain:"Elle se termine en 1945."},
+            {type:"qcm", q:"En Europe, l'Allemagne nazie capitule le :",
+             options:["8 mai 1945","11 novembre 1918","14 juillet 1789","1er janvier 2000"], answer:0,
+             explain:"Le 8 mai 1945 marque la victoire en Europe."},
+            {type:"qcm", q:"Qui lance l'appel du 18 juin 1940 à continuer le combat ?",
+             options:["le général de Gaulle","Napoléon","Jules Ferry","Louis XIV"], answer:0,
+             explain:"Charles de Gaulle lance l'appel du 18 juin 1940 depuis Londres."},
+            {type:"vf", q:"La Shoah désigne le génocide des Juifs commis par l'Allemagne nazie.", answer:true,
+             explain:"Oui : la Shoah est l'extermination systématique des Juifs d'Europe."}
+          ]
+        },
+        {
+          id:"h12", niveau:"3e", title:"La Vᵉ République et la laïcité (EMC)",
+          cours:"La <b>Vᵉ République</b> est née en 1958. Aujourd'hui, le président est élu au <b>suffrage universel direct</b> pour un mandat de <b>5 ans</b> (quinquennat). " +
+                "La <b>devise</b> de la République est « Liberté, Égalité, Fraternité ». La <b>laïcité</b> garantit la liberté de croire ou non et la neutralité de l'État.",
+          questions:[
+            {type:"saisie", q:"En quelle année débute la Vᵉ République ?", answer:["1958"],
+             explain:"La Constitution de la Vᵉ République est adoptée en 1958."},
+            {type:"qcm", q:"Aujourd'hui, le président de la République française est élu :",
+             options:["au suffrage universel direct","par le roi","par tirage au sort","à vie"], answer:0,
+             explain:"Depuis 1962, les Français élisent directement le président."},
+            {type:"qcm", q:"Depuis 2002, le mandat du président dure :",
+             options:["5 ans","2 ans","10 ans","20 ans"], answer:0,
+             explain:"C'est le quinquennat : 5 ans (au lieu de 7 auparavant)."},
+            {type:"qcm", q:"La devise de la République française est :",
+             options:["Liberté, Égalité, Fraternité","Travail, Famille, Patrie","Un pour tous, tous pour un","Paix et prospérité"], answer:0,
+             explain:"« Liberté, Égalité, Fraternité » est la devise républicaine."},
+            {type:"vf", q:"La laïcité garantit la liberté de croire ou de ne pas croire, et la neutralité de l'État.", answer:true,
+             explain:"Oui : c'est le principe de laïcité (loi de 1905)."}
+          ]
         }
       ]
     },
@@ -960,6 +1136,67 @@ const CONTENT = {
             {type:"qcm", q:"La roche fondue présente en profondeur s'appelle :",
              options:["le sable","le magma","le granite froid","la glace"], answer:1,
              explain:"Le magma est la roche en fusion sous la surface."}
+          ]
+        },
+        {
+          id:"s9", niveau:"3e", title:"L'énergie et ses conversions",
+          cours:"L'<b>énergie</b> existe sous plusieurs formes : cinétique (mouvement), thermique (chaleur), électrique, chimique, lumineuse… " +
+                "Elle peut se <b>convertir</b> d'une forme à une autre, mais elle se <b>conserve</b> (elle ne disparaît pas). Son unité est le <b>joule</b> (J).",
+          questions:[
+            {type:"qcm", q:"L'unité de l'énergie est :",
+             options:["le joule (J)","le mètre (m)","le litre (L)","le gramme (g)"], answer:0,
+             explain:"L'énergie se mesure en joules (J)."},
+            {type:"qcm", q:"Une lampe transforme l'énergie électrique surtout en énergie :",
+             options:["lumineuse (et un peu thermique)","chimique","nucléaire","sonore"], answer:0,
+             explain:"Une lampe produit de la lumière (et de la chaleur)."},
+            {type:"vf", q:"L'énergie peut se transformer d'une forme à une autre, mais elle ne disparaît pas.", answer:true,
+             explain:"C'est le principe de conservation de l'énergie."},
+            {type:"qcm", q:"Dans une pile, l'énergie est stockée sous forme :",
+             options:["chimique","lumineuse","musculaire","éolienne"], answer:0,
+             explain:"La pile stocke de l'énergie chimique, convertie en énergie électrique."},
+            {type:"qcm", q:"Un objet en mouvement possède de l'énergie :",
+             options:["cinétique","chimique","lumineuse","thermique"], answer:0,
+             explain:"L'énergie liée au mouvement est l'énergie cinétique."}
+          ]
+        },
+        {
+          id:"s10", niveau:"3e", title:"Acides, bases et pH",
+          cours:"Le <b>pH</b> mesure si une solution est acide ou basique, sur une échelle de <b>0 à 14</b>. " +
+                "Si pH < 7, la solution est <b>acide</b> ; si pH = 7, elle est <b>neutre</b> (comme l'eau pure) ; si pH > 7, elle est <b>basique</b>.",
+          questions:[
+            {type:"qcm", q:"L'échelle de pH va de :",
+             options:["0 à 14","0 à 100","1 à 10","−10 à 10"], answer:0,
+             explain:"Le pH est gradué de 0 à 14."},
+            {type:"qcm", q:"Une solution de pH = 3 est :",
+             options:["acide","neutre","basique","gazeuse"], answer:0,
+             explain:"pH < 7 : la solution est acide."},
+            {type:"qcm", q:"Une solution neutre (comme l'eau pure) a un pH de :",
+             options:["7","0","14","1"], answer:0,
+             explain:"L'eau pure a un pH de 7 (neutre)."},
+            {type:"vf", q:"Une solution dont le pH est supérieur à 7 est basique.", answer:true,
+             explain:"pH > 7 : la solution est basique."},
+            {type:"saisie", q:"Quel est le pH d'une solution neutre ?", answer:["7"],
+             explain:"Une solution neutre a un pH égal à 7."}
+          ]
+        },
+        {
+          id:"s11", niveau:"3e", title:"Génétique : ADN, chromosomes et hérédité",
+          cours:"L'information génétique est portée par une molécule, l'<b>ADN</b>, regroupée en <b>chromosomes</b> dans le <b>noyau</b> de la cellule. " +
+                "Une portion d'ADN qui détermine un caractère est un <b>gène</b>. L'<b>hérédité</b> est la transmission de caractères des parents aux enfants.",
+          questions:[
+            {type:"qcm", q:"L'information génétique est portée par une molécule appelée :",
+             options:["l'ADN","le calcium","le glucose","l'oxygène"], answer:0,
+             explain:"L'ADN porte l'information génétique."},
+            {type:"qcm", q:"Dans la cellule, les chromosomes se trouvent dans :",
+             options:["le noyau","la membrane","la paroi","le cytoplasme uniquement"], answer:0,
+             explain:"Les chromosomes sont situés dans le noyau de la cellule."},
+            {type:"saisie", q:"Combien de chromosomes possède une cellule humaine (hors cellules reproductrices) ?",
+             answer:["46"], explain:"46 chromosomes, soit 23 paires."},
+            {type:"qcm", q:"Une portion d'ADN qui détermine un caractère s'appelle :",
+             options:["un gène","un atome","un organe","un muscle"], answer:0,
+             explain:"Un gène est une portion d'ADN responsable d'un caractère."},
+            {type:"vf", q:"L'hérédité, c'est la transmission de caractères des parents à leurs enfants.", answer:true,
+             explain:"Oui : les caractères se transmettent de génération en génération."}
           ]
         }
       ]
@@ -2091,6 +2328,7 @@ function goAfterLogin(){
   if(!STATE.diagnosticDone) renderDiagnosticIntro(); else renderMap();
 }
 function renderLanding(){
+  if(typeof stopExamTimer==="function") stopExamTimer();
   setBrand("Le Royaume du Savoir");
   renderStats();
   const profiles = loadProfiles();
@@ -2420,6 +2658,9 @@ function runDiagnostic(){
 
 /* ===================== BREVET BLANC ===================== */
 var EXAM=null, EXAM_I=0, EXAM_ANS=[];
+var EXAM_TIMED=false, EXAM_END=0, EXAM_TIMER=null;     // minuteur (conditions réelles)
+var EXAM_REDAC=null, EXAM_REDAC_ANS="";                // question rédigée (entraînement, hors note)
+var SEC_PER_Q=75;                                      // ~1,25 min par question auto-corrigeable
 function _shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function _norm(s){return String(s).toLowerCase().trim().replace(/\s+/g,"").replace(/\u00b2/g,"2").replace(/,/g,".");}/* virgule d\u00e9cimale FR accept\u00e9e comme le point (align\u00e9 sur `norm` des le\u00e7ons) */
 function collegeQuestions(){
@@ -2427,30 +2668,83 @@ function collegeQuestions(){
   CONTENT.subjects.forEach(function(s){
     s.lessons.forEach(function(l){
       var niv=l.niveau||"5e"; if(niv==="6e") return;
-      l.questions.forEach(function(q){ out.push(Object.assign({},q,{subject:s.id,subjectName:s.name,subjectIcon:s.icon})); });
+      l.questions.forEach(function(q){ out.push(Object.assign({},q,{subject:s.id,subjectName:s.name,subjectIcon:s.icon,niveau:niv})); });
     });
   });
   return out;
 }
-function buildBrevet(){
+/* Vivier du Brevet : on privilégie la 3ᵉ (niveau de l'examen) tout en gardant
+   un mélange collège. perSub = nombre de questions par matière (standard 3, court 2). */
+function buildBrevet(opts){
+  opts=opts||{};
+  var perSub=opts.perSub||3;
   var bySub={}; collegeQuestions().forEach(function(q){ (bySub[q.subject]=bySub[q.subject]||[]).push(q); });
-  var exam=[]; Object.keys(bySub).forEach(function(k){ exam=exam.concat(_shuf(bySub[k]).slice(0,3)); });
+  var exam=[];
+  Object.keys(bySub).forEach(function(k){
+    var pool=bySub[k];
+    var trois=_shuf(pool.filter(function(q){ return q.niveau==="3e"; }));
+    var autres=_shuf(pool.filter(function(q){ return q.niveau!=="3e"; }));
+    var n3=Math.min(trois.length, Math.ceil(perSub*2/3));   // ~2/3 de questions de 3ᵉ
+    var pick=trois.slice(0,n3);
+    pick=pick.concat(autres.slice(0, perSub-pick.length));
+    if(pick.length<perSub) pick=pick.concat(trois.slice(n3));     // compléter si peu d'autres niveaux
+    exam=exam.concat(pick.slice(0,perSub));
+  });
   return _shuf(exam);
 }
+var REDACTIONS=[
+  {q:"En quelques phrases, explique pourquoi le 11 novembre est un jour de commémoration en France.",
+   modele:"Le 11 novembre 1918 a été signé l'armistice qui met fin à la Première Guerre mondiale. Ce jour rend hommage aux soldats morts pendant la guerre. C'est aujourd'hui un jour férié de mémoire.",
+   criteres:["J'ai répondu à la question (11 novembre · 1918 · armistice)","J'ai donné au moins une raison ou un exemple","Mes phrases sont construites et reliées","J'ai relu l'orthographe et la ponctuation"]},
+  {q:"Un triangle a pour côtés 3 cm, 4 cm et 5 cm. Rédige une réponse expliquant comment vérifier qu'il est rectangle.",
+   modele:"J'utilise la réciproque du théorème de Pythagore : je compare le carré du plus grand côté (5² = 25) à la somme des carrés des deux autres (3² + 4² = 9 + 16 = 25). Comme 25 = 25, le triangle est bien rectangle.",
+   criteres:["J'ai cité le théorème de Pythagore (ou sa réciproque)","J'ai écrit le calcul (3²+4² et 5²)","J'ai conclu clairement (rectangle ou non)","J'ai rédigé des phrases claires"]},
+  {q:"Donne un exemple de droit et un exemple de devoir d'un citoyen, puis explique en quelques phrases.",
+   modele:"Un droit : voter aux élections (à partir de 18 ans). Un devoir : respecter la loi (par exemple payer ses impôts, ou être juré si on est appelé). Droits et devoirs vont ensemble : ils permettent de vivre ensemble dans une démocratie.",
+   criteres:["J'ai donné un droit ET un devoir","J'ai expliqué avec mes propres mots","J'ai donné un exemple concret","J'ai relu l'orthographe"]}
+];
+function fmtTime(ms){ if(ms<0)ms=0; var s=Math.round(ms/1000); var m=Math.floor(s/60); s=s%60; return m+":"+(s<10?"0":"")+s; }
+function stopExamTimer(){ if(EXAM_TIMER){ clearInterval(EXAM_TIMER); EXAM_TIMER=null; } }
+function startExamTimer(){ stopExamTimer(); EXAM_END=Date.now()+EXAM.length*SEC_PER_Q*1000; EXAM_TIMER=setInterval(tickTimer,1000); }
+function tickTimer(){
+  var rem=EXAM_END-Date.now();
+  var el=document.getElementById("exTimer");
+  if(rem<=0){ if(el) el.textContent="⏱️ 0:00"; examTimeUp(); return; }
+  if(el) el.textContent="⏱️ "+fmtTime(rem);
+}
+function examTimeUp(){ stopExamTimer(); toast("⏱️ Temps écoulé — voici ton résultat."); renderExamResult(); }
 function renderBrevetIntro(){
+  stopExamTimer();
   renderStats();
   var best=STATE.brevet||0;
   app.innerHTML='<div class="card center">'
     +'<div style="font-size:54px" class="pop">🎓</div>'
     +'<h1>Le Brevet blanc</h1>'
-    +'<p class="muted" style="max-width:620px;margin:0 auto">C\'est l\'examen pour t\'entraîner comme le jour du vrai Brevet. '
-    +'Des questions de toutes les matières, sans aide cette fois : tu réponds, et la correction arrive à la fin. '
+    +'<p class="muted" style="max-width:640px;margin:0 auto">C\'est l\'examen pour t\'entraîner comme le jour du vrai Brevet. '
+    +'Des questions de toutes les matières (surtout de 3ᵉ), sans aide cette fois : tu réponds, et la correction arrive à la fin. '
     +'Prends ton temps, respire, et fais de ton mieux. 💪</p>'
     +(best?'<p class="small muted" style="margin-top:8px">🏅 Ton meilleur score : <b>'+best+'/20</b></p>':'')
+    +'<div class="card" style="max-width:540px;margin:18px auto 0;text-align:left">'
+    +'  <div class="section-title">Avant de commencer</div>'
+    +'  <div class="small" style="margin:6px 0;font-weight:800">Longueur de l\'examen</div>'
+    +'  <div class="row" style="gap:16px;flex-wrap:wrap"><label class="small"><input type="radio" name="exLen" value="standard" checked> Standard (~12 questions)</label>'
+    +'  <label class="small"><input type="radio" name="exLen" value="court"> Court (~8 questions)</label></div>'
+    +'  <label class="small" style="display:flex;align-items:flex-start;gap:8px;margin-top:14px">'
+    +'    <input type="checkbox" id="exTimerOpt"> <span><b>Activer le minuteur</b> (comme le jour J). '
+    +'    Sinon, tu t\'entraînes <b>sans limite de temps</b>, tranquillement — conseillé pour débuter. 🌙</span></label>'
+    +'</div>'
     +'<div class="row" style="justify-content:center;margin-top:18px">'
     +'<button class="btn big" id="startEx">Commencer l\'examen →</button>'
     +'<button class="btn ghost" id="backEx">← Carte</button></div></div>';
-  document.getElementById("startEx").onclick=function(){ EXAM=buildBrevet(); EXAM_I=0; EXAM_ANS=new Array(EXAM.length).fill(null); renderExamQ(); };
+  document.getElementById("startEx").onclick=function(){
+    var lenEl=document.querySelector('input[name="exLen"]:checked');
+    var perSub=(lenEl&&lenEl.value==="court")?2:3;
+    EXAM=buildBrevet({perSub:perSub}); EXAM_I=0; EXAM_ANS=new Array(EXAM.length).fill(null);
+    EXAM_REDAC=_shuf(REDACTIONS)[0]; EXAM_REDAC_ANS="";
+    EXAM_TIMED=!!(document.getElementById("exTimerOpt")&&document.getElementById("exTimerOpt").checked);
+    if(EXAM_TIMED) startExamTimer(); else { stopExamTimer(); EXAM_END=0; }
+    renderExamQ();
+  };
   document.getElementById("backEx").onclick=renderMap;
 }
 function renderExamQ(){
@@ -2462,18 +2756,36 @@ function renderExamQ(){
   } else {
     ctrl='<div style="max-width:320px;margin:10px auto"><input class="text" id="exIn" placeholder="Ta réponse" value="'+(cur!=null?esc(cur):"")+'"/></div>';
   }
+  var timerChip = EXAM_TIMED ? '<span class="chip" id="exTimer" title="Temps restant">⏱️ '+fmtTime(EXAM_END-Date.now())+'</span> ' : '';
   app.innerHTML='<div class="card">'
-    +'<div class="row"><div class="small muted">Brevet blanc · Question '+(EXAM_I+1)+'/'+n+'</div><div class="spacer"></div><span class="chip">'+q.subjectIcon+' '+esc(q.subjectName)+'</span></div>'
+    +'<div class="row"><div class="small muted">Brevet blanc · Question '+(EXAM_I+1)+'/'+n+'</div><div class="spacer"></div>'+timerChip+'<span class="chip">'+q.subjectIcon+' '+esc(q.subjectName)+'</span></div>'
     +'<div class="prog" style="margin:8px 0"><i style="width:'+Math.round(100*(EXAM_I+1)/n)+'%;background:#16a34a"></i></div>'
     +'<div class="qtext" style="font-size:18px;margin:10px 0">'+esc(q.q)+'</div>'+ctrl
     +'<div class="row" style="margin-top:16px">'+(EXAM_I>0?'<button class="btn ghost" id="prevQ">← Précédent</button>':'')+'<div class="spacer"></div><button class="btn" id="nextQ">'+(EXAM_I<n-1?'Suivant →':'Terminer ✅')+'</button></div></div>';
   app.querySelectorAll(".ex-opt").forEach(function(b){ b.onclick=function(){ if(q.type==="qcm") EXAM_ANS[EXAM_I]=parseInt(b.dataset.i,10); else EXAM_ANS[EXAM_I]=(b.dataset.v==="true"); app.querySelectorAll(".ex-opt").forEach(function(x){x.classList.remove("sel");}); b.classList.add("sel"); }; });
   var inp=document.getElementById("exIn"); if(inp) inp.oninput=function(){ EXAM_ANS[EXAM_I]=inp.value; };
   var pv=document.getElementById("prevQ"); if(pv) pv.onclick=function(){ EXAM_I--; renderExamQ(); };
-  document.getElementById("nextQ").onclick=function(){ if(inp) EXAM_ANS[EXAM_I]=inp.value; if(EXAM_I<n-1){ EXAM_I++; renderExamQ(); } else renderExamResult(); };
+  document.getElementById("nextQ").onclick=function(){ if(inp) EXAM_ANS[EXAM_I]=inp.value; if(EXAM_I<n-1){ EXAM_I++; renderExamQ(); } else { stopExamTimer(); if(EXAM_REDAC) renderExamRedaction(); else renderExamResult(); } };
+}
+/* Partie rédigée : entraînement, NON comptée dans la note /20 (on ne peut pas
+   noter un texte libre de façon fiable — ce serait malhonnête). */
+function renderExamRedaction(){
+  stopExamTimer();
+  var rd=EXAM_REDAC;
+  app.innerHTML='<div class="card">'
+    +'<div class="row"><div class="small muted">Brevet blanc · Partie rédaction</div><div class="spacer"></div><span class="chip">✍️ Entraînement</span></div>'
+    +'<div class="qtext" style="font-size:18px;margin:10px 0">'+esc(rd.q)+'</div>'
+    +'<p class="small muted">Cette partie n\'est <b>pas comptée</b> dans la note /20 : c\'est un entraînement à la rédaction. '
+    +'Écris ta réponse, puis tu pourras la comparer à une <b>réponse-modèle</b> et t\'auto-évaluer.</p>'
+    +'<textarea id="exRedac" rows="6" placeholder="Écris ta réponse ici..." '
+    +'style="width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--bg2);color:var(--ink);font-family:inherit;font-size:15px;resize:vertical">'+esc(EXAM_REDAC_ANS||"")+'</textarea>'
+    +'<div class="row" style="margin-top:16px"><div class="spacer"></div><button class="btn" id="redacDone">Voir mon résultat →</button></div></div>';
+  var ta=document.getElementById("exRedac"); if(ta) ta.oninput=function(){ EXAM_REDAC_ANS=ta.value; };
+  document.getElementById("redacDone").onclick=function(){ if(ta) EXAM_REDAC_ANS=ta.value; renderExamResult(); };
 }
 function _correct(q,a){ if(a==null) return false; if(q.type==="qcm"||q.type==="vf") return a===q.answer; return q.answer.some(function(x){ return _norm(x)===_norm(a); }); }
 function renderExamResult(){
+  stopExamTimer();
   var n=EXAM.length, correct=0, bySub={};
   EXAM.forEach(function(q,i){ var ok=_correct(q,EXAM_ANS[i]); if(ok) correct++; var b=bySub[q.subjectName]=bySub[q.subjectName]||{ok:0,t:0,icon:q.subjectIcon}; b.t++; if(ok) b.ok++; });
   var note=Math.round(correct/n*20);
@@ -2488,11 +2800,22 @@ function renderExamResult(){
     var ta; if(EXAM_ANS[i]==null) ta="(pas de réponse)"; else if(q.type==="qcm") ta=esc(q.options[EXAM_ANS[i]]); else if(q.type==="vf") ta=(EXAM_ANS[i]?"Vrai":"Faux"); else ta=esc(EXAM_ANS[i]);
     return '<div class="quest" style="align-items:flex-start"><div class="qix">'+(ok?"✅":"❌")+'</div><div class="qmeta"><div class="qt" style="font-size:15px">'+esc(q.q)+'</div><div class="small" style="color:'+(ok?"#6b6b8a":"#dc2626")+'">Ta réponse : '+ta+'</div>'+(ok?'':'<div class="small" style="color:#16a34a">Bonne réponse : '+bonne+'</div>')+'<div class="small muted">'+esc(q.explain||"")+'</div></div></div>';
   }).join("");
+  var redacBlock="";
+  if(EXAM_REDAC){
+    var rd=EXAM_REDAC;
+    var crit=rd.criteres.map(function(c){ return '<label class="small" style="display:flex;gap:8px;align-items:flex-start;margin:4px 0"><input type="checkbox" class="redac-crit"> <span>'+esc(c)+'</span></label>'; }).join("");
+    redacBlock='<div class="card"><div class="section-title">✍️ Ta rédaction (entraînement — hors note /20)</div>'
+      +'<div class="small muted" style="margin-bottom:8px">'+esc(rd.q)+'</div>'
+      +'<div class="quest" style="align-items:flex-start"><div class="qix">📝</div><div class="qmeta"><div class="small" style="font-weight:800">Ta réponse :</div><div class="small">'+(EXAM_REDAC_ANS&&EXAM_REDAC_ANS.trim()?esc(EXAM_REDAC_ANS):"(tu n\'as rien écrit cette fois — ce n\'est pas grave !)")+'</div></div></div>'
+      +'<div class="quest" style="align-items:flex-start;margin-top:8px"><div class="qix">💡</div><div class="qmeta"><div class="small" style="font-weight:800;color:#16a34a">Réponse-modèle :</div><div class="small">'+esc(rd.modele)+'</div></div></div>'
+      +'<div class="section-title" style="margin-top:12px">Je m\'auto-évalue</div><div>'+crit+'</div>'
+      +'<p class="small muted">Coche ce que tu as réussi. Cette partie ne change <b>pas</b> ta note /20 : elle t\'entraîne à <b>rédiger</b>, comme au Brevet.</p></div>';
+  }
   app.innerHTML='<div class="card center"><div style="font-size:50px" class="pop">'+(admis?"🎓":"📚")+'</div><h1>'+note+'/20</h1><h3 style="margin:2px 0">'+mention+'</h3>'
     +'<p class="muted small">Tu as '+correct+' bonnes réponses sur '+n+'. '+(admis?"Bravo, tu es sur la bonne voie pour le Brevet !":"Chaque essai te rapproche du but. Continue les quêtes et retente !")+'</p>'
     +'<div class="quests" style="margin-top:12px;text-align:left">'+subRows+'</div>'
     +'<div class="row" style="justify-content:center;margin-top:14px"><button class="btn" id="againEx">↻ Refaire un Brevet blanc</button><button class="btn ghost" id="toMapEx">🗺️ Carte</button></div></div>'
-    +'<div class="card"><div class="section-title">📝 La correction</div><div class="quests" style="text-align:left">'+corr+'</div></div>';
+    +'<div class="card"><div class="section-title">📝 La correction</div><div class="quests" style="text-align:left">'+corr+'</div></div>'+redacBlock;
   if(admis) toast("🎓 Brevet blanc réussi : "+note+"/20 !", true);
   document.getElementById("againEx").onclick=renderBrevetIntro;
   document.getElementById("toMapEx").onclick=renderMap;
@@ -2500,6 +2823,7 @@ function renderExamResult(){
 }
 
 function renderMap(){
+  if(typeof stopExamTimer==="function") stopExamTimer();
   setBrand("Le Royaume du Savoir");
   renderStats();
   const regions=CONTENT.subjects.map(s=>{
