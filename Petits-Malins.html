@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>L'École des Petits Malins</title>
+<style>
+  :root{
+    --bleu:#3b82f6; --vert:#22c55e; --orange:#f59e0b; --rose:#ec4899;
+    --violet:#8b5cf6; --rouge:#ef4444; --jaune:#fde047;
+    --fond:#fef9f0; --carte:#ffffff; --texte:#1f2937;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  body{
+    font-family:'Comic Sans MS','Trebuchet MS',system-ui,sans-serif;
+    background:linear-gradient(160deg,#fef9f0,#fde6f0 50%,#e0f2fe);
+    color:var(--texte); min-height:100vh; overflow-x:hidden;
+    -webkit-user-select:none; user-select:none;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:16px;}
+  header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+  .logo{font-size:clamp(22px,5vw,34px);font-weight:bold;color:var(--violet);text-shadow:2px 2px 0 #fff;display:flex;align-items:center;gap:8px;}
+  .score-box{background:#fff;border-radius:999px;padding:8px 16px;font-size:20px;font-weight:bold;box-shadow:0 4px 0 #e5d4b8;display:flex;align-items:center;gap:6px;}
+  .btn-back{background:#fff;border:none;border-radius:999px;padding:10px 18px;font-size:18px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d1d5db;color:var(--texte);font-family:inherit;}
+  .btn-back:active{transform:translateY(3px);box-shadow:0 1px 0 #d1d5db;}
+
+  /* Sélecteur d'âge */
+  .age-toggle{display:flex;gap:8px;background:#fff;border-radius:999px;padding:6px;box-shadow:0 4px 0 #e5d4b8;}
+  .age-toggle button{border:none;background:transparent;border-radius:999px;padding:8px 16px;font-size:16px;font-weight:bold;cursor:pointer;font-family:inherit;color:#9ca3af;}
+  .age-toggle button.on{background:var(--orange);color:#fff;}
+
+  h2.titre{text-align:center;font-size:clamp(24px,5vw,34px);color:var(--bleu);margin:10px 0 18px;text-shadow:1px 1px 0 #fff;}
+
+  /* Grille menu */
+  .grille{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+  .tuile{
+    border:none;border-radius:28px;padding:28px 16px;cursor:pointer;color:#fff;
+    font-size:clamp(20px,4vw,26px);font-weight:bold;font-family:inherit;
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    box-shadow:0 8px 0 rgba(0,0,0,.18);transition:transform .08s;
+  }
+  .tuile:active{transform:translateY(5px);box-shadow:0 3px 0 rgba(0,0,0,.18);}
+  .tuile .emo{font-size:54px;}
+  .t-lecture{background:linear-gradient(160deg,#fb7185,#e11d48);}
+  .t-calcul{background:linear-gradient(160deg,#60a5fa,#2563eb);}
+  .t-langues{background:linear-gradient(160deg,#34d399,#059669);}
+  .t-histoire{background:linear-gradient(160deg,#fbbf24,#d97706);}
+
+  /* Sous-menu boutons */
+  .sous-menu{display:flex;flex-direction:column;gap:14px;max-width:480px;margin:0 auto;}
+  .gros-btn{
+    border:none;border-radius:22px;padding:20px;font-size:22px;font-weight:bold;
+    font-family:inherit;cursor:pointer;color:#fff;display:flex;align-items:center;gap:14px;
+    box-shadow:0 6px 0 rgba(0,0,0,.18);text-align:left;
+  }
+  .gros-btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.18);}
+  .gros-btn .emo{font-size:38px;}
+
+  /* Zone de jeu */
+  .carte-jeu{background:var(--carte);border-radius:28px;padding:26px 20px;box-shadow:0 10px 0 #e5d4b8;text-align:center;max-width:620px;margin:0 auto;}
+  .consigne{font-size:22px;color:#6b7280;margin-bottom:6px;}
+  .question{font-size:clamp(40px,11vw,80px);font-weight:bold;margin:14px 0;color:var(--texte);line-height:1.1;}
+  .question.petit{font-size:clamp(24px,6vw,40px);}
+  .emoji-rang{font-size:clamp(30px,8vw,52px);line-height:1.3;word-spacing:6px;margin:10px 0;}
+
+  .choix{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px;}
+  .choix.trois{grid-template-columns:repeat(3,1fr);}
+  .choix button{
+    border:none;border-radius:20px;padding:22px 10px;font-size:30px;font-weight:bold;
+    font-family:inherit;cursor:pointer;background:#eef2ff;color:var(--texte);
+    box-shadow:0 5px 0 #c7d2fe;transition:transform .06s;
+  }
+  .choix button:active{transform:translateY(3px);box-shadow:0 2px 0 #c7d2fe;}
+  .choix button.bon{background:var(--vert);color:#fff;box-shadow:0 5px 0 #15803d;}
+  .choix button.faux{background:var(--rouge);color:#fff;box-shadow:0 5px 0 #991b1b;}
+  .choix button:disabled{cursor:default;}
+
+  .btn-son{background:var(--jaune);border:none;border-radius:999px;padding:14px 22px;font-size:22px;font-weight:bold;font-family:inherit;cursor:pointer;box-shadow:0 5px 0 #ca8a04;margin:6px;}
+  .btn-son:active{transform:translateY(3px);box-shadow:0 2px 0 #ca8a04;}
+
+  .feedback{font-size:30px;font-weight:bold;min-height:42px;margin-top:16px;}
+  .feedback.ok{color:var(--vert);}
+  .feedback.non{color:var(--orange);}
+
+  .btn-suite{background:var(--violet);color:#fff;border:none;border-radius:20px;padding:16px 32px;font-size:22px;font-weight:bold;font-family:inherit;cursor:pointer;box-shadow:0 6px 0 #6d28d9;margin-top:18px;}
+  .btn-suite:active{transform:translateY(4px);box-shadow:0 2px 0 #6d28d9;}
+
+  /* Carte leçon / langue */
+  .mot-img{font-size:96px;margin:6px 0;}
+  .mot-fr{font-size:30px;color:#6b7280;}
+  .mot-cible{font-size:clamp(36px,9vw,56px);font-weight:bold;color:var(--vert);margin:6px 0;}
+  .drapeaux{display:flex;justify-content:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+  .drapeaux button{font-size:30px;border:none;background:#fff;border-radius:14px;padding:8px 12px;cursor:pointer;box-shadow:0 4px 0 #e5e7eb;}
+  .drapeaux button.on{background:var(--jaune);box-shadow:0 4px 0 #ca8a04;}
+
+  .lecon{text-align:left;font-size:20px;line-height:1.6;color:#374151;}
+  .lecon h3{font-size:26px;color:var(--orange);margin-bottom:10px;text-align:center;}
+  .lecon .ill{font-size:70px;text-align:center;display:block;margin:8px 0;}
+
+  .barre{display:flex;justify-content:center;gap:6px;margin-top:14px;flex-wrap:wrap;}
+  .pastille{width:16px;height:16px;border-radius:50%;background:#e5e7eb;}
+  .pastille.faite{background:var(--vert);}
+
+  /* clavier numérique (mode grands) */
+  .touche{border:none;border-radius:16px;padding:18px;font-size:28px;font-weight:bold;font-family:inherit;background:#eef2ff;color:var(--texte);box-shadow:0 4px 0 #c7d2fe;cursor:pointer;}
+  .touche:active{transform:translateY(2px);box-shadow:0 2px 0 #c7d2fe;}
+  .touche:disabled{opacity:.45;}
+  .saisie-box{font-size:clamp(40px,11vw,68px);font-weight:bold;min-height:1.2em;color:var(--bleu);letter-spacing:2px;}
+  .niveau-badge{display:inline-block;background:rgba(255,255,255,.3);border-radius:999px;padding:2px 10px;font-size:14px;margin-left:6px;}
+
+  .cacher{display:none;}
+  .pop{animation:pop .3s;}
+  @keyframes pop{0%{transform:scale(.7)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+  .confetti{position:fixed;top:-20px;font-size:26px;animation:fall 2.2s linear forwards;z-index:50;pointer-events:none;}
+  @keyframes fall{to{transform:translateY(110vh) rotate(420deg);opacity:.4;}}
+
+  footer{text-align:center;color:#9ca3af;font-size:14px;margin-top:26px;}
+  @media(max-width:520px){ .grille{gap:12px;} .tuile{padding:20px 10px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">🎒 Les Petits Malins</div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <div class="age-toggle" id="ageToggle">
+        <button data-age="petit" class="on">🐣 Petits</button>
+        <button data-age="grand">🦉 Grands</button>
+      </div>
+      <div class="score-box">⭐ <span id="score">0</span></div>
+    </div>
+  </header>
+
+  <div id="app"></div>
+
+  <footer>Fait avec ❤️ pour les enfants de Florence · prononciation par synthèse vocale</footer>
+</div>
+
+<script>
+/* ===================== ÉTAT ===================== */
+const state = {
+  age: 'petit',          // 'petit' (3-6) ou 'grand' (6-9)
+  score: 0,
+  vue: 'accueil',
+};
+try{ const s = localStorage.getItem('pm_score'); if(s) state.score = +s; }catch(e){}
+try{ const a = localStorage.getItem('pm_age'); if(a) state.age = a; }catch(e){}
+
+const app = document.getElementById('app');
+const $score = document.getElementById('score');
+function rafraichirScore(){ $score.textContent = state.score; try{localStorage.setItem('pm_score', state.score);}catch(e){} }
+rafraichirScore();
+
+function gagner(n){ state.score += n; rafraichirScore(); }
+
+/* Sélecteur d'âge */
+document.getElementById('ageToggle').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  state.age = b.dataset.age;
+  try{localStorage.setItem('pm_age', state.age);}catch(e){}
+  document.querySelectorAll('#ageToggle button').forEach(x=>x.classList.toggle('on', x.dataset.age===state.age));
+  vueAccueil(); // on revient à l'accueil pour proposer les bons niveaux
+});
+
+/* ===================== VOIX ===================== */
+function parler(texte, langue='fr-FR'){
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(texte);
+    u.lang = langue; u.rate = 0.9;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ===================== OUTILS ===================== */
+const r = (n)=>Math.floor(Math.random()*n);
+const choisir = (arr)=>arr[r(arr.length)];
+function melanger(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=r(i+1);[a[i],a[j]]=[a[j],a[i]];} return a; }
+function confettis(){
+  const emos=['🎉','⭐','🌟','🎈','✨','🥳'];
+  for(let i=0;i<18;i++){
+    const c=document.createElement('div'); c.className='confetti';
+    c.textContent=choisir(emos); c.style.left=r(100)+'vw'; c.style.animationDelay=(r(8)/10)+'s';
+    document.body.appendChild(c); setTimeout(()=>c.remove(),2500);
+  }
+}
+function bravo(){ confettis(); parler(choisir(['Bravo !','Super !','Génial !','Bien joué !'])); }
+
+function barreHTML(total, faites){
+  let h='<div class="barre">';
+  for(let i=0;i<total;i++) h+=`<div class="pastille ${i<faites?'faite':''}"></div>`;
+  return h+'</div>';
+}
+
+/* ===================== ACCUEIL ===================== */
+function vueAccueil(){
+  state.vue='accueil';
+  app.innerHTML = `
+    <h2 class="titre">Choisis ton aventure !</h2>
+    <div class="grille">
+      <button class="tuile t-lecture" onclick="ouvrir('lecture')"><span class="emo">📖</span>Lecture</button>
+      <button class="tuile t-calcul" onclick="ouvrir('calcul')"><span class="emo">🔢</span>Calcul</button>
+      <button class="tuile t-langues" onclick="ouvrir('langues')"><span class="emo">🌍</span>Langues</button>
+      <button class="tuile t-histoire" onclick="ouvrir('histoire')"><span class="emo">🏰</span>Histoire</button>
+    </div>`;
+}
+
+function entete(titre, retour='vueAccueil'){
+  return `<header style="margin-bottom:6px;"><button class="btn-back" onclick="${retour}()">⬅ Retour</button>
+          <h2 class="titre" style="margin:0;flex:1;">${titre}</h2><div style="width:90px"></div></header>`;
+}
+
+function ouvrir(mat){
+  if(mat==='lecture') menuLecture();
+  if(mat==='calcul') menuCalcul();
+  if(mat==='langues') menuLangues();
+  if(mat==='histoire') menuHistoire();
+}
+</script>
+
+<script>
+/* ====================================================================
+   MODULE LECTURE
+   ==================================================================== */
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+const MOTS = [
+  {mot:'CHAT', img:'🐱'},{mot:'CHIEN', img:'🐶'},{mot:'POMME', img:'🍎'},
+  {mot:'SOLEIL', img:'☀️'},{mot:'LUNE', img:'🌙'},{mot:'FLEUR', img:'🌸'},
+  {mot:'MAISON', img:'🏠'},{mot:'VOITURE', img:'🚗'},{mot:'BALLON', img:'⚽'},
+  {mot:'POISSON', img:'🐟'},{mot:'GÂTEAU', img:'🎂'},{mot:'ÉTOILE', img:'⭐'},
+  {mot:'ARBRE', img:'🌳'},{mot:'OISEAU', img:'🐦'},{mot:'BANANE', img:'🍌'}
+];
+const PHRASES = [
+  'Le chat dort sur le lit.',
+  'Maman fait un bon gâteau.',
+  'Le soleil brille très fort.',
+  'Mon chien court dans le jardin.',
+  'La fleur sent très bon.',
+  'Le poisson nage dans l\'eau.'
+];
+
+function menuLecture(){
+  state.vue='lecture';
+  const grands = state.age==='grand';
+  app.innerHTML = entete('📖 Lecture') + `
+    <div class="sous-menu">
+      <button class="gros-btn t-lecture" onclick="bonus('lecture')"><span class="emo">🧠</span>Carte mentale & vidéos</button>
+      <button class="gros-btn t-lecture" onclick="jeuLettres()"><span class="emo">🔤</span>Reconnaître les lettres</button>
+      <button class="gros-btn t-lecture" onclick="jeuSons()"><span class="emo">🔊</span>Le son des lettres</button>
+      <button class="gros-btn t-lecture" onclick="jeuMots()"><span class="emo">🖼️</span>Lire des mots</button>
+      ${grands?`<button class="gros-btn t-lecture" onclick="jeuPhrases()"><span class="emo">📝</span>Remettre une phrase en ordre</button>
+      <button class="gros-btn t-lecture" onclick="jeuComprehension()"><span class="emo">🧠</span>Lire et comprendre<span class="niveau-badge">texte + questions</span></button>`:''}
+    </div>`;
+}
+
+/* Jeu : trouver la lettre qu'on entend */
+function jeuLettres(){
+  const bonne = choisir(ALPHABET);
+  let opts = new Set([bonne]);
+  while(opts.size<(state.age==='petit'?3:4)) opts.add(choisir(ALPHABET));
+  opts = melanger([...opts]);
+  parler('Trouve la lettre '+bonne);
+  app.innerHTML = entete('🔤 Les lettres','menuLecture') + `
+    <div class="carte-jeu">
+      <p class="consigne">Touche la lettre que tu entends</p>
+      <button class="btn-son" onclick="parler('La lettre ${bonne}')">🔊 Réécouter</button>
+      <div class="choix ${opts.length===3?'trois':''}" id="zone">
+        ${opts.map(l=>`<button onclick="repLettre(this,'${l}','${bonne}')">${l}</button>`).join('')}
+      </div>
+      <div class="feedback" id="fb"></div>
+    </div>`;
+}
+function repLettre(btn, choix, bonne){
+  const fb=document.getElementById('fb');
+  if(choix===bonne){ btn.classList.add('bon'); fb.textContent='✅ Bravo !'; fb.className='feedback ok'; gagner(2); bravo();
+    document.querySelectorAll('#zone button').forEach(b=>b.disabled=true);
+    setTimeout(jeuLettres,1300);
+  }else{ btn.classList.add('faux'); fb.textContent='Essaie encore 🙂'; fb.className='feedback non'; }
+}
+
+/* Jeu : quel mot commence par ce son ? */
+function jeuSons(){
+  const cible = choisir(MOTS);
+  const lettre = cible.mot[0];
+  let autres = melanger(MOTS.filter(m=>m.mot[0]!==lettre)).slice(0,2);
+  const opts = melanger([cible,...autres]);
+  parler('Quel mot commence par le son '+lettre);
+  app.innerHTML = entete('🔊 Les sons','menuLecture') + `
+    <div class="carte-jeu">
+      <p class="consigne">Quel mot commence par...</p>
+      <div class="question">${lettre}</div>
+      <button class="btn-son" onclick="parler('Quel mot commence par ${lettre}')">🔊 Réécouter</button>
+      <div class="choix trois" id="zone">
+        ${opts.map(m=>`<button style="font-size:46px" onclick="repSon(this,'${m.mot[0]}','${lettre}','${m.mot}')">${m.img}</button>`).join('')}
+      </div>
+      <div class="feedback" id="fb"></div>
+    </div>`;
+}
+function repSon(btn, prem, lettre, mot){
+  const fb=document.getElementById('fb');
+  if(prem===lettre){ btn.classList.add('bon'); fb.textContent='✅ '+mot+' !'; fb.className='feedback ok'; parler(mot); gagner(2); bravo();
+    document.querySelectorAll('#zone button').forEach(b=>b.disabled=true); setTimeout(jeuSons,1500);
+  }else{ btn.classList.add('faux'); fb.textContent='Non, écoute bien 👂'; fb.className='feedback non'; }
+}
+
+/* Jeu : associer image -> mot écrit */
+function jeuMots(){
+  const cible = choisir(MOTS);
+  let autres = melanger(MOTS.filter(m=>m.mot!==cible.mot)).slice(0, state.age==='petit'?2:3);
+  const opts = melanger([cible,...autres]);
+  parler(cible.mot);
+  app.innerHTML = entete('🖼️ Lire des mots','menuLecture') + `
+    <div class="carte-jeu">
+      <p class="consigne">Quel mot va avec l'image ?</p>
+      <div class="mot-img pop">${cible.img}</div>
+      <button class="btn-son" onclick="parler('${cible.mot}')">🔊 Écouter le mot</button>
+      <div class="choix ${opts.length===3?'trois':''}" id="zone">
+        ${opts.map(m=>`<button style="font-size:24px" onclick="repMot(this,'${m.mot}','${cible.mot}')">${m.mot}</button>`).join('')}
+      </div>
+      <div class="feedback" id="fb"></div>
+    </div>`;
+}
+function repMot(btn, choix, bonne){
+  const fb=document.getElementById('fb');
+  if(choix===bonne){ btn.classList.add('bon'); fb.textContent='✅ Bravo !'; fb.className='feedback ok'; gagner(3); bravo();
+    document.querySelectorAll('#zone button').forEach(b=>b.disabled=true); setTimeout(jeuMots,1400);
+  }else{ btn.classList.add('faux'); fb.textContent='Regarde encore 👀'; fb.className='feedback non'; }
+}
+
+/* Jeu : remettre les mots d'une phrase dans l'ordre (grands) */
+function jeuPhrases(){
+  const ph = choisir(PHRASES);
+  const mots = ph.replace('.','').split(' ');
+  const melange = melanger(mots);
+  parler(ph);
+  app.innerHTML = entete('📝 Les phrases','menuLecture') + `
+    <div class="carte-jeu">
+      <p class="consigne">Remets la phrase dans l'ordre</p>
+      <button class="btn-son" onclick="parler('${ph.replace(/'/g,"\\'")}')">🔊 Écouter la phrase</button>
+      <div id="cible" style="min-height:60px;font-size:24px;margin:14px 0;padding:12px;border:3px dashed #c7d2fe;border-radius:16px;"></div>
+      <div id="banque" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+        ${melange.map((m,i)=>`<button class="btn-son" style="background:#eef2ff;box-shadow:0 4px 0 #c7d2fe" onclick="poserMot(this,'${m}')">${m}</button>`).join('')}
+      </div>
+      <div class="feedback" id="fb"></div>
+      <div><button class="btn-suite cacher" id="next" onclick="jeuPhrases()">Suivant ➡</button></div>
+    </div>`;
+  app.dataset.phrase = mots.join(' ');
+  app.dataset.cur = '';
+}
+function poserMot(btn, mot){
+  btn.style.visibility='hidden';
+  const cible=document.getElementById('cible');
+  app.dataset.cur = (app.dataset.cur?app.dataset.cur+' ':'')+mot;
+  cible.textContent = app.dataset.cur;
+  if(app.dataset.cur.split(' ').length === app.dataset.phrase.split(' ').length){
+    const fb=document.getElementById('fb');
+    if(app.dataset.cur===app.dataset.phrase){ fb.textContent='✅ Parfait !'; fb.className='feedback ok'; gagner(4); bravo();
+      parler(app.dataset.phrase);
+    } else { fb.textContent='Presque ! La bonne phrase : '+app.dataset.phrase; fb.className='feedback non'; }
+    document.getElementById('next').classList.remove('cacher');
+  }
+}
+
+/* Compréhension de texte (grands) : lire un texte puis répondre */
+const TEXTES=[
+  {titre:'Le petit chat gris', em:'🐱',
+   txt:`Minou est un petit chat gris. Tous les matins, il boit son lait dans un bol bleu. Il adore jouer avec une pelote de laine rouge. Le soir, fatigué, il dort en boule près du feu, dans la cuisine.`,
+   qs:[{q:'De quelle couleur est Minou ?', bon:'Gris', faux:['Noir','Blanc']},
+       {q:'Avec quoi aime-t-il jouer ?', bon:'Une pelote de laine', faux:['Un ballon','Une souris']},
+       {q:'Où dort-il le soir ?', bon:'Près du feu', faux:['Dans le jardin','Sur le toit']}]},
+  {titre:'La sortie à la ferme', em:'🐮',
+   txt:`Samedi, Lucas est allé à la ferme avec sa classe. Il a vu trois vaches, deux cochons roses et beaucoup de poules. Le fermier lui a montré comment ramasser les œufs. Lucas a rapporté six œufs frais à la maison.`,
+   qs:[{q:'Quel jour Lucas est-il allé à la ferme ?', bon:'Samedi', faux:['Dimanche','Mercredi']},
+       {q:'Combien de vaches a-t-il vues ?', bon:'Trois', faux:['Deux','Six']},
+       {q:'Qu\'a-t-il appris à ramasser ?', bon:'Les œufs', faux:['Le foin','Les pommes']},
+       {q:'Combien d\'œufs a-t-il rapportés ?', bon:'Six', faux:['Trois','Dix']}]},
+  {titre:'La graine et la fleur', em:'🌱',
+   txt:`Emma a planté une petite graine dans un pot. Chaque jour, elle lui donne un peu d'eau et la met au soleil sur la fenêtre. Après deux semaines, une tige verte est sortie de la terre. Bientôt, une jolie fleur jaune est apparue.`,
+   qs:[{q:'Qu\'a planté Emma ?', bon:'Une graine', faux:['Un arbre','Une fleur déjà grande']},
+       {q:'De quoi la graine a-t-elle besoin ?', bon:'D\'eau et de soleil', faux:['De chocolat','De musique']},
+       {q:'De quelle couleur est la fleur ?', bon:'Jaune', faux:['Rouge','Bleue']}]}
+];
+function jeuComprehension(){
+  const t=choisir(TEXTES);
+  window._txtLu=t.txt;
+  window._pendingQs=t.qs; window._pendingRetour='menuLecture'; window._pendingTitre='🧠 Compréhension'; window._pendingFin=jeuComprehension;
+  app.innerHTML = entete('🧠 Lire et comprendre','menuLecture') + `
+    <div class="carte-jeu">
+      <div class="lecon">
+        <span class="ill">${t.em}</span>
+        <h3>${t.titre}</h3>
+        <p style="font-size:21px">${t.txt}</p>
+      </div>
+      <button class="btn-son" onclick="parler(window._txtLu)">🔊 Lire à voix haute</button>
+      <div><button class="btn-suite" onclick="lancerQuiz()">Répondre aux questions ❓</button></div>
+    </div>`;
+}
+
+/* ===== Moteur de quiz générique (séquence de questions) =====
+   Utilise window._pendingQs (tableau {q,bon,faux}), _pendingRetour, _pendingTitre, _pendingFin */
+function lancerQuiz(){ window._qSeq=window._pendingQs; window._qIdx=0; poserQuestionSeq(); }
+function poserQuestionSeq(){
+  const qs=window._qSeq, qi=window._qIdx, q=qs[qi];
+  const opts=melanger([q.bon, ...q.faux]);
+  window._qOpts=opts; window._qBon=q.bon;
+  parler(q.q);
+  app.innerHTML = entete(window._pendingTitre, window._pendingRetour) + `
+    <div class="carte-jeu">
+      <p class="consigne">Question ${qi+1} / ${qs.length}</p>
+      <p class="consigne" style="font-size:22px;color:#374151">${q.q}</p>
+      <div class="choix" id="zone" style="grid-template-columns:1fr;">
+        ${opts.map((o,k)=>`<button style="font-size:21px" onclick="repQuiz(this,${k})">${o}</button>`).join('')}
+      </div>
+      <div class="feedback" id="fb"></div>
+      <div><button class="btn-suite cacher" id="next" onclick="suiteQuizSeq()">${qi+1<qs.length?'Question suivante ➡':'Terminer ✅'}</button></div>
+    </div>`;
+}
+function repQuiz(btn,k){
+  const fb=document.getElementById('fb');
+  if(window._qOpts[k]===window._qBon){
+    btn.classList.add('bon'); fb.textContent='✅ Bonne réponse !'; fb.className='feedback ok'; gagner(4); bravo();
+    document.querySelectorAll('#zone button').forEach(b=>b.disabled=true);
+    document.getElementById('next').classList.remove('cacher');
+  } else { btn.classList.add('faux'); fb.textContent='Relis bien 🔎'; fb.className='feedback non'; }
+}
+function suiteQuizSeq(){
+  window._qIdx++;
+  if(window._qIdx>=window._qSeq.length){ confettis(); (window._pendingFin||menuLecture)(); }
+  else poserQuestionSeq();
+}
+</script>
+
+<script>
+/* ====================================================================
+   MODULE CALCUL
+   ==================================================================== */
+function menuCalcul(){
+  state.vue='calcul';
+  const grands = state.age==='grand';
+  app.innerHTML = entete('🔢 Calcul') + `
+    <div class="sous-menu">
+      ${!grands?`<button class="gros-btn t-calcul" onclick="jeuCompter()"><span class="emo">🧮</span>Compter</button>`:''}
+      <button class="gros-btn t-calcul" onclick="bonus('calcul')"><span class="emo">🧠</span>Carte mentale & vidéos</button>
+      <button class="gros-btn t-calcul" onclick="jeuOp('+')"><span class="emo">➕</span>Additions${grands?'<span class="niveau-badge">2 chiffres</span>':''}</button>
+      <button class="gros-btn t-calcul" onclick="jeuOp('-')"><span class="emo">➖</span>Soustractions</button>
+      ${grands?`
+      <button class="gros-btn t-calcul" onclick="jeuOp('×')"><span class="emo">✖️</span>Multiplications<span class="niveau-badge">tables</span></button>
+      <button class="gros-btn t-calcul" onclick="jeuOp('÷')"><span class="emo">➗</span>Divisions</button>
+      <button class="gros-btn t-calcul" onclick="jeuSuites()"><span class="emo">🔢</span>Suites de nombres</button>
+      <button class="gros-btn t-calcul" onclick="jeuProbleme()"><span class="emo">🧩</span>Problèmes</button>`:''}
+    </div>`;
+}
+
+/* Compter des objets (petits) */
+const OBJETS=['🍎','🌟','🐶','🎈','🍓','🐠','🌸','🚗','⚽','🦋'];
+function jeuCompter(){
+  const max = state.age==='petit'?6:10;
+  const n = 1+r(max);
+  const emo = choisir(OBJETS);
+  let opts=new Set([n]);
+  while(opts.size<3){ let x=1+r(max+2); opts.add(x); }
+  opts=melanger([...opts]);
+  parler('Compte les objets');
+  app.innerHTML = entete('🧮 Compter','menuCalcul') + `
+    <div class="carte-jeu">
+      <p class="consigne">Combien y en a-t-il ?</p>
+      <div class="emoji-rang">${(emo+' ').repeat(n)}</div>
+      <div class="choix trois" id="zone">
+        ${opts.map(o=>`<button onclick="repCompter(this,${o},${n})">${o}</button>`).join('')}
+      </div>
+      <div class="feedback" id="fb"></div>
+    </div>`;
+}
+function repCompter(btn,choix,bon){
+  const fb=document.getElementById('fb');
+  if(choix===bon){ btn.classList.add('bon'); fb.textContent='✅ Oui, '+bon+' !'; fb.className='feedback ok'; parler(''+bon); gagner(2); bravo();
+    document.querySelectorAll('#zone button').forEach(b=>b.disabled=true); setTimeout(jeuCompter,1300);
+  }else{ btn.classList.add('faux'); fb.textContent='Recompte bien 🔢'; fb.className='feedback non'; }
+}
+
+/* Opérations */
+function genOp(op){
+  let a,b,res;
+  const grand = state.age==='grand';
+  if(op==='+'){ if(grand){ a=11+r(89); b=11+r(89);} else { a=1+r(10); b=1+r(10);} res=a+b; }
+  else if(op==='-'){ if(grand){ a=25+r(75); b=5+r(a-5);} else { a=1+r(10); b=1+r(a);} res=a-b; }
+  else if(op==='×'){ if(grand){ a=2+r(11); b=2+r(11);} else { a=1+r(5); b=1+r(5);} res=a*b; }
+  else { if(grand){ b=2+r(8); res=2+r(11);} else { b=1+r(5); res=1+r(5);} a=b*res; } // division exacte : a÷b=res
+  return {a,b,res};
+}
+const NOMS_OP={'+':'plus','-':'moins','×':'fois','÷':'divisé par'};
+const TITRES_OP={'+':'➕ Additions','-':'➖ Soustractions','×':'✖️ Multiplications','÷':'➗ Divisions'};
+function jeuOp(op){
+  const {a,b,res}=genOp(op);
+  parler(`${a} ${NOMS_OP[op]} ${b}`);
+  if(state.age==='grand'){
+    // mode grands : réponse à taper au clavier
+    app.innerHTML = entete(TITRES_OP[op],'menuCalcul') + `
+      <div class="carte-jeu">
+        <p class="consigne">Écris le résultat</p>
+        <div class="question">${a} ${op} ${b} =</div>
+        <div class="saisie-box" id="saisie">?</div>
+        <button class="btn-son" onclick="parler('${a} ${NOMS_OP[op]} ${b}')">🔊 Réécouter</button>
+        ${clavierHTML()}
+        <div class="feedback" id="fb"></div>
+      </div>`;
+    demarrerSaisie(res, ()=>jeuOp(op));
+    return;
+  }
+  // mode petits : choix multiple
+  let opts=new Set([res]);
+  while(opts.size<3){ let d=res + (r(2)?1:-1)*(1+r(5)); if(d>=0) opts.add(d); }
+  opts=melanger([...opts]);
+  app.innerHTML = entete(TITRES_OP[op],'menuCalcul') + `
+    <div class="carte-jeu">
+      <p class="consigne">Combien font...</p>
+      <div class="question">${a} ${op} ${b} = ?</div>
+      <button class="btn-son" onclick="parler('${a} ${NOMS_OP[op]} ${b}')">🔊 Réécouter</button>
+      <div class="choix trois" id="zone">
+        ${opts.map(o=>`<button onclick="repOp(this,${o},${res},'${op}')">${o}</button>`).join('')}
+      </div>
+      <div class="feedback" id="fb"></div>
+    </div>`;
+}
+function repOp(btn,choix,bon,op){
+  const fb=document.getElementById('fb');
+  if(choix===bon){ btn.classList.add('bon'); fb.textContent='✅ '+bon+' !'; fb.className='feedback ok'; parler(''+bon); gagner(3); bravo();
+    document.querySelectorAll('#zone button').forEach(b=>b.disabled=true); setTimeout(()=>jeuOp(op),1300);
+  }else{ btn.classList.add('faux'); fb.textContent='Essaie encore 💪'; fb.className='feedback non'; }
+}
+
+/* --- Saisie au clavier (mode grands) --- */
+let _saisie='', _bonneRep=null, _suiteCB=null;
+function clavierHTML(){
+  let t='';
+  for(let n=1;n<=9;n++) t+=`<button class="touche" onclick="tape('${n}')">${n}</button>`;
+  t+=`<button class="touche" onclick="efface()">⌫</button>`;
+  t+=`<button class="touche" onclick="tape('0')">0</button>`;
+  t+=`<button class="touche" style="background:var(--vert);color:#fff;box-shadow:0 4px 0 #15803d" onclick="valider()">✓</button>`;
+  return `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:250px;margin:14px auto 4px;">${t}</div>`;
+}
+function demarrerSaisie(bon, suite){ _saisie=''; _bonneRep=bon; _suiteCB=suite; majSaisie(); }
+function tape(d){ if(_saisie.length<6){ _saisie+=d; majSaisie(); } }
+function efface(){ _saisie=_saisie.slice(0,-1); majSaisie(); }
+function majSaisie(){ const e=document.getElementById('saisie'); if(e) e.textContent=_saisie||'?'; }
+function valider(){
+  if(_saisie==='') return;
+  const fb=document.getElementById('fb');
+  if(+_saisie===_bonneRep){ fb.textContent='✅ Bravo, '+_bonneRep+' !'; fb.className='feedback ok'; parler(''+_bonneRep); gagner(5); bravo();
+    document.querySelectorAll('.touche').forEach(b=>b.disabled=true); setTimeout(_suiteCB,1300);
+  } else { fb.textContent='❌ Non, réessaie'; fb.className='feedback non'; _saisie=''; majSaisie(); }
+}
+
+/* --- Suites de nombres (grands) --- */
+function jeuSuites(){
+  const pas=choisir([2,3,4,5,10,-2,-3,-5]);
+  let depart = (pas>0 ? 1+r(12) : 50+r(30));
+  const suite=[]; for(let i=0;i<6;i++) suite.push(depart+pas*i);
+  const trou=2+r(3);
+  const bon=suite[trou];
+  const aff=suite.map((v,i)=> i===trou?'?':v).join('  →  ');
+  parler('Trouve le nombre qui manque');
+  app.innerHTML = entete('🔢 Suites','menuCalcul') + `
+    <div class="carte-jeu">
+      <p class="consigne">De ${pas>0?'+':''}${pas} en ${pas>0?'+':''}${pas} : quel nombre manque-t-il ?</p>
+      <div class="question petit">${aff}</div>
+      <div class="saisie-box" id="saisie">?</div>
+      ${clavierHTML()}
+      <div class="feedback" id="fb"></div>
+    </div>`;
+  demarrerSaisie(bon, jeuSuites);
+}
+
+/* --- Problèmes (grands) --- */
+const PROBLEMES=[
+  ()=>{const a=12+r(30),b=5+r(20);return{t:`Tom a ${a} billes. Il en gagne ${b} à la récré. Combien en a-t-il maintenant ?`,r:a+b};},
+  ()=>{const a=30+r(40),b=8+r(20);return{t:`Il y a ${a} bonbons dans le bocal. Léa en mange ${b}. Combien en reste-t-il ?`,r:a-b};},
+  ()=>{const a=3+r(6),b=3+r(7);return{t:`Un sachet contient ${b} images. Combien d'images dans ${a} sachets ?`,r:a*b};},
+  ()=>{const b=2+r(4),res=2+r(8),a=b*res;return{t:`On partage ${a} gâteaux entre ${b} enfants. Combien chacun en reçoit-il ?`,r:res};},
+  ()=>{const a=3+r(6),b=3+r(6);return{t:`Dans la classe il y a ${a} rangées de ${b} tables. Combien de tables en tout ?`,r:a*b};},
+  ()=>{const prix=2+r(8),n=2+r(5);return{t:`Un jouet coûte ${prix} euros. Combien coûtent ${n} jouets ?`,r:prix*n};},
+  ()=>{const total=20+r(30),pris=5+r(12);return{t:`Maman achète ${total} pommes. Elle en met ${pris} dans un panier. Combien reste-t-il de pommes ?`,r:total-pris};}
+];
+function jeuProbleme(){
+  const p=choisir(PROBLEMES)();
+  window._pTxt=p.t;
+  parler(p.t);
+  app.innerHTML = entete('🧩 Problèmes','menuCalcul') + `
+    <div class="carte-jeu">
+      <p class="consigne" style="font-size:22px;line-height:1.5;color:#374151">${p.t}</p>
+      <button class="btn-son" onclick="parler(window._pTxt)">🔊 Relire</button>
+      <div class="saisie-box" id="saisie">?</div>
+      ${clavierHTML()}
+      <div class="feedback" id="fb"></div>
+    </div>`;
+  demarrerSaisie(p.r, jeuProbleme);
+}
+</script>
+
+<script>
+/* ====================================================================
+   MODULE LANGUES
+   ==================================================================== */
+const LANGUES = {
+  en:{nom:'Anglais', drap:'🇬🇧', code:'en-US', salut:'Hello!'},
+  es:{nom:'Espagnol', drap:'🇪🇸', code:'es-ES', salut:'¡Hola!'},
+  it:{nom:'Italien', drap:'🇮🇹', code:'it-IT', salut:'Ciao!'}
+};
+const VOCAB = [
+  {img:'🐱', fr:'Chat',   en:'Cat',    es:'Gato',     it:'Gatto'},
+  {img:'🐶', fr:'Chien',  en:'Dog',    es:'Perro',    it:'Cane'},
+  {img:'🏠', fr:'Maison', en:'House',  es:'Casa',     it:'Casa'},
+  {img:'☀️', fr:'Soleil', en:'Sun',    es:'Sol',      it:'Sole'},
+  {img:'🍎', fr:'Pomme',  en:'Apple',  es:'Manzana',  it:'Mela'},
+  {img:'💧', fr:'Eau',    en:'Water',  es:'Agua',     it:'Acqua'},
+  {img:'📕', fr:'Livre',  en:'Book',   es:'Libro',    it:'Libro'},
+  {img:'🌳', fr:'Arbre',  en:'Tree',   es:'Árbol',    it:'Albero'},
+  {img:'⭐', fr:'Étoile', en:'Star',   es:'Estrella', it:'Stella'},
+  {img:'🌸', fr:'Fleur',  en:'Flower', es:'Flor',     it:'Fiore'},
+  {img:'🐟', fr:'Poisson',en:'Fish',   es:'Pez',      it:'Pesce'},
+  {img:'🥖', fr:'Pain',   en:'Bread',  es:'Pan',      it:'Pane'}
+];
+const NOMBRES = [
+  {img:'1️⃣',fr:'Un',    en:'One',   es:'Uno',    it:'Uno'},
+  {img:'2️⃣',fr:'Deux',  en:'Two',   es:'Dos',    it:'Due'},
+  {img:'3️⃣',fr:'Trois', en:'Three', es:'Tres',   it:'Tre'},
+  {img:'4️⃣',fr:'Quatre',en:'Four',  es:'Cuatro', it:'Quattro'},
+  {img:'5️⃣',fr:'Cinq',  en:'Five',  es:'Cinco',  it:'Cinque'},
+  {img:'6️⃣',fr:'Six',   en:'Six',   es:'Seis',   it:'Sei'},
+  {img:'7️⃣',fr:'Sept',  en:'Seven', es:'Siete',  it:'Sette'},
+  {img:'8️⃣',fr:'Huit',  en:'Eight', es:'Ocho',   it:'Otto'},
+  {img:'9️⃣',fr:'Neuf',  en:'Nine',  es:'Nueve',  it:'Nove'},
+  {img:'🔟',fr:'Dix',   en:'Ten',   es:'Diez',   it:'Dieci'}
+];
+const COULEURS = [
+  {img:'🔴',fr:'Rouge', en:'Red',    es:'Rojo',    it:'Rosso'},
+  {img:'🔵',fr:'Bleu',  en:'Blue',   es:'Azul',    it:'Blu'},
+  {img:'🟢',fr:'Vert',  en:'Green',  es:'Verde',   it:'Verde'},
+  {img:'🟡',fr:'Jaune', en:'Yellow', es:'Amarillo',it:'Giallo'},
+  {img:'⚫',fr:'Noir',  en:'Black',  es:'Negro',   it:'Nero'},
+  {img:'⚪',fr:'Blanc', en:'White',  es:'Blanco',  it:'Bianco'},
+  {img:'🟠',fr:'Orange',en:'Orange', es:'Naranja', it:'Arancione'},
+  {img:'🟣',fr:'Violet',en:'Purple', es:'Morado',  it:'Viola'}
+];
+const PHRASES_L = [
+  {img:'👋',fr:'Bonjour',      en:'Hello',         es:'Hola',          it:'Ciao'},
+  {img:'🙏',fr:'Merci',        en:'Thank you',     es:'Gracias',       it:'Grazie'},
+  {img:'👋',fr:'Au revoir',    en:'Goodbye',       es:'Adiós',         it:'Arrivederci'},
+  {img:'😊',fr:'S\'il te plaît',en:'Please',       es:'Por favor',     it:'Per favore'},
+  {img:'❓',fr:'Comment ça va ?',en:'How are you?', es:'¿Cómo estás?',  it:'Come stai?'},
+  {img:'👍',fr:'Oui',          en:'Yes',           es:'Sí',            it:'Sì'},
+  {img:'👎',fr:'Non',          en:'No',            es:'No',            it:'No'}
+];
+const LISTES = {base:VOCAB, nombres:NOMBRES, couleurs:COULEURS, phrases:PHRASES_L};
+let langueCur = 'en';
+let catCur = 'base';
+
+function menuLangues(){
+  state.vue='langues';
+  const grands = state.age==='grand';
+  app.innerHTML = entete('🌍 Langues') + `
+    <div class="drapeaux" id="dr">
+      ${Object.entries(LANGUES).map(([k,v])=>`<button data-l="${k}" class="${k===langueCur?'on':''}" onclick="setLangue('${k}')">${v.drap} ${v.nom}</button>`).join('')}
+    </div>
+    <div class="sous-menu">
+      <button class="gros-btn t-langues" onclick="bonus('langues')"><span class="emo">🧠</span>Carte mentale & vidéos</button>
+      <button class="gros-btn t-langues" onclick="jeuVocab('base')"><span class="emo">👀</span>Découvrir les mots</button>
+      <button class="gros-btn t-langues" onclick="jeuLangueQuiz('base')"><span class="emo">❓</span>Quiz : trouve le mot</button>
+      ${grands?`
+      <button class="gros-btn t-langues" onclick="jeuVocab('nombres')"><span class="emo">🔢</span>Les nombres</button>
+      <button class="gros-btn t-langues" onclick="jeuVocab('couleurs')"><span class="emo">🎨</span>Les couleurs</button>
+      <button class="gros-btn t-langues" onclick="jeuVocab('phrases')"><span class="emo">💬</span>Petites phrases</button>
+      <button class="gros-btn t-langues" onclick="jeuLangueQuiz('melange')"><span class="emo">🏆</span>Grand quiz<span class="niveau-badge">4 choix</span></button>`:''}
+    </div>`;
+}
+function setLangue(k){ langueCur=k; document.querySelectorAll('#dr button').forEach(b=>b.classList.toggle('on',b.dataset.l===k)); }
+function listePourCat(cat){
+  if(cat==='melange') return [...VOCAB,...NOMBRES,...COULEURS,...PHRASES_L];
+  return LISTES[cat]||VOCAB;
+}
+
+/* Mode découverte : carte par carte */
+let vocabIdx = 0;
+function jeuVocab(cat){
+  catCur = cat||'base';
+  const liste = melanger(listePourCat(catCur));
+  vocabIdx = 0;
+  montrerCarteVocab(liste);
+}
+function montrerCarteVocab(liste){
+  const L=LANGUES[langueCur];
+  const v=liste[vocabIdx];
+  parler(v[langueCur], L.code);
+  app.innerHTML = entete(L.drap+' '+L.nom,'menuLangues') + `
+    <div class="carte-jeu">
+      <p class="consigne">En français : <b>${v.fr}</b></p>
+      <div class="mot-img pop">${v.img}</div>
+      <div class="mot-cible">${v[langueCur]}</div>
+      <button class="btn-son" onclick="parler('${v[langueCur].replace(/'/g,"\\'")}','${L.code}')">🔊 Écouter</button>
+      ${barreHTML(liste.length, vocabIdx+1)}
+      <div><button class="btn-suite" onclick="suiteVocab()">${vocabIdx+1<liste.length?'Suivant ➡':'Recommencer 🔁'}</button></div>
+    </div>`;
+  window._listeVocab = liste;
+}
+function suiteVocab(){
+  const liste=window._listeVocab;
+  vocabIdx++;
+  if(vocabIdx>=liste.length){ gagner(3); confettis(); vocabIdx=0; montrerCarteVocab(melanger(listePourCat(catCur))); }
+  else montrerCarteVocab(liste);
+}
+
+/* Quiz : montre l'image + mot français, trouver le mot dans la langue.
+   Grands : 4 options. Petits/base : 3 options. */
+function jeuLangueQuiz(cat){
+  catCur = cat||'base';
+  const liste = listePourCat(catCur);
+  const L=LANGUES[langueCur];
+  const cible=choisir(liste);
+  const nbAutres = (state.age==='grand') ? 3 : 2;
+  let autres=melanger(liste.filter(v=>v.fr!==cible.fr)).slice(0,nbAutres);
+  const opts=melanger([cible,...autres]);
+  parler('Comment dit-on '+cible.fr+' en '+L.nom);
+  app.innerHTML = entete(L.drap+' Quiz','menuLangues') + `
+    <div class="carte-jeu">
+      <p class="consigne">Comment dit-on en ${L.nom} ?</p>
+      <div class="mot-img pop">${cible.img}</div>
+      <div class="mot-fr">${cible.fr}</div>
+      <div class="choix ${opts.length===3?'trois':''}" id="zone">
+        ${opts.map(o=>`<button style="font-size:22px" onclick="repLangue(this,'${o.fr.replace(/'/g,"\\'")}','${cible.fr.replace(/'/g,"\\'")}','${o[langueCur].replace(/'/g,"\\'")}','${L.code}')">${o[langueCur]}</button>`).join('')}
+      </div>
+      <div class="feedback" id="fb"></div>
+    </div>`;
+}
+function repLangue(btn,choix,bonne,mot,code){
+  const fb=document.getElementById('fb');
+  if(choix===bonne){ btn.classList.add('bon'); fb.textContent='✅ Bravo !'; fb.className='feedback ok'; parler(mot,code); gagner(3); bravo();
+    document.querySelectorAll('#zone button').forEach(b=>b.disabled=true); setTimeout(()=>jeuLangueQuiz(catCur),1500);
+  }else{ btn.classList.add('faux'); fb.textContent='Non, réessaie 🙂'; fb.className='feedback non'; }
+}
+</script>
+
+<script>
+/* ====================================================================
+   MODULE HISTOIRE
+   ==================================================================== */
+const LECONS = [
+  {
+    titre:'La Préhistoire', ill:'🦣',
+    texte:`Il y a très très longtemps, les hommes vivaient dans des grottes. On les appelle les hommes préhistoriques. Ils ont découvert le <b>feu</b> pour se réchauffer et cuire la nourriture, et ils chassaient des animaux comme le mammouth. Ils dessinaient sur les murs des grottes !`,
+    quiz:{q:'Où vivaient les hommes préhistoriques ?', bon:'Dans des grottes', faux:['Dans des châteaux','Dans des immeubles']},
+    age:'petit'
+  },
+  {
+    titre:'Les Égyptiens', ill:'🔺',
+    texte:`En Égypte, il y a des milliers d'années, les rois s'appelaient les <b>pharaons</b>. Ils ont fait construire d'immenses <b>pyramides</b> en pierre. Les Égyptiens écrivaient avec de petits dessins appelés hiéroglyphes.`,
+    quiz:{q:'Comment s\'appelaient les rois d\'Égypte ?', bon:'Les pharaons', faux:['Les chevaliers','Les présidents']},
+    age:'petit'
+  },
+  {
+    titre:'Les Chevaliers', ill:'🏰',
+    texte:`Au Moyen Âge, les <b>chevaliers</b> portaient une armure en métal et se battaient avec une épée. Ils vivaient dans de grands <b>châteaux forts</b> entourés de murs et de douves remplies d'eau pour se protéger.`,
+    quiz:{q:'Où vivaient les chevaliers ?', bon:'Dans des châteaux forts', faux:['Dans des pyramides','Dans des cavernes']},
+    age:'petit'
+  },
+  {
+    titre:'Les Romains', ill:'🏛️',
+    texte:`Les Romains vivaient à <b>Rome</b>, il y a plus de 2000 ans. Ils ont construit des routes, des aqueducs pour transporter l'eau, et de grandes arènes comme le <b>Colisée</b> où combattaient les gladiateurs. Leur chef s'appelait l'empereur.`,
+    quiz:{q:'Comment s\'appelle la grande arène de Rome ?', bon:'Le Colisée', faux:['La Tour Eiffel','La pyramide']},
+    age:'grand'
+  },
+  {
+    titre:'Christophe Colomb', ill:'⛵',
+    texte:`En <b>1492</b>, un explorateur nommé Christophe Colomb est parti sur des bateaux à travers l'océan. Il cherchait une nouvelle route et il a découvert un continent que les Européens ne connaissaient pas : l'<b>Amérique</b> !`,
+    quiz:{q:'Quel continent Colomb a-t-il découvert ?', bon:'L\'Amérique', faux:['L\'Australie','L\'Afrique']},
+    age:'grand'
+  },
+  {
+    titre:'La Tour Eiffel', ill:'🗼',
+    texte:`La <b>Tour Eiffel</b> a été construite à Paris en <b>1889</b>, il y a plus de 130 ans, par l'ingénieur Gustave Eiffel. Elle est faite de fer et mesure plus de 300 mètres. C'est le monument le plus connu de France !`,
+    quiz:{q:'Dans quelle ville se trouve la Tour Eiffel ?', bon:'Paris', faux:['Rome','Londres']},
+    age:'grand'
+  }
+];
+
+/* Questions supplémentaires pour les grands (par titre de leçon) */
+const QUIZ_PLUS = {
+  'La Préhistoire':[
+    {q:'Qu\'ont découvert les hommes préhistoriques pour se réchauffer ?', bon:'Le feu', faux:['L\'électricité','Le gaz']},
+    {q:'Quel grand animal chassaient-ils ?', bon:'Le mammouth', faux:['Le lion','Le dauphin']}
+  ],
+  'Les Égyptiens':[
+    {q:'Qu\'ont fait construire les pharaons ?', bon:'Des pyramides', faux:['Des gratte-ciels','Des ponts']},
+    {q:'Comment s\'appelaient les petits dessins de leur écriture ?', bon:'Des hiéroglyphes', faux:['Des emojis','Des lettres']}
+  ],
+  'Les Chevaliers':[
+    {q:'En quoi était faite l\'armure du chevalier ?', bon:'En métal', faux:['En bois','En papier']},
+    {q:'Qu\'y avait-il autour des châteaux forts ?', bon:'Des douves remplies d\'eau', faux:['Une autoroute','Un jardin de fleurs']}
+  ],
+  'Les Romains':[
+    {q:'À quoi servaient les aqueducs des Romains ?', bon:'À transporter l\'eau', faux:['À voler','À faire du feu']},
+    {q:'Qui combattait dans le Colisée ?', bon:'Les gladiateurs', faux:['Les chevaliers','Les pharaons']},
+    {q:'Comment s\'appelait le chef des Romains ?', bon:'L\'empereur', faux:['Le président','Le roi mage']}
+  ],
+  'Christophe Colomb':[
+    {q:'En quelle année Colomb a-t-il découvert l\'Amérique ?', bon:'1492', faux:['1789','2000']},
+    {q:'Comment a-t-il traversé l\'océan ?', bon:'En bateau', faux:['En avion','À pied']}
+  ],
+  'La Tour Eiffel':[
+    {q:'En quelle année la Tour Eiffel a-t-elle été construite ?', bon:'1889', faux:['1492','1980']},
+    {q:'En quel matériau est faite la Tour Eiffel ?', bon:'En fer', faux:['En or','En verre']},
+    {q:'Qui a construit la Tour Eiffel ?', bon:'Gustave Eiffel', faux:['Napoléon','Léonard de Vinci']}
+  ]
+};
+
+/* Chronologie (grands) : ranger des événements du plus ancien au plus récent */
+const CHRONO=[
+  {e:'La Préhistoire', o:1, em:'🦣'},
+  {e:'Les Égyptiens et les pyramides', o:2, em:'🔺'},
+  {e:'Les Romains et le Colisée', o:3, em:'🏛️'},
+  {e:'Les chevaliers du Moyen Âge', o:4, em:'🏰'},
+  {e:'Christophe Colomb (1492)', o:5, em:'⛵'},
+  {e:'La Tour Eiffel (1889)', o:6, em:'🗼'}
+];
+
+function menuHistoire(){
+  state.vue='histoire';
+  const grands = state.age==='grand';
+  const leconsAge = LECONS.filter(l=> grands ? true : l.age==='petit');
+  app.innerHTML = entete('🏰 Histoire') + `
+    <div class="sous-menu">
+      <button class="gros-btn t-histoire" onclick="bonus('histoire')"><span class="emo">🧠</span>Carte mentale & vidéos</button>
+      ${leconsAge.map(l=>`<button class="gros-btn t-histoire" onclick="ouvrirLecon(${LECONS.indexOf(l)})"><span class="emo">${l.ill}</span>${l.titre}</button>`).join('')}
+      ${grands?`<button class="gros-btn t-histoire" onclick="jeuChrono()"><span class="emo">⏳</span>Chronologie<span class="niveau-badge">range dans l'ordre</span></button>`:''}
+    </div>`;
+}
+function ouvrirLecon(i){
+  const l=LECONS[i];
+  app.innerHTML = entete(l.ill+' '+l.titre,'menuHistoire') + `
+    <div class="carte-jeu">
+      <div class="lecon">
+        <span class="ill">${l.ill}</span>
+        <p>${l.texte}</p>
+      </div>
+      <button class="btn-son" onclick="parler(document.getElementById('lt').textContent)">🔊 Lire à voix haute</button>
+      <p id="lt" style="display:none">${l.texte.replace(/<[^>]+>/g,'')}</p>
+      <div><button class="btn-suite" onclick="quizLecon(${i})">Faire le quiz ❓</button></div>
+    </div>`;
+}
+function quizLecon(i){
+  const l=LECONS[i];
+  let qs=[l.quiz];
+  if(state.age==='grand' && QUIZ_PLUS[l.titre]) qs=qs.concat(QUIZ_PLUS[l.titre]);
+  qs=melanger(qs);
+  window._pendingQs=qs; window._pendingRetour='menuHistoire'; window._pendingTitre=l.ill+' Quiz'; window._pendingFin=menuHistoire;
+  lancerQuiz();
+}
+
+/* Chronologie : cliquer du plus ancien au plus récent */
+function jeuChrono(){
+  const sel=melanger(CHRONO).slice(0,4);
+  const cible=sel.slice().sort((a,b)=>a.o-b.o);
+  window._chrCible=cible; window._chrStep=0;
+  app.innerHTML = entete('⏳ Chronologie','menuHistoire') + `
+    <div class="carte-jeu">
+      <p class="consigne">Clique du plus <b>ANCIEN</b> au plus <b>RÉCENT</b></p>
+      <div id="zone" style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
+        ${melanger(sel).map(x=>`<button class="gros-btn t-histoire" style="font-size:18px" onclick="repChrono(this,${x.o})"><span class="emo">${x.em}</span>${x.e}</button>`).join('')}
+      </div>
+      <div class="feedback" id="fb"></div>
+      <div><button class="btn-suite cacher" id="next" onclick="jeuChrono()">Rejouer 🔁</button></div>
+    </div>`;
+}
+function repChrono(btn,o){
+  const fb=document.getElementById('fb');
+  if(o===window._chrCible[window._chrStep].o){
+    btn.classList.add('bon'); btn.disabled=true; window._chrStep++;
+    if(window._chrStep>=window._chrCible.length){
+      fb.textContent='✅ Parfait, tout est dans l\'ordre !'; fb.className='feedback ok'; gagner(6); bravo();
+      document.getElementById('next').classList.remove('cacher');
+    } else { fb.textContent='👍 Continue...'; fb.className='feedback ok'; }
+  } else {
+    btn.classList.add('faux'); fb.textContent='❌ Ce n\'est pas le plus ancien restant'; fb.className='feedback non';
+    setTimeout(()=>btn.classList.remove('faux'),700);
+  }
+}
+</script>
+
+<script>
+/* ===== Cartes mentales + vidéos par matière (Petits Malins) ===== */
+const CARTES = {
+  lecture:{titre:'La lecture', c:'#e11d48', noeuds:['Les voyelles a e i o u','Les consonnes','Les syllabes ba be bi','Lire des mots','Lire des phrases']},
+  calcul:{titre:'Le calcul', c:'#2563eb', noeuds:['Compter','Additionner +','Soustraire \u2212','Multiplier \u00d7','Diviser \u00f7']},
+  langues:{titre:'Les langues', c:'#059669', noeuds:['Anglais','Espagnol','Italien','Les nombres','Les couleurs']},
+  histoire:{titre:'Le temps', c:'#d97706', noeuds:['Prehistoire','Antiquite','Moyen Age','Temps modernes','Aujourd hui']}
+};
+const VIDEOS_PM = {
+  lecture:[{l:'La planete des Alphas',q:'la planete des alphas apprendre a lire'},{l:'Alphabet en chanson',q:'alphabet chanson maternelle apprendre'},{l:'Lire les syllabes (CP)',q:'apprendre a lire les syllabes CP'}],
+  calcul:[{l:'Apprendre a compter',q:'apprendre a compter maternelle chanson'},{l:'Les additions (CP)',q:'apprendre les additions CP'},{l:'Tables de multiplication',q:'table de multiplication chanson enfant'}],
+  langues:[{l:'Anglais pour enfants',q:'anglais pour enfants debutant animaux couleurs'},{l:'Espagnol pour enfants',q:'espagnol pour enfants debutant'},{l:'Italien pour enfants',q:'italien pour enfants debutant'}],
+  histoire:[{l:'C est pas sorcier',q:'c est pas sorcier prehistoire'},{l:'Quelle Histoire',q:'quelle histoire dessin anime prehistoire'},{l:'L Antiquite aux enfants',q:'antiquite expliquee aux enfants'}]
+};
+function carteMentaleSVG(key){
+  const d=CARTES[key]; const cx=260,cy=160,rx=190,ry=110,n=d.noeuds.length; let nodes="";
+  d.noeuds.forEach(function(t,i){
+    const ang=(-90+i*(360/n))*Math.PI/180; const x=cx+rx*Math.cos(ang), y=cy+ry*Math.sin(ang);
+    const w=Math.max(96,t.length*8+18), h=34;
+    nodes+='<line x1="'+cx+'" y1="'+cy+'" x2="'+x+'" y2="'+y+'" stroke="'+d.c+'" stroke-width="3" opacity=".5"/>';
+    nodes+='<rect x="'+(x-w/2)+'" y="'+(y-h/2)+'" width="'+w+'" height="'+h+'" rx="12" fill="#fff" stroke="'+d.c+'" stroke-width="2"/>';
+    nodes+='<text x="'+x+'" y="'+(y+5)+'" text-anchor="middle" font-size="14" font-weight="700" fill="#374151">'+t+'</text>';
+  });
+  return '<svg viewBox="0 0 520 320" width="100%" style="max-height:320px">'+nodes+'<ellipse cx="'+cx+'" cy="'+cy+'" rx="92" ry="52" fill="'+d.c+'"/><text x="'+cx+'" y="'+(cy+7)+'" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">'+d.titre+'</text></svg>';
+}
+function bonus(key){
+  const d=CARTES[key];
+  const retour={lecture:"menuLecture",calcul:"menuCalcul",langues:"menuLangues",histoire:"menuHistoire"}[key];
+  const vids=VIDEOS_PM[key].map(function(v){ return '<a class="btn-son" style="text-decoration:none;display:inline-block;background:#fff;box-shadow:0 4px 0 #e5e7eb" href="https://www.youtube.com/results?search_query='+encodeURIComponent(v.q)+'" target="_blank" rel="noopener">\uD83C\uDFAC '+v.l+'</a>'; }).join(" ");
+  app.innerHTML = entete("\uD83E\uDDE0 "+d.titre, retour) + '<div class="carte-jeu"><p class="consigne">Ma carte mentale</p><div style="background:#f8fafc;border-radius:18px;padding:10px">'+carteMentaleSVG(key)+'</div><p class="consigne" style="margin-top:16px">\uD83C\uDFAC Des vidéos pour apprendre <span style="font-size:14px">(elles s ouvrent dans le navigateur)</span></p><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">'+vids+'</div></div>';
+}
+</script>
+<script>
+/* démarrage */
+vueAccueil();
+</script>
+</body>
+</html>

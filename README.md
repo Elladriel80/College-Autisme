@@ -1,6 +1,12 @@
 # 🪄 Le Royaume du Savoir
 
-Application d'apprentissage **gamifiée** pour préparer le **Diplôme National du Brevet**, pensée pour une élève **autiste** scolarisée au collège. L'objectif : évaluer son niveau, la faire progresser pas à pas sur le programme de l'Éducation nationale, avec un renforcement positif fort et un univers fantastique motivant.
+> **Appli familiale (fusion) — du CP au Brevet.** À l'ouverture, on choisit un profil. Chaque profil appartient à un **monde** :
+> 🐣 **Les Petits Malins** (les bases, dès le CP : lecture, calcul, langues, histoire) ou 🏰 **Le Royaume du Savoir** (collège, jusqu'au Brevet).
+> Une même aventure qui accompagne **tous les enfants** au fil de leur scolarité. Les deux univers cohabitent dans le même fichier `Royaume-du-Savoir.html` ; la progression de chaque enfant est enregistrée séparément sur l'appareil. Le monde des petits est aussi disponible seul dans `Petits-Malins.html`.
+>
+> 🎯 **But de l'application** : permettre à l'enfant/ado d'obtenir son **Brevet** dans de bonnes conditions. En fin de parcours, un **Brevet blanc** (examen multi-matières en conditions réelles, noté **/20** avec mentions, correction détaillée et meilleur score conservé) entraîne l'élève comme le jour J. L'app aura rempli sa mission le jour où ce résultat est atteint.
+
+Application d'apprentissage **gamifiée** qui accompagne les enfants **du CP au Brevet**, pensée pour **tous les enfants** — et particulièrement adaptée aux enfants **autistes** (structure prévisible, une tâche à la fois, mode calme). L'objectif : évaluer son niveau, la faire progresser pas à pas sur le programme de l'Éducation nationale, avec un renforcement positif fort et un univers fantastique motivant.
 
 > Application web autonome : un seul fichier `Royaume-du-Savoir.html`. Aucune installation. Fonctionne sur PC (et tablette) en ouvrant le fichier dans un navigateur. La progression est sauvegardée automatiquement sur l'ordinateur.
 
@@ -22,12 +28,12 @@ Application d'apprentissage **gamifiée** pour préparer le **Diplôme National 
 
 | Matière | Région | Niveaux |
 |---|---|---|
-| Mathématiques | Les Tours de Calcul | 5ᵉ + 4ᵉ |
-| Français | La Bibliothèque Enchantée | 5ᵉ + 4ᵉ |
-| Histoire-Géo & EMC | Le Donjon du Temps | 5ᵉ + 4ᵉ |
-| Sciences (PC · SVT · Techno) | Le Laboratoire Alchimique | 5ᵉ + 4ᵉ |
+| Mathématiques | Les Tours de Calcul | 6ᵉ + 5ᵉ + 4ᵉ |
+| Français | La Bibliothèque Enchantée | 6ᵉ + 5ᵉ + 4ᵉ |
+| Histoire-Géo & EMC | Le Donjon du Temps | 6ᵉ + 5ᵉ + 4ᵉ |
+| Sciences (PC · SVT · Techno) | Le Laboratoire Alchimique | 6ᵉ + 5ᵉ + 4ᵉ |
 
-**27 leçons · 117 questions** à ce stade. L'architecture permet d'ajouter facilement la **3ᵉ** et d'étoffer chaque leçon.
+**35 leçons · 157 questions** à ce stade. Le niveau **6ᵉ** fait la jonction avec le monde des Petits Malins, pour une continuité **du CP au Brevet**. **Chaque âge** dispose de **cartes mentales** et de **vidéos** : auto-générées + vidéo dans chaque leçon du Royaume, et une carte mentale + des vidéos par matière dans Les Petits Malins. L'architecture permet d'ajouter facilement la **3ᵉ** et d'étoffer chaque leçon.
 
 ## 🎬 Vidéos pédagogiques
 
