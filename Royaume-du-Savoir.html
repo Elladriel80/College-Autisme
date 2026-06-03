@@ -403,8 +403,8 @@ const CONTENT = {
              explain:"4/8 se simplifie en 1/2 (on divise haut et bas par 4)."},
             {type:"saisie", q:"Simplifie 6/9 (écris sous la forme a/b la plus simple).", answer:["2/3"],
              explain:"On divise par 3 : 6÷3 / 9÷3 = 2/3."},
-            {type:"qcm", q:"Combien fait 5/6 − 1/6 ?", options:["4/6","4/0","6/6","4/12"], answer:0,
-             explain:"Même dénominateur : 5−1 = 4, donc 4/6 (que l'on peut simplifier en 2/3)."}
+            {type:"qcm", q:"Combien fait 5/6 − 1/6 ?", options:["4/6","4","6/6","4/12"], answer:0,
+             explain:"Même dénominateur : on garde le 6 et on calcule 5−1 = 4, donc 4/6 (que l'on peut simplifier en 2/3). Attention : le dénominateur ne change pas (ce n'est pas « 4 » tout seul)."}
           ]
         },
         {
@@ -2421,7 +2421,7 @@ function runDiagnostic(){
 /* ===================== BREVET BLANC ===================== */
 var EXAM=null, EXAM_I=0, EXAM_ANS=[];
 function _shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-function _norm(s){return String(s).toLowerCase().trim().replace(/\s+/g,"").replace(/\u00b2/g,"2");}
+function _norm(s){return String(s).toLowerCase().trim().replace(/\s+/g,"").replace(/\u00b2/g,"2").replace(/,/g,".");}/* virgule d\u00e9cimale FR accept\u00e9e comme le point (align\u00e9 sur `norm` des le\u00e7ons) */
 function collegeQuestions(){
   var out=[];
   CONTENT.subjects.forEach(function(s){
