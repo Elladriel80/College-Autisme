@@ -196,6 +196,120 @@
   .feat .f .ft{font-weight:700;margin:4px 0 2px}
   .demo-q{max-width:540px;margin:0 auto}
   .parent-note{background:var(--bg2);border:1px dashed var(--border);border-radius:14px;padding:16px;margin-top:14px}
+.world-opt{opacity:.55} .world-opt.sel{opacity:1;box-shadow:0 0 0 3px #22c55e inset}
+.ex-opt.sel{outline:3px solid #16a34a;outline-offset:2px}
+</style>
+<style id="pmStyle">
+/* ===== LES PETITS MALINS — styles scopés sous #pmRoot (intégration native) =====
+   Tout est préfixé par #pmRoot pour ne PAS déteindre sur le Royaume
+   (sélecteurs globaux *, body, :root, .wrap, .feedback, .logo, @keyframes pop/fall). */
+#pmRoot{
+  --pm-bleu:#3b82f6; --pm-vert:#22c55e; --pm-orange:#f59e0b; --pm-rose:#ec4899;
+  --pm-violet:#8b5cf6; --pm-rouge:#ef4444; --pm-jaune:#fde047;
+  --pm-carte:#ffffff; --pm-texte:#1f2937;
+  font-family:'Comic Sans MS','Trebuchet MS',system-ui,sans-serif;
+  color:var(--pm-texte);
+  background:linear-gradient(160deg,#fef9f0,#fde6f0 50%,#e0f2fe);
+  border-radius:18px; padding:16px; margin-top:6px; display:block;
+}
+#pmRoot *{box-sizing:border-box;}
+#pmRoot button{font-family:inherit;}
+
+/* Bandeau de contrôle sobre (âge / score / mode calme) — un seul en-tête,
+   la topbar du Royaume reste la barre principale. */
+#pmRoot .pm-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:8px;}
+#pmRoot .pm-age{display:flex;gap:6px;background:#fff;border-radius:999px;padding:5px;box-shadow:0 3px 0 #e5d4b8;}
+#pmRoot .pm-age button{border:none;background:transparent;border-radius:999px;padding:7px 14px;font-size:15px;font-weight:bold;cursor:pointer;color:#9ca3af;}
+#pmRoot .pm-age button.on{background:var(--pm-orange);color:#fff;}
+#pmRoot .pm-score{background:#fff;border-radius:999px;padding:6px 14px;font-size:18px;font-weight:bold;box-shadow:0 3px 0 #e5d4b8;}
+#pmRoot .pm-calme{border:none;background:#fff;border-radius:999px;padding:7px 14px;font-size:14px;font-weight:bold;cursor:pointer;color:#4b5563;box-shadow:0 3px 0 #e5d4b8;}
+#pmRoot .pm-calme.on{background:#312e81;color:#fff;box-shadow:0 3px 0 #1e1b4b;}
+
+#pmRoot .pm-bar{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap;}
+#pmRoot .btn-back{background:#fff;border:none;border-radius:999px;padding:9px 16px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #d1d5db;color:var(--pm-texte);font-family:inherit;min-height:44px;}
+#pmRoot .btn-back:active{transform:translateY(3px);box-shadow:0 1px 0 #d1d5db;}
+#pmRoot .btn-back:disabled{opacity:.45;}
+#pmRoot h2.titre{text-align:center;font-size:clamp(22px,4.5vw,30px);color:var(--pm-bleu);margin:6px 0 14px;text-shadow:1px 1px 0 #fff;}
+
+#pmRoot .grille{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+#pmRoot .tuile{border:none;border-radius:28px;padding:28px 16px;cursor:pointer;color:#fff;font-size:clamp(20px,4vw,26px);font-weight:bold;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:0 8px 0 rgba(0,0,0,.18);transition:transform .08s;}
+#pmRoot .tuile:active{transform:translateY(5px);box-shadow:0 3px 0 rgba(0,0,0,.18);}
+#pmRoot .tuile .emo{font-size:54px;}
+#pmRoot .t-lecture{background:linear-gradient(160deg,#fb7185,#e11d48);}
+#pmRoot .t-calcul{background:linear-gradient(160deg,#60a5fa,#2563eb);}
+#pmRoot .t-langues{background:linear-gradient(160deg,#34d399,#059669);}
+#pmRoot .t-histoire{background:linear-gradient(160deg,#fbbf24,#d97706);}
+
+#pmRoot .sous-menu{display:flex;flex-direction:column;gap:14px;max-width:480px;margin:0 auto;}
+#pmRoot .gros-btn{border:none;border-radius:22px;padding:20px;font-size:22px;font-weight:bold;font-family:inherit;cursor:pointer;color:#fff;display:flex;align-items:center;gap:14px;box-shadow:0 6px 0 rgba(0,0,0,.18);text-align:left;}
+#pmRoot .gros-btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.18);}
+#pmRoot .gros-btn .emo{font-size:38px;}
+
+#pmRoot .carte-jeu{background:var(--pm-carte);border-radius:28px;padding:26px 20px;box-shadow:0 10px 0 #e5d4b8;text-align:center;max-width:620px;margin:0 auto;}
+#pmRoot .consigne{font-size:22px;color:#4b5563;margin-bottom:6px;}
+#pmRoot .question{font-size:clamp(40px,11vw,80px);font-weight:bold;margin:14px 0;color:var(--pm-texte);line-height:1.1;}
+#pmRoot .question.petit{font-size:clamp(24px,6vw,40px);}
+#pmRoot .emoji-rang{font-size:clamp(30px,8vw,52px);line-height:1.3;word-spacing:6px;margin:10px 0;}
+
+#pmRoot .choix{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px;}
+#pmRoot .choix.trois{grid-template-columns:repeat(3,1fr);}
+#pmRoot .choix button{border:none;border-radius:20px;padding:22px 10px;font-size:30px;font-weight:bold;font-family:inherit;cursor:pointer;background:#eef2ff;color:var(--pm-texte);box-shadow:0 5px 0 #c7d2fe;transition:transform .06s;min-height:64px;}
+#pmRoot .choix button:active{transform:translateY(3px);box-shadow:0 2px 0 #c7d2fe;}
+/* Réussite/erreur : couleur + symbole (✓/✗) pour ne pas dépendre de la seule couleur (accessibilité daltonisme) */
+#pmRoot .choix button.bon{background:var(--pm-vert);color:#fff;box-shadow:0 5px 0 #15803d;}
+#pmRoot .choix button.bon::after{content:" ✓";}
+#pmRoot .choix button.faux{background:var(--pm-rouge);color:#fff;box-shadow:0 5px 0 #991b1b;}
+#pmRoot .choix button.faux::after{content:" ✗";}
+#pmRoot .choix button:disabled{cursor:default;}
+
+#pmRoot .btn-son{background:var(--pm-jaune);border:none;border-radius:999px;padding:14px 22px;font-size:20px;font-weight:bold;font-family:inherit;cursor:pointer;box-shadow:0 5px 0 #ca8a04;margin:6px;min-height:48px;}
+#pmRoot .btn-son:active{transform:translateY(3px);box-shadow:0 2px 0 #ca8a04;}
+
+#pmRoot .feedback{font-size:24px;font-weight:bold;min-height:42px;margin-top:16px;line-height:1.35;}
+#pmRoot .feedback.ok{color:#15803d;}
+#pmRoot .feedback.non{color:#b45309;}
+
+#pmRoot .btn-suite{background:var(--pm-violet);color:#fff;border:none;border-radius:20px;padding:16px 32px;font-size:22px;font-weight:bold;font-family:inherit;cursor:pointer;box-shadow:0 6px 0 #6d28d9;margin-top:18px;min-height:52px;}
+#pmRoot .btn-suite:active{transform:translateY(4px);box-shadow:0 2px 0 #6d28d9;}
+
+#pmRoot .mot-img{font-size:96px;margin:6px 0;}
+#pmRoot .mot-fr{font-size:30px;color:#4b5563;}
+#pmRoot .mot-cible{font-size:clamp(36px,9vw,56px);font-weight:bold;color:#047857;margin:6px 0;}
+#pmRoot .drapeaux{display:flex;justify-content:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+#pmRoot .drapeaux button{font-size:18px;border:none;background:#fff;border-radius:14px;padding:10px 14px;cursor:pointer;box-shadow:0 4px 0 #e5e7eb;font-family:inherit;font-weight:bold;min-height:48px;}
+#pmRoot .drapeaux button.on{background:var(--pm-jaune);box-shadow:0 4px 0 #ca8a04;}
+
+#pmRoot .lecon{text-align:left;font-size:20px;line-height:1.6;color:#374151;}
+#pmRoot .lecon h3{font-size:26px;color:var(--pm-orange);margin-bottom:10px;text-align:center;}
+#pmRoot .lecon .ill{font-size:70px;text-align:center;display:block;margin:8px 0;}
+
+#pmRoot .barre{display:flex;justify-content:center;gap:6px;margin-top:14px;flex-wrap:wrap;}
+#pmRoot .pastille{width:16px;height:16px;border-radius:50%;background:#e5e7eb;}
+#pmRoot .pastille.faite{background:var(--pm-vert);}
+
+#pmRoot .pm-clavier{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:280px;margin:14px auto 4px;}
+#pmRoot .touche{border:none;border-radius:16px;padding:18px;font-size:28px;font-weight:bold;font-family:inherit;background:#eef2ff;color:var(--pm-texte);box-shadow:0 4px 0 #c7d2fe;cursor:pointer;min-height:56px;}
+#pmRoot .touche:active{transform:translateY(2px);box-shadow:0 2px 0 #c7d2fe;}
+#pmRoot .touche:disabled{opacity:.45;}
+#pmRoot .saisie-box{font-size:clamp(40px,11vw,68px);font-weight:bold;min-height:1.2em;color:var(--pm-bleu);letter-spacing:2px;}
+#pmRoot .niveau-badge{display:inline-block;background:rgba(255,255,255,.3);border-radius:999px;padding:2px 10px;font-size:14px;margin-left:6px;}
+
+/* Remettre la phrase en ordre — cibles tactiles agrandies (audit) */
+#pmRoot .phrase-cible{min-height:60px;font-size:24px;margin:14px 0;padding:12px;border:3px dashed #c7d2fe;border-radius:16px;}
+#pmRoot .phrase-banque{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+#pmRoot .mot-btn{border:none;border-radius:14px;padding:14px 18px;font-size:20px;font-weight:bold;font-family:inherit;background:#eef2ff;color:var(--pm-texte);box-shadow:0 4px 0 #c7d2fe;cursor:pointer;min-height:48px;}
+#pmRoot .mot-btn:active{transform:translateY(2px);box-shadow:0 2px 0 #c7d2fe;}
+
+#pmRoot .cacher{display:none;}
+#pmRoot .pop{animation:pmpop .3s;}
+@keyframes pmpop{0%{transform:scale(.7)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+/* Mode calme côté petits : plus aucune animation ni transition */
+#pmRoot.calme *{animation:none !important;transition:none !important;}
+
+/* Confettis : ajoutés à <body>, donc nommés à part (pas de collision avec le Royaume) */
+.pm-confetti{position:fixed;top:-20px;font-size:26px;animation:pmfall 2.2s linear forwards;z-index:50;pointer-events:none;}
+@keyframes pmfall{to{transform:translateY(110vh) rotate(420deg);opacity:.4;}}
 </style>
 </head>
 <body>
@@ -216,7 +330,7 @@
 <script>
 /* =========================================================================
    LE ROYAUME DU SAVOIR — prototype d'apprentissage gamifié (Brevet / Cycle 4)
-   Conçu pour une enfant autiste de 5e : structure prévisible, renforcement
+   Conçu pour tous les enfants du collège (dont les enfants autistes) : structure prévisible, renforcement
    positif, thème fantastique, une tâche à la fois, encouragements constants.
    ========================================================================= */
 
@@ -231,6 +345,31 @@ const CONTENT = {
     {
       id:"maths", name:"Mathématiques", region:"Les Tours de Calcul", icon:"🗼", color:"#46c8c0",
       lessons:[
+        {
+          id:"m9", niveau:"6e", title:"Les nombres décimaux",
+          cours:"Un <b>nombre décimal</b> a une partie entière et une partie après la <b>virgule</b> (ex : 3,25). " +
+                "Le 1er chiffre après la virgule est celui des <b>dixièmes</b>, le 2e celui des <b>centièmes</b>. " +
+                "Pour <b>comparer</b>, on regarde d'abord la partie entière, puis les dixièmes. 3,5 = 3,50.",
+          questions:[
+            {type:"qcm", q:"Dans 3,25, le chiffre 2 représente :", options:["les dixièmes","les centièmes","les unités","les dizaines"], answer:0, explain:"1er chiffre après la virgule = dixièmes : 2 dixièmes."},
+            {type:"qcm", q:"Quel nombre est le plus grand ?", options:["3,5","3,45","3,09","3,4"], answer:0, explain:"3,5 = 3,50 : le plus grand (5 dixièmes)."},
+            {type:"saisie", q:"Combien fait 2,5 + 1,75 ? (avec une virgule)", answer:["4,25"], explain:"On aligne les virgules : 2,50 + 1,75 = 4,25."},
+            {type:"vf", q:"Les nombres 3,5 et 3,50 sont égaux.", answer:true, explain:"Un zéro après le dernier décimal ne change rien."},
+            {type:"qcm", q:"L'écriture décimale de 7/10 est :", options:["0,7","7,0","0,07","1,7"], answer:0, explain:"7 dixièmes = 0,7."}
+          ]
+        },
+        {
+          id:"m10", niveau:"6e", title:"Périmètre et aire du rectangle",
+          cours:"Le <b>périmètre</b> est la longueur du tour. Rectangle : périmètre = <b>2 × (Longueur + largeur)</b>. " +
+                "L'<b>aire</b> est la surface. Rectangle : aire = <b>Longueur × largeur</b>. Périmètre en cm, aire en <b>cm²</b>.",
+          questions:[
+            {type:"saisie", q:"Rectangle 5 cm sur 3 cm : périmètre (en cm) ?", answer:["16","16 cm"], explain:"2 × (5 + 3) = 16 cm."},
+            {type:"saisie", q:"Rectangle 5 cm sur 3 cm : aire (en cm²) ?", answer:["15","15 cm²"], explain:"5 × 3 = 15 cm²."},
+            {type:"qcm", q:"Une aire se mesure en :", options:["cm","cm²","litres","kg"], answer:1, explain:"Une surface : en cm²."},
+            {type:"vf", q:"Le périmètre d'un carré de côté 4 cm vaut 16 cm.", answer:true, explain:"4 × 4 = 16 cm."},
+            {type:"qcm", q:"Aire d'un carré de côté 6 cm ?", options:["12 cm²","24 cm²","36 cm²","18 cm²"], answer:2, explain:"6 × 6 = 36 cm²."}
+          ]
+        },
         {
           id:"m1", title:"Les nombres relatifs",
           cours:"Un <b>nombre relatif</b> peut être positif (ex : +5) ou négatif (ex : -3). " +
@@ -264,8 +403,8 @@ const CONTENT = {
              explain:"4/8 se simplifie en 1/2 (on divise haut et bas par 4)."},
             {type:"saisie", q:"Simplifie 6/9 (écris sous la forme a/b la plus simple).", answer:["2/3"],
              explain:"On divise par 3 : 6÷3 / 9÷3 = 2/3."},
-            {type:"qcm", q:"Combien fait 5/6 − 1/6 ?", options:["4/6","4/0","6/6","4/12"], answer:0,
-             explain:"Même dénominateur : 5−1 = 4, donc 4/6 (que l'on peut simplifier en 2/3)."}
+            {type:"qcm", q:"Combien fait 5/6 − 1/6 ?", options:["4/6","4","6/6","4/12"], answer:0,
+             explain:"Même dénominateur : on garde le 6 et on calcule 5−1 = 4, donc 4/6 (que l'on peut simplifier en 2/3). Attention : le dénominateur ne change pas (ce n'est pas « 4 » tout seul)."}
           ]
         },
         {
@@ -378,6 +517,30 @@ const CONTENT = {
     {
       id:"francais", name:"Français", region:"La Bibliothèque Enchantée", icon:"📜", color:"#e87fb0",
       lessons:[
+        {
+          id:"f7", niveau:"6e", title:"Les types de phrases",
+          cours:"Une <b>phrase</b> commence par une majuscule et finit par un point. La <b>déclarative</b> raconte (.). " +
+                "L'<b>interrogative</b> pose une question (?). L'<b>exclamative</b> exprime un sentiment (!). L'<b>impérative</b> donne un ordre.",
+          questions:[
+            {type:"qcm", q:"« Range ta chambre. » est une phrase :", options:["interrogative","impérative","déclarative","exclamative"], answer:1, explain:"Elle donne un ordre : impérative."},
+            {type:"qcm", q:"Quelle ponctuation termine une question ?", options:[".","!","?","…"], answer:2, explain:"Le point d'interrogation ?"},
+            {type:"vf", q:"« Quelle belle journée ! » est exclamative.", answer:true, explain:"Elle exprime un sentiment et finit par !"},
+            {type:"qcm", q:"« Le chat dort. » est une phrase :", options:["déclarative","interrogative","impérative","exclamative"], answer:0, explain:"Elle raconte un fait : déclarative."},
+            {type:"saisie", q:"Quel signe termine une question ? (le symbole)", answer:["?"], explain:"Le point d'interrogation ?"}
+          ]
+        },
+        {
+          id:"f8", niveau:"6e", title:"Le verbe et son sujet",
+          cours:"Le <b>verbe</b> exprime l'action ou l'état. Le <b>sujet</b> fait l'action : on le trouve avec " +
+                "« <b>Qui est-ce qui</b> … ? » devant le verbe. Le verbe <b>s'accorde</b> avec son sujet (les enfants jou<b>ent</b>).",
+          questions:[
+            {type:"qcm", q:"Dans « Léa mange une pomme », le verbe est :", options:["Léa","mange","une","pomme"], answer:1, explain:"« mange » = l'action : le verbe."},
+            {type:"qcm", q:"Dans « Les oiseaux chantent », le sujet est :", options:["chantent","Les oiseaux","les","-ent"], answer:1, explain:"Qui est-ce qui chante ? Les oiseaux."},
+            {type:"saisie", q:"Complète : « Les enfants jou… » (terminaison au présent)", answer:["ent","jouent"], explain:"Sujet pluriel → ils jouent : -ent."},
+            {type:"vf", q:"Le verbe s'accorde avec son sujet.", answer:true, explain:"Oui : l'accord sujet-verbe."},
+            {type:"qcm", q:"On trouve le sujet en demandant :", options:["Quoi ?","Qui est-ce qui … ?","Où ?","Quand ?"], answer:1, explain:"« Qui est-ce qui + verbe »."}
+          ]
+        },
         {
           id:"f1", title:"Les classes de mots",
           cours:"Chaque mot appartient à une <b>classe</b> : le <b>nom</b> (dragon), le <b>déterminant</b> (le, un, ma), " +
@@ -503,6 +666,32 @@ const CONTENT = {
     {
       id:"histgeo", name:"Histoire-Géo & EMC", region:"Le Donjon du Temps", icon:"🏰", color:"#f2c14e",
       lessons:[
+        {
+          id:"h8", niveau:"6e", title:"L'Antiquité : l'Égypte ancienne",
+          cours:"L'<b>Antiquité</b> commence avec l'invention de l'<b>écriture</b>, vers 3300 av. J.-C. En <b>Égypte</b>, " +
+                "on écrivait avec des <b>hiéroglyphes</b>. On bâtissait des <b>pyramides</b> pour les pharaons et on " +
+                "croyait en de nombreux dieux (polythéisme).",
+          questions:[
+            {type:"qcm", q:"L'Antiquité commence avec l'invention de :", options:["l'imprimerie","l'écriture","l'électricité","la roue"], answer:1, explain:"L'histoire débute avec l'écriture (~3300 av. J.-C.)."},
+            {type:"qcm", q:"Les Égyptiens écrivaient avec des :", options:["lettres latines","hiéroglyphes","chiffres romains","émojis"], answer:1, explain:"Des hiéroglyphes."},
+            {type:"vf", q:"Les Égyptiens croyaient en plusieurs dieux.", answer:true, explain:"Oui, ils étaient polythéistes."},
+            {type:"qcm", q:"Les pyramides étaient des tombeaux pour les :", options:["pharaons","soldats","paysans","marchands"], answer:0, explain:"Les pharaons."},
+            {type:"saisie", q:"Comment appelle-t-on le roi de l'Égypte ancienne ?", answer:["pharaon","le pharaon"], explain:"Le pharaon."}
+          ]
+        },
+        {
+          id:"h9", niveau:"6e", title:"La Grèce antique",
+          cours:"Dans la <b>Grèce antique</b>, on vivait dans des <b>cités</b> comme <b>Athènes</b> et Sparte. À Athènes " +
+                "est née la <b>démocratie</b> (le pouvoir au peuple). Les Grecs ont créé les <b>Jeux olympiques</b> et " +
+                "racontaient des mythes avec des dieux comme <b>Zeus</b>.",
+          questions:[
+            {type:"qcm", q:"La démocratie est née dans la cité d' :", options:["Athènes","Rome","Le Caire","Babylone"], answer:0, explain:"À Athènes : le pouvoir au peuple."},
+            {type:"qcm", q:"« Démocratie » signifie le pouvoir :", options:["du roi","du peuple","des prêtres","de l'armée"], answer:1, explain:"Démos = peuple, kratos = pouvoir."},
+            {type:"vf", q:"Les Jeux olympiques viennent de la Grèce antique.", answer:true, explain:"Oui, à Olympie en l'honneur de Zeus."},
+            {type:"qcm", q:"Une ville-État grecque s'appelle une :", options:["cité","province","région","colonie"], answer:0, explain:"Une cité (polis)."},
+            {type:"saisie", q:"Nomme le roi des dieux grecs.", answer:["Zeus"], explain:"Zeus, roi de l'Olympe."}
+          ]
+        },
         {
           id:"h1", title:"Le Moyen Âge : la féodalité",
           cours:"Au Moyen Âge (Ve–XVe s.), la <b>société féodale</b> repose sur des liens : le <b>seigneur</b> " +
@@ -633,6 +822,31 @@ const CONTENT = {
       id:"sciences", name:"Sciences (PC · SVT · Techno)", region:"Le Laboratoire Alchimique", icon:"⚗️", color:"#6fdc8c",
       lessons:[
         {
+          id:"s7", niveau:"6e", title:"Vivant ou non-vivant ?",
+          cours:"Un être <b>vivant</b> naît, se <b>nourrit</b>, grandit, se <b>reproduit</b> puis meurt. Les animaux et les " +
+                "<b>végétaux</b> sont vivants. Une pierre ou une voiture ne sont <b>pas vivants</b>. On classe le vivant " +
+                "selon des <b>caractères</b> communs.",
+          questions:[
+            {type:"qcm", q:"Lequel est vivant ?", options:["un caillou","un arbre","une chaise","un vélo"], answer:1, explain:"Un arbre naît, grandit, se reproduit."},
+            {type:"vf", q:"Un être vivant se nourrit et se reproduit.", answer:true, explain:"Ce sont des caractères du vivant."},
+            {type:"qcm", q:"Lequel n'est PAS vivant ?", options:["un chat","une fleur","un rocher","un poisson"], answer:2, explain:"Un rocher ne se reproduit pas."},
+            {type:"qcm", q:"Les végétaux sont :", options:["non vivants","vivants","des minéraux","des objets"], answer:1, explain:"Les plantes sont vivantes."},
+            {type:"vf", q:"Une voiture est vivante car elle bouge.", answer:false, explain:"Bouger ne suffit pas : pas de naissance ni de reproduction."}
+          ]
+        },
+        {
+          id:"s8", niveau:"6e", title:"La Terre et le système solaire",
+          cours:"La <b>Terre</b> tourne autour du <b>Soleil</b> en un an. Elle tourne aussi sur elle-même en 24 h, ce qui " +
+                "crée le <b>jour et la nuit</b>. La <b>Lune</b> est le satellite de la Terre. Le Soleil est une <b>étoile</b>.",
+          questions:[
+            {type:"qcm", q:"La Terre tourne autour :", options:["de la Lune","du Soleil","de Mars","d'elle seule"], answer:1, explain:"Autour du Soleil, en ~1 an."},
+            {type:"qcm", q:"Le jour et la nuit viennent :", options:["de la rotation de la Terre sur elle-même","de la Lune","des nuages","des saisons"], answer:0, explain:"La Terre tourne sur elle-même en 24 h."},
+            {type:"vf", q:"Le Soleil est une étoile.", answer:true, explain:"Oui, l'étoile la plus proche."},
+            {type:"qcm", q:"La Lune est :", options:["une étoile","une planète","le satellite de la Terre","le Soleil"], answer:2, explain:"La Lune tourne autour de la Terre."},
+            {type:"saisie", q:"En combien d'heures la Terre tourne-t-elle sur elle-même ?", answer:["24","24 h","24h"], explain:"24 heures = un jour."}
+          ]
+        },
+        {
           id:"s1", title:"Physique-Chimie : les états de la matière",
           cours:"La matière existe en 3 <b>états</b> : <b>solide</b> (forme propre), <b>liquide</b> (prend la forme " +
                 "du récipient), <b>gaz</b> (occupe tout l'espace). Les changements d'état ont des noms : " +
@@ -760,7 +974,13 @@ const AVATARS = [
   {id:"dragon", face:"🐉", nm:"Dragonne"},
   {id:"licorne", face:"🦄", nm:"Licorne"},
   {id:"hibou", face:"🦉", nm:"Hibou sage"},
-  {id:"chat", face:"🐈‍⬛", nm:"Chat magique"}
+  {id:"chat", face:"🐈‍⬛", nm:"Chat magique"},
+  {id:"magicien", face:"🧙‍♂️", nm:"Magicien"},
+  {id:"heros", face:"🦸‍♂️", nm:"Super-héros"},
+  {id:"ninja", face:"🥷", nm:"Ninja"},
+  {id:"lion", face:"🦁", nm:"Lion"},
+  {id:"loup", face:"🐺", nm:"Loup"},
+  {id:"robot", face:"🤖", nm:"Robot"}
 ];
 
 /* Badges */
@@ -772,7 +992,8 @@ const BADGES = [
   {id:"niveau5", icon:"🏅", nm:"Mage niveau 5", test:s=>levelInfo(s.xp).level>=5},
   {id:"maths", icon:"🗼", nm:"Tours de Calcul", test:s=>regionComplete(s,"maths")},
   {id:"francais", icon:"📜", nm:"Bibliothèque", test:s=>regionComplete(s,"francais")},
-  {id:"explorateur", icon:"🗺️", nm:"Touche-à-tout", test:s=>subjectsTouched(s)>=3}
+  {id:"explorateur", icon:"🗺️", nm:"Touche-à-tout", test:s=>subjectsTouched(s)>=3},
+  {id:"brevet", icon:"🎓", nm:"Brevet blanc réussi", test:s=>(s.brevet||0)>=10}
 ];
 
 /* Constructions du royaume (achetées avec des cristaux 💎) */
@@ -799,13 +1020,872 @@ const SAVE_PREFIX  = "rds_save_";
 let STATE = defaultState();   // état du profil actif (chargé après connexion)
 let ACTIVE = null;            // id du profil actif
 
+/* ====================================================================
+   LES PETITS MALINS — module natif intégré au Royaume (sans iframe)
+   --------------------------------------------------------------------
+   Tout est encapsulé dans window.PM (IIFE) pour éviter les collisions
+   de noms globaux avec le Royaume (state, app, r, choisir, melanger,
+   parler, gagner, entete, confettis, bravo, menuLecture, …).
+   Rendu dans le conteneur #pmRoot fourni par mount() ; le CSS est scopé
+   sous #pmRoot (cf. <style id="pmStyle">).
+   Améliorations d'audit incluses : B (carte mentale en FIN d'activité,
+   suppression des liens YouTube ouverts), C (feedback formatif + repli
+   écrit pour les jeux d'écoute), D (mode calme persistant), E (consigne
+   « lettre », texte Colomb).
+   ==================================================================== */
+var PM = (function(){
+  "use strict";
+
+  /* ---------- état + persistance (clés namespacées par profil) -------- */
+  var KEY_SCORE='pm_score', KEY_AGE='pm_age', KEY_CALME='pm_calme';
+  var root=null;     // #pmRoot
+  var app=null;      // #pmContent (zone de contenu remplacée à chaque vue)
+  var state={ age:'petit', score:0, vue:'accueil', calme:false };
+
+  function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+
+  /* ---------- voix ----------
+     speak() = prononciation explicite (bouton 🔊), marche toujours.
+     say()   = narration automatique au chargement d'un écran : coupée
+               en mode calme (consigne D). */
+  function speak(texte, langue){
+    try{ speechSynthesis.cancel();
+      var u=new SpeechSynthesisUtterance(texte); u.lang=langue||'fr-FR'; u.rate=0.9;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+  function say(texte, langue){ if(state.calme) return; speak(texte, langue); }
+
+  /* ---------- outils ---------- */
+  var r=function(n){ return Math.floor(Math.random()*n); };
+  var choisir=function(arr){ return arr[r(arr.length)]; };
+  function melanger(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=r(i+1); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function q(s){ return String(s).replace(/'/g,"\\'"); } // pour insérer dans onclick="...'...'"
+
+  function confettis(){
+    if(state.calme) return;                 // mode calme : pas de confettis
+    var emos=['🎉','⭐','🌟','🎈','✨','🥳'];
+    for(var i=0;i<18;i++){
+      var c=document.createElement('div'); c.className='pm-confetti';
+      c.textContent=choisir(emos); c.style.left=r(100)+'vw'; c.style.animationDelay=(r(8)/10)+'s';
+      document.body.appendChild(c);
+      (function(el){ setTimeout(function(){ if(el&&el.remove) el.remove(); },2500); })(c);
+    }
+  }
+  function bravo(){ confettis(); say(choisir(['Bravo !','Super !','Génial !','Bien joué !'])); }
+
+  function gagner(n){
+    state.score += n;
+    var e=document.getElementById('pmScore'); if(e) e.textContent=state.score;
+    lsSet(KEY_SCORE, String(state.score));
+  }
+
+  function barreHTML(total, faites){
+    var h='<div class="barre">';
+    for(var i=0;i<total;i++) h+='<div class="pastille '+(i<faites?'faite':'')+'"></div>';
+    return h+'</div>';
+  }
+
+  /* zone d'options : désactive tout / révèle la bonne réponse (data-v) */
+  function disableZone(){ var z=document.getElementById('zone'); if(!z) return; var b=z.querySelectorAll('button'); for(var i=0;i<b.length;i++) b[i].disabled=true; }
+  function montrerBonne(val){ var z=document.getElementById('zone'); if(!z) return; var b=z.querySelectorAll('button'); for(var i=0;i<b.length;i++){ if(b[i].getAttribute('data-v')===String(val)) b[i].classList.add('bon'); b[i].disabled=true; } }
+
+  /* ---------- en-tête de vue (barre Retour interne) ---------- */
+  function entete(titre, retour){
+    retour = retour || 'vueAccueil';
+    return '<div class="pm-bar"><button class="btn-back" onclick="PM.'+retour+'()">⬅ Retour</button>'+
+           '<h2 class="titre" style="margin:0;flex:1;">'+titre+'</h2><div style="width:90px"></div></div>';
+  }
+
+  /* ==================================================================
+     CARTE MENTALE RÉCAPITULATIVE (B) — affichée en FIN d'activité,
+     après une série de bonnes réponses : « voici ce que tu as appris ».
+     Plus aucun lien YouTube ouvert (retiré pour des raisons de sécurité).
+     ================================================================== */
+  var CARTES = {
+    lecture:{titre:'La lecture', c:'#e11d48', noeuds:['Les voyelles a e i o u','Les consonnes','Les syllabes ba be bi','Lire des mots','Lire des phrases']},
+    calcul:{titre:'Le calcul', c:'#2563eb', noeuds:['Compter','Additionner +','Soustraire −','Multiplier ×','Diviser ÷']},
+    langues:{titre:'Les langues', c:'#059669', noeuds:['Anglais','Espagnol','Italien','Les nombres','Les couleurs']},
+    histoire:{titre:'Le temps', c:'#d97706', noeuds:['Prehistoire','Antiquite','Moyen Age','Temps modernes','Aujourd hui']}
+  };
+  function carteMentaleSVG(key){
+    var d=CARTES[key]; var cx=260,cy=160,rx=190,ry=110,n=d.noeuds.length; var nodes="";
+    d.noeuds.forEach(function(t,i){
+      var ang=(-90+i*(360/n))*Math.PI/180; var x=cx+rx*Math.cos(ang), y=cy+ry*Math.sin(ang);
+      var w=Math.max(96,t.length*8+18), h=34;
+      nodes+='<line x1="'+cx+'" y1="'+cy+'" x2="'+x+'" y2="'+y+'" stroke="'+d.c+'" stroke-width="3" opacity=".5"/>';
+      nodes+='<rect x="'+(x-w/2)+'" y="'+(y-h/2)+'" width="'+w+'" height="'+h+'" rx="12" fill="#fff" stroke="'+d.c+'" stroke-width="2"/>';
+      nodes+='<text x="'+x+'" y="'+(y+5)+'" text-anchor="middle" font-size="15" font-weight="700" fill="#374151">'+t+'</text>';
+    });
+    return '<svg viewBox="0 0 520 320" width="100%" style="max-height:320px" role="img" aria-label="Carte mentale : '+d.titre+'">'+nodes+
+           '<ellipse cx="'+cx+'" cy="'+cy+'" rx="92" ry="52" fill="'+d.c+'"/><text x="'+cx+'" y="'+(cy+7)+'" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">'+d.titre+'</text></svg>';
+  }
+
+  /* compteur de bonnes réponses par matière → carte mentale tous les SEUIL */
+  var SEUIL=5;
+  var prog={lecture:0,calcul:0,langues:0,histoire:0};
+  var _recapCB=null;
+  function bumpProgress(mat, cb){
+    prog[mat]=(prog[mat]||0)+1;
+    if(prog[mat]>=SEUIL){ prog[mat]=0; montrerRecap(mat, cb); }
+    else if(cb) cb();
+  }
+  function montrerRecap(mat, cb){
+    _recapCB = cb || vueAccueil;
+    var retour={lecture:'menuLecture',calcul:'menuCalcul',langues:'menuLangues',histoire:'menuHistoire'}[mat]||'vueAccueil';
+    confettis();
+    app.innerHTML = entete('🧠 Ce que tu as appris', retour) +
+      '<div class="carte-jeu">'+
+        '<p class="consigne">Bravo ! Voici une carte pour résumer ce que tu viens de travailler :</p>'+
+        '<div style="background:#f8fafc;border-radius:18px;padding:10px">'+carteMentaleSVG(mat)+'</div>'+
+        '<div><button class="btn-suite" onclick="PM.recapContinuer()">Continuer ➡</button></div>'+
+      '</div>';
+  }
+  function recapContinuer(){ var cb=_recapCB; _recapCB=null; (cb||vueAccueil)(); }
+
+  /* ==================================================================
+     ACCUEIL + bandeau de contrôle (âge / score / mode calme)
+     ================================================================== */
+  function controlsHTML(){
+    return '<div class="pm-controls">'+
+      '<div class="pm-age" id="pmAge">'+
+        '<button data-age="petit" class="'+(state.age==='petit'?'on':'')+'" onclick="PM.setAge(\'petit\')">🐣 Petits</button>'+
+        '<button data-age="grand" class="'+(state.age==='grand'?'on':'')+'" onclick="PM.setAge(\'grand\')">🦉 Grands</button>'+
+      '</div>'+
+      '<div class="pm-score">⭐ <span id="pmScore">'+state.score+'</span></div>'+
+      '<button class="pm-calme" id="pmCalmeBtn" onclick="PM.toggleCalme()" aria-pressed="'+(state.calme?'true':'false')+'">'+(state.calme?'🌙 Mode calme ✓':'🔔 Mode calme')+'</button>'+
+    '</div>';
+  }
+  function vueAccueil(){
+    state.vue='accueil';
+    app.innerHTML =
+      '<h2 class="titre">Choisis ton aventure !</h2>'+
+      '<div class="grille">'+
+        '<button class="tuile t-lecture" onclick="PM.ouvrir(\'lecture\')"><span class="emo">📖</span>Lecture</button>'+
+        '<button class="tuile t-calcul" onclick="PM.ouvrir(\'calcul\')"><span class="emo">🔢</span>Calcul</button>'+
+        '<button class="tuile t-langues" onclick="PM.ouvrir(\'langues\')"><span class="emo">🌍</span>Langues</button>'+
+        '<button class="tuile t-histoire" onclick="PM.ouvrir(\'histoire\')"><span class="emo">🏰</span>Histoire</button>'+
+      '</div>';
+  }
+  function ouvrir(mat){
+    if(mat==='lecture') menuLecture();
+    else if(mat==='calcul') menuCalcul();
+    else if(mat==='langues') menuLangues();
+    else if(mat==='histoire') menuHistoire();
+  }
+
+  function setAge(a){
+    state.age=a; lsSet(KEY_AGE,a);
+    var btns=root.querySelectorAll('#pmAge button');
+    for(var i=0;i<btns.length;i++) btns[i].classList.toggle('on', btns[i].getAttribute('data-age')===a);
+    vueAccueil();
+  }
+  function applyCalme(){
+    if(root) root.classList.toggle('calme', state.calme);
+    var b=document.getElementById('pmCalmeBtn');
+    if(b){ b.textContent = state.calme?'🌙 Mode calme ✓':'🔔 Mode calme'; b.setAttribute('aria-pressed', state.calme?'true':'false'); }
+    if(state.calme){ try{ speechSynthesis.cancel(); }catch(e){} }
+  }
+  function toggleCalme(){ state.calme=!state.calme; lsSet(KEY_CALME, state.calme?'1':'0'); applyCalme(); }
+
+  /* ==================================================================
+     MODULE LECTURE
+     ================================================================== */
+  var ALPHABET="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+  var MOTS=[
+    {mot:'CHAT', img:'🐱'},{mot:'CHIEN', img:'🐶'},{mot:'POMME', img:'🍎'},
+    {mot:'SOLEIL', img:'☀️'},{mot:'LUNE', img:'🌙'},{mot:'FLEUR', img:'🌸'},
+    {mot:'MAISON', img:'🏠'},{mot:'VOITURE', img:'🚗'},{mot:'BALLON', img:'⚽'},
+    {mot:'POISSON', img:'🐟'},{mot:'GÂTEAU', img:'🎂'},{mot:'ÉTOILE', img:'⭐'},
+    {mot:'ARBRE', img:'🌳'},{mot:'OISEAU', img:'🐦'},{mot:'BANANE', img:'🍌'}
+  ];
+  var PHRASES=[
+    'Le chat dort sur le lit.',
+    'Maman fait un bon gâteau.',
+    'Le soleil brille très fort.',
+    'Mon chien court dans le jardin.',
+    'La fleur sent très bon.',
+    "Le poisson nage dans l'eau."
+  ];
+
+  function menuLecture(){
+    state.vue='lecture';
+    var grands = state.age==='grand';
+    app.innerHTML = entete('📖 Lecture') +
+      '<div class="sous-menu">'+
+        '<button class="gros-btn t-lecture" onclick="PM.jeuLettres()"><span class="emo">🔤</span>Reconnaître les lettres</button>'+
+        '<button class="gros-btn t-lecture" onclick="PM.jeuSons()"><span class="emo">🔡</span>La première lettre des mots</button>'+
+        '<button class="gros-btn t-lecture" onclick="PM.jeuMots()"><span class="emo">🖼️</span>Lire des mots</button>'+
+        (grands?'<button class="gros-btn t-lecture" onclick="PM.jeuPhrases()"><span class="emo">📝</span>Remettre une phrase en ordre</button>'+
+        '<button class="gros-btn t-lecture" onclick="PM.jeuComprehension()"><span class="emo">🧠</span>Lire et comprendre<span class="niveau-badge">texte + questions</span></button>':'')+
+      '</div>';
+  }
+
+  /* Reconnaître la lettre — la lettre cible est AFFICHÉE (repli écrit, C) :
+     jouable sans son et en mode calme. */
+  function jeuLettres(){
+    var bonne=choisir(ALPHABET);
+    var opts={}; opts[bonne]=1;
+    while(Object.keys(opts).length<(state.age==='petit'?3:4)) opts[choisir(ALPHABET)]=1;
+    var liste=melanger(Object.keys(opts));
+    say('Touche la lettre '+bonne);
+    app.innerHTML = entete('🔤 Les lettres','menuLecture') +
+      '<div class="carte-jeu">'+
+        '<p class="consigne">Touche la même lettre :</p>'+
+        '<div class="question">'+bonne+'</div>'+
+        '<button class="btn-son" onclick="PM.dire(\'La lettre '+bonne+'\')">🔊 Écouter</button>'+
+        '<div class="choix '+(liste.length===3?'trois':'')+'" id="zone">'+
+          liste.map(function(l){ return '<button data-v="'+l+'" onclick="PM.repLettre(this,\''+l+'\',\''+bonne+'\')">'+l+'</button>'; }).join('')+
+        '</div>'+
+        '<div class="feedback" id="fb"></div>'+
+      '</div>';
+  }
+  function repLettre(btn, choix, bonne){
+    var fb=document.getElementById('fb');
+    if(choix===bonne){ btn.classList.add('bon'); fb.textContent="✅ Bravo, c'est le "+bonne+' !'; fb.className='feedback ok'; gagner(2); bravo(); disableZone();
+      setTimeout(function(){ bumpProgress('lecture', jeuLettres); },1300);
+    } else { btn.classList.add('faux'); montrerBonne(bonne); fb.textContent='👀 Regarde : la bonne lettre était '+bonne; fb.className='feedback non';
+      setTimeout(function(){ bumpProgress('lecture', jeuLettres); },1900);
+    }
+  }
+
+  /* Première lettre d'un mot (E : consigne « lettre », le code compare bien
+     la 1ʳᵉ lettre écrite). La lettre est affichée → jouable sans son. */
+  function jeuSons(){
+    var cible=choisir(MOTS);
+    var lettre=cible.mot[0];
+    var autres=melanger(MOTS.filter(function(m){ return m.mot[0]!==lettre; })).slice(0,2);
+    var opts=melanger([cible].concat(autres));
+    say('Quel mot commence par la lettre '+lettre);
+    app.innerHTML = entete('🔡 La première lettre','menuLecture') +
+      '<div class="carte-jeu">'+
+        '<p class="consigne">Quel mot commence par la lettre…</p>'+
+        '<div class="question">'+lettre+'</div>'+
+        '<button class="btn-son" onclick="PM.dire(\'La lettre '+lettre+'\')">🔊 Écouter</button>'+
+        '<div class="choix trois" id="zone">'+
+          opts.map(function(m){ return '<button data-v="'+m.mot[0]+'" style="font-size:46px" aria-label="'+m.mot+'" onclick="PM.repSon(this,\''+m.mot[0]+'\',\''+lettre+'\',\''+q(m.mot)+'\')">'+m.img+'</button>'; }).join('')+
+        '</div>'+
+        '<div class="feedback" id="fb"></div>'+
+      '</div>';
+  }
+  function repSon(btn, prem, lettre, motCible){
+    var fb=document.getElementById('fb');
+    if(prem===lettre){ btn.classList.add('bon'); fb.textContent='✅ '+motCible+' commence par '+lettre+' !'; fb.className='feedback ok'; say(motCible); gagner(2); bravo(); disableZone();
+      setTimeout(function(){ bumpProgress('lecture', jeuSons); },1500);
+    } else { btn.classList.add('faux'); montrerBonne(lettre); fb.textContent='👂 La bonne réponse : '+motCible+' (lettre '+lettre+')'; fb.className='feedback non';
+      setTimeout(function(){ bumpProgress('lecture', jeuSons); },1900);
+    }
+  }
+
+  /* Associer image → mot écrit */
+  function jeuMots(){
+    var cible=choisir(MOTS);
+    var autres=melanger(MOTS.filter(function(m){ return m.mot!==cible.mot; })).slice(0, state.age==='petit'?2:3);
+    var opts=melanger([cible].concat(autres));
+    say(cible.mot);
+    app.innerHTML = entete('🖼️ Lire des mots','menuLecture') +
+      '<div class="carte-jeu">'+
+        '<p class="consigne">Quel mot va avec l\'image ?</p>'+
+        '<div class="mot-img pop" aria-label="'+cible.mot+'">'+cible.img+'</div>'+
+        '<button class="btn-son" onclick="PM.dire(\''+q(cible.mot)+'\')">🔊 Écouter le mot</button>'+
+        '<div class="choix '+(opts.length===3?'trois':'')+'" id="zone">'+
+          opts.map(function(m){ return '<button data-v="'+q(m.mot)+'" style="font-size:24px" onclick="PM.repMot(this,\''+q(m.mot)+'\',\''+q(cible.mot)+'\')">'+m.mot+'</button>'; }).join('')+
+        '</div>'+
+        '<div class="feedback" id="fb"></div>'+
+      '</div>';
+  }
+  function repMot(btn, choix, bonne){
+    var fb=document.getElementById('fb');
+    if(choix===bonne){ btn.classList.add('bon'); fb.textContent='✅ Bravo, c\'était '+bonne+' !'; fb.className='feedback ok'; gagner(3); bravo(); disableZone();
+      setTimeout(function(){ bumpProgress('lecture', jeuMots); },1400);
+    } else { btn.classList.add('faux'); montrerBonne(bonne); fb.textContent='👀 Le bon mot était : '+bonne; fb.className='feedback non';
+      setTimeout(function(){ bumpProgress('lecture', jeuMots); },1900);
+    }
+  }
+
+  /* Remettre la phrase en ordre (grands) — avec RETOUR ARRIÈRE et
+     comparaison tolérante à la casse/ponctuation (audit). */
+  var _phr={cible:'', placed:[]};
+  function normPhrase(s){ return String(s).toLowerCase().replace(/[.,;:!?']/g,'').replace(/\s+/g,' ').trim(); }
+  function jeuPhrases(){
+    var ph=choisir(PHRASES);
+    var mots=ph.replace(/[.]/g,'').split(' ');
+    var melange=melanger(mots);
+    _phr={cible:mots.join(' '), placed:[]};
+    say(ph);
+    app.innerHTML = entete('📝 Les phrases','menuLecture') +
+      '<div class="carte-jeu">'+
+        '<p class="consigne">Remets la phrase dans l\'ordre</p>'+
+        '<button class="btn-son" onclick="PM.dire(\''+q(ph)+'\')">🔊 Écouter la phrase</button>'+
+        '<div id="cible" class="phrase-cible"></div>'+
+        '<div id="banque" class="phrase-banque">'+
+          melange.map(function(m,i){ return '<button class="mot-btn" id="mb'+i+'" onclick="PM.poserMot(this,\''+q(m)+'\')">'+m+'</button>'; }).join('')+
+        '</div>'+
+        '<div style="margin-top:8px"><button class="btn-back" id="undo" onclick="PM.retirerMot()" disabled>↩ Retirer le dernier mot</button></div>'+
+        '<div class="feedback" id="fb"></div>'+
+        '<div><button class="btn-suite cacher" id="next" onclick="PM.jeuPhrases()">Suivant ➡</button></div>'+
+      '</div>';
+  }
+  function majPhrase(){
+    var cible=document.getElementById('cible');
+    cible.textContent=_phr.placed.map(function(p){ return p.mot; }).join(' ');
+    var undo=document.getElementById('undo'); if(undo) undo.disabled=_phr.placed.length===0;
+  }
+  function poserMot(btn, mot){
+    btn.style.visibility='hidden';
+    _phr.placed.push({mot:mot, btn:btn});
+    majPhrase();
+    if(_phr.placed.length === _phr.cible.split(' ').length){
+      var fb=document.getElementById('fb');
+      var propose=_phr.placed.map(function(p){ return p.mot; }).join(' ');
+      if(normPhrase(propose)===normPhrase(_phr.cible)){ fb.textContent='✅ Parfait !'; fb.className='feedback ok'; gagner(4); bravo(); say(_phr.cible);
+        document.getElementById('next').classList.remove('cacher');
+        setTimeout(function(){ bumpProgress('lecture', jeuPhrases); },1600);
+      } else { fb.textContent='🤝 Presque ! La bonne phrase : '+_phr.cible+'. Tu peux retirer un mot et corriger.'; fb.className='feedback non'; }
+    }
+  }
+  function retirerMot(){
+    var last=_phr.placed.pop();
+    if(last && last.btn) last.btn.style.visibility='visible';
+    var fb=document.getElementById('fb'); if(fb){ fb.textContent=''; fb.className='feedback'; }
+    var next=document.getElementById('next'); if(next) next.classList.add('cacher');
+    majPhrase();
+  }
+
+  /* Compréhension de texte (grands) */
+  var TEXTES=[
+    {titre:'Le petit chat gris', em:'🐱',
+     txt:"Minou est un petit chat gris. Tous les matins, il boit son lait dans un bol bleu. Il adore jouer avec une pelote de laine rouge. Le soir, fatigué, il dort en boule près du feu, dans la cuisine.",
+     qs:[{q:'De quelle couleur est Minou ?', bon:'Gris', faux:['Noir','Blanc'], ind:'Relis la première phrase.'},
+         {q:'Avec quoi aime-t-il jouer ?', bon:'Une pelote de laine', faux:['Un ballon','Une souris'], ind:'Cherche le mot « jouer ».'},
+         {q:'Où dort-il le soir ?', bon:'Près du feu', faux:['Dans le jardin','Sur le toit'], ind:'Regarde la fin du texte.'}]},
+    {titre:'La sortie à la ferme', em:'🐮',
+     txt:"Samedi, Lucas est allé à la ferme avec sa classe. Il a vu trois vaches, deux cochons roses et beaucoup de poules. Le fermier lui a montré comment ramasser les œufs. Lucas a rapporté six œufs frais à la maison.",
+     qs:[{q:'Quel jour Lucas est-il allé à la ferme ?', bon:'Samedi', faux:['Dimanche','Mercredi'], ind:'C\'est le premier mot.'},
+         {q:'Combien de vaches a-t-il vues ?', bon:'Trois', faux:['Deux','Six'], ind:'« trois vaches ».'},
+         {q:'Qu\'a-t-il appris à ramasser ?', bon:'Les œufs', faux:['Le foin','Les pommes'], ind:'Le fermier lui a montré…'},
+         {q:'Combien d\'œufs a-t-il rapportés ?', bon:'Six', faux:['Trois','Dix'], ind:'« six œufs frais ».'}]},
+    {titre:'La graine et la fleur', em:'🌱',
+     txt:"Emma a planté une petite graine dans un pot. Chaque jour, elle lui donne un peu d'eau et la met au soleil sur la fenêtre. Après deux semaines, une tige verte est sortie de la terre. Bientôt, une jolie fleur jaune est apparue.",
+     qs:[{q:'Qu\'a planté Emma ?', bon:'Une graine', faux:['Un arbre','Une fleur déjà grande'], ind:'Tout au début.'},
+         {q:'De quoi la graine a-t-elle besoin ?', bon:'D\'eau et de soleil', faux:['De chocolat','De musique'], ind:'« un peu d\'eau » et « au soleil ».'},
+         {q:'De quelle couleur est la fleur ?', bon:'Jaune', faux:['Rouge','Bleue'], ind:'La toute dernière phrase.'}]}
+  ];
+  var _txtLu='', _qSeq=[], _qIdx=0, _qOpts=[], _qBon='', _qInd='', _quizMat='lecture', _quizFin=null;
+  function jeuComprehension(){
+    var t=choisir(TEXTES);
+    _txtLu=t.txt; _qSeq=t.qs; _quizMat='lecture'; _quizFin=jeuComprehension;
+    app.innerHTML = entete('🧠 Lire et comprendre','menuLecture') +
+      '<div class="carte-jeu">'+
+        '<div class="lecon"><span class="ill">'+t.em+'</span><h3>'+t.titre+'</h3><p style="font-size:21px">'+t.txt+'</p></div>'+
+        '<button class="btn-son" onclick="PM.dire(\''+q(t.txt)+'\')">🔊 Lire à voix haute</button>'+
+        '<div><button class="btn-suite" onclick="PM.lancerQuiz(\'lecture\',\'jeuComprehension\')">Répondre aux questions ❓</button></div>'+
+      '</div>';
+  }
+  function lancerQuiz(mat, fin){ _quizMat=mat||'lecture'; _quizFin=fin?PM[fin]:null; _qIdx=0; poserQuestionSeq(); }
+  function poserQuestionSeq(){
+    var qs=_qSeq, qi=_qIdx, qq=qs[qi];
+    var opts=melanger([qq.bon].concat(qq.faux));
+    _qOpts=opts; _qBon=qq.bon; _qInd=qq.ind||'';
+    say(qq.q);
+    app.innerHTML = entete('🧠 Questions','menuLecture') +
+      '<div class="carte-jeu">'+
+        '<p class="consigne">Question '+(qi+1)+' / '+qs.length+'</p>'+
+        '<p class="consigne" style="font-size:22px;color:#374151">'+qq.q+'</p>'+
+        '<div class="choix" id="zone" style="grid-template-columns:1fr;">'+
+          opts.map(function(o,k){ return '<button data-v="'+q(o)+'" style="font-size:21px" onclick="PM.repQuiz(this,'+k+')">'+o+'</button>'; }).join('')+
+        '</div>'+
+        '<div class="feedback" id="fb"></div>'+
+        '<div><button class="btn-suite cacher" id="next" onclick="PM.suiteQuizSeq()">'+(qi+1<qs.length?'Question suivante ➡':'Terminer ✅')+'</button></div>'+
+      '</div>';
+  }
+  function repQuiz(btn,k){
+    var fb=document.getElementById('fb');
+    if(_qOpts[k]===_qBon){ btn.classList.add('bon'); fb.textContent='✅ Bonne réponse !'; fb.className='feedback ok'; gagner(4); bravo(); disableZone();
+      document.getElementById('next').classList.remove('cacher');
+    } else { btn.classList.add('faux'); montrerBonne(_qBon); fb.textContent='🔎 La bonne réponse : '+_qBon+(_qInd?' — '+_qInd:''); fb.className='feedback non'; disableZone();
+      document.getElementById('next').classList.remove('cacher');
+    }
+  }
+  function suiteQuizSeq(){
+    _qIdx++;
+    if(_qIdx>=_qSeq.length){ bumpProgress(_quizMat, _quizFin||menuLecture); }
+    else poserQuestionSeq();
+  }
+
+  /* ==================================================================
+     MODULE CALCUL
+     ================================================================== */
+  function menuCalcul(){
+    state.vue='calcul';
+    var grands = state.age==='grand';
+    app.innerHTML = entete('🔢 Calcul') +
+      '<div class="sous-menu">'+
+        (!grands?'<button class="gros-btn t-calcul" onclick="PM.jeuCompter()"><span class="emo">🧮</span>Compter</button>':'')+
+        '<button class="gros-btn t-calcul" onclick="PM.jeuOp(\'+\')"><span class="emo">➕</span>Additions'+(grands?'<span class="niveau-badge">2 chiffres</span>':'')+'</button>'+
+        '<button class="gros-btn t-calcul" onclick="PM.jeuOp(\'-\')"><span class="emo">➖</span>Soustractions</button>'+
+        (grands?'<button class="gros-btn t-calcul" onclick="PM.jeuOp(\'×\')"><span class="emo">✖️</span>Multiplications<span class="niveau-badge">tables</span></button>'+
+        '<button class="gros-btn t-calcul" onclick="PM.jeuOp(\'÷\')"><span class="emo">➗</span>Divisions</button>'+
+        '<button class="gros-btn t-calcul" onclick="PM.jeuSuites()"><span class="emo">🔢</span>Suites de nombres</button>'+
+        '<button class="gros-btn t-calcul" onclick="PM.jeuProbleme()"><span class="emo">🧩</span>Problèmes</button>':'')+
+      '</div>';
+  }
+
+  var OBJETS=['🍎','🌟','🐶','🎈','🍓','🐠','🌸','🚗','⚽','🦋'];
+  function jeuCompter(){
+    var max = state.age==='petit'?6:10;
+    var n = 1+r(max);
+    var emo = choisir(OBJETS);
+    var opts={}; opts[n]=1;
+    while(Object.keys(opts).length<3){ var x=1+r(max+2); opts[x]=1; }
+    var liste=melanger(Object.keys(opts).map(Number));
+    say('Compte les objets');
+    app.innerHTML = entete('🧮 Compter','menuCalcul') +
+      '<div class="carte-jeu">'+
+        '<p class="consigne">Combien y en a-t-il ?</p>'+
+        '<div class="emoji-rang">'+new Array(n+1).join(emo+' ')+'</div>'+
+        '<div class="choix trois" id="zone">'+
+          liste.map(function(o){ return '<button data-v="'+o+'" onclick="PM.repCompter(this,'+o+','+n+')">'+o+'</button>'; }).join('')+
+        '</div>'+
+        '<div class="feedback" id="fb"></div>'+
+      '</div>';
+  }
+  function repCompter(btn,choix,bon){
+    var fb=document.getElementById('fb');
+    if(choix===bon){ btn.classList.add('bon'); fb.textContent='✅ Oui, '+bon+' !'; fb.className='feedback ok'; say(''+bon); gagner(2); bravo(); disableZone();
+      setTimeout(function(){ bumpProgress('calcul', jeuCompter); },1300);
+    } else { btn.classList.add('faux'); montrerBonne(bon); fb.textContent='🔢 Il y en avait '+bon+'. Recompte un par un !'; fb.className='feedback non';
+      setTimeout(function(){ bumpProgress('calcul', jeuCompter); },1900);
+    }
+  }
+
+  function genOp(op){
+    var a,b,res; var grand=state.age==='grand';
+    if(op==='+'){ if(grand){ a=11+r(89); b=11+r(89);} else { a=1+r(10); b=1+r(10);} res=a+b; }
+    else if(op==='-'){ if(grand){ a=25+r(75); b=5+r(a-5);} else { a=1+r(10); b=1+r(a);} res=a-b; }
+    else if(op==='×'){ if(grand){ a=2+r(11); b=2+r(11);} else { a=1+r(5); b=1+r(5);} res=a*b; }
+    else { if(grand){ b=2+r(8); res=2+r(11);} else { b=1+r(5); res=1+r(5);} a=b*res; }
+    return {a:a,b:b,res:res};
+  }
+  var NOMS_OP={'+':'plus','-':'moins','×':'fois','÷':'divisé par'};
+  var TITRES_OP={'+':'➕ Additions','-':'➖ Soustractions','×':'✖️ Multiplications','÷':'➗ Divisions'};
+  function jeuOp(op){
+    var g=genOp(op), a=g.a, b=g.b, res=g.res;
+    say(a+' '+NOMS_OP[op]+' '+b);
+    if(state.age==='grand'){
+      app.innerHTML = entete(TITRES_OP[op],'menuCalcul') +
+        '<div class="carte-jeu">'+
+          '<p class="consigne">Écris le résultat</p>'+
+          '<div class="question">'+a+' '+op+' '+b+' =</div>'+
+          '<div class="saisie-box" id="saisie">?</div>'+
+          '<button class="btn-son" onclick="PM.dire(\''+a+' '+NOMS_OP[op]+' '+b+'\')">🔊 Réécouter</button>'+
+          clavierHTML()+
+          '<div class="feedback" id="fb"></div>'+
+        '</div>';
+      demarrerSaisie(res, function(){ jeuOp(op); }, a+' '+op+' '+b+' = '+res);
+      return;
+    }
+    var opts={}; opts[res]=1;
+    while(Object.keys(opts).length<3){ var d=res + (r(2)?1:-1)*(1+r(5)); if(d>=0) opts[d]=1; }
+    var liste=melanger(Object.keys(opts).map(Number));
+    app.innerHTML = entete(TITRES_OP[op],'menuCalcul') +
+      '<div class="carte-jeu">'+
+        '<p class="consigne">Combien font...</p>'+
+        '<div class="question">'+a+' '+op+' '+b+' = ?</div>'+
+        '<button class="btn-son" onclick="PM.dire(\''+a+' '+NOMS_OP[op]+' '+b+'\')">🔊 Réécouter</button>'+
+        '<div class="choix trois" id="zone">'+
+          liste.map(function(o){ return '<button data-v="'+o+'" onclick="PM.repOp(this,'+o+','+res+',\''+op+'\','+a+','+b+')">'+o+'</button>'; }).join('')+
+        '</div>'+
+        '<div class="feedback" id="fb"></div>'+
+      '</div>';
+  }
+  function repOp(btn,choix,bon,op,a,b){
+    var fb=document.getElementById('fb');
+    if(choix===bon){ btn.classList.add('bon'); fb.textContent='✅ '+bon+' !'; fb.className='feedback ok'; say(''+bon); gagner(3); bravo(); disableZone();
+      setTimeout(function(){ bumpProgress('calcul', function(){ jeuOp(op); }); },1300);
+    } else { btn.classList.add('faux'); montrerBonne(bon); fb.textContent='💡 '+a+' '+op+' '+b+' = '+bon; fb.className='feedback non';
+      setTimeout(function(){ bumpProgress('calcul', function(){ jeuOp(op); }); },1900);
+    }
+  }
+
+  /* Saisie au clavier (mode grands) */
+  var _saisie='', _bonneRep=null, _suiteCB=null, _saisieSol='';
+  function clavierHTML(){
+    var t='';
+    for(var n=1;n<=9;n++) t+='<button class="touche" onclick="PM.tape(\''+n+'\')">'+n+'</button>';
+    t+='<button class="touche" onclick="PM.efface()">⌫</button>';
+    t+='<button class="touche" onclick="PM.tape(\'0\')">0</button>';
+    t+='<button class="touche" style="background:var(--pm-vert);color:#fff;box-shadow:0 4px 0 #15803d" onclick="PM.valider()">✓</button>';
+    return '<div class="pm-clavier">'+t+'</div>';
+  }
+  function demarrerSaisie(bon, suite, sol){ _saisie=''; _bonneRep=bon; _suiteCB=suite; _saisieSol=sol||(''+bon); majSaisie(); }
+  function tape(d){ if(_saisie.length<6){ _saisie+=d; majSaisie(); } }
+  function efface(){ _saisie=_saisie.slice(0,-1); majSaisie(); }
+  function majSaisie(){ var e=document.getElementById('saisie'); if(e) e.textContent=_saisie||'?'; }
+  function valider(){
+    if(_saisie==='') return;
+    var fb=document.getElementById('fb');
+    if(+_saisie===_bonneRep){ fb.textContent='✅ Bravo, '+_bonneRep+' !'; fb.className='feedback ok'; say(''+_bonneRep); gagner(5); bravo();
+      var bs=document.querySelectorAll('.touche'); for(var i=0;i<bs.length;i++) bs[i].disabled=true;
+      setTimeout(function(){ bumpProgress('calcul', _suiteCB); },1300);
+    } else { fb.textContent='🤝 Presque ! La bonne réponse : '+_saisieSol; fb.className='feedback non'; _saisie=''; majSaisie(); }
+  }
+
+  function jeuSuites(){
+    var pas=choisir([2,3,4,5,10,-2,-3,-5]);
+    var depart = (pas>0 ? 1+r(12) : 50+r(30));
+    var suite=[]; for(var i=0;i<6;i++) suite.push(depart+pas*i);
+    var trou=2+r(3);
+    var bon=suite[trou];
+    var aff=suite.map(function(v,i){ return i===trou?'?':v; }).join('  →  ');
+    say('Trouve le nombre qui manque');
+    app.innerHTML = entete('🔢 Suites','menuCalcul') +
+      '<div class="carte-jeu">'+
+        '<p class="consigne">De '+(pas>0?'+':'')+pas+' en '+(pas>0?'+':'')+pas+' : quel nombre manque-t-il ?</p>'+
+        '<div class="question petit">'+aff+'</div>'+
+        '<div class="saisie-box" id="saisie">?</div>'+
+        clavierHTML()+
+        '<div class="feedback" id="fb"></div>'+
+      '</div>';
+    demarrerSaisie(bon, jeuSuites, ''+bon);
+  }
+
+  var PROBLEMES=[
+    function(){ var a=12+r(30),b=5+r(20); return {t:'Tom a '+a+' billes. Il en gagne '+b+' à la récré. Combien en a-t-il maintenant ?', r:a+b}; },
+    function(){ var a=30+r(40),b=8+r(20); return {t:'Il y a '+a+' bonbons dans le bocal. Léa en mange '+b+'. Combien en reste-t-il ?', r:a-b}; },
+    function(){ var a=3+r(6),b=3+r(7); return {t:'Un sachet contient '+b+' images. Combien d\'images dans '+a+' sachets ?', r:a*b}; },
+    function(){ var b=2+r(4),res=2+r(8),a=b*res; return {t:'On partage '+a+' gâteaux entre '+b+' enfants. Combien chacun en reçoit-il ?', r:res}; },
+    function(){ var a=3+r(6),b=3+r(6); return {t:'Dans la classe il y a '+a+' rangées de '+b+' tables. Combien de tables en tout ?', r:a*b}; },
+    function(){ var prix=2+r(8),n=2+r(5); return {t:'Un jouet coûte '+prix+' euros. Combien coûtent '+n+' jouets ?', r:prix*n}; },
+    function(){ var total=20+r(30),pris=5+r(12); return {t:'Maman achète '+total+' pommes. Elle en met '+pris+' dans un panier. Combien reste-t-il de pommes ?', r:total-pris}; }
+  ];
+  var _pTxt='';
+  function jeuProbleme(){
+    var p=choisir(PROBLEMES)();
+    _pTxt=p.t;
+    say(p.t);
+    app.innerHTML = entete('🧩 Problèmes','menuCalcul') +
+      '<div class="carte-jeu">'+
+        '<p class="consigne" style="font-size:22px;line-height:1.5;color:#374151">'+p.t+'</p>'+
+        '<button class="btn-son" onclick="PM.dire(PM._pTxt())">🔊 Relire</button>'+
+        '<div class="saisie-box" id="saisie">?</div>'+
+        clavierHTML()+
+        '<div class="feedback" id="fb"></div>'+
+      '</div>';
+    demarrerSaisie(p.r, jeuProbleme, ''+p.r);
+  }
+
+  /* ==================================================================
+     MODULE LANGUES
+     ================================================================== */
+  var LANGUES={
+    en:{nom:'Anglais', drap:'🇬🇧', code:'en-GB', salut:'Hello!'},
+    es:{nom:'Espagnol', drap:'🇪🇸', code:'es-ES', salut:'¡Hola!'},
+    it:{nom:'Italien', drap:'🇮🇹', code:'it-IT', salut:'Ciao!'}
+  };
+  var VOCAB=[
+    {img:'🐱', fr:'Chat',   en:'Cat',    es:'Gato',     it:'Gatto'},
+    {img:'🐶', fr:'Chien',  en:'Dog',    es:'Perro',    it:'Cane'},
+    {img:'🏠', fr:'Maison', en:'House',  es:'Casa',     it:'Casa'},
+    {img:'☀️', fr:'Soleil', en:'Sun',    es:'Sol',      it:'Sole'},
+    {img:'🍎', fr:'Pomme',  en:'Apple',  es:'Manzana',  it:'Mela'},
+    {img:'💧', fr:'Eau',    en:'Water',  es:'Agua',     it:'Acqua'},
+    {img:'📕', fr:'Livre',  en:'Book',   es:'Libro',    it:'Libro'},
+    {img:'🌳', fr:'Arbre',  en:'Tree',   es:'Árbol',    it:'Albero'},
+    {img:'⭐', fr:'Étoile', en:'Star',   es:'Estrella', it:'Stella'},
+    {img:'🌸', fr:'Fleur',  en:'Flower', es:'Flor',     it:'Fiore'},
+    {img:'🐟', fr:'Poisson',en:'Fish',   es:'Pez',      it:'Pesce'},
+    {img:'🥖', fr:'Pain',   en:'Bread',  es:'Pan',      it:'Pane'}
+  ];
+  var NOMBRES=[
+    {img:'1️⃣',fr:'Un',    en:'One',   es:'Uno',    it:'Uno'},
+    {img:'2️⃣',fr:'Deux',  en:'Two',   es:'Dos',    it:'Due'},
+    {img:'3️⃣',fr:'Trois', en:'Three', es:'Tres',   it:'Tre'},
+    {img:'4️⃣',fr:'Quatre',en:'Four',  es:'Cuatro', it:'Quattro'},
+    {img:'5️⃣',fr:'Cinq',  en:'Five',  es:'Cinco',  it:'Cinque'},
+    {img:'6️⃣',fr:'Six',   en:'Six',   es:'Seis',   it:'Sei'},
+    {img:'7️⃣',fr:'Sept',  en:'Seven', es:'Siete',  it:'Sette'},
+    {img:'8️⃣',fr:'Huit',  en:'Eight', es:'Ocho',   it:'Otto'},
+    {img:'9️⃣',fr:'Neuf',  en:'Nine',  es:'Nueve',  it:'Nove'},
+    {img:'🔟',fr:'Dix',   en:'Ten',   es:'Diez',   it:'Dieci'}
+  ];
+  var COULEURS=[
+    {img:'🔴',fr:'Rouge', en:'Red',    es:'Rojo',    it:'Rosso'},
+    {img:'🔵',fr:'Bleu',  en:'Blue',   es:'Azul',    it:'Blu'},
+    {img:'🟢',fr:'Vert',  en:'Green',  es:'Verde',   it:'Verde'},
+    {img:'🟡',fr:'Jaune', en:'Yellow', es:'Amarillo',it:'Giallo'},
+    {img:'⚫',fr:'Noir',  en:'Black',  es:'Negro',   it:'Nero'},
+    {img:'⚪',fr:'Blanc', en:'White',  es:'Blanco',  it:'Bianco'},
+    {img:'🟠',fr:'Orange',en:'Orange', es:'Naranja', it:'Arancione'},
+    {img:'🟣',fr:'Violet',en:'Purple', es:'Morado',  it:'Viola'}
+  ];
+  var PHRASES_L=[
+    {img:'👋',fr:'Bonjour',      en:'Hello',         es:'Hola',          it:'Ciao'},
+    {img:'🙏',fr:'Merci',        en:'Thank you',     es:'Gracias',       it:'Grazie'},
+    {img:'👋',fr:'Au revoir',    en:'Goodbye',       es:'Adiós',         it:'Arrivederci'},
+    {img:'😊',fr:"S'il te plaît",en:'Please',        es:'Por favor',     it:'Per favore'},
+    {img:'❓',fr:'Comment ça va ?',en:'How are you?', es:'¿Cómo estás?',  it:'Come stai?'},
+    {img:'👍',fr:'Oui',          en:'Yes',           es:'Sí',            it:'Sì'},
+    {img:'👎',fr:'Non',          en:'No',            es:'No',            it:'No'}
+  ];
+  var LISTES={base:VOCAB, nombres:NOMBRES, couleurs:COULEURS, phrases:PHRASES_L};
+  var langueCur='en', catCur='base', vocabIdx=0, _listeVocab=[];
+
+  function menuLangues(){
+    state.vue='langues';
+    var grands = state.age==='grand';
+    app.innerHTML = entete('🌍 Langues') +
+      '<div class="drapeaux" id="dr">'+
+        Object.keys(LANGUES).map(function(k){ var v=LANGUES[k]; return '<button data-l="'+k+'" class="'+(k===langueCur?'on':'')+'" onclick="PM.setLangue(\''+k+'\')">'+v.drap+' '+v.nom+'</button>'; }).join('')+
+      '</div>'+
+      '<div class="sous-menu">'+
+        '<button class="gros-btn t-langues" onclick="PM.jeuVocab(\'base\')"><span class="emo">👀</span>Découvrir les mots</button>'+
+        '<button class="gros-btn t-langues" onclick="PM.jeuLangueQuiz(\'base\')"><span class="emo">❓</span>Quiz : trouve le mot</button>'+
+        (grands?'<button class="gros-btn t-langues" onclick="PM.jeuVocab(\'nombres\')"><span class="emo">🔢</span>Les nombres</button>'+
+        '<button class="gros-btn t-langues" onclick="PM.jeuVocab(\'couleurs\')"><span class="emo">🎨</span>Les couleurs</button>'+
+        '<button class="gros-btn t-langues" onclick="PM.jeuVocab(\'phrases\')"><span class="emo">💬</span>Petites phrases</button>'+
+        '<button class="gros-btn t-langues" onclick="PM.jeuLangueQuiz(\'melange\')"><span class="emo">🏆</span>Grand quiz<span class="niveau-badge">4 choix</span></button>':'')+
+      '</div>';
+  }
+  function setLangue(k){ langueCur=k; var bs=root.querySelectorAll('#dr button'); for(var i=0;i<bs.length;i++) bs[i].classList.toggle('on', bs[i].getAttribute('data-l')===k); }
+  function listePourCat(cat){
+    if(cat==='melange') return VOCAB.concat(NOMBRES,COULEURS,PHRASES_L);
+    return LISTES[cat]||VOCAB;
+  }
+  function jeuVocab(cat){
+    catCur=cat||'base';
+    var liste=melanger(listePourCat(catCur));
+    vocabIdx=0;
+    montrerCarteVocab(liste);
+  }
+  function montrerCarteVocab(liste){
+    var L=LANGUES[langueCur];
+    var v=liste[vocabIdx];
+    say(v[langueCur], L.code);
+    _listeVocab=liste;
+    app.innerHTML = entete(L.drap+' '+L.nom,'menuLangues') +
+      '<div class="carte-jeu">'+
+        '<p class="consigne">En français : <b>'+v.fr+'</b></p>'+
+        '<div class="mot-img pop">'+v.img+'</div>'+
+        '<div class="mot-cible">'+v[langueCur]+'</div>'+
+        '<button class="btn-son" onclick="PM.dire(\''+q(v[langueCur])+'\',\''+L.code+'\')">🔊 Écouter</button>'+
+        barreHTML(liste.length, vocabIdx+1)+
+        '<div><button class="btn-suite" onclick="PM.suiteVocab()">'+(vocabIdx+1<liste.length?'Suivant ➡':'Recommencer 🔁')+'</button></div>'+
+      '</div>';
+  }
+  function suiteVocab(){
+    var liste=_listeVocab;
+    vocabIdx++;
+    if(vocabIdx>=liste.length){ gagner(3); confettis(); vocabIdx=0; montrerCarteVocab(melanger(listePourCat(catCur))); }
+    else montrerCarteVocab(liste);
+  }
+  function jeuLangueQuiz(cat){
+    catCur=cat||'base';
+    var liste=listePourCat(catCur);
+    var L=LANGUES[langueCur];
+    var cible=choisir(liste);
+    var nbAutres=(state.age==='grand')?3:2;
+    var autres=melanger(liste.filter(function(v){ return v.fr!==cible.fr; })).slice(0,nbAutres);
+    var opts=melanger([cible].concat(autres));
+    say('Comment dit-on '+cible.fr+' en '+L.nom);
+    app.innerHTML = entete(L.drap+' Quiz','menuLangues') +
+      '<div class="carte-jeu">'+
+        '<p class="consigne">Comment dit-on en '+L.nom+' ?</p>'+
+        '<div class="mot-img pop">'+cible.img+'</div>'+
+        '<div class="mot-fr">'+cible.fr+'</div>'+
+        '<div class="choix '+(opts.length===3?'trois':'')+'" id="zone">'+
+          opts.map(function(o){ return '<button data-v="'+q(o.fr)+'" style="font-size:22px" onclick="PM.repLangue(this,\''+q(o.fr)+'\',\''+q(cible.fr)+'\',\''+q(o[langueCur])+'\',\''+L.code+'\','+'\''+q(cible[langueCur])+'\')">'+o[langueCur]+'</button>'; }).join('')+
+        '</div>'+
+        '<div class="feedback" id="fb"></div>'+
+      '</div>';
+  }
+  function repLangue(btn,choix,bonne,mot,code,bonMot){
+    var fb=document.getElementById('fb');
+    if(choix===bonne){ btn.classList.add('bon'); fb.textContent='✅ Bravo !'; fb.className='feedback ok'; say(mot,code); gagner(3); bravo(); disableZone();
+      setTimeout(function(){ bumpProgress('langues', function(){ jeuLangueQuiz(catCur); }); },1500);
+    } else { btn.classList.add('faux'); montrerBonne(bonne); fb.textContent='👂 '+bonne+' se dit « '+bonMot+' »'; fb.className='feedback non';
+      setTimeout(function(){ bumpProgress('langues', function(){ jeuLangueQuiz(catCur); }); },2000);
+    }
+  }
+
+  /* ==================================================================
+     MODULE HISTOIRE
+     ================================================================== */
+  var LECONS=[
+    {titre:'La Préhistoire', ill:'🦣',
+     texte:"Il y a très très longtemps, les hommes vivaient dans des grottes. On les appelle les hommes préhistoriques. Ils ont découvert le <b>feu</b> pour se réchauffer et cuire la nourriture, et ils chassaient des animaux comme le mammouth. Ils dessinaient sur les murs des grottes !",
+     quiz:{q:'Où vivaient les hommes préhistoriques ?', bon:'Dans des grottes', faux:['Dans des châteaux','Dans des immeubles'], ind:'Avant les maisons…'}, age:'petit'},
+    {titre:'Les Égyptiens', ill:'🔺',
+     texte:"En Égypte, il y a des milliers d'années, les rois s'appelaient les <b>pharaons</b>. Ils ont fait construire d'immenses <b>pyramides</b> en pierre. Les Égyptiens écrivaient avec de petits dessins appelés hiéroglyphes.",
+     quiz:{q:"Comment s'appelaient les rois d'Égypte ?", bon:'Les pharaons', faux:['Les chevaliers','Les présidents'], ind:'En Égypte ancienne.'}, age:'petit'},
+    {titre:'Les Chevaliers', ill:'🏰',
+     texte:"Au Moyen Âge, les <b>chevaliers</b> portaient une armure en métal et se battaient avec une épée. Ils vivaient dans de grands <b>châteaux forts</b> entourés de murs et de douves remplies d'eau pour se protéger.",
+     quiz:{q:'Où vivaient les chevaliers ?', bon:'Dans des châteaux forts', faux:['Dans des pyramides','Dans des cavernes'], ind:'De grands bâtiments protégés.'}, age:'petit'},
+    {titre:'Les Romains', ill:'🏛️',
+     texte:"Les Romains vivaient à <b>Rome</b>, il y a plus de 2000 ans. Ils ont construit des routes, des aqueducs pour transporter l'eau, et de grandes arènes comme le <b>Colisée</b> où combattaient les gladiateurs. Leur chef s'appelait l'empereur.",
+     quiz:{q:"Comment s'appelle la grande arène de Rome ?", bon:'Le Colisée', faux:['La Tour Eiffel','La pyramide'], ind:'Une grande arène ronde.'}, age:'grand'},
+    {titre:'Christophe Colomb', ill:'⛵',
+     texte:"En <b>1492</b>, un explorateur nommé Christophe Colomb est parti sur des bateaux à travers l'océan. Il cherchait une nouvelle route vers l'Asie et il a atteint des terres inconnues des Européens, en <b>Amérique</b> (d'abord des îles des Caraïbes).",
+     quiz:{q:"Quel continent Colomb a-t-il atteint en explorant l'océan ?", bon:"L'Amérique", faux:["L'Australie","L'Afrique"], ind:'De l\'autre côté de l\'océan Atlantique.'}, age:'grand'},
+    {titre:'La Tour Eiffel', ill:'🗼',
+     texte:"La <b>Tour Eiffel</b> a été construite à Paris en <b>1889</b>, il y a plus de 130 ans, par l'ingénieur Gustave Eiffel. Elle est faite de fer et mesure plus de 300 mètres. C'est le monument le plus connu de France !",
+     quiz:{q:'Dans quelle ville se trouve la Tour Eiffel ?', bon:'Paris', faux:['Rome','Londres'], ind:'La capitale de la France.'}, age:'grand'}
+  ];
+  var QUIZ_PLUS={
+    'La Préhistoire':[
+      {q:'Qu\'ont découvert les hommes préhistoriques pour se réchauffer ?', bon:'Le feu', faux:["L'électricité",'Le gaz'], ind:'Ça brûle et ça réchauffe.'},
+      {q:'Quel grand animal chassaient-ils ?', bon:'Le mammouth', faux:['Le lion','Le dauphin'], ind:'Un éléphant tout poilu.'}
+    ],
+    'Les Égyptiens':[
+      {q:'Qu\'ont fait construire les pharaons ?', bon:'Des pyramides', faux:['Des gratte-ciels','Des ponts'], ind:'De grands triangles de pierre.'},
+      {q:'Comment s\'appelaient les petits dessins de leur écriture ?', bon:'Des hiéroglyphes', faux:['Des emojis','Des lettres'], ind:'Un mot un peu compliqué.'}
+    ],
+    'Les Chevaliers':[
+      {q:'En quoi était faite l\'armure du chevalier ?', bon:'En métal', faux:['En bois','En papier'], ind:'Un matériau dur et brillant.'},
+      {q:'Qu\'y avait-il autour des châteaux forts ?', bon:"Des douves remplies d'eau", faux:['Une autoroute','Un jardin de fleurs'], ind:'De l\'eau pour protéger.'}
+    ],
+    'Les Romains':[
+      {q:'À quoi servaient les aqueducs des Romains ?', bon:"À transporter l'eau", faux:['À voler','À faire du feu'], ind:'Pense à « aqua ».'},
+      {q:'Qui combattait dans le Colisée ?', bon:'Les gladiateurs', faux:['Les chevaliers','Les pharaons'], ind:'Des combattants romains.'},
+      {q:'Comment s\'appelait le chef des Romains ?', bon:"L'empereur", faux:['Le président','Le roi mage'], ind:'Pas un président.'}
+    ],
+    'Christophe Colomb':[
+      {q:'En quelle année Colomb a-t-il traversé l\'océan vers l\'Amérique ?', bon:'1492', faux:['1789','2000'], ind:'À la fin du XVe siècle.'},
+      {q:'Comment a-t-il traversé l\'océan ?', bon:'En bateau', faux:['En avion','À pied'], ind:'Il n\'y avait pas d\'avion !'}
+    ],
+    'La Tour Eiffel':[
+      {q:'En quelle année la Tour Eiffel a-t-elle été construite ?', bon:'1889', faux:['1492','1980'], ind:'À la fin du XIXe siècle.'},
+      {q:'En quel matériau est faite la Tour Eiffel ?', bon:'En fer', faux:['En or','En verre'], ind:'Un métal solide.'},
+      {q:'Qui a construit la Tour Eiffel ?', bon:'Gustave Eiffel', faux:['Napoléon','Léonard de Vinci'], ind:'Elle porte son nom.'}
+    ]
+  };
+  var CHRONO=[
+    {e:'La Préhistoire', o:1, em:'🦣'},
+    {e:'Les Égyptiens et les pyramides', o:2, em:'🔺'},
+    {e:'Les Romains et le Colisée', o:3, em:'🏛️'},
+    {e:'Les chevaliers du Moyen Âge', o:4, em:'🏰'},
+    {e:'Christophe Colomb (1492)', o:5, em:'⛵'},
+    {e:'La Tour Eiffel (1889)', o:6, em:'🗼'}
+  ];
+
+  function menuHistoire(){
+    state.vue='histoire';
+    var grands = state.age==='grand';
+    var leconsAge = LECONS.filter(function(l){ return grands ? true : l.age==='petit'; });
+    app.innerHTML = entete('🏰 Histoire') +
+      '<div class="sous-menu">'+
+        leconsAge.map(function(l){ return '<button class="gros-btn t-histoire" onclick="PM.ouvrirLecon('+LECONS.indexOf(l)+')"><span class="emo">'+l.ill+'</span>'+l.titre+'</button>'; }).join('')+
+        (grands?'<button class="gros-btn t-histoire" onclick="PM.jeuChrono()"><span class="emo">⏳</span>Chronologie<span class="niveau-badge">range dans l\'ordre</span></button>':'')+
+      '</div>';
+  }
+  function ouvrirLecon(i){
+    var l=LECONS[i];
+    var txtBrut=l.texte.replace(/<[^>]+>/g,'');
+    app.innerHTML = entete(l.ill+' '+l.titre,'menuHistoire') +
+      '<div class="carte-jeu">'+
+        '<div class="lecon"><span class="ill">'+l.ill+'</span><p>'+l.texte+'</p></div>'+
+        '<button class="btn-son" onclick="PM.dire(\''+q(txtBrut)+'\')">🔊 Lire à voix haute</button>'+
+        '<div><button class="btn-suite" onclick="PM.quizLecon('+i+')">Faire le quiz ❓</button></div>'+
+      '</div>';
+  }
+  function quizLecon(i){
+    var l=LECONS[i];
+    var qs=[l.quiz];
+    if(state.age==='grand' && QUIZ_PLUS[l.titre]) qs=qs.concat(QUIZ_PLUS[l.titre]);
+    qs=melanger(qs);
+    _qSeq=qs; _quizMat='histoire'; _quizFin=menuHistoire; _qIdx=0; poserQuestionSeq();
+  }
+
+  function jeuChrono(){
+    var sel=melanger(CHRONO).slice(0,4);
+    var cible=sel.slice().sort(function(a,b){ return a.o-b.o; });
+    window._chrCible=cible; window._chrStep=0;
+    app.innerHTML = entete('⏳ Chronologie','menuHistoire') +
+      '<div class="carte-jeu">'+
+        '<p class="consigne">Clique du plus <b>ANCIEN</b> au plus <b>RÉCENT</b></p>'+
+        '<div id="zone" style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">'+
+          melanger(sel).map(function(x){ return '<button class="gros-btn t-histoire" style="font-size:18px" onclick="PM.repChrono(this,'+x.o+')"><span class="emo">'+x.em+'</span>'+x.e+'</button>'; }).join('')+
+        '</div>'+
+        '<div class="feedback" id="fb"></div>'+
+        '<div><button class="btn-suite cacher" id="next" onclick="PM.jeuChrono()">Rejouer 🔁</button></div>'+
+      '</div>';
+  }
+  function repChrono(btn,o){
+    var fb=document.getElementById('fb');
+    if(o===window._chrCible[window._chrStep].o){
+      btn.classList.add('bon'); btn.disabled=true; window._chrStep++;
+      if(window._chrStep>=window._chrCible.length){
+        fb.textContent='✅ Parfait, tout est dans l\'ordre !'; fb.className='feedback ok'; gagner(6); bravo();
+        document.getElementById('next').classList.remove('cacher');
+        setTimeout(function(){ bumpProgress('histoire', menuHistoire); },1600);
+      } else { fb.textContent='👍 Continue...'; fb.className='feedback ok'; }
+    } else {
+      btn.classList.add('faux'); fb.textContent="❌ Ce n'est pas le plus ancien qui reste. Cherche ce qui s'est passé en premier."; fb.className='feedback non';
+      setTimeout(function(){ btn.classList.remove('faux'); },800);
+    }
+  }
+
+  /* ==================================================================
+     MONTAGE
+     ================================================================== */
+  function mount(rootEl, opts){
+    opts=opts||{};
+    root=rootEl;
+    var pid=opts.profileId;
+    var pref=(pid!=null && pid!=='') ? ('pm_'+pid) : (opts.keyPrefix||'pm');
+    KEY_SCORE=pref+'_score'; KEY_AGE=pref+'_age'; KEY_CALME=pref+'_calme';
+    var s=lsGet(KEY_SCORE); state.score = s? (parseInt(s,10)||0) : 0;
+    var a=lsGet(KEY_AGE); state.age = (a==='grand'||a==='petit') ? a : 'petit';
+    state.calme = lsGet(KEY_CALME)==='1';
+    prog={lecture:0,calcul:0,langues:0,histoire:0};
+    root.innerHTML = controlsHTML() + '<div id="pmContent"></div>';
+    app = root.querySelector('#pmContent');
+    applyCalme();
+    vueAccueil();
+  }
+
+  return {
+    mount:mount, dire:speak, setAge:setAge, toggleCalme:toggleCalme,
+    vueAccueil:vueAccueil, ouvrir:ouvrir, recapContinuer:recapContinuer,
+    menuLecture:menuLecture, jeuLettres:jeuLettres, repLettre:repLettre,
+    jeuSons:jeuSons, repSon:repSon, jeuMots:jeuMots, repMot:repMot,
+    jeuPhrases:jeuPhrases, poserMot:poserMot, retirerMot:retirerMot,
+    jeuComprehension:jeuComprehension, lancerQuiz:lancerQuiz, repQuiz:repQuiz, suiteQuizSeq:suiteQuizSeq,
+    menuCalcul:menuCalcul, jeuCompter:jeuCompter, repCompter:repCompter,
+    jeuOp:jeuOp, repOp:repOp, tape:tape, efface:efface, valider:valider,
+    jeuSuites:jeuSuites, jeuProbleme:jeuProbleme, _pTxt:function(){ return _pTxt; },
+    menuLangues:menuLangues, setLangue:setLangue, jeuVocab:jeuVocab, suiteVocab:suiteVocab,
+    jeuLangueQuiz:jeuLangueQuiz, repLangue:repLangue,
+    menuHistoire:menuHistoire, ouvrirLecon:ouvrirLecon, quizLecon:quizLecon,
+    jeuChrono:jeuChrono, repChrono:repChrono,
+    _state:function(){ return state; }
+  };
+})();
+function setBrand(t){ var b=document.querySelector("#topbar .brand span:last-child"); if(b) b.textContent=t; }
+function renderPetitsWorld(){
+  /* Intégration NATIVE (sans iframe) : un seul en-tête (la topbar du Royaume),
+     le monde des petits est rendu dans #app via le module window.PM, scopé sous #pmRoot. */
+  setBrand("Les Petits Malins");
+  var stats=document.getElementById("stats");
+  if(stats) stats.innerHTML='<button class="btn ghost small" id="pmSwitch">👤 Changer de compte</button>';
+  app.innerHTML='<div id="pmRoot"></div>';
+  var sw=document.getElementById("pmSwitch"); if(sw) sw.onclick=function(){ logoutProfile(); renderStats(); renderLanding(); };
+  if(window.PM && PM.mount){
+    PM.mount(document.getElementById("pmRoot"), {
+      profileId: ACTIVE,
+      onExit: function(){ logoutProfile(); renderStats(); renderLanding(); }
+    });
+  }
+}
 function defaultState(){
   return {
     setup:false, avatar:null, name:"",
     xp:0, crystals:0, streak:0, lastDay:null,
     scores:{},            // lessonId -> {stars, best}
     diagnosticDone:false, diagnostic:{}, // subjectId -> {right,total}
-    badges:[], buildings:[]
+    badges:[], buildings:[], brevet:0
   };
 }
 function loadProfiles(){
@@ -824,10 +1904,10 @@ function loadState(){
 function save(){ if(!ACTIVE) return; try{ localStorage.setItem(SAVE_PREFIX+ACTIVE, JSON.stringify(STATE)); }catch(e){} }
 function setActive(id){ ACTIVE=id; try{ localStorage.setItem(ACTIVE_KEY, id||""); }catch(e){} }
 function logoutProfile(){ ACTIVE=null; try{ localStorage.removeItem(ACTIVE_KEY); }catch(e){} STATE=defaultState(); }
-function createProfile(name, avatar, pin){
+function createProfile(name, avatar, pin, world){
   const id = "p"+Date.now()+Math.floor(Math.random()*1000);
   const list = loadProfiles();
-  list.push({id, name, avatar, pin: pin||null});
+  list.push({id, name, avatar, pin: pin||null, world: world||"royaume"});
   saveProfiles(list);
   setActive(id);
   STATE = defaultState();
@@ -844,7 +1924,7 @@ function enterProfile(id){
   setActive(id);
   STATE = loadState();
   const p = profileById(id);
-  if(p){ STATE.name=p.name; STATE.avatar=p.avatar; STATE.setup=true; }
+  if(p){ STATE.name=p.name; STATE.avatar=p.avatar; STATE.setup=true; STATE.world=p.world||"royaume"; }
   touchStreak(); save();
 }
 
@@ -1004,10 +2084,14 @@ function toast(msg, big){
 
 /* ---- Page d'accueil + sélection de profil ---- */
 function goAfterLogin(){
+  var ap = profileById(ACTIVE);
+  if(ap && (ap.world||"royaume")==="petits"){ renderPetitsWorld(); return; }
+  setBrand("Le Royaume du Savoir");
   renderStats();
   if(!STATE.diagnosticDone) renderDiagnosticIntro(); else renderMap();
 }
 function renderLanding(){
+  setBrand("Le Royaume du Savoir");
   renderStats();
   const profiles = loadProfiles();
   const cards = profiles.map(p=>{
@@ -1016,6 +2100,7 @@ function renderLanding(){
         <div class="face">${av?av.face:"🧙‍♀️"}</div>
         <div class="nm">${esc(p.name)}</div>
         <div class="small muted">${p.pin?"🔒 protégé":"clique pour entrer"}</div>
+        <div class="small" style="margin-top:2px">${(p.world==="petits")?"🐣 Petits Malins":"🏰 Royaume"}</div>
       </div>`;
   }).join("");
 
@@ -1045,7 +2130,7 @@ function renderLanding(){
     ["📺","Vidéos de cours","Une vidéo d'une chaîne reconnue (Yvan Monka, Les Bons Profs…) dans chaque leçon."],
     ["🏰","Royaume à bâtir","Les cristaux gagnés servent à construire un royaume qui s'agrandit."],
     ["🏅","Badges & niveaux","XP, niveaux de mage, séries de jours et badges à débloquer."],
-    ["🌙","Pensé pour l'autisme","Structure prévisible, une tâche à la fois, ton bienveillant, mode calme."]
+    ["🌙","Adapté à chaque enfant","Structure claire et prévisible, une tâche à la fois, ton bienveillant et mode calme — pensé aussi pour les enfants autistes."]
   ].map(f=>`<div class="f"><div class="fi">${f[0]}</div><div class="ft">${f[1]}</div>
       <div class="small muted">${f[2]}</div></div>`).join("");
 
@@ -1063,13 +2148,14 @@ function renderLanding(){
 
   app.innerHTML = `
   <div class="card center hero">
-    <span class="tag">🎓 Préparer le Brevet en s'amusant</span>
+    <span class="tag">🎓 Apprendre en s'amusant, du CP au Brevet</span>
     <div style="font-size:58px" class="pop">🏰</div>
     <h1>Le Royaume du Savoir</h1>
     <p class="muted" style="max-width:680px;margin:0 auto 4px">
-      Une académie magique où ta fille apprend à son rythme, progresse sur le programme officiel
-      (Cycle 4 : 5ᵉ → 4ᵉ → 3ᵉ) et gagne des récompenses à chaque réussite. Pensée spécialement
-      pour un apprentissage clair, motivant et rassurant.
+      Une académie magique où chaque enfant apprend à son rythme, progresse sur le programme officiel
+      (Cycle 4 : 5ᵉ → 4ᵉ → 3ᵉ) et gagne des récompenses à chaque réussite. Conçue pour tous les enfants,
+      avec un apprentissage clair, motivant et rassurant — et particulièrement adaptée aux enfants autistes.
+      Et pour les plus jeunes, dès le CP, le monde « Les Petits Malins » pose les bases : lecture, calcul, langues et histoire.
     </p>
     ${heroCTA}
   </div>
@@ -1193,6 +2279,12 @@ function renderCreateAccount(){
   <div class="card center">
     <h1>✨ Créer mon compte</h1>
     <p class="muted">Choisis ton avatar, ton nom de mage, et un code si tu veux protéger ton compte.</p>
+    <h3 style="margin-top:14px">Quel monde ?</h3>
+    <div class="row" id="worldSel" style="justify-content:center;gap:12px;flex-wrap:wrap;margin-top:6px">
+      <button class="btn world-opt sel" data-w="petits">🐣 Les Petits Malins</button>
+      <button class="btn world-opt" data-w="royaume">🏰 Royaume du Savoir</button>
+    </div>
+    <div class="small muted" style="margin-top:4px">Petits Malins = les bases, dès le CP · Royaume = collège, jusqu'au Brevet</div>
     <h3 style="margin-top:14px">Ton avatar</h3>
     <div class="grid avatars" id="avs"></div>
     <div style="max-width:360px;margin:16px auto 0">
@@ -1209,6 +2301,8 @@ function renderCreateAccount(){
     </div>
   </div>`;
   const avs=document.getElementById("avs"); let chosen=null;
+  let worldSel="petits";
+  app.querySelectorAll(".world-opt").forEach(function(b){ b.onclick=function(){ worldSel=b.dataset.w; app.querySelectorAll(".world-opt").forEach(function(x){x.classList.remove("sel");}); b.classList.add("sel"); }; });
   AVATARS.forEach(a=>{
     const d=document.createElement("div");
     d.className="avatar"; d.innerHTML=`<div class="face">${a.face}</div><div class="nm">${a.nm}</div>`;
@@ -1224,7 +2318,7 @@ function renderCreateAccount(){
   create.onclick=()=>{
     const pinVal=pin.value.trim();
     if(pinVal && pinVal.length!==4){ toast("Le code doit faire 4 chiffres (ou rester vide)."); return; }
-    createProfile(name.value.trim(), chosen, pinVal||null);
+    createProfile(name.value.trim(), chosen, pinVal||null, worldSel);
     goAfterLogin();
   };
   document.getElementById("backBtn").onclick=renderLanding;
@@ -1323,7 +2417,90 @@ function runDiagnostic(){
 }
 
 /* ---- Carte du royaume (matières) ---- */
+
+/* ===================== BREVET BLANC ===================== */
+var EXAM=null, EXAM_I=0, EXAM_ANS=[];
+function _shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function _norm(s){return String(s).toLowerCase().trim().replace(/\s+/g,"").replace(/\u00b2/g,"2").replace(/,/g,".");}/* virgule d\u00e9cimale FR accept\u00e9e comme le point (align\u00e9 sur `norm` des le\u00e7ons) */
+function collegeQuestions(){
+  var out=[];
+  CONTENT.subjects.forEach(function(s){
+    s.lessons.forEach(function(l){
+      var niv=l.niveau||"5e"; if(niv==="6e") return;
+      l.questions.forEach(function(q){ out.push(Object.assign({},q,{subject:s.id,subjectName:s.name,subjectIcon:s.icon})); });
+    });
+  });
+  return out;
+}
+function buildBrevet(){
+  var bySub={}; collegeQuestions().forEach(function(q){ (bySub[q.subject]=bySub[q.subject]||[]).push(q); });
+  var exam=[]; Object.keys(bySub).forEach(function(k){ exam=exam.concat(_shuf(bySub[k]).slice(0,3)); });
+  return _shuf(exam);
+}
+function renderBrevetIntro(){
+  renderStats();
+  var best=STATE.brevet||0;
+  app.innerHTML='<div class="card center">'
+    +'<div style="font-size:54px" class="pop">🎓</div>'
+    +'<h1>Le Brevet blanc</h1>'
+    +'<p class="muted" style="max-width:620px;margin:0 auto">C\'est l\'examen pour t\'entraîner comme le jour du vrai Brevet. '
+    +'Des questions de toutes les matières, sans aide cette fois : tu réponds, et la correction arrive à la fin. '
+    +'Prends ton temps, respire, et fais de ton mieux. 💪</p>'
+    +(best?'<p class="small muted" style="margin-top:8px">🏅 Ton meilleur score : <b>'+best+'/20</b></p>':'')
+    +'<div class="row" style="justify-content:center;margin-top:18px">'
+    +'<button class="btn big" id="startEx">Commencer l\'examen →</button>'
+    +'<button class="btn ghost" id="backEx">← Carte</button></div></div>';
+  document.getElementById("startEx").onclick=function(){ EXAM=buildBrevet(); EXAM_I=0; EXAM_ANS=new Array(EXAM.length).fill(null); renderExamQ(); };
+  document.getElementById("backEx").onclick=renderMap;
+}
+function renderExamQ(){
+  var q=EXAM[EXAM_I], n=EXAM.length, cur=EXAM_ANS[EXAM_I], ctrl="";
+  if(q.type==="qcm"){
+    ctrl='<div class="quests" style="margin-top:8px">'+q.options.map(function(o,i){ return '<button class="opt ex-opt'+(cur===i?' sel':'')+'" data-i="'+i+'">'+esc(o)+'</button>'; }).join("")+'</div>';
+  } else if(q.type==="vf"){
+    ctrl='<div class="row" style="justify-content:center;gap:12px;margin-top:8px"><button class="opt ex-opt'+(cur===true?' sel':'')+'" data-v="true">✅ Vrai</button><button class="opt ex-opt'+(cur===false?' sel':'')+'" data-v="false">❌ Faux</button></div>';
+  } else {
+    ctrl='<div style="max-width:320px;margin:10px auto"><input class="text" id="exIn" placeholder="Ta réponse" value="'+(cur!=null?esc(cur):"")+'"/></div>';
+  }
+  app.innerHTML='<div class="card">'
+    +'<div class="row"><div class="small muted">Brevet blanc · Question '+(EXAM_I+1)+'/'+n+'</div><div class="spacer"></div><span class="chip">'+q.subjectIcon+' '+esc(q.subjectName)+'</span></div>'
+    +'<div class="prog" style="margin:8px 0"><i style="width:'+Math.round(100*(EXAM_I+1)/n)+'%;background:#16a34a"></i></div>'
+    +'<div class="qtext" style="font-size:18px;margin:10px 0">'+esc(q.q)+'</div>'+ctrl
+    +'<div class="row" style="margin-top:16px">'+(EXAM_I>0?'<button class="btn ghost" id="prevQ">← Précédent</button>':'')+'<div class="spacer"></div><button class="btn" id="nextQ">'+(EXAM_I<n-1?'Suivant →':'Terminer ✅')+'</button></div></div>';
+  app.querySelectorAll(".ex-opt").forEach(function(b){ b.onclick=function(){ if(q.type==="qcm") EXAM_ANS[EXAM_I]=parseInt(b.dataset.i,10); else EXAM_ANS[EXAM_I]=(b.dataset.v==="true"); app.querySelectorAll(".ex-opt").forEach(function(x){x.classList.remove("sel");}); b.classList.add("sel"); }; });
+  var inp=document.getElementById("exIn"); if(inp) inp.oninput=function(){ EXAM_ANS[EXAM_I]=inp.value; };
+  var pv=document.getElementById("prevQ"); if(pv) pv.onclick=function(){ EXAM_I--; renderExamQ(); };
+  document.getElementById("nextQ").onclick=function(){ if(inp) EXAM_ANS[EXAM_I]=inp.value; if(EXAM_I<n-1){ EXAM_I++; renderExamQ(); } else renderExamResult(); };
+}
+function _correct(q,a){ if(a==null) return false; if(q.type==="qcm"||q.type==="vf") return a===q.answer; return q.answer.some(function(x){ return _norm(x)===_norm(a); }); }
+function renderExamResult(){
+  var n=EXAM.length, correct=0, bySub={};
+  EXAM.forEach(function(q,i){ var ok=_correct(q,EXAM_ANS[i]); if(ok) correct++; var b=bySub[q.subjectName]=bySub[q.subjectName]||{ok:0,t:0,icon:q.subjectIcon}; b.t++; if(ok) b.ok++; });
+  var note=Math.round(correct/n*20);
+  var mention=note>=16?"Mention Très Bien 🌟":note>=14?"Mention Bien ✨":note>=12?"Mention Assez Bien 👏":note>=10?"Admis·e ! 🎉":"Pas encore — on révise et on retente 💪";
+  var admis=note>=10;
+  if(note>(STATE.brevet||0)) STATE.brevet=note;
+  STATE.xp=(STATE.xp||0)+correct*5; STATE.crystals=(STATE.crystals||0)+(admis?15:correct); save();
+  var subRows=Object.keys(bySub).map(function(k){var b=bySub[k];return '<div class="quest"><div class="qix">'+b.icon+'</div><div class="qmeta"><div class="qt">'+esc(k)+'</div><div class="small muted">'+b.ok+'/'+b.t+' réussites</div></div></div>';}).join("");
+  var corr=EXAM.map(function(q,i){
+    var ok=_correct(q,EXAM_ANS[i]);
+    var bonne=q.type==="qcm"?esc(q.options[q.answer]):q.type==="vf"?(q.answer?"Vrai":"Faux"):esc(q.answer.join(" / "));
+    var ta; if(EXAM_ANS[i]==null) ta="(pas de réponse)"; else if(q.type==="qcm") ta=esc(q.options[EXAM_ANS[i]]); else if(q.type==="vf") ta=(EXAM_ANS[i]?"Vrai":"Faux"); else ta=esc(EXAM_ANS[i]);
+    return '<div class="quest" style="align-items:flex-start"><div class="qix">'+(ok?"✅":"❌")+'</div><div class="qmeta"><div class="qt" style="font-size:15px">'+esc(q.q)+'</div><div class="small" style="color:'+(ok?"#6b6b8a":"#dc2626")+'">Ta réponse : '+ta+'</div>'+(ok?'':'<div class="small" style="color:#16a34a">Bonne réponse : '+bonne+'</div>')+'<div class="small muted">'+esc(q.explain||"")+'</div></div></div>';
+  }).join("");
+  app.innerHTML='<div class="card center"><div style="font-size:50px" class="pop">'+(admis?"🎓":"📚")+'</div><h1>'+note+'/20</h1><h3 style="margin:2px 0">'+mention+'</h3>'
+    +'<p class="muted small">Tu as '+correct+' bonnes réponses sur '+n+'. '+(admis?"Bravo, tu es sur la bonne voie pour le Brevet !":"Chaque essai te rapproche du but. Continue les quêtes et retente !")+'</p>'
+    +'<div class="quests" style="margin-top:12px;text-align:left">'+subRows+'</div>'
+    +'<div class="row" style="justify-content:center;margin-top:14px"><button class="btn" id="againEx">↻ Refaire un Brevet blanc</button><button class="btn ghost" id="toMapEx">🗺️ Carte</button></div></div>'
+    +'<div class="card"><div class="section-title">📝 La correction</div><div class="quests" style="text-align:left">'+corr+'</div></div>';
+  if(admis) toast("🎓 Brevet blanc réussi : "+note+"/20 !", true);
+  document.getElementById("againEx").onclick=renderBrevetIntro;
+  document.getElementById("toMapEx").onclick=renderMap;
+  renderStats();
+}
+
 function renderMap(){
+  setBrand("Le Royaume du Savoir");
   renderStats();
   const regions=CONTENT.subjects.map(s=>{
     const p=regionProgress(s.id);
@@ -1349,6 +2526,7 @@ function renderMap(){
         <div class="spacer"></div>
         <button class="btn ghost" id="kingdomBtn">🏰 Mon royaume</button>
         <button class="btn ghost" id="badgesBtn">🏅 Mes badges</button>
+        <button class="btn ghost" id="brevetBtn">🎓 Brevet blanc</button>
       </div>
       <div class="grid regions" style="margin-top:16px">${regions}</div>
     </div>`;
@@ -1356,6 +2534,7 @@ function renderMap(){
     r.onclick=()=>renderRegion(r.dataset.sub);
   });
   document.getElementById("badgesBtn").onclick=renderBadges;
+  document.getElementById("brevetBtn").onclick=renderBrevetIntro;
   document.getElementById("kingdomBtn").onclick=renderKingdom;
 }
 
