@@ -21,7 +21,7 @@ desktop.ini
 # Fichiers de travail / artefacts (non versionnés)
 _wtest.txt
 zi9a9F30
-Prompt-ClaudeCode-Corrections.md
+Prompt-ClaudeCode-*.md
 enseignant/
 enseignant.skill
 node_modules/

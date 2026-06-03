@@ -14,7 +14,7 @@ Application d'apprentissage **gamifiée** qui accompagne les enfants **du CP au 
 
 ## ✨ Fonctionnalités
 
-- **Page d'accueil et comptes personnalisés** : plusieurs profils (ta fille, un frère/une sœur…), chacun avec sa progression, son avatar et un **code PIN optionnel**. Comptes enregistrés localement sur l'appareil, sans envoi de données.
+- **Page d'accueil resserrée, centrée sur l'enfant** : une promesse claire (« Du CP au Brevet, en s'amusant »), le **choix du profil en action principale** (« Qui joue aujourd'hui ? », visible sans scroller), une présentation des **deux mondes** (🐣 Petits Malins / 🏰 Royaume) et 4 arguments de valeur (adaptation autisme, motivation saine, données **locales/privées**, objectif Brevet). Plusieurs profils (ta fille, un frère/une sœur…), chacun avec sa progression, son avatar et un **code PIN optionnel**. Comptes enregistrés localement sur l'appareil, sans envoi de données.
 - **Création d'avatar** (mage, fée, dragonne…) et nom de magicien·ne.
 - **Test de l'Oracle** : un diagnostic doux pour situer le niveau, sans mise en échec.
 - **Carte du royaume** : chaque matière est une région magique à explorer.
