@@ -198,6 +198,21 @@
   .parent-note{background:var(--bg2);border:1px dashed var(--border);border-radius:14px;padding:16px;margin-top:14px}
 .world-opt{opacity:.55} .world-opt.sel{opacity:1;box-shadow:0 0 0 3px #22c55e inset}
 .ex-opt.sel{outline:3px solid #16a34a;outline-offset:2px}
+/* ---- Accueil resserré (proposition de valeur + choix du profil) ---- */
+.avatar:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.monde-badge{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:2px 10px;margin-top:4px}
+.monde-badge.petits{background:rgba(236,72,153,.18);border:1px solid #ec4899;color:#ffd9ec}
+.monde-badge.royaume{background:rgba(70,200,192,.16);border:1px solid var(--teal);color:#bff3ef}
+.two-worlds{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:640px){.two-worlds{grid-template-columns:1fr}}
+.world-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:18px;text-align:center}
+.world-card.petits{border-color:#ec4899}
+.world-card.royaume{border-color:var(--teal)}
+.world-card .wc-emo{font-size:44px}
+.world-card h3{margin:6px 0 4px}
+ul.why{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:10px}
+ul.why li{display:flex;gap:12px;align-items:flex-start;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px 14px}
+ul.why .wi{font-size:22px;flex:0 0 auto;line-height:1.25}
 </style>
 <style id="pmStyle">
 /* ===== LES PETITS MALINS — styles scopés sous #pmRoot (intégration native) =====
@@ -2096,148 +2111,84 @@ function renderLanding(){
   const profiles = loadProfiles();
   const cards = profiles.map(p=>{
     const av = AVATARS.find(a=>a.id===p.avatar);
-    return `<div class="avatar" data-pid="${p.id}">
+    const monde = (p.world==="petits")
+      ? '<span class="monde-badge petits">🐣 Petits Malins</span>'
+      : '<span class="monde-badge royaume">🏰 Royaume</span>';
+    return `<div class="avatar" data-pid="${p.id}" role="button" tabindex="0" aria-label="Entrer dans le compte de ${esc(p.name)}">
         <div class="face">${av?av.face:"🧙‍♀️"}</div>
         <div class="nm">${esc(p.name)}</div>
-        <div class="small muted">${p.pin?"🔒 protégé":"clique pour entrer"}</div>
-        <div class="small" style="margin-top:2px">${(p.world==="petits")?"🐣 Petits Malins":"🏰 Royaume"}</div>
+        ${monde}
+        <div class="small muted" style="margin-top:4px">${p.pin?"🔒 protégé":"clique pour entrer"}</div>
       </div>`;
   }).join("");
 
-  // Bloc connexion / création (réutilisé en haut et en bas)
+  // Action principale : choisir son profil (visible sans scroller)
   const heroCTA = profiles.length ? `
-      <h3 style="margin-top:18px">Qui joue aujourd'hui ?</h3>
+      <h3 style="margin:18px 0 4px">Qui joue aujourd'hui ?</h3>
+      <p class="small muted" style="margin:0 0 12px">Choisis ton profil pour continuer ton aventure.</p>
       <div class="grid avatars" id="plist">${cards}</div>
-      <div style="margin-top:16px"><button class="btn big" id="newAcc">➕ Nouveau compte</button></div>
-      <div style="margin-top:8px"><a class="link small" id="manageAcc">Gérer les comptes</a></div>`
-    : `<div style="margin-top:20px"><button class="btn big" id="newAcc">✨ Créer mon compte</button></div>`;
-
-  // Les 4 matières
-  const subjectsHTML = CONTENT.subjects.map(s=>{
-    const nb = s.lessons.length;
-    return `<div class="region" style="cursor:default;border-color:${s.color}">
-        <div class="rico">${s.icon}</div>
-        <h3>${s.region}</h3>
-        <div class="small muted">${s.name}</div>
-        <div class="pct" style="color:${s.color}">${nb} quêtes</div>
-      </div>`;
-  }).join("");
-
-  // Fonctionnalités
-  const feats = [
-    ["🎯","Test de niveau","L'Oracle situe son niveau en douceur, sans note ni échec."],
-    ["🧠","Cartes mentales","Chaque leçon résume ses idées-clés dans une carte mentale visuelle."],
-    ["📺","Vidéos de cours","Une vidéo d'une chaîne reconnue (Yvan Monka, Les Bons Profs…) dans chaque leçon."],
-    ["🏰","Royaume à bâtir","Les cristaux gagnés servent à construire un royaume qui s'agrandit."],
-    ["🏅","Badges & niveaux","XP, niveaux de mage, séries de jours et badges à débloquer."],
-    ["🌙","Adapté à chaque enfant","Structure claire et prévisible, une tâche à la fois, ton bienveillant et mode calme — pensé aussi pour les enfants autistes."]
-  ].map(f=>`<div class="f"><div class="fi">${f[0]}</div><div class="ft">${f[1]}</div>
-      <div class="small muted">${f[2]}</div></div>`).join("");
-
-  // Badges d'exemple
-  const badgeDemo = BADGES.slice(0,4).map(b=>`<div class="badge">
-      <div class="bic">${b.icon}</div><div class="bn">${b.nm}</div></div>`).join("");
-
-  // Question d'exemple (démo)
-  const demo = {
-    q:"🪄 Sortilège de calcul : combien fait (−7) + (−5) ?",
-    options:["−12","−2","+12"], answer:0,
-    explain:"Deux nombres négatifs : on additionne 7 + 5 = 12 et on garde le signe −. Donc <b>−12</b> !"
-  };
-  const demoOpts = demo.options.map((o,i)=>`<button class="opt demo-opt" data-i="${i}">${o}</button>`).join("");
+      <div class="row" style="justify-content:center;gap:10px;margin-top:18px">
+        <button class="btn big" id="newAcc">➕ Nouveau compte</button>
+        <button class="btn ghost" id="manageAcc">⚙️ Gérer les comptes</button>
+      </div>`
+    : `<p class="small muted" style="margin:14px 0 0">Crée un profil pour commencer — chaque enfant a le sien.</p>
+       <div style="margin-top:14px"><button class="btn big" id="newAcc">✨ Créer mon compte</button></div>`;
 
   app.innerHTML = `
   <div class="card center hero">
-    <span class="tag">🎓 Apprendre en s'amusant, du CP au Brevet</span>
-    <div style="font-size:58px" class="pop">🏰</div>
+    <span class="tag">🎓 Du CP au Brevet, en s'amusant</span>
+    <div style="font-size:54px" class="pop">🪄</div>
     <h1>Le Royaume du Savoir</h1>
-    <p class="muted" style="max-width:680px;margin:0 auto 4px">
-      Une académie magique où chaque enfant apprend à son rythme, progresse sur le programme officiel
-      (Cycle 4 : 5ᵉ → 4ᵉ → 3ᵉ) et gagne des récompenses à chaque réussite. Conçue pour tous les enfants,
-      avec un apprentissage clair, motivant et rassurant — et particulièrement adaptée aux enfants autistes.
-      Et pour les plus jeunes, dès le CP, le monde « Les Petits Malins » pose les bases : lecture, calcul, langues et histoire.
+    <p class="muted" style="max-width:640px;margin:0 auto 2px;font-size:17px">
+      Une seule appli qui accompagne <b>chaque enfant tout au long de sa scolarité</b>,
+      <b>du CP au Brevet</b> — à son rythme, dans un univers magique et rassurant.
     </p>
     ${heroCTA}
   </div>
 
   <div class="card">
-    <div class="section-title">⚙️ Comment ça marche</div>
-    <p class="muted small">Toujours le même déroulé, simple et prévisible.</p>
-    <div class="steps">
-      <div class="step"><div class="num">1</div><div class="si">🧙‍♀️</div><div class="st">Je crée mon mage</div>
-        <div class="small muted">Avatar, nom, et un code si je veux.</div></div>
-      <div class="step"><div class="num">2</div><div class="si">🔮</div><div class="st">L'Oracle me situe</div>
-        <div class="small muted">Un petit test doux, sans note.</div></div>
-      <div class="step"><div class="num">3</div><div class="si">⚔️</div><div class="st">Je fais des quêtes</div>
-        <div class="small muted">Cours, carte mentale, vidéo, exercices.</div></div>
-      <div class="step"><div class="num">4</div><div class="si">💎</div><div class="st">Je fais grandir mon royaume</div>
-        <div class="small muted">Je gagne XP, cristaux et badges.</div></div>
+    <div class="section-title">🗺️ Deux mondes selon l'âge</div>
+    <div class="grid two-worlds" style="margin-top:12px">
+      <div class="world-card petits">
+        <div class="wc-emo">🐣</div>
+        <h3>Les Petits Malins</h3>
+        <div class="pill">Dès le CP · 3-9 ans</div>
+        <p class="small muted">Les bases en s'amusant : <b>lecture</b>, <b>calcul</b>, <b>langues</b> et <b>histoire</b>, avec de grandes tuiles colorées et des jeux simples.</p>
+      </div>
+      <div class="world-card royaume">
+        <div class="wc-emo">🏰</div>
+        <h3>Le Royaume du Savoir</h3>
+        <div class="pill">Collège · jusqu'au Brevet</div>
+        <p class="small muted">Maths, français, histoire-géo et sciences en <b>quêtes</b> : cours, carte mentale, vidéo, puis un <b>Brevet blanc</b> pour s'entraîner comme le jour J.</p>
+      </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="section-title">📚 Ce que l'on travaille</div>
-    <p class="muted small">Les 4 matières évaluées au Brevet, chacune une région magique à explorer.</p>
-    <div class="grid regions" style="margin-top:12px">${subjectsHTML}</div>
-  </div>
-
-  <div class="card">
-    <div class="section-title">✨ Essaie une question, comme dans le jeu</div>
-    <p class="muted small">Clique sur une réponse : le retour est toujours bienveillant.</p>
-    <div class="demo-q">
-      <div class="qtext">${demo.q}</div>
-      <div class="options">${demoOpts}</div>
-      <div class="feedback" id="demoFb"></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="section-title">🧠 Une carte mentale dans chaque leçon</div>
-    <p class="muted small">Exemple généré automatiquement pour la leçon « Les fractions ».</p>
-    <div class="mindmap-box">${mindmapSVG(lessonById("m2"))}</div>
-  </div>
-
-  <div class="card">
-    <div class="section-title">🏅 On gagne des badges</div>
-    <p class="muted small">Des récompenses qui célèbrent chaque progrès.</p>
-    <div class="badges" style="margin-top:12px">${badgeDemo}</div>
-  </div>
-
-  <div class="card">
-    <div class="section-title">🌟 Tout ce que propose l'app</div>
-    <div class="feat">${feats}</div>
-  </div>
-
-  <div class="card">
-    <div class="section-title">👨‍👩‍👧 Pour les parents</div>
-    <div class="parent-note">
-      Application <b>gratuite</b>, qui fonctionne sur PC et tablette. Les comptes et la progression sont
-      enregistrés <b>localement</b> sur l'appareil (aucune donnée envoyée). Le contenu suit le programme de
-      l'Éducation nationale ; les vidéos pointent vers des chaînes pédagogiques reconnues. Un <b>mode calme</b>
-      réduit les animations si besoin.
-    </div>
+    <div class="section-title">💛 Pourquoi cette appli</div>
+    <ul class="why">
+      <li><span class="wi">🌙</span> <span><b>Pensée pour tous les enfants — et particulièrement adaptée à l'autisme</b> : structure prévisible, une tâche à la fois, langage clair, <b>mode calme</b> et feedback bienveillant.</span></li>
+      <li><span class="wi">🎮</span> <span><b>On apprend en s'amusant</b> : avatars, quêtes, cartes mentales, vidéos, royaume à bâtir et badges — une motivation saine, <b>sans pression</b>.</span></li>
+      <li><span class="wi">🔒</span> <span><b>Chaque enfant a son profil et sa progression</b>, enregistrés <b>localement</b> sur l'appareil — <b>aucune donnée envoyée</b>. Gratuit, sans installation.</span></li>
+      <li><span class="wi">🎓</span> <span><b>Le but : décrocher le Brevet dans de bonnes conditions</b> — un Brevet blanc entraîne comme le jour de l'examen.</span></li>
+    </ul>
+    <p class="small muted" style="margin-top:14px">
+      <b>Pour les parents :</b> gratuit, sur PC et tablette, progression enregistrée <b>localement</b> (aucune donnée envoyée),
+      contenu aligné sur le programme de l'Éducation nationale, et un <b>mode calme</b> pour réduire les animations.
+    </p>
     <div class="center" style="margin-top:16px">
       <button class="btn big" id="newAcc2">✨ Créer un compte et commencer</button>
     </div>
   </div>`;
 
-  // Handlers
+  // Handlers — mécanique des profils inchangée
   const bind = id => { const el=document.getElementById(id); if(el) el.onclick=renderCreateAccount; };
   bind("newAcc"); bind("newAcc2");
   const mg=document.getElementById("manageAcc"); if(mg) mg.onclick=renderManageAccounts;
-  app.querySelectorAll("[data-pid]").forEach(c=> c.onclick=()=>loginProfile(c.dataset.pid));
-  // Démo interactive
-  app.querySelectorAll(".demo-opt").forEach((b,i)=>{
-    b.onclick=()=>{
-      app.querySelectorAll(".demo-opt").forEach((x,j)=>{
-        x.disabled=true;
-        if(j===demo.answer) x.classList.add("correct");
-        else if(j===i) x.classList.add("wrong");
-      });
-      const fb=document.getElementById("demoFb"); const ok=i===demo.answer;
-      fb.className="feedback "+(ok?"ok":"no");
-      fb.innerHTML=(ok?'<span class="lab">✅ Bravo !</span>':'<span class="lab">🤝 Presque !</span>')+demo.explain;
-    };
+  app.querySelectorAll("[data-pid]").forEach(c=>{
+    const go=()=>loginProfile(c.dataset.pid);
+    c.onclick=go;
+    c.onkeydown=e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(); } };
   });
 }
 function loginProfile(id){

@@ -2,6 +2,35 @@
 
 Toutes les évolutions notables de l'application sont consignées ici.
 
+## [Non publié] — Refonte de la page d'accueil (2026-06-03)
+
+`renderLanding()` est réécrite pour **porter la proposition de valeur** et mettre
+le **choix du profil en avant**, au lieu d'une page longue et marketing. Aucune
+régression de la mécanique des profils (clés `rds_*` préservées). Vérifié par
+**31 assertions jsdom** (origine `https://`).
+
+### Modifié
+
+- **Hero resserré** : logo + titre + une **phrase-promesse** (« Du CP au Brevet,
+  en s'amusant ») + le **sélecteur de profil en action principale** (« Qui joue
+  aujourd'hui ? », cartes de profils avec **badge de monde** 🐣/🏰, boutons
+  **Nouveau compte** et **Gérer les comptes**), visible sans scroller. Sans
+  profil, la **création** est mise en avant.
+- **« Deux mondes »** : deux cartes courtes (🐣 Les Petits Malins, dès le CP ·
+  🏰 Le Royaume du Savoir, collège → Brevet) avec tranche d'âge et contenu.
+- **« Pourquoi cette appli »** : 4 arguments d'une ligne — adaptation autisme +
+  mode calme, motivation saine sans pression, données **locales/privées** et
+  gratuit, objectif **Brevet** (Brevet blanc). Note **parents** courte (1 ligne).
+- **Accessibilité** : cartes de profil focusables au clavier (`role="button"`,
+  `tabindex`, Entrée/Espace, `:focus-visible`).
+
+### Retiré (allègement)
+
+- La carte « Comment ça marche », la **démo interactive**, l'**exemple de carte
+  mentale** et l'**expo de badges**, la longue liste de fonctionnalités et la
+  grande carte « Pour les parents » — qui noyaient le message. L'accueil se lit
+  désormais d'un coup d'œil.
+
 ## [Non publié] — Corrections de l'audit pédagogique (2026-06-03)
 
 Cette série applique les corrections **prioritaires** de l'`Audit-pedagogique.md`
