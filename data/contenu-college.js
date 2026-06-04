@@ -458,6 +458,25 @@ var CONTENT = {
             {type:"vf", q:"Le point (0 ; 0) est l'origine du repère.", answer:true, explain:"Oui : c'est le point de départ.", indice:"Les deux coordonnées sont nulles."},
             {type:"qcm", q:"Le point A(2 ; 0) se trouve :", options:["sur l'axe horizontal","sur l'axe vertical","à l'origine","hors du plan"], answer:0, explain:"Comme y = 0, le point est sur l'axe horizontal.", indice:"Ordonnée nulle = sur l'axe des abscisses."}
           ]
+        },
+        {
+          id:"m24", niveau:"5e", title:"Organisation et gestion de données",
+          carte:{centre:"Organisation de données", branches:[{titre:"Tableau", detail:"ranger les données"},{titre:"Graphiques", detail:"bâtons, courbe, camembert"},{titre:"Effectif", detail:"combien de fois une valeur apparaît"},{titre:"Moyenne", detail:"somme ÷ nombre de valeurs"},{titre:"Lire un point", detail:"grâce aux axes"}]},
+          cours:"Les <b>données</b> se présentent dans un <b>tableau</b> ou un <b>graphique</b> (diagramme en <b>bâtons</b>, <b>courbe</b>, diagramme <b>circulaire</b>). L'<b>effectif</b> d'une valeur est le <b>nombre de fois</b> qu'elle apparaît. La <b>moyenne</b> se calcule par <b>somme des valeurs ÷ nombre de valeurs</b>. Pour lire une valeur sur un graphique, on utilise les <b>axes</b>.",
+          questions:[
+            {type:"qcm", q:"Un diagramme en bâtons sert à :", options:["représenter des données","calculer une aire","tracer un cercle","conjuguer un verbe"], answer:0, explain:"Il représente visuellement des données.", indice:"Des barres de hauteurs différentes."},
+            {type:"qcm", q:"L'effectif d'une valeur, c'est :", options:["le nombre de fois qu'elle apparaît","sa hauteur en cm","son carré","sa moitié"], answer:0, explain:"L'effectif compte les apparitions.", indice:"Combien de fois on la rencontre."},
+            {type:"saisie", q:"8 élèves ont eu 12 et 12 élèves ont eu 14. Combien d'élèves en tout ?", answer:["20"], explain:"8 + 12 = 20 élèves.", indice:"Additionne les deux effectifs."},
+            {type:"qcm", q:"Pour lire la valeur d'un point sur un graphique, on regarde :", options:["ses coordonnées (les axes)","sa couleur","son épaisseur","rien"], answer:0, explain:"On lit ses coordonnées sur les axes.", indice:"Projette sur les deux axes."},
+            {type:"saisie", q:"Calcule la moyenne de : 10, 12, 14, 16.", answer:["13"], explain:"(10 + 12 + 14 + 16) ÷ 4 = 52 ÷ 4 = 13.", indice:"Additionne, puis divise par 4."},
+            {type:"qcm", q:"Un diagramme circulaire (camembert) représente :", options:["des proportions (parts d'un tout)","une longueur","un angle droit","une vitesse"], answer:0, explain:"Il montre des parts d'un ensemble.", indice:"Des parts de « gâteau »."},
+            {type:"vf", q:"Un tableau et un graphique peuvent présenter les mêmes données.", answer:true, explain:"Oui : deux façons de montrer les mêmes informations.", indice:"Même contenu, présentation différente."},
+            {type:"saisie", q:"Effectifs : rouge 5, bleu 3, vert 2. Total ?", answer:["10"], explain:"5 + 3 + 2 = 10.", indice:"Additionne les trois effectifs."},
+            {type:"qcm", q:"La moyenne se calcule par :", options:["somme des valeurs ÷ nombre de valeurs","valeur la plus grande","valeur la plus petite","somme × nombre"], answer:0, explain:"Moyenne = somme ÷ effectif total.", indice:"On partage la somme."},
+            {type:"saisie", q:"Calcule la moyenne de : 8, 12, 10.", answer:["10"], explain:"(8 + 12 + 10) ÷ 3 = 30 ÷ 3 = 10.", indice:"Somme 30, divisée par 3."},
+            {type:"vf", q:"Sur un diagramme en bâtons, plus le bâton est haut, plus l'effectif est grand.", answer:true, explain:"Oui : la hauteur représente l'effectif.", indice:"Haut = beaucoup."},
+            {type:"qcm", q:"Les axes d'un graphique servent à :", options:["repérer et lire les valeurs","décorer","colorier","mesurer la température"], answer:0, explain:"Les axes permettent de lire les données.", indice:"Comme un repère."}
+          ]
         }
       ]
     },
@@ -904,6 +923,44 @@ var CONTENT = {
             {type:"qcm", q:"« beauté » et « bonté » :", options:["riment","ne riment pas","sont synonymes","sont contraires"], answer:0, explain:"Même son final « -té » : elles riment.", indice:"Écoute la fin des deux mots."},
             {type:"qcm", q:"Une strophe de 2 vers s'appelle :", options:["un distique","un quatrain","un tercet","un sonnet"], answer:0, explain:"2 vers : un distique.", indice:"« di » rappelle deux."}
           ]
+        },
+        {
+          id:"f23", niveau:"5e", title:"Le théâtre",
+          carte:{centre:"Le théâtre", branches:[{titre:"Pour être joué", detail:"sur une scène"},{titre:"La réplique", detail:"ce que dit un personnage"},{titre:"Les didascalies", detail:"indications de mise en scène"},{titre:"Acte et scène", detail:"les grandes parties"},{titre:"Comédie / tragédie", detail:"faire rire / finir mal"}]},
+          cours:"Le <b>théâtre</b> est un texte écrit pour être <b>joué sur scène</b>. Ce que dit un personnage est une <b>réplique</b> ; un échange de répliques forme un <b>dialogue</b>. Les <b>didascalies</b> sont les indications de mise en scène (gestes, décor), <b>non dites</b> par les acteurs. Une pièce se divise en <b>actes</b> puis en <b>scènes</b>. La <b>comédie</b> fait rire, la <b>tragédie</b> finit souvent mal.",
+          questions:[
+            {type:"qcm", q:"Le théâtre est un texte fait pour :", options:["être joué sur scène","être lu en silence seulement","être chanté","être dessiné"], answer:0, explain:"Le théâtre est destiné à la représentation.", indice:"Des acteurs sur une scène."},
+            {type:"qcm", q:"Ce que dit un personnage s'appelle :", options:["une réplique","une strophe","un vers","une rime"], answer:0, explain:"Chaque prise de parole est une réplique.", indice:"Mot propre au théâtre."},
+            {type:"qcm", q:"Les indications de mise en scène (gestes, décor) sont :", options:["les didascalies","les répliques","les actes","les rimes"], answer:0, explain:"Ce sont les didascalies.", indice:"Souvent en italique, non dites."},
+            {type:"qcm", q:"Un échange de répliques entre personnages est :", options:["un dialogue","un monologue seul","une strophe","une rime"], answer:0, explain:"C'est un dialogue.", indice:"Plusieurs personnages se répondent."},
+            {type:"qcm", q:"Une grande partie d'une pièce s'appelle :", options:["un acte","un chapitre","une strophe","un couplet"], answer:0, explain:"Une pièce se divise en actes.", indice:"Mot du théâtre, pas du roman."},
+            {type:"qcm", q:"Une pièce qui fait rire est :", options:["une comédie","une tragédie","un roman","un poème"], answer:0, explain:"La comédie cherche à faire rire.", indice:"« comique »."},
+            {type:"qcm", q:"Une pièce au dénouement malheureux est :", options:["une tragédie","une comédie","une fable","une chanson"], answer:0, explain:"La tragédie finit souvent mal.", indice:"Le contraire de la comédie."},
+            {type:"vf", q:"Les didascalies ne sont pas dites par les acteurs.", answer:true, explain:"Oui : elles guident la mise en scène.", indice:"Ce sont des consignes, pas des paroles."},
+            {type:"qcm", q:"Les subdivisions d'un acte sont :", options:["les scènes","les vers","les strophes","les rimes"], answer:0, explain:"Un acte se divise en scènes.", indice:"Plus petites parties d'un acte."},
+            {type:"vf", q:"Au théâtre, l'histoire avance surtout grâce aux dialogues.", answer:true, explain:"Oui : les personnages parlent et agissent.", indice:"Peu de narrateur."},
+            {type:"qcm", q:"Le texte de théâtre est surtout fait de :", options:["dialogues","longues descriptions","poèmes","recettes"], answer:0, explain:"Le dialogue domine.", indice:"Des personnages qui se parlent."},
+            {type:"vf", q:"La comédie cherche à faire rire, la tragédie émeut et finit souvent mal.", answer:true, explain:"Oui : ce sont deux grands genres opposés.", indice:"Rire / émotion grave."}
+          ]
+        },
+        {
+          id:"f24", niveau:"6e", title:"Les niveaux de langue",
+          carte:{centre:"Les niveaux de langue", branches:[{titre:"Familier", detail:"entre amis, relâché (bouffer)"},{titre:"Courant", detail:"correct, tous les jours (manger)"},{titre:"Soutenu", detail:"soigné, littéraire (se restaurer)"},{titre:"S'adapter", detail:"selon la situation et la personne"}]},
+          cours:"On distingue trois <b>niveaux de langue</b>. Le <b>familier</b> s'emploie entre amis, de façon relâchée (bouffer, bagnole). Le <b>courant</b> est correct et s'utilise tous les jours (manger, voiture). Le <b>soutenu</b> est soigné, souvent littéraire (se restaurer, automobile). On <b>adapte</b> son niveau de langue à la <b>situation</b> et à la <b>personne</b>.",
+          questions:[
+            {type:"qcm", q:"Le langage utilisé entre amis, de façon relâchée, est :", options:["le langage familier","le langage soutenu","le langage scientifique","le langage courant"], answer:0, explain:"Entre amis : registre familier.", indice:"Le plus décontracté."},
+            {type:"qcm", q:"Le langage de tous les jours, correct, est :", options:["le langage courant","le langage familier","le langage soutenu","le langage poétique"], answer:0, explain:"Usage quotidien correct : courant.", indice:"Ni relâché ni très soigné."},
+            {type:"qcm", q:"Le langage le plus soigné (littéraire) est :", options:["le langage soutenu","le langage familier","le langage courant","le langage parlé"], answer:0, explain:"Le registre soutenu est le plus soigné.", indice:"Celui de la belle littérature."},
+            {type:"qcm", q:"« bouffer » appartient au registre :", options:["familier","courant","soutenu","scientifique"], answer:0, explain:"« bouffer » est familier.", indice:"On ne l'écrit pas dans une rédaction."},
+            {type:"qcm", q:"« manger » appartient au registre :", options:["courant","familier","soutenu","ancien"], answer:0, explain:"« manger » est courant.", indice:"Le mot normal, de tous les jours."},
+            {type:"qcm", q:"« se restaurer » appartient au registre :", options:["soutenu","familier","courant","argotique"], answer:0, explain:"« se restaurer » est soutenu.", indice:"Plus recherché que « manger »."},
+            {type:"vf", q:"On adapte son niveau de langue à la situation et à la personne.", answer:true, explain:"Oui : on ne parle pas pareil avec un ami et un adulte qu'on respecte.", indice:"La situation guide le registre."},
+            {type:"qcm", q:"À l'écrit scolaire, on utilise plutôt le langage :", options:["courant ou soutenu","familier","argotique","relâché"], answer:0, explain:"On évite le familier dans les écrits scolaires.", indice:"Un registre correct."},
+            {type:"qcm", q:"« bagnole » est un mot :", options:["familier","courant","soutenu","savant"], answer:0, explain:"« bagnole » est familier (pour « voiture »).", indice:"Mot relâché."},
+            {type:"vf", q:"Le langage soutenu se rencontre souvent dans la littérature.", answer:true, explain:"Oui : romans, poésie, textes soignés.", indice:"Là où la langue est travaillée."},
+            {type:"qcm", q:"Avec un professeur, on évite le langage :", options:["familier","courant","soutenu","poli"], answer:0, explain:"On reste correct : pas de familier.", indice:"Le registre relâché est à éviter."},
+            {type:"vf", q:"« voiture » est du langage courant, « bagnole » du langage familier.", answer:true, explain:"Oui : même sens, registres différents.", indice:"Deux mots pour la même chose."}
+          ]
         }
       ]
     },
@@ -1317,6 +1374,25 @@ var CONTENT = {
             {type:"vf", q:"Internet permet d'échanger des informations très vite dans le monde entier.", answer:true, explain:"Oui : en quasi temps réel.", indice:"Communication mondiale rapide."},
             {type:"qcm", q:"Les ports et les aéroports sont :", options:["des lieux d'échanges importants","des musées","des fermes","des écoles"], answer:0, explain:"Ce sont des points clés de la mondialisation.", indice:"Là où arrivent et partent marchandises et voyageurs."},
             {type:"vf", q:"La mondialisation rapproche les différentes régions du monde.", answer:true, explain:"Oui : les distances comptent moins qu'avant.", indice:"Le monde semble plus « petit »."}
+          ]
+        },
+        {
+          id:"h22", niveau:"3e", title:"Aménager le territoire français",
+          carte:{centre:"Aménager le territoire", branches:[{titre:"But", detail:"organiser l'espace, réduire les inégalités"},{titre:"Acteurs", detail:"État, régions, communes, UE"},{titre:"Transports", detail:"TGV, autoroutes"},{titre:"Métropoles", detail:"attractives et peuplées"},{titre:"Espaces ruraux", detail:"moins peuplés"}]},
+          cours:"<b>Aménager le territoire</b>, c'est <b>organiser l'espace</b> pour mieux y vivre et <b>réduire les inégalités</b> entre les régions. De nombreux <b>acteurs</b> y participent : l'<b>État</b>, les <b>régions</b>, les <b>communes</b> et l'<b>Union européenne</b>. Exemples : réseaux de <b>transport</b> (TGV, autoroutes), zones d'activité, équipements. Les <b>métropoles</b> sont très attractives, tandis que les <b>espaces ruraux</b> sont moins peuplés.",
+          questions:[
+            {type:"qcm", q:"Aménager le territoire, c'est :", options:["organiser l'espace pour mieux y vivre","construire une seule ville","détruire les routes","ignorer les régions"], answer:0, explain:"On organise l'espace au service des habitants.", indice:"Rendre le territoire plus pratique."},
+            {type:"qcm", q:"Un but de l'aménagement est de :", options:["réduire les inégalités entre les régions","favoriser une seule région","supprimer les transports","isoler les villages"], answer:0, explain:"On vise un développement plus équilibré.", indice:"Moins de différences entre territoires."},
+            {type:"qcm", q:"Le TGV et les autoroutes sont des :", options:["réseaux de transport (aménagements)","monuments anciens","cours d'eau","forêts"], answer:0, explain:"Ce sont des aménagements de transport.", indice:"Pour se déplacer vite."},
+            {type:"qcm", q:"Qui participe à l'aménagement du territoire ?", options:["l'État, les régions, les communes","seulement les habitants","seulement les entreprises","personne"], answer:0, explain:"De nombreux acteurs publics interviennent.", indice:"Plusieurs niveaux de décision."},
+            {type:"vf", q:"Les métropoles sont des espaces très attractifs et peuplés.", answer:true, explain:"Oui : elles concentrent population et activités.", indice:"Les grandes villes attirent."},
+            {type:"qcm", q:"Les espaces ruraux sont souvent :", options:["moins peuplés que les métropoles","plus peuplés que les villes","sans habitants","des îles"], answer:0, explain:"La campagne est moins densément peuplée.", indice:"Moins de monde qu'en ville."},
+            {type:"vf", q:"L'Union européenne peut aider à financer des aménagements.", answer:true, explain:"Oui : l'UE soutient certains projets régionaux.", indice:"Un acteur au-dessus de l'État."},
+            {type:"qcm", q:"Construire une ligne de TGV est un exemple :", options:["d'aménagement du territoire","de pollution volontaire","de décolonisation","de mondialisation culturelle"], answer:0, explain:"C'est un aménagement de transport.", indice:"On organise l'espace pour relier les villes."},
+            {type:"vf", q:"Aménager le territoire vise un développement plus équilibré.", answer:true, explain:"Oui : éviter que certaines régions soient délaissées.", indice:"Plus d'équilibre entre régions."},
+            {type:"qcm", q:"Relier les régions par de bons transports permet de :", options:["réduire leur isolement","les couper du reste","augmenter les inégalités","supprimer les villes"], answer:0, explain:"De bons transports désenclavent les régions.", indice:"Moins isolées."},
+            {type:"qcm", q:"Une grande ville qui concentre activités et population est :", options:["une métropole","un hameau","un désert","une île déserte"], answer:0, explain:"C'est une métropole.", indice:"Très grande ville attractive."},
+            {type:"vf", q:"L'aménagement cherche à mieux répartir les activités et les services.", answer:true, explain:"Oui : pour que chacun y ait accès.", indice:"Répartir plus justement."}
           ]
         }
       ]
@@ -1755,6 +1831,44 @@ var CONTENT = {
             {type:"qcm", q:"Le son se propage dans :", options:["l'air, l'eau et les solides","le vide uniquement","la lumière","l'obscurité"], answer:0, explain:"Dans tout milieu matériel.", indice:"Partout où il y a de la matière."},
             {type:"vf", q:"Sans matière (dans le vide), le son ne peut pas se propager.", answer:true, explain:"Oui : il a besoin d'un support matériel.", indice:"Pas de matière, pas de son."},
             {type:"qcm", q:"La vibration des cordes vocales produit :", options:["la voix (un son)","de la lumière","de la chaleur seule","une odeur"], answer:0, explain:"Les cordes vocales vibrent et produisent la voix.", indice:"Ta voix est un son."}
+          ]
+        },
+        {
+          id:"s23", niveau:"5e", title:"Le cycle de l'eau et ses changements d'état",
+          carte:{centre:"Le cycle de l'eau", branches:[{titre:"Trois états", detail:"solide, liquide, vapeur"},{titre:"Évaporation", detail:"liquide → vapeur"},{titre:"Condensation", detail:"vapeur → nuages"},{titre:"Précipitations", detail:"pluie, neige"},{titre:"Repères", detail:"glace 0 °C, ébullition 100 °C"}]},
+          cours:"L'eau existe sous <b>trois états</b> : <b>solide</b> (glace), <b>liquide</b> et <b>gazeux</b> (vapeur). Elle <b>s'évapore</b> (liquide vers vapeur), la vapeur se <b>condense</b> en formant les <b>nuages</b>, puis l'eau retombe en <b>précipitations</b> (pluie, neige) : c'est le <b>cycle de l'eau</b>. L'eau gèle à <b>0 °C</b> et bout à <b>100 °C</b>.",
+          questions:[
+            {type:"qcm", q:"L'eau peut exister sous :", options:["trois états (solide, liquide, gaz)","un seul état","cinq états","aucun état"], answer:0, explain:"Solide, liquide, gazeux.", indice:"Glace, eau, vapeur."},
+            {type:"qcm", q:"Le passage de l'eau liquide à la vapeur s'appelle :", options:["l'évaporation","la fusion","la solidification","la condensation"], answer:0, explain:"Liquide vers gaz : évaporation.", indice:"L'eau « s'évapore »."},
+            {type:"qcm", q:"La vapeur d'eau qui redevient liquide (les nuages), c'est :", options:["la condensation","l'évaporation","la fusion","la congélation"], answer:0, explain:"Gaz vers liquide : condensation.", indice:"Formation des nuages et de la buée."},
+            {type:"qcm", q:"La pluie et la neige sont des :", options:["précipitations","évaporations","fontes","fumées"], answer:0, explain:"Ce sont des précipitations.", indice:"L'eau qui retombe du ciel."},
+            {type:"vf", q:"Dans le cycle de l'eau, l'eau s'évapore puis retombe en pluie.", answer:true, explain:"Oui : un cycle qui se répète.", indice:"Monte en vapeur, redescend en pluie."},
+            {type:"qcm", q:"L'eau gèle (devient solide) à :", options:["0 °C","100 °C","50 °C","-10 °C"], answer:0, explain:"L'eau gèle à 0 °C.", indice:"Température de la glace qui se forme."},
+            {type:"qcm", q:"L'eau bout (devient vapeur) à :", options:["100 °C","0 °C","37 °C","200 °C"], answer:0, explain:"L'eau bout à 100 °C.", indice:"Ébullition de l'eau."},
+            {type:"vf", q:"Les nuages se forment par condensation de la vapeur d'eau.", answer:true, explain:"Oui : la vapeur se condense en gouttelettes.", indice:"Vapeur qui redevient liquide en altitude."},
+            {type:"qcm", q:"La glace qui fond redevient :", options:["de l'eau liquide (fusion)","de la vapeur","de la neige","du sel"], answer:0, explain:"Solide vers liquide : la fusion.", indice:"La glace « fond »."},
+            {type:"vf", q:"Le cycle de l'eau fait passer l'eau de la mer au ciel puis à la terre.", answer:true, explain:"Oui : évaporation, nuages, pluie, rivières.", indice:"Un grand circuit naturel."},
+            {type:"qcm", q:"L'eau liquide qui devient solide :", options:["se solidifie","s'évapore","se condense","disparaît"], answer:0, explain:"Liquide vers solide : solidification.", indice:"Elle « gèle »."},
+            {type:"vf", q:"L'eau change d'état mais reste de l'eau (H₂O).", answer:true, explain:"Oui : c'est toujours la même substance.", indice:"Glace, eau, vapeur : même molécule."}
+          ]
+        },
+        {
+          id:"s24", niveau:"4e", title:"Le poids et la masse",
+          carte:{centre:"Poids et masse", branches:[{titre:"La masse", detail:"quantité de matière, en kg"},{titre:"Le poids", detail:"une force, en newtons (N)"},{titre:"Masse constante", detail:"identique partout"},{titre:"Poids variable", detail:"plus faible sur la Lune"},{titre:"Sur Terre", detail:"poids ≈ masse × 10"}]},
+          cours:"La <b>masse</b> (en <b>kilogrammes</b>) est la <b>quantité de matière</b> : elle <b>ne change pas</b> selon le lieu. Le <b>poids</b> (en <b>newtons</b>, N) est la <b>force</b> de gravité qui attire l'objet vers le bas : il <b>dépend du lieu</b> (plus faible sur la Lune). Sur Terre, le poids vaut environ <b>masse × 10</b> (g ≈ 10 N/kg). On mesure la masse avec une <b>balance</b>.",
+          questions:[
+            {type:"qcm", q:"La masse se mesure en :", options:["kilogrammes (kg)","newtons","mètres","secondes"], answer:0, explain:"La masse est en kilogrammes.", indice:"Comme sur une balance de cuisine."},
+            {type:"qcm", q:"Le poids est :", options:["une force (l'attraction de la gravité)","une longueur","une durée","une surface"], answer:0, explain:"Le poids est une force.", indice:"Ce qui nous attire vers le sol."},
+            {type:"qcm", q:"Le poids se mesure en :", options:["newtons (N)","kilogrammes","litres","degrés"], answer:0, explain:"Une force se mesure en newtons.", indice:"Unité de force."},
+            {type:"vf", q:"La masse d'un objet ne change pas selon le lieu.", answer:true, explain:"Oui : elle est la même sur Terre ou sur la Lune.", indice:"La matière reste la même."},
+            {type:"vf", q:"Le poids d'un objet est plus faible sur la Lune que sur la Terre.", answer:true, explain:"Oui : la gravité y est plus faible.", indice:"On y saute plus haut."},
+            {type:"qcm", q:"Sur Terre, le poids dépend de :", options:["la gravité","la couleur","la forme exacte","le prix"], answer:0, explain:"Le poids dépend de la gravité du lieu.", indice:"L'attraction de la planète."},
+            {type:"saisie", q:"Sur Terre (g ≈ 10 N/kg), une masse de 2 kg a un poids d'environ ... N ?", answer:["20","20 N"], explain:"2 × 10 = 20 N.", indice:"Multiplie la masse par 10."},
+            {type:"qcm", q:"On mesure la masse avec :", options:["une balance","un thermomètre","une règle","un chronomètre"], answer:0, explain:"La balance mesure la masse.", indice:"Instrument de la cuisine et du marché."},
+            {type:"vf", q:"Sur la Lune, la masse reste la même mais le poids diminue.", answer:true, explain:"Oui : masse constante, poids plus faible.", indice:"La matière ne change pas, la gravité oui."},
+            {type:"saisie", q:"Masse 5 kg, g ≈ 10 N/kg : poids ≈ ... N ?", answer:["50","50 N"], explain:"5 × 10 = 50 N.", indice:"Multiplie par 10."},
+            {type:"qcm", q:"La masse est :", options:["la quantité de matière","une force","une vitesse","une couleur"], answer:0, explain:"La masse mesure la quantité de matière.", indice:"Combien il y a de matière."},
+            {type:"vf", q:"Le poids et la masse sont deux grandeurs différentes.", answer:true, explain:"Oui : l'une est une force, l'autre une quantité de matière.", indice:"À ne pas confondre."}
           ]
         }
       ]
