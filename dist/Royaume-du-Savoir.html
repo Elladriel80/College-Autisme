@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le Royaume du Savoir (Académie des Mages)</title>
+<title>Collegica, apprendre du CP au Brevet</title>
 <style>
   :root{
     --bg:#1a1633;        /* nuit profonde, violet */
@@ -349,7 +349,7 @@
 <body>
 <div class="wrap">
   <div class="topbar" id="topbar">
-    <div class="brand"><span class="logo">🪄</span><span>Le Royaume du Savoir</span></div>
+    <div class="brand"><span class="logo">🪄</span><span>Collegica</span></div>
     <div class="stats" id="stats"></div>
   </div>
   <div id="app"></div>
@@ -374,7 +374,7 @@
 <script>
 /* —— inliné depuis data/contenu-college.js (build.js) —— */
 /* =========================================================================
-   DONNÉES — CONTENU COLLÈGE (Le Royaume du Savoir)
+   DONNEES, CONTENU COLLEGE (Le Royaume du Savoir)
    -------------------------------------------------------------------------
    Ce fichier ne contient QUE des données (aucune logique de moteur).
    Une enseignante ou un enseignant peut ajouter une leçon ICI, sans toucher
@@ -420,7 +420,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"m1", title:"Les nombres relatifs",
+          id:"m1", niveau:"5e", title:"Les nombres relatifs",
           cours:"Un <b>nombre relatif</b> peut être positif (ex : +5) ou négatif (ex : -3). " +
                 "Pour <b>additionner</b> deux nombres de même signe, on additionne et on garde le signe. " +
                 "De signes différents : on soustrait et on garde le signe du plus grand. " +
@@ -439,7 +439,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"m2", title:"Les fractions",
+          id:"m2", niveau:"5e", title:"Les fractions",
           cours:"Pour <b>additionner</b> des fractions, il faut le <b>même dénominateur</b>. " +
                 "Ex : 1/2 + 1/3 → on met sur 6 : 3/6 + 2/6 = 5/6. " +
                 "Prendre une fraction « de » un nombre = multiplier : 3/4 de 20 = 3×20/4 = 15.",
@@ -457,7 +457,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"m3", title:"La proportionnalité & les pourcentages",
+          id:"m3", niveau:"5e", title:"La proportionnalité & les pourcentages",
           cours:"Deux grandeurs sont <b>proportionnelles</b> si on passe de l'une à l'autre en multipliant " +
                 "toujours par le même nombre (le coefficient). Un <b>pourcentage</b> : 25 % d'un nombre = " +
                 "25/100 × ce nombre. Ex : 25 % de 80 = 20.",
@@ -477,7 +477,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"m4", title:"Géométrie : angles & triangles",
+          id:"m4", niveau:"5e", title:"Géométrie : angles & triangles",
           cours:"Dans tout triangle, la <b>somme des angles vaut 180°</b>. " +
                 "L'<b>aire d'un triangle</b> = (base × hauteur) ÷ 2. " +
                 "Deux angles <b>complémentaires</b> font 90°, deux angles <b>supplémentaires</b> font 180°.",
@@ -614,6 +614,51 @@ var CONTENT = {
             {type:"vf", q:"La notation scientifique facilite l'écriture des très grands et très petits nombres.", answer:true,
              explain:"C'est justement son intérêt principal."}
           ]
+        },
+        {
+          id:"m14", niveau:"6e", title:"Division euclidienne et divisibilité",
+          cours:"La <b>division euclidienne</b> de a (le <b>dividende</b>) par b (le <b>diviseur</b>) s'écrit a = b × q + r, où q est le <b>quotient</b> et r le <b>reste</b>, avec 0 ≤ r < b (le reste est toujours plus petit que le diviseur). " +
+                "Un nombre est <b>divisible</b> par un autre quand le reste est 0. Critères utiles : divisible par <b>2</b> si le chiffre des unités est pair (0,2,4,6,8) ; par <b>5</b> si l'unité est 0 ou 5 ; par <b>10</b> si l'unité est 0 ; par <b>3</b> si la somme des chiffres est divisible par 3 ; par <b>9</b> si la somme des chiffres est divisible par 9.",
+          questions:[
+            {type:"saisie", q:"Division euclidienne de 17 par 5 : quel est le quotient ?", answer:["3"], explain:"17 = 5 × 3 + 2, donc le quotient est 3.", indice:"Combien de fois 5 entre-t-il dans 17 ?"},
+            {type:"saisie", q:"Division euclidienne de 17 par 5 : quel est le reste ?", answer:["2"], explain:"17 = 5 × 3 + 2, donc le reste est 2.", indice:"17 moins (5 × 3)."},
+            {type:"qcm", q:"Dans l'égalité 23 = 4 × 5 + 3, le reste est :", options:["3","4","5","23"], answer:0, explain:"Le reste est le nombre ajouté après le produit : ici 3.", indice:"C'est ce qui suit le signe « + »."},
+            {type:"vf", q:"Dans une division euclidienne, le reste est toujours plus petit que le diviseur.", answer:true, explain:"Oui : on a toujours 0 ≤ r < b.", indice:"Sinon, on pourrait encore enlever une fois le diviseur."},
+            {type:"qcm", q:"30 est un multiple de :", options:["6","7","8","9"], answer:0, explain:"30 = 6 × 5, donc 30 est un multiple de 6.", indice:"Cherche par quel nombre on peut multiplier pour tomber sur 30."},
+            {type:"qcm", q:"Un nombre est divisible par 2 si son chiffre des unités est :", options:["pair (0,2,4,6,8)","impair","égal à 5","égal à 1"], answer:0, explain:"Les nombres pairs se terminent par 0, 2, 4, 6 ou 8.", indice:"Pense aux nombres « pairs »."},
+            {type:"qcm", q:"Lequel de ces nombres est divisible par 5 ?", options:["45","32","18","27"], answer:0, explain:"45 = 5 × 9 ; il se termine par 5.", indice:"Un multiple de 5 finit par 0 ou 5."},
+            {type:"qcm", q:"Lequel de ces nombres est divisible par 3 ?", options:["24","25","26","28"], answer:0, explain:"2 + 4 = 6, divisible par 3, donc 24 l'est (24 = 3 × 8).", indice:"Additionne les chiffres et regarde si le total est dans la table de 3."},
+            {type:"vf", q:"100 est divisible par 10.", answer:true, explain:"Oui : 100 = 10 × 10, il se termine par 0.", indice:"Un multiple de 10 finit par 0."},
+            {type:"saisie", q:"Combien font 48 ÷ 6 (division exacte) ?", answer:["8"], explain:"6 × 8 = 48, donc 48 ÷ 6 = 8.", indice:"Cherche dans la table de 6."},
+            {type:"qcm", q:"Lequel de ces nombres est un diviseur de 12 ?", options:["4","5","7","8"], answer:0, explain:"12 = 4 × 3, donc 4 divise 12.", indice:"Cherche un nombre qui « tombe juste » dans 12."},
+            {type:"qcm", q:"Lequel est divisible par 9 ?", options:["81","82","84","88"], answer:0, explain:"8 + 1 = 9, divisible par 9, donc 81 = 9 × 9.", indice:"Additionne les chiffres et compare à la table de 9."},
+            {type:"vf", q:"7 est un nombre premier : il n'a que deux diviseurs, 1 et lui-même.", answer:true, explain:"Oui : 7 n'est divisible que par 1 et par 7.", indice:"Essaie de diviser 7 par 2, 3, 4... ça ne tombe jamais juste."},
+            {type:"saisie", q:"Division euclidienne de 100 par 7 : quel est le reste ?", answer:["2"], explain:"100 = 7 × 14 + 2 (car 7 × 14 = 98), donc le reste est 2.", indice:"Cherche le plus grand multiple de 7 sous 100, puis la différence."},
+            {type:"qcm", q:"Lequel de ces nombres n'est PAS divisible par 2 ?", options:["27","14","20","38"], answer:0, explain:"27 est impair (il finit par 7), il n'est donc pas divisible par 2.", indice:"Repère celui qui est impair."}
+          ]
+        },
+        {
+          id:"m15", niveau:"6e", title:"La symétrie axiale",
+          cours:"La <b>symétrie axiale</b> par rapport à une droite (l'<b>axe</b>) revient à un <b>pliage</b> le long de cet axe : la figure et son image se <b>superposent</b> exactement. " +
+                "Elle <b>conserve</b> les longueurs, les angles et l'alignement. Un point situé <b>sur</b> l'axe est son propre symétrique. " +
+                "Nombre d'axes de symétrie : le <b>carré</b> en a 4, le <b>rectangle</b> 2, le <b>losange</b> 2, le <b>triangle équilatéral</b> 3, le <b>cercle</b> une infinité.",
+          questions:[
+            {type:"qcm", q:"La symétrie axiale revient à faire un :", options:["pliage le long d'une droite","agrandissement","glissement","coloriage"], answer:0, explain:"On plie la figure le long de l'axe : les deux parties se superposent.", indice:"Pense à plier une feuille en deux."},
+            {type:"vf", q:"Par symétrie axiale, une figure et son image se superposent par pliage le long de l'axe.", answer:true, explain:"Oui : c'est la définition du pliage symétrique.", indice:"Si tu plies sur l'axe, les deux moitiés coïncident."},
+            {type:"qcm", q:"Combien d'axes de symétrie a un carré ?", options:["4","2","1","0"], answer:0, explain:"Le carré a 4 axes : ses 2 médianes et ses 2 diagonales.", indice:"Compte les médianes ET les diagonales."},
+            {type:"qcm", q:"Combien d'axes de symétrie a un rectangle (qui n'est pas un carré) ?", options:["2","4","1","0"], answer:0, explain:"Le rectangle a 2 axes : ses deux médianes (pas les diagonales).", indice:"Les diagonales du rectangle ne sont pas des axes de symétrie."},
+            {type:"qcm", q:"Combien d'axes de symétrie a un cercle ?", options:["une infinité","1","2","4"], answer:0, explain:"Toute droite passant par le centre est un axe : il y en a une infinité.", indice:"Pense à toutes les droites qui passent par le centre."},
+            {type:"qcm", q:"Combien d'axes de symétrie a un triangle équilatéral ?", options:["3","1","2","0"], answer:0, explain:"Il a 3 axes, un par sommet (les médiatrices des côtés).", indice:"Autant que de sommets."},
+            {type:"vf", q:"La symétrie axiale conserve les longueurs (les distances ne changent pas).", answer:true, explain:"Oui : une figure et son symétrique ont les mêmes mesures.", indice:"L'image a la même taille que la figure de départ."},
+            {type:"vf", q:"La symétrie axiale conserve les angles.", answer:true, explain:"Oui : les angles de l'image sont égaux à ceux de la figure.", indice:"La forme n'est pas déformée, juste retournée."},
+            {type:"qcm", q:"La lettre majuscule A possède un axe de symétrie :", options:["vertical","horizontal","diagonal","aucun"], answer:0, explain:"On peut plier le A le long d'un axe vertical : les deux moitiés coïncident.", indice:"Plie mentalement le A de haut en bas."},
+            {type:"qcm", q:"La lettre majuscule B possède un axe de symétrie :", options:["horizontal","vertical","diagonal","aucun"], answer:0, explain:"Le B se plie le long d'un axe horizontal (haut/bas identiques).", indice:"Regarde si le haut et le bas du B se ressemblent."},
+            {type:"qcm", q:"Laquelle de ces lettres majuscules n'a AUCUN axe de symétrie ?", options:["F","A","M","T"], answer:0, explain:"A, M et T ont un axe vertical ; F n'en a aucun.", indice:"Essaie de plier chaque lettre : laquelle ne coïncide jamais ?"},
+            {type:"vf", q:"Un point situé exactement sur l'axe de symétrie est son propre symétrique.", answer:true, explain:"Oui : il ne bouge pas, son image est lui-même.", indice:"Sur le pli, le point reste à la même place."},
+            {type:"qcm", q:"Combien d'axes de symétrie a un losange ?", options:["2","4","1","0"], answer:0, explain:"Le losange a 2 axes : ses deux diagonales.", indice:"Ce sont les diagonales du losange."},
+            {type:"vf", q:"Dans une symétrie axiale, l'axe est une droite.", answer:true, explain:"Oui : l'axe de symétrie est toujours une droite.", indice:"C'est la ligne de pliage."},
+            {type:"qcm", q:"Quand on plie la figure le long de son axe de symétrie, les deux parties :", options:["se superposent exactement","se chevauchent à moitié","s'éloignent","disparaissent"], answer:0, explain:"Elles coïncident parfaitement : c'est le signe d'une symétrie axiale.", indice:"Une symétrie « réussie » fait coïncider les deux moitiés."}
+          ]
         }
       ]
     },
@@ -645,7 +690,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"f1", title:"Les classes de mots",
+          id:"f1", niveau:"6e", title:"Les classes de mots",
           cours:"Chaque mot appartient à une <b>classe</b> : le <b>nom</b> (dragon), le <b>déterminant</b> (le, un, ma), " +
                 "l'<b>adjectif</b> (puissant), le <b>verbe</b> (voler), l'<b>adverbe</b> (vite), le <b>pronom</b> (il, elle).",
           questions:[
@@ -666,7 +711,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"f2", title:"Conjugaison : présent de l'indicatif",
+          id:"f2", niveau:"6e", title:"Conjugaison : présent de l'indicatif",
           cours:"Au <b>présent</b>, les verbes du 1ᵉʳ groupe (-er) se terminent par " +
                 "-e, -es, -e, -ons, -ez, -ent. Attention aux verbes irréguliers : " +
                 "être (je suis, tu es, il est…), avoir (j'ai, tu as, il a…), aller (je vais, tu vas, il va…).",
@@ -686,7 +731,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"f3", title:"Les figures de style",
+          id:"f3", niveau:"5e", title:"Les figures de style",
           cours:"Une <b>comparaison</b> rapproche deux éléments avec un mot-outil (comme, tel, semblable à) : " +
                 "« fort <b>comme</b> un lion ». Une <b>métaphore</b> fait la même chose <i>sans</i> mot-outil : " +
                 "« cet homme est un lion ». La <b>personnification</b> donne des traits humains à une chose : " +
@@ -826,6 +871,88 @@ var CONTENT = {
             {type:"vf", q:"Un exemple sert à illustrer un argument et à le rendre plus convaincant.", answer:true,
              explain:"Oui : l'exemple rend l'argument concret et crédible."}
           ]
+        },
+        {
+          id:"f12", niveau:"6e", title:"Les homophones a / à, et / est, son / sont",
+          cours:"Des mots se prononcent pareil mais s'écrivent différemment (les <b>homophones</b>). Petites astuces : " +
+                "<b>a</b> (verbe avoir) se remplace par « <b>avait</b> », sinon c'est <b>à</b> (préposition). " +
+                "<b>est</b> (verbe être) se remplace par « <b>était</b> », sinon c'est <b>et</b> (qui relie, comme « et puis »). " +
+                "<b>sont</b> (verbe être) se remplace par « <b>étaient</b> », sinon c'est <b>son</b> (déterminant : son vélo).",
+          questions:[
+            {type:"qcm", q:"« Il ___ mangé une pomme. »", options:["a","à"], answer:0, explain:"On peut dire « il avait mangé » : c'est le verbe avoir, donc « a ».", indice:"Essaie de remplacer par « avait »."},
+            {type:"qcm", q:"« Je vais ___ Paris. »", options:["à","a"], answer:0, explain:"« avait » ne marche pas : c'est la préposition « à ».", indice:"On ne peut pas dire « je vais avait Paris »."},
+            {type:"qcm", q:"« Léo ___ content. »", options:["est","et"], answer:0, explain:"On peut dire « Léo était content » : verbe être, donc « est ».", indice:"Remplace par « était »."},
+            {type:"qcm", q:"« un chat ___ un chien »", options:["et","est"], answer:0, explain:"« et » relie deux mots (= et puis).", indice:"« était » ne marche pas ici."},
+            {type:"qcm", q:"« ___ vélo est rouge. »", options:["Son","Sont"], answer:0, explain:"« son vélo » : déterminant possessif (un seul vélo).", indice:"« étaient » ne marche pas : ce n'est pas le verbe être."},
+            {type:"qcm", q:"« Les enfants ___ sages. »", options:["sont","son"], answer:0, explain:"On peut dire « les enfants étaient sages » : verbe être, donc « sont ».", indice:"Remplace par « étaient »."},
+            {type:"vf", q:"Pour choisir « a » ou « à », on essaie de remplacer par « avait » : si ça marche, c'est « a ».", answer:true, explain:"Oui : « avait » fonctionne uniquement pour le verbe avoir.", indice:"« a » = avoir ; « à » = préposition."},
+            {type:"saisie", q:"Complète avec le bon mot (verbe avoir) : « Elle ___ un chien. »", answer:["a"], explain:"« Elle avait un chien » fonctionne : on écrit « a ».", indice:"Verbe avoir = « a »."},
+            {type:"qcm", q:"« Il habite ___ la campagne. »", options:["à","a"], answer:0, explain:"Préposition de lieu : « à ».", indice:"« avait » est impossible ici."},
+            {type:"qcm", q:"« Le ciel ___ bleu ___ les oiseaux chantent. »", options:["est / et","et / est","a / à","à / a"], answer:0, explain:"Le ciel EST bleu (être) ET les oiseaux (relie).", indice:"Le premier se remplace par « était »."},
+            {type:"vf", q:"« sont » est le verbe « être » conjugué (ils / elles sont).", answer:true, explain:"Oui : « ils sont » = « ils étaient » au présent.", indice:"Pense à « être » au pluriel."},
+            {type:"qcm", q:"« Mes voisins ___ en vacances. »", options:["sont","son"], answer:0, explain:"« Mes voisins étaient en vacances » : verbe être, donc « sont ».", indice:"Remplace par « étaient »."}
+          ]
+        },
+        {
+          id:"f13", niveau:"6e", title:"Le groupe nominal et les accords",
+          cours:"Un <b>groupe nominal</b> (GN) est construit autour d'un <b>nom</b> (le noyau), souvent avec un <b>déterminant</b> (le, la, un, des...) et un ou des <b>adjectifs</b>. " +
+                "Dans le GN, le déterminant et l'adjectif <b>s'accordent</b> avec le nom en <b>genre</b> (masculin / féminin) et en <b>nombre</b> (singulier / pluriel). " +
+                "Le <b>pluriel</b> des noms se forme souvent en ajoutant <b>-s</b>, parfois <b>-x</b> (un château, des châteaux).",
+          questions:[
+            {type:"qcm", q:"Dans le GN « un grand jardin », le nom noyau est :", options:["jardin","grand","un","aucun"], answer:0, explain:"Le noyau est le nom : « jardin ».", indice:"Cherche le mot principal qui désigne la chose."},
+            {type:"qcm", q:"Pluriel de « un chat noir » :", options:["des chats noirs","des chat noirs","des chats noir","des chats noires"], answer:0, explain:"Tout s'accorde au pluriel masculin : des chats noirs.", indice:"Déterminant, nom ET adjectif prennent la marque du pluriel."},
+            {type:"qcm", q:"Féminin de « un ami gentil » :", options:["une amie gentille","une ami gentil","une amie gentil","un amie gentille"], answer:0, explain:"Au féminin : une amie gentille.", indice:"Le nom et l'adjectif passent au féminin."},
+            {type:"vf", q:"Dans un groupe nominal, l'adjectif s'accorde en genre et en nombre avec le nom.", answer:true, explain:"Oui : c'est la règle d'accord dans le GN.", indice:"L'adjectif suit le nom auquel il se rapporte."},
+            {type:"qcm", q:"« des fleurs ___ » (adjectif « bleu ») :", options:["bleues","bleu","bleue","bleus"], answer:0, explain:"« fleurs » est féminin pluriel : bleues.", indice:"Féminin pluriel : -es."},
+            {type:"saisie", q:"Mets au pluriel : « un château ».", answer:["des châteaux","châteaux","les châteaux"], explain:"Pluriel en -x : des châteaux.", indice:"Les noms en -eau prennent un -x au pluriel."},
+            {type:"qcm", q:"Pluriel de « un cheval » :", options:["des chevaux","des chevals","des chevaus","des chevales"], answer:0, explain:"Les noms en -al font souvent -aux : des chevaux.", indice:"Pense à « journal » qui donne « journaux »."},
+            {type:"qcm", q:"Dans « les petites filles », « petites » est :", options:["un adjectif","un nom","un verbe","un déterminant"], answer:0, explain:"« petites » qualifie « filles » : c'est un adjectif.", indice:"Le mot qui décrit le nom est l'adjectif."},
+            {type:"vf", q:"« le », « la », « les », « un », « une », « des » sont des déterminants.", answer:true, explain:"Oui : ils introduisent le nom dans le GN.", indice:"Ils se placent devant le nom."},
+            {type:"qcm", q:"« une voiture ___ » (adjectif « rapide ») :", options:["rapide","rapides","rapidé","rapide(s)"], answer:0, explain:"Singulier : une voiture rapide (rapide est déjà au singulier).", indice:"Un seul objet : pas de -s."},
+            {type:"qcm", q:"Accorde : « des garçons ___ » (poli) :", options:["polis","poli","polie","polies"], answer:0, explain:"Masculin pluriel : polis.", indice:"Masculin pluriel : -s."},
+            {type:"saisie", q:"Pluriel de « un chou ».", answer:["des choux","choux","les choux"], explain:"« chou » prend un -x au pluriel : des choux.", indice:"Comme bijou, caillou, genou, hibou..."}
+          ]
+        },
+        {
+          id:"f14", niveau:"5e", title:"Le futur de l'indicatif",
+          cours:"Le <b>futur</b> de l'indicatif exprime une action qui se passera <b>plus tard</b>. " +
+                "Ses <b>terminaisons</b> sont les mêmes pour tous les verbes : <b>-ai, -as, -a, -ons, -ez, -ont</b>. " +
+                "Pour les verbes en -er, on part en général de l'infinitif (chanter, je chanterai). Verbes utiles : être (je serai), avoir (j'aurai), aller (j'irai), faire (je ferai).",
+          questions:[
+            {type:"qcm", q:"Le futur exprime une action qui se passe :", options:["plus tard (dans l'avenir)","maintenant","hier","il y a longtemps"], answer:0, explain:"Le futur situe l'action après le moment où l'on parle.", indice:"Pense au mot « demain »."},
+            {type:"qcm", q:"« Demain, je ___ (manger) une pomme. »", options:["mangerai","mangeais","mange","mangé"], answer:0, explain:"Futur, 1re personne : je mangerai.", indice:"Infinitif « manger » + terminaison -ai."},
+            {type:"qcm", q:"Les terminaisons du futur sont :", options:["-ai, -as, -a, -ons, -ez, -ont","-e, -es, -e, -ons, -ez, -ent","-ais, -ais, -ait, -ions, -iez, -aient","-s, -s, -t, -ons, -ez, -ent"], answer:0, explain:"Elles sont identiques pour tous les verbes au futur.", indice:"Elles ressemblent au verbe « avoir » au présent (ai, as, a...)."},
+            {type:"qcm", q:"« Nous ___ (chanter) demain. »", options:["chanterons","chantions","chanterions","chantons"], answer:0, explain:"Futur, nous : chanterons (-ons).", indice:"Attention à ne pas confondre avec le conditionnel « chanterions »."},
+            {type:"saisie", q:"Conjugue « être » au futur, 1re personne du singulier : « je ___ ».", answer:["serai","je serai"], explain:"je serai.", indice:"Pas « je serais » (ça, c'est le conditionnel)."},
+            {type:"saisie", q:"Conjugue « avoir » au futur : « j'___ ».", answer:["aurai","j'aurai","aurai."], explain:"j'aurai.", indice:"Le radical du futur de « avoir » est « aur »."},
+            {type:"qcm", q:"« Tu ___ (aller) à l'école. » (futur)", options:["iras","allais","vas","irais"], answer:0, explain:"Futur de « aller », tu : iras.", indice:"Le radical du futur de « aller » est « ir »."},
+            {type:"vf", q:"Au futur, tous les verbes ont les terminaisons -ai, -as, -a, -ons, -ez, -ont.", answer:true, explain:"Oui : seule la base change selon le verbe.", indice:"Les terminaisons ne changent jamais au futur."},
+            {type:"qcm", q:"« Ils ___ (faire) leurs devoirs. » (futur)", options:["feront","faisaient","font","feraient"], answer:0, explain:"Futur de « faire », ils : feront.", indice:"Radical « fer » + -ont."},
+            {type:"qcm", q:"« Vous ___ (finir) bientôt. » (futur)", options:["finirez","finissez","finissiez","finiriez"], answer:0, explain:"Futur de « finir », vous : finirez.", indice:"Infinitif « finir » + -ez."},
+            {type:"vf", q:"« je mangerai » est au futur ; « je mangerais » (avec s) est au conditionnel.", answer:true, explain:"Oui : le -s final change le temps.", indice:"Le conditionnel se termine par -ais, -ais, -ait..."},
+            {type:"qcm", q:"« Elle ___ (venir) demain. » (futur)", options:["viendra","venait","vient","viendrait"], answer:0, explain:"Futur de « venir », elle : viendra.", indice:"Radical « viendr » + -a."}
+          ]
+        },
+        {
+          id:"f15", niveau:"5e", title:"Les homophones ses / ces, on / ont, ou / où",
+          cours:"Encore des homophones, avec leurs astuces : " +
+                "<b>ses</b> (à lui, à elle : ses livres) et <b>ces</b> (que l'on montre : ces livres-là). " +
+                "<b>on</b> (pronom, = il) se remplace par « <b>il</b> » ; <b>ont</b> (verbe avoir) se remplace par « <b>avaient</b> ». " +
+                "<b>ou</b> (= ou bien) et <b>où</b> (le lieu : la ville où je vis).",
+          questions:[
+            {type:"qcm", q:"« Il range ___ affaires. » (les siennes)", options:["ses","ces"], answer:0, explain:"« ses affaires » = les siennes (possessif).", indice:"On peut dire « ses propres affaires »."},
+            {type:"qcm", q:"« Regarde ___ montagnes ! » (celles-là)", options:["ces","ses"], answer:0, explain:"« ces montagnes » = celles que l'on montre (démonstratif).", indice:"On pourrait ajouter « -là » : ces montagnes-là."},
+            {type:"qcm", q:"« ___ va à la piscine. » (pronom)", options:["On","Ont"], answer:0, explain:"« On va » = « il va » : pronom « on ».", indice:"Remplace par « il »."},
+            {type:"qcm", q:"« Les enfants ___ fini. » (verbe avoir)", options:["ont","on"], answer:0, explain:"« Les enfants avaient fini » : verbe avoir, donc « ont ».", indice:"Remplace par « avaient »."},
+            {type:"qcm", q:"« Tu veux du thé ___ du café ? »", options:["ou","où"], answer:0, explain:"« ou » = « ou bien » (un choix).", indice:"Sans accent quand on peut dire « ou bien »."},
+            {type:"qcm", q:"« ___ vas-tu ? » (lieu)", options:["Où","Ou"], answer:0, explain:"« où » avec accent indique le lieu.", indice:"Il s'agit d'un endroit, pas d'un choix."},
+            {type:"vf", q:"Pour choisir « on » ou « ont », on remplace par « avaient » : si ça marche, c'est « ont ».", answer:true, explain:"Oui : « avaient » = verbe avoir = « ont ».", indice:"« on » se remplace par « il », pas par « avaient »."},
+            {type:"saisie", q:"Complète (pronom, = il) : « ___ a gagné ! »", answer:["On","on"], explain:"« On a gagné » = « il a gagné ».", indice:"Remplace par « il »."},
+            {type:"qcm", q:"« Mets ___ chaussures. » (les siennes)", options:["ses","ces"], answer:0, explain:"Possessif : ses chaussures (les siennes).", indice:"Ce sont SES chaussures à elle/lui."},
+            {type:"vf", q:"« où » avec un accent indique un lieu (la maison où je vis).", answer:true, explain:"Oui : « où » de lieu prend un accent.", indice:"Pense à « l'endroit où »."},
+            {type:"qcm", q:"« Ils ___ beaucoup d'amis. »", options:["ont","on"], answer:0, explain:"« Ils avaient beaucoup d'amis » : verbe avoir, donc « ont ».", indice:"Remplace par « avaient »."},
+            {type:"qcm", q:"« Je ne sais pas ___ il habite. » (lieu)", options:["où","ou"], answer:0, explain:"Lieu : « où » avec accent.", indice:"C'est l'endroit où il habite."}
+          ]
         }
       ]
     },
@@ -859,7 +986,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"h1", title:"Le Moyen Âge : la féodalité",
+          id:"h1", niveau:"5e", title:"Le Moyen Âge : la féodalité",
           cours:"Au Moyen Âge (Ve–XVe s.), la <b>société féodale</b> repose sur des liens : le <b>seigneur</b> " +
                 "donne une terre (le fief) à son <b>vassal</b> qui jure fidélité. Les <b>paysans</b> travaillent " +
                 "la terre du seigneur. Le <b>château fort</b> protège et symbolise le pouvoir.",
@@ -878,7 +1005,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"h2", title:"Naissance et expansion de l'islam",
+          id:"h2", niveau:"5e", title:"Naissance et expansion de l'islam",
           cours:"L'islam naît au VIIᵉ siècle en Arabie. En <b>622</b>, Mahomet quitte La Mecque pour Médine : " +
                 "c'est l'<b>Hégire</b>, point de départ du calendrier musulman. Le livre sacré est le <b>Coran</b>. " +
                 "L'empire musulman s'étend ensuite très rapidement.",
@@ -896,7 +1023,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"h3", title:"Géo : richesse et pauvreté dans le monde",
+          id:"h3", niveau:"5e", title:"Géo : richesse et pauvreté dans le monde",
           cours:"Le monde est marqué par de fortes <b>inégalités</b> de développement. On mesure la richesse " +
                 "d'un pays avec le <b>PIB</b>, et le développement humain (santé, éducation, niveau de vie) " +
                 "avec l'<b>IDH</b>. Les écarts existent entre pays, mais aussi à l'intérieur d'un même pays.",
@@ -912,7 +1039,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"h4", title:"EMC : respect et lutte contre le harcèlement",
+          id:"h4", niveau:"5e", title:"EMC : respect et lutte contre le harcèlement",
           cours:"En EMC, on apprend les valeurs de la République : <b>liberté, égalité, fraternité</b> et la " +
                 "<b>laïcité</b>. Le <b>respect</b> d'autrui est essentiel. Le <b>harcèlement</b> est interdit : " +
                 "face à une situation, il faut en parler à un adulte de confiance.",
@@ -994,7 +1121,7 @@ var CONTENT = {
              explain:"Elle se termine en 1918 (armistice le 11 novembre)."},
             {type:"qcm", q:"L'armistice de la Première Guerre mondiale a été signé le :",
              options:["11 novembre 1918","14 juillet 1789","8 mai 1945","1er septembre 1939"], answer:0,
-             explain:"Le 11 novembre 1918 — d'où le jour férié de commémoration."},
+             explain:"Le 11 novembre 1918 (d'où le jour férié de commémoration)."},
             {type:"qcm", q:"Les soldats combattaient souvent depuis des :",
              options:["tranchées","châteaux forts","pyramides","gratte-ciels"], answer:0,
              explain:"La guerre des tranchées caractérise ce conflit."},
@@ -1040,6 +1167,75 @@ var CONTENT = {
             {type:"vf", q:"La laïcité garantit la liberté de croire ou de ne pas croire, et la neutralité de l'État.", answer:true,
              explain:"Oui : c'est le principe de laïcité (loi de 1905)."}
           ]
+        },
+        {
+          id:"h13", niveau:"6e", title:"La Préhistoire",
+          cours:"La <b>Préhistoire</b> est la très longue période qui va de l'apparition des premiers humains jusqu'à l'invention de l'<b>écriture</b> (vers 3300 av. J.-C.). " +
+                "Au <b>Paléolithique</b> (âge de la pierre <b>taillée</b>), les humains sont <b>nomades</b> : ils vivent de la <b>chasse</b>, de la pêche et de la <b>cueillette</b>, et maîtrisent le <b>feu</b>. " +
+                "Au <b>Néolithique</b> (âge de la pierre <b>polie</b>), une grande nouveauté apparaît : l'<b>agriculture</b> et l'<b>élevage</b>. Les humains se <b>sédentarisent</b> et fondent les premiers villages.",
+          questions:[
+            {type:"qcm", q:"La Préhistoire se termine avec l'invention de :", options:["l'écriture","l'imprimerie","la voiture","Internet"], answer:0, explain:"L'invention de l'écriture (vers 3300 av. J.-C.) marque la fin de la Préhistoire.", indice:"C'est ce qui permet de noter et de transmettre les mots."},
+            {type:"saisie", q:"Comment appelle-t-on la longue période AVANT l'écriture ?", answer:["la Préhistoire","Préhistoire","prehistoire","la prehistoire"], explain:"C'est la Préhistoire.", indice:"Le préfixe « pré » veut dire « avant »."},
+            {type:"qcm", q:"« Paléolithique » signifie l'âge de la pierre :", options:["taillée","polie","précieuse","fondue"], answer:0, explain:"Paléolithique = âge de la pierre taillée (outils éclatés).", indice:"C'est la pierre travaillée en la cassant, pas en la lissant."},
+            {type:"qcm", q:"« Néolithique » signifie l'âge de la pierre :", options:["polie","taillée","brûlée","peinte"], answer:0, explain:"Néolithique = âge de la pierre polie (outils lissés).", indice:"C'est l'inverse de « taillée » : la pierre est lissée."},
+            {type:"qcm", q:"Au Paléolithique, les humains se nourrissent surtout grâce à :", options:["la chasse et la cueillette","les supermarchés","l'agriculture","l'élevage"], answer:0, explain:"Ils chassent, pêchent et cueillent : ils ne produisent pas encore leur nourriture.", indice:"Ils prennent ce que la nature offre, sans cultiver."},
+            {type:"vf", q:"Au Paléolithique, les humains sont nomades : ils se déplacent souvent.", answer:true, explain:"Oui : ils suivent le gibier et les saisons.", indice:"« Nomade » veut dire qui n'a pas d'habitation fixe."},
+            {type:"qcm", q:"La grande nouveauté du Néolithique est l'apparition de :", options:["l'agriculture et l'élevage","l'électricité","l'écriture","l'imprimerie"], answer:0, explain:"C'est la « révolution néolithique » : on cultive et on élève des animaux.", indice:"Cela permet de produire soi-même sa nourriture."},
+            {type:"vf", q:"Au Néolithique, les humains se sédentarisent et fondent les premiers villages.", answer:true, explain:"Oui : en cultivant, ils restent au même endroit.", indice:"« Sédentaire » est le contraire de « nomade »."},
+            {type:"qcm", q:"Les peintures de la grotte de Lascaux datent de la :", options:["Préhistoire","Antiquité","Moyen Âge","époque moderne"], answer:0, explain:"Lascaux (Dordogne) est un art pariétal du Paléolithique, donc préhistorique.", indice:"C'est très ancien, bien avant l'écriture."},
+            {type:"vf", q:"Les hommes préhistoriques savaient maîtriser le feu.", answer:true, explain:"Oui : le feu sert à se chauffer, cuire et se protéger.", indice:"Pense aux foyers retrouvés par les archéologues."},
+            {type:"qcm", q:"L'espèce humaine actuelle (Homo sapiens) est apparue d'abord en :", options:["Afrique","Europe","Amérique","Australie"], answer:0, explain:"Homo sapiens apparaît en Afrique, puis migre vers les autres continents.", indice:"C'est le continent où l'on a trouvé les plus anciens fossiles."},
+            {type:"vf", q:"L'agriculture permet de produire sa nourriture au lieu de seulement la chasser ou la cueillir.", answer:true, explain:"Oui : c'est tout l'intérêt de cultiver et d'élever.", indice:"Produire soi-même plutôt que prélever dans la nature."},
+            {type:"qcm", q:"Les premiers outils du Paléolithique sont surtout en :", options:["pierre, os et bois","fer","plastique","or"], answer:0, explain:"On taille la pierre, on utilise os et bois ; les métaux viennent plus tard.", indice:"Quels matériaux trouve-t-on directement dans la nature ?"},
+            {type:"vf", q:"La poterie (récipients en terre cuite) se développe au Néolithique.", answer:true, explain:"Oui : avec la vie sédentaire, on fabrique des poteries pour stocker.", indice:"On en a besoin quand on reste au même endroit pour conserver les récoltes."},
+            {type:"saisie", q:"Quelle grande période commence APRÈS la Préhistoire, avec l'écriture ?", answer:["l'Antiquité","Antiquité","antiquite","l'antiquite"], explain:"Après la Préhistoire vient l'Antiquité.", indice:"C'est l'époque de l'Égypte des pharaons et de Rome."}
+          ]
+        },
+        {
+          id:"h14", niveau:"6e", title:"La Mésopotamie et la naissance de l'écriture",
+          cours:"Vers 3300 av. J.-C., en <b>Mésopotamie</b> (mot qui signifie « entre deux fleuves », le <b>Tigre</b> et l'<b>Euphrate</b>, dans l'actuel Irak), les <b>Sumériens</b> inventent l'<b>écriture</b>. " +
+                "C'est l'écriture <b>cunéiforme</b> (en forme de coins), tracée avec un roseau sur des <b>tablettes d'argile</b>. " +
+                "Elle sert d'abord à <b>compter</b> et à noter les échanges. Son invention marque le début de l'<b>Histoire</b>.",
+          questions:[
+            {type:"saisie", q:"Vers quelle année (av. J.-C.) l'écriture est-elle inventée ?", answer:["3300","-3300","3300 av. J.-C.","vers 3300"], explain:"L'écriture apparaît en Mésopotamie vers 3300 av. J.-C.", indice:"Il y a plus de 5000 ans."},
+            {type:"qcm", q:"La Mésopotamie se trouve entre deux fleuves :", options:["le Tigre et l'Euphrate","le Nil et le Rhône","la Seine et la Loire","le Gange et l'Indus"], answer:0, explain:"« Mésopotamie » veut dire « entre deux fleuves » : le Tigre et l'Euphrate.", indice:"Ces fleuves coulent dans l'actuel Irak."},
+            {type:"qcm", q:"La première écriture s'appelle l'écriture :", options:["cunéiforme","alphabétique","numérique","secrète"], answer:0, explain:"L'écriture des Sumériens est dite cunéiforme (en forme de coins).", indice:"Son nom vient du latin « cuneus » : le coin."},
+            {type:"qcm", q:"Sur quoi écrivait-on en Mésopotamie ?", options:["des tablettes d'argile","des feuilles de papier","des écrans","des plaques de métal"], answer:0, explain:"On gravait l'argile humide avec un roseau (calame), puis on la laissait sécher.", indice:"C'est une matière molle que l'on trouve près des fleuves."},
+            {type:"vf", q:"L'invention de l'écriture marque le début de l'Histoire.", answer:true, explain:"Oui : avant l'écriture, c'est la Préhistoire.", indice:"« Histoire » et « écriture » sont liées : on peut enfin lire des traces écrites."},
+            {type:"qcm", q:"Quel peuple a fondé les premières grandes cités (Ur, Uruk) ?", options:["les Sumériens","les Gaulois","les Vikings","les Aztèques"], answer:0, explain:"Les Sumériens fondent les premières cités-États de Mésopotamie.", indice:"Leur nom ressemble à la région de « Sumer »."},
+            {type:"vf", q:"La Mésopotamie correspond en partie à l'Irak actuel.", answer:true, explain:"Oui : c'est au Proche-Orient, autour du Tigre et de l'Euphrate.", indice:"Pense à la carte du Proche-Orient aujourd'hui."},
+            {type:"qcm", q:"À quoi servait d'abord l'écriture ?", options:["à compter et noter les échanges","à écrire des romans","à envoyer des messages","à faire de la publicité"], answer:0, explain:"Les premières tablettes sont surtout des comptes (quantités de grain, d'animaux).", indice:"Pense au commerce et aux stocks à gérer."},
+            {type:"qcm", q:"Le mot « Mésopotamie » signifie :", options:["entre deux fleuves","pays du soleil","terre du milieu","grande plaine"], answer:0, explain:"Du grec « mésos » (au milieu) et « potamos » (fleuve).", indice:"Regarde la composition du mot : « méso » et « potam »."},
+            {type:"qcm", q:"Le Code de Hammurabi est :", options:["un des plus anciens recueils de lois","une carte du monde","un livre de cuisine","un calendrier"], answer:0, explain:"Vers 1750 av. J.-C., le roi Hammurabi de Babylone fait graver un recueil de lois.", indice:"Il s'agit de règles écrites pour la société."},
+            {type:"saisie", q:"Comment appelle-t-on le grand temple mésopotamien en forme de pyramide à étages ?", answer:["ziggourat","une ziggourat","ziggurat","la ziggourat"], explain:"C'est la ziggourat, un temple à étages.", indice:"Le mot commence par « zig »."},
+            {type:"vf", q:"On écrivait le cunéiforme avec un roseau taillé appelé calame.", answer:true, explain:"Oui : le calame imprimait des signes en forme de coins dans l'argile.", indice:"C'est un outil végétal, pas un stylo moderne."},
+            {type:"qcm", q:"L'écriture cunéiforme est faite de signes en forme de :", options:["coins (clous)","ronds","fleurs","animaux"], answer:0, explain:"Les signes ressemblent à de petits coins ou clous.", indice:"« Cunéiforme » contient l'idée de « coin »."},
+            {type:"vf", q:"En Égypte, à la même époque, on utilisait une autre écriture : les hiéroglyphes.", answer:true, explain:"Oui : les hiéroglyphes égyptiens sont une autre écriture ancienne.", indice:"Pense aux dessins gravés sur les temples égyptiens."},
+            {type:"qcm", q:"La Mésopotamie se situe :", options:["au Proche-Orient","en Amérique","en Australie","au pôle Nord"], answer:0, explain:"C'est au Proche-Orient, autour du Tigre et de l'Euphrate.", indice:"C'est près de l'actuel Irak."}
+          ]
+        },
+        {
+          id:"h15", niveau:"6e", title:"Rome : de la République à l'Empire",
+          cours:"D'après la légende, <b>Rome</b> est fondée en <b>753 av. J.-C.</b> par <b>Romulus</b> (les jumeaux Romulus et Remus auraient été élevés par une <b>louve</b>). " +
+                "En <b>509 av. J.-C.</b>, Rome devient une <b>République</b>, dirigée par le <b>Sénat</b> et des <b>consuls</b>. Le général <b>Jules César</b> conquiert la <b>Gaule</b>. " +
+                "En <b>27 av. J.-C.</b>, <b>Auguste</b> devient le <b>premier empereur</b> : c'est le début de l'<b>Empire romain</b>, qui s'étend autour de la mer Méditerranée. La langue des Romains est le <b>latin</b>.",
+          questions:[
+            {type:"saisie", q:"Selon la légende, en quelle année (av. J.-C.) Rome est-elle fondée ?", answer:["753","-753","753 av. J.-C."], explain:"La fondation légendaire de Rome est datée de 753 av. J.-C.", indice:"C'est au VIIIᵉ siècle av. J.-C."},
+            {type:"qcm", q:"D'après la légende, Rome a été fondée par :", options:["Romulus","Jules César","Auguste","Napoléon"], answer:0, explain:"Romulus, l'un des deux jumeaux, est le fondateur légendaire.", indice:"Son nom ressemble beaucoup à « Rome »."},
+            {type:"qcm", q:"Dans la légende, les jumeaux Romulus et Remus sont élevés par :", options:["une louve","un aigle","un ours","un cheval"], answer:0, explain:"La louve qui allaite les jumeaux est un symbole de Rome.", indice:"C'est un animal sauvage qui hurle à la lune."},
+            {type:"saisie", q:"En quelle année (av. J.-C.) commence la République romaine ?", answer:["509","-509","509 av. J.-C."], explain:"La République est instaurée en 509 av. J.-C., après la royauté.", indice:"C'est à la fin du VIᵉ siècle av. J.-C."},
+            {type:"qcm", q:"Sous la République, Rome est dirigée notamment par :", options:["le Sénat et des consuls","un pharaon","un calife","un roi unique"], answer:0, explain:"Le Sénat et les magistrats (consuls) gouvernent la République.", indice:"Ce n'est pas un seul chef, mais une assemblée et des élus."},
+            {type:"qcm", q:"Quel général romain a conquis la Gaule ?", options:["Jules César","Charlemagne","Vercingétorix","Clovis"], answer:0, explain:"Jules César conquiert la Gaule (guerre des Gaules).", indice:"Il a aussi donné son nom au mois de juillet (Iulius)."},
+            {type:"qcm", q:"En 52 av. J.-C., César bat le chef gaulois Vercingétorix à :", options:["Alésia","Gergovie","Carthage","Marathon"], answer:0, explain:"La reddition de Vercingétorix a lieu à Alésia en 52 av. J.-C.", indice:"Le nom du lieu commence par « Alé »."},
+            {type:"qcm", q:"Qui devient le premier empereur romain en 27 av. J.-C. ?", options:["Auguste","Jules César","Néron","Romulus"], answer:0, explain:"Octave, devenu Auguste, est le premier empereur en 27 av. J.-C.", indice:"Un mois de l'année (le 8ᵉ) porte son nom."},
+            {type:"vf", q:"Jules César a été le tout premier empereur de Rome.", answer:false, explain:"Non : César était général et dictateur ; le premier empereur est Auguste (27 av. J.-C.).", indice:"Méfie-toi : César est célèbre, mais l'Empire commence après lui."},
+            {type:"qcm", q:"La langue des Romains était :", options:["le latin","le grec","le gaulois","l'arabe"], answer:0, explain:"Le latin est la langue de Rome ; il a donné le français.", indice:"Le français en est une « langue fille »."},
+            {type:"vf", q:"L'Empire romain s'étendait autour de la mer Méditerranée.", answer:true, explain:"Oui : la Méditerranée était surnommée « Mare Nostrum » (notre mer).", indice:"Pense à une mer entourée par l'Empire."},
+            {type:"qcm", q:"La diffusion du mode de vie romain (villes, routes, latin) s'appelle :", options:["la romanisation","la mondialisation","la colonisation grecque","la féodalité"], answer:0, explain:"La romanisation diffuse la culture romaine dans tout l'Empire.", indice:"Le mot contient « Rome »."},
+            {type:"qcm", q:"Le christianisme apparaît :", options:["dans l'Empire romain, au Iᵉ siècle","à la Préhistoire","au Moyen Âge","au XXᵉ siècle"], answer:0, explain:"Le christianisme naît au Iᵉ siècle en Judée, alors province romaine.", indice:"C'est à l'époque de l'Empire, pas avant Rome."},
+            {type:"vf", q:"Le Colisée est un grand amphithéâtre construit par les Romains.", answer:true, explain:"Oui : on y donnait des combats de gladiateurs et des spectacles.", indice:"C'est un monument célèbre encore visible à Rome."},
+            {type:"qcm", q:"Dans l'ordre, Rome a d'abord été une royauté, puis :", options:["une République, puis un Empire","un Empire, puis une République","une démocratie grecque","une colonie égyptienne"], answer:0, explain:"Royauté (753 av. J.-C.), puis République (509), puis Empire (27 av. J.-C.).", indice:"La République vient avant l'Empire d'Auguste."}
+          ]
         }
       ]
     },
@@ -1072,7 +1268,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"s1", title:"Physique-Chimie : les états de la matière",
+          id:"s1", niveau:"5e", title:"Physique-Chimie : les états de la matière",
           cours:"La matière existe en 3 <b>états</b> : <b>solide</b> (forme propre), <b>liquide</b> (prend la forme " +
                 "du récipient), <b>gaz</b> (occupe tout l'espace). Les changements d'état ont des noms : " +
                 "<b>fusion</b> (solide→liquide), <b>solidification</b> (liquide→solide), <b>vaporisation</b> " +
@@ -1093,7 +1289,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"s2", title:"Physique : les circuits électriques",
+          id:"s2", niveau:"5e", title:"Physique : les circuits électriques",
           cours:"Un <b>circuit</b> simple comprend un générateur (pile), des fils et un récepteur (lampe). " +
                 "En <b>série</b>, les composants sont sur une seule boucle : si une lampe s'éteint, l'autre aussi. " +
                 "En <b>dérivation</b> (parallèle), chaque lampe est sur sa propre branche : elles sont indépendantes.",
@@ -1112,7 +1308,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"s3", title:"SVT : le corps humain et la digestion",
+          id:"s3", niveau:"5e", title:"SVT : le corps humain et la digestion",
           cours:"La <b>digestion</b> transforme les aliments en nutriments, qui passent dans le sang au niveau " +
                 "de l'<b>intestin grêle</b>. Le trajet : bouche → œsophage → estomac → intestin grêle → gros intestin. " +
                 "Les nutriments servent à fournir de l'énergie et à construire le corps.",
@@ -1246,6 +1442,47 @@ var CONTENT = {
              explain:"Un gène est une portion d'ADN responsable d'un caractère."},
             {type:"vf", q:"L'hérédité, c'est la transmission de caractères des parents à leurs enfants.", answer:true,
              explain:"Oui : les caractères se transmettent de génération en génération."}
+          ]
+        },
+        {
+          id:"s12", niveau:"6e", title:"Mélanges et solutions",
+          cours:"Un <b>mélange homogène</b> est un mélange où l'on ne distingue plus les constituants (eau salée, eau sucrée). " +
+                "Un <b>mélange hétérogène</b> laisse voir les constituants (eau + huile, eau + sable). " +
+                "Quand un solide <b>se dissout</b> dans un liquide, on obtient une <b>solution</b> (le solide est le <b>soluté</b>, le liquide est le <b>solvant</b>). " +
+                "Pour séparer : la <b>filtration</b> retient un solide non dissous, l'<b>évaporation</b> récupère un solide dissous (le sel de l'eau salée).",
+          questions:[
+            {type:"qcm", q:"Eau + sel bien mélangés : on ne voit plus le sel. C'est un mélange :", options:["homogène","hétérogène","pur","solide"], answer:0, explain:"On ne distingue plus les constituants : mélange homogène.", indice:"« Homo » veut dire « pareil partout »."},
+            {type:"qcm", q:"Eau + huile : on voit deux couches. C'est un mélange :", options:["hétérogène","homogène","pur","gazeux"], answer:0, explain:"On distingue les constituants : mélange hétérogène.", indice:"« Hétéro » veut dire « différent »."},
+            {type:"vf", q:"Une solution, comme l'eau salée, est un mélange homogène.", answer:true, explain:"Oui : le soluté dissous ne se voit plus.", indice:"On ne distingue plus le sel dans l'eau."},
+            {type:"qcm", q:"Quand le sel disparaît dans l'eau, on dit qu'il se :", options:["dissout","évapore","congèle","filtre"], answer:0, explain:"Le sel se dissout : il se mélange à l'échelle invisible.", indice:"Le verbe vient de « dissolution »."},
+            {type:"qcm", q:"Pour séparer l'eau et le sable, on utilise la :", options:["filtration","évaporation","congélation","dissolution"], answer:0, explain:"Le filtre retient le sable (solide non dissous) et laisse passer l'eau.", indice:"On verse à travers un filtre."},
+            {type:"qcm", q:"Pour récupérer le sel dissous dans l'eau salée, on fait :", options:["évaporer l'eau","une filtration","congeler","ajouter du sucre"], answer:0, explain:"L'eau s'évapore, le sel reste au fond.", indice:"Pense aux marais salants au soleil."},
+            {type:"vf", q:"La filtration permet de séparer le sel dissous de l'eau.", answer:false, explain:"Non : le sel dissous traverse le filtre. Il faut faire évaporer l'eau.", indice:"Un filtre n'arrête que ce qui n'est pas dissous."},
+            {type:"qcm", q:"Dans l'eau sucrée, le sucre est :", options:["le soluté","le solvant","un filtre","un gaz"], answer:0, explain:"Le soluté est le solide qui se dissout (le sucre).", indice:"C'est ce qui est dissous."},
+            {type:"qcm", q:"Dans l'eau sucrée, l'eau joue le rôle de :", options:["solvant","soluté","solide","gaz"], answer:0, explain:"Le solvant est le liquide qui dissout (l'eau).", indice:"C'est ce qui dissout le sucre."},
+            {type:"vf", q:"L'air est un mélange de plusieurs gaz.", answer:true, explain:"Oui : surtout du diazote et du dioxygène.", indice:"L'air n'est pas un seul gaz pur."},
+            {type:"qcm", q:"Eau + sable : on laisse reposer, le sable tombe au fond, puis on verse doucement le liquide. C'est la :", options:["décantation","évaporation","dissolution","fusion"], answer:0, explain:"La décantation sépare en laissant reposer.", indice:"On laisse « décanter », c'est-à-dire reposer."},
+            {type:"vf", q:"Quand on dissout du sel dans l'eau, la masse totale (eau + sel) est conservée.", answer:true, explain:"Oui : rien ne disparaît, la masse se conserve.", indice:"Le sel est toujours là, simplement invisible."}
+          ]
+        },
+        {
+          id:"s13", niveau:"6e", title:"Les objets techniques (Technologie)",
+          cours:"Un <b>objet technique</b> est <b>fabriqué par l'être humain</b> pour <b>répondre à un besoin</b> (un vélo, un parapluie, une montre). " +
+                "Sa <b>fonction d'usage</b> est ce à quoi il sert ; sa <b>fonction d'estime</b> est ce qui plaît (forme, couleur). " +
+                "Il est fait de <b>matériaux</b> (métal, plastique, bois, verre...) choisis selon leurs <b>propriétés</b>. La liste des besoins et contraintes à respecter s'appelle le <b>cahier des charges</b>.",
+          questions:[
+            {type:"qcm", q:"Un objet technique est fabriqué pour :", options:["répondre à un besoin","décorer seulement","pousser tout seul","exister par hasard"], answer:0, explain:"Tout objet technique répond à un besoin humain.", indice:"On le crée parce qu'on en a besoin."},
+            {type:"vf", q:"Un arbre est un objet technique.", answer:false, explain:"Non : un arbre est naturel. Un objet technique est fabriqué par l'être humain.", indice:"Naturel ou fabriqué ?"},
+            {type:"qcm", q:"La « fonction d'usage » d'un objet, c'est :", options:["ce à quoi il sert","sa couleur","son prix","son poids"], answer:0, explain:"La fonction d'usage répond à « à quoi ça sert ? ».", indice:"Pense à l'utilité de l'objet."},
+            {type:"qcm", q:"La fonction d'usage d'un parapluie est de :", options:["protéger de la pluie","éclairer la nuit","mesurer le temps","faire du bruit"], answer:0, explain:"Un parapluie sert à se protéger de la pluie.", indice:"À quoi sert un parapluie quand il pleut ?"},
+            {type:"qcm", q:"La « fonction d'estime », c'est :", options:["ce qui plaît (forme, couleur)","ce à quoi il sert","son matériau","son poids"], answer:0, explain:"La fonction d'estime concerne le goût, l'esthétique.", indice:"C'est ce qui donne envie de le choisir, au-delà de l'utilité."},
+            {type:"qcm", q:"Le verre, le bois, le métal, le plastique sont des :", options:["matériaux","besoins","fonctions","énergies"], answer:0, explain:"Ce sont des matériaux qui servent à fabriquer les objets.", indice:"Ce sont les « matières » de fabrication."},
+            {type:"vf", q:"On choisit le matériau d'un objet selon ses propriétés (solidité, légèreté...).", answer:true, explain:"Oui : par exemple le plastique pour la légèreté.", indice:"Chaque matériau a ses avantages."},
+            {type:"qcm", q:"La liste des besoins et contraintes à respecter pour concevoir un objet s'appelle :", options:["le cahier des charges","le mode d'emploi","le ticket de caisse","le plan de la ville"], answer:0, explain:"Le cahier des charges fixe ce que l'objet doit respecter.", indice:"C'est un « cahier » de règles à suivre."},
+            {type:"vf", q:"Un objet technique peut être composé de plusieurs pièces assemblées.", answer:true, explain:"Oui : par exemple un vélo (roues, cadre, guidon...).", indice:"Pense à toutes les parties d'un vélo."},
+            {type:"qcm", q:"Un vélo sert principalement à :", options:["se déplacer","cuire des aliments","éclairer","mesurer le temps"], answer:0, explain:"La fonction d'usage du vélo est le déplacement.", indice:"À quoi sert un vélo ?"},
+            {type:"qcm", q:"Lequel est un objet technique ?", options:["une montre","un caillou","un nuage","une fleur"], answer:0, explain:"La montre est fabriquée pour donner l'heure ; les autres sont naturels.", indice:"Lequel a été fabriqué par l'être humain ?"},
+            {type:"vf", q:"Le plastique est souvent choisi parce qu'il est léger et peu coûteux.", answer:true, explain:"Oui : ce sont deux de ses propriétés utiles.", indice:"Léger et bon marché : pratique pour beaucoup d'objets."}
           ]
         }
       ]
@@ -3508,7 +3745,7 @@ function goAfterLogin(){
 }
 function renderLanding(lastId){
   if(typeof stopExamTimer==="function") stopExamTimer();
-  setBrand("Le Royaume du Savoir");
+  setBrand("Collegica");
   renderStats();
   const profiles = loadProfiles();
   if(lastId && !profiles.some(p=>p.id===lastId)) lastId="";
@@ -3573,7 +3810,7 @@ function renderLanding(lastId){
   <div class="card center hero">
     <span class="tag">🎓 Apprendre en s'amusant, du CP au Brevet</span>
     <div style="font-size:58px" class="pop">🏰</div>
-    <h1>Le Royaume du Savoir</h1>
+    <h1>Collegica</h1>
     <p class="muted" style="max-width:680px;margin:0 auto 4px">
       Une seule aventure magique qui accompagne chaque enfant <b>du CP au Brevet</b>, à son rythme.
       Dès le CP, le monde « <b>Les Petits Malins</b> » pose les bases (lecture, calcul, langues, histoire) ;
@@ -4835,7 +5072,7 @@ function collectProgress(){
 }
 function exportProgress(){
   var payload={
-    app:"Le Royaume du Savoir",
+    app:"Collegica",
     type:"progression",
     version:1,
     exportedAt:new Date().toISOString(),
