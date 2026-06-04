@@ -439,6 +439,25 @@ var CONTENT = {
             {type:"qcm", q:"Sur une carte, une échelle 1/25000 indique que :", options:["les distances réelles sont 25000 fois plus grandes","la carte est 25000 fois plus grande","il y a 25000 cartes","rien"], answer:0, explain:"1 cm sur la carte = 25000 cm réels.", indice:"Le dénominateur dit combien de fois la réalité est plus grande."},
             {type:"saisie", q:"Agrandissement de coefficient 5 : un côté de 3 cm devient ... cm ?", answer:["15","15 cm"], explain:"3 × 5 = 15 cm.", indice:"Multiplie par 5."}
           ]
+        },
+        {
+          id:"m23", niveau:"5e", title:"Le repérage dans le plan",
+          carte:{centre:"Le repérage dans le plan", branches:[{titre:"Deux axes", detail:"perpendiculaires, en (0 ; 0)"},{titre:"Abscisse (x)", detail:"sur l'axe horizontal"},{titre:"Ordonnée (y)", detail:"sur l'axe vertical"},{titre:"Coordonnées", detail:"(abscisse ; ordonnée)"},{titre:"L'origine", detail:"le point (0 ; 0)"}]},
+          cours:"Un <b>repère</b> du plan est formé de <b>deux axes perpendiculaires</b> : l'axe des <b>abscisses</b> (horizontal, x) et l'axe des <b>ordonnées</b> (vertical, y). Un point a des <b>coordonnées (x ; y)</b> : d'abord l'<b>abscisse</b>, puis l'<b>ordonnée</b>. Leur point de croisement, l'<b>origine</b>, a pour coordonnées <b>(0 ; 0)</b>.",
+          questions:[
+            {type:"qcm", q:"Un repère du plan est formé de :", options:["deux axes perpendiculaires","un seul axe","trois cercles","une diagonale"], answer:0, explain:"Deux axes perpendiculaires (x et y).", indice:"Ils forment un angle droit."},
+            {type:"qcm", q:"L'axe horizontal s'appelle :", options:["l'axe des abscisses","l'axe des ordonnées","la diagonale","le rayon"], answer:0, explain:"L'axe horizontal est celui des abscisses (x).", indice:"x, de gauche à droite."},
+            {type:"qcm", q:"L'axe vertical s'appelle :", options:["l'axe des ordonnées","l'axe des abscisses","la hauteur","le diamètre"], answer:0, explain:"L'axe vertical est celui des ordonnées (y).", indice:"y, de bas en haut."},
+            {type:"qcm", q:"Dans les coordonnées (3 ; 5), le nombre 3 est :", options:["l'abscisse","l'ordonnée","le périmètre","l'aire"], answer:0, explain:"Le premier nombre est l'abscisse.", indice:"Abscisse d'abord."},
+            {type:"qcm", q:"Dans (3 ; 5), le nombre 5 est :", options:["l'ordonnée","l'abscisse","la hauteur du repère","le rayon"], answer:0, explain:"Le second nombre est l'ordonnée.", indice:"Ordonnée en second."},
+            {type:"qcm", q:"Les coordonnées de l'origine sont :", options:["(0 ; 0)","(1 ; 1)","(0 ; 1)","(10 ; 10)"], answer:0, explain:"L'origine est le point (0 ; 0).", indice:"Au croisement des deux axes."},
+            {type:"qcm", q:"On écrit les coordonnées dans l'ordre :", options:["(abscisse ; ordonnée)","(ordonnée ; abscisse)","(y ; x)","au hasard"], answer:0, explain:"Toujours (x ; y) : abscisse puis ordonnée.", indice:"x avant y."},
+            {type:"vf", q:"L'abscisse se lit sur l'axe horizontal.", answer:true, explain:"Oui : l'abscisse correspond à x (horizontal).", indice:"Horizontal = abscisse."},
+            {type:"qcm", q:"Un point d'abscisse positive est situé :", options:["à droite de l'origine","à gauche de l'origine","tout en bas","hors du plan"], answer:0, explain:"x positif : à droite.", indice:"Positif vers la droite."},
+            {type:"qcm", q:"Un point d'ordonnée négative est situé :", options:["en dessous de l'axe horizontal","au-dessus","à droite seulement","à l'origine"], answer:0, explain:"y négatif : en dessous.", indice:"Négatif vers le bas."},
+            {type:"vf", q:"Le point (0 ; 0) est l'origine du repère.", answer:true, explain:"Oui : c'est le point de départ.", indice:"Les deux coordonnées sont nulles."},
+            {type:"qcm", q:"Le point A(2 ; 0) se trouve :", options:["sur l'axe horizontal","sur l'axe vertical","à l'origine","hors du plan"], answer:0, explain:"Comme y = 0, le point est sur l'axe horizontal.", indice:"Ordonnée nulle = sur l'axe des abscisses."}
+          ]
         }
       ]
     },
@@ -847,6 +866,44 @@ var CONTENT = {
             {type:"vf", q:"Un COI est introduit par une préposition comme « à » ou « de ».", answer:true, explain:"Oui : c'est ce qui le rend « indirect ».", indice:"Cherche « à » ou « de »."},
             {type:"qcm", q:"« Elle téléphone à sa mère. » « à sa mère » est :", options:["un COI","un COD","un sujet","un adjectif"], answer:0, explain:"Elle téléphone à qui ? à sa mère : COI.", indice:"Préposition « à »."}
           ]
+        },
+        {
+          id:"f21", niveau:"6e", title:"Synonymes, antonymes et familles de mots",
+          carte:{centre:"Synonymes, antonymes, familles", branches:[{titre:"Synonyme", detail:"sens proche (content / heureux)"},{titre:"Antonyme", detail:"sens contraire (grand / petit)"},{titre:"Famille de mots", detail:"même radical (dent, dentiste)"},{titre:"Préfixe", detail:"avant le radical (re-faire)"},{titre:"Suffixe", detail:"après le radical (dent-aire)"}]},
+          cours:"Un <b>synonyme</b> est un mot de <b>sens proche</b> (content / heureux). Un <b>antonyme</b> (contraire) a un <b>sens opposé</b> (grand / petit). Une <b>famille de mots</b> regroupe des mots formés sur un même <b>radical</b> (dent, dentiste, dentaire). Le <b>préfixe</b> se place <b>avant</b> le radical, le <b>suffixe</b> <b>après</b>.",
+          questions:[
+            {type:"qcm", q:"Un synonyme est un mot :", options:["de sens proche","de sens contraire","qui se prononce pareil","qui s'écrit pareil"], answer:0, explain:"Synonyme = sens voisin.", indice:"Proche, pas identique ni contraire."},
+            {type:"qcm", q:"Un synonyme de « content » est :", options:["heureux","triste","fatigué","petit"], answer:0, explain:"« heureux » est proche de « content ».", indice:"Une émotion positive."},
+            {type:"qcm", q:"Un antonyme (contraire) de « grand » est :", options:["petit","immense","géant","haut"], answer:0, explain:"Le contraire de grand est petit.", indice:"Cherche l'opposé."},
+            {type:"qcm", q:"Un antonyme de « chaud » est :", options:["froid","tiède","brûlant","doux"], answer:0, explain:"Le contraire de chaud est froid.", indice:"L'opposé sur la température."},
+            {type:"qcm", q:"Des mots d'une même famille partagent :", options:["un même radical","une même couleur","le même nombre de lettres","rien"], answer:0, explain:"Ils sont bâtis sur un même radical.", indice:"La partie commune du mot."},
+            {type:"qcm", q:"« dent, dentiste, dentaire » forment :", options:["une famille de mots","une phrase","une rime","une strophe"], answer:0, explain:"Même radical « dent » : une famille.", indice:"Ils tournent autour de « dent »."},
+            {type:"qcm", q:"Le préfixe se place :", options:["avant le radical","après le radical","à la toute fin","au hasard"], answer:0, explain:"Le préfixe précède le radical.", indice:"« pré » veut dire avant."},
+            {type:"qcm", q:"Le suffixe se place :", options:["après le radical","avant le radical","devant le mot","jamais"], answer:0, explain:"Le suffixe suit le radical.", indice:"À la fin du mot."},
+            {type:"vf", q:"« rapide » et « lent » sont des antonymes (contraires).", answer:true, explain:"Oui : ils ont des sens opposés.", indice:"Vitesse opposée."},
+            {type:"qcm", q:"Un synonyme de « beau » est :", options:["joli","laid","méchant","lourd"], answer:0, explain:"« joli » est proche de « beau ».", indice:"Sens positif et proche."},
+            {type:"vf", q:"Les synonymes ont un sens proche, les antonymes un sens opposé.", answer:true, explain:"Oui : c'est la différence entre les deux.", indice:"Proche / opposé."},
+            {type:"qcm", q:"Dans « refaire », « re- » est :", options:["un préfixe","un suffixe","un radical","une terminaison"], answer:0, explain:"« re- » placé avant le radical est un préfixe.", indice:"Il est devant « faire »."}
+          ]
+        },
+        {
+          id:"f22", niveau:"4e", title:"La poésie et la versification",
+          carte:{centre:"Poésie et versification", branches:[{titre:"Le vers", detail:"une ligne du poème"},{titre:"La strophe", detail:"un groupe de vers"},{titre:"La rime", detail:"sons identiques en fin de vers"},{titre:"L'alexandrin", detail:"un vers de 12 syllabes"},{titre:"Les strophes", detail:"distique 2, tercet 3, quatrain 4"}]},
+          cours:"Un poème est fait de <b>vers</b> (les lignes) regroupés en <b>strophes</b>. La <b>rime</b> est la répétition de <b>sons identiques</b> à la fin des vers. On compte les <b>syllabes</b> d'un vers : l'<b>alexandrin</b> en a <b>12</b>. Selon le nombre de vers, une strophe est un <b>distique</b> (2), un <b>tercet</b> (3) ou un <b>quatrain</b> (4).",
+          questions:[
+            {type:"qcm", q:"Une ligne d'un poème s'appelle :", options:["un vers","une strophe","une rime","une syllabe"], answer:0, explain:"Chaque ligne est un vers.", indice:"Le « v » de vers."},
+            {type:"qcm", q:"Un groupe de vers s'appelle :", options:["une strophe","un vers","une rime","une lettre"], answer:0, explain:"Un groupe de vers forme une strophe.", indice:"Comme un « paragraphe » du poème."},
+            {type:"qcm", q:"La rime, ce sont :", options:["des sons qui se répètent à la fin des vers","des dessins","des images","des couleurs"], answer:0, explain:"Sons identiques en fin de vers.", indice:"Écoute la fin des vers."},
+            {type:"qcm", q:"Un vers de 12 syllabes s'appelle :", options:["un alexandrin","un quatrain","un tercet","un sonnet"], answer:0, explain:"12 syllabes : un alexandrin.", indice:"Le plus célèbre des vers."},
+            {type:"qcm", q:"Une strophe de 4 vers s'appelle :", options:["un quatrain","un tercet","un distique","un vers"], answer:0, explain:"4 vers : un quatrain.", indice:"« quatre » comme quatrain."},
+            {type:"qcm", q:"Une strophe de 3 vers s'appelle :", options:["un tercet","un quatrain","un distique","un alexandrin"], answer:0, explain:"3 vers : un tercet.", indice:"« ter » rappelle trois."},
+            {type:"vf", q:"On compte les syllabes d'un vers pour le mesurer.", answer:true, explain:"Oui : le nombre de syllabes donne la mesure du vers.", indice:"Compte les sons-voyelles."},
+            {type:"qcm", q:"Deux vers qui riment se terminent par :", options:["des sons identiques","des lettres différentes","le même mot","des chiffres"], answer:0, explain:"Mêmes sons finaux : ils riment.", indice:"Le son de la fin se répond."},
+            {type:"qcm", q:"Un poème est souvent organisé en :", options:["vers et strophes","chapitres","actes","paragraphes seulement"], answer:0, explain:"Vers regroupés en strophes.", indice:"Lignes et groupes de lignes."},
+            {type:"vf", q:"L'alexandrin compte 12 syllabes.", answer:true, explain:"Oui : 12 syllabes.", indice:"Une douzaine."},
+            {type:"qcm", q:"« beauté » et « bonté » :", options:["riment","ne riment pas","sont synonymes","sont contraires"], answer:0, explain:"Même son final « -té » : elles riment.", indice:"Écoute la fin des deux mots."},
+            {type:"qcm", q:"Une strophe de 2 vers s'appelle :", options:["un distique","un quatrain","un tercet","un sonnet"], answer:0, explain:"2 vers : un distique.", indice:"« di » rappelle deux."}
+          ]
         }
       ]
     },
@@ -1241,6 +1298,25 @@ var CONTENT = {
             {type:"vf", q:"L'indépendance de l'Inde a lieu en 1947.", answer:true, explain:"Oui : 1947.", indice:"Deux ans après 1945."},
             {type:"qcm", q:"Un pays qui obtient son indépendance devient :", options:["un État souverain","une colonie","une région française","une ville"], answer:0, explain:"Il se gouverne lui-même : il est souverain.", indice:"Il décide seul de son destin."},
             {type:"vf", q:"La décolonisation se déroule surtout dans les années 1950-1960.", answer:true, explain:"Oui : ces deux décennies sont décisives.", indice:"Milieu du XXe siècle."}
+          ]
+        },
+        {
+          id:"h21", niveau:"4e", title:"La mondialisation et les échanges",
+          carte:{centre:"La mondialisation", branches:[{titre:"Définition", detail:"le monde mis en relation"},{titre:"Échanges", detail:"marchandises, infos, personnes"},{titre:"Transports", detail:"porte-conteneurs, avions"},{titre:"Internet", detail:"relie le monde en direct"},{titre:"Inégalités", detail:"elles demeurent"}]},
+          cours:"La <b>mondialisation</b> est la mise en <b>relation</b> des différentes parties du monde par les <b>échanges</b> : <b>marchandises</b>, <b>informations</b> et <b>personnes</b>. Les <b>porte-conteneurs</b> et les <b>avions</b> transportent les produits ; <b>Internet</b> relie le monde en direct. De grandes entreprises (<b>multinationales</b>) produisent et vendent partout. Mais des <b>inégalités</b> demeurent entre les pays.",
+          questions:[
+            {type:"qcm", q:"La mondialisation, c'est :", options:["la mise en relation du monde par les échanges","la fin des échanges","une guerre","une seule ville"], answer:0, explain:"Le monde relié par les échanges.", indice:"« monde » est dans le mot."},
+            {type:"qcm", q:"La plupart des marchandises voyagent par :", options:["bateau (porte-conteneurs)","fusée","à pied","train uniquement"], answer:0, explain:"Les porte-conteneurs transportent l'essentiel du commerce.", indice:"De grands navires remplis de boîtes."},
+            {type:"qcm", q:"Ce qui relie le monde pour l'information est notamment :", options:["Internet","le télégraphe seul","la diligence","rien"], answer:0, explain:"Internet permet des échanges instantanés.", indice:"Le réseau mondial."},
+            {type:"qcm", q:"Les grandes entreprises présentes dans plusieurs pays sont :", options:["des multinationales","des mairies","des écoles","des fermes"], answer:0, explain:"Ce sont des firmes multinationales.", indice:"Présentes dans de nombreux pays."},
+            {type:"vf", q:"La mondialisation augmente les échanges entre les pays.", answer:true, explain:"Oui : commerce et communications se multiplient.", indice:"Plus de relations entre pays."},
+            {type:"qcm", q:"Le conteneur a surtout facilité :", options:["le transport des marchandises","la cuisine","l'agriculture locale","la lecture"], answer:0, explain:"Le conteneur standardise et accélère le transport.", indice:"Une grande boîte qui passe du bateau au camion."},
+            {type:"vf", q:"La mondialisation concerne les marchandises, les informations et les personnes.", answer:true, explain:"Oui : les trois circulent.", indice:"Produits, données et voyageurs."},
+            {type:"qcm", q:"Malgré la mondialisation, il existe encore :", options:["des inégalités entre pays","une égalité parfaite","plus aucun commerce","une seule langue obligatoire"], answer:0, explain:"Les richesses restent inégalement réparties.", indice:"Tous les pays ne profitent pas pareil."},
+            {type:"qcm", q:"Un produit peut être conçu dans un pays et fabriqué :", options:["dans un autre","nulle part","seulement en France","sur la Lune"], answer:0, explain:"La production est répartie entre plusieurs pays.", indice:"Conception et fabrication peuvent être séparées."},
+            {type:"vf", q:"Internet permet d'échanger des informations très vite dans le monde entier.", answer:true, explain:"Oui : en quasi temps réel.", indice:"Communication mondiale rapide."},
+            {type:"qcm", q:"Les ports et les aéroports sont :", options:["des lieux d'échanges importants","des musées","des fermes","des écoles"], answer:0, explain:"Ce sont des points clés de la mondialisation.", indice:"Là où arrivent et partent marchandises et voyageurs."},
+            {type:"vf", q:"La mondialisation rapproche les différentes régions du monde.", answer:true, explain:"Oui : les distances comptent moins qu'avant.", indice:"Le monde semble plus « petit »."}
           ]
         }
       ]
@@ -1641,6 +1717,44 @@ var CONTENT = {
             {type:"qcm", q:"Étudier les fossiles permet de connaître :", options:["des espèces du passé","l'avenir","la météo","les planètes"], answer:0, explain:"Les fossiles nous renseignent sur le passé du vivant.", indice:"Des espèces d'il y a longtemps."},
             {type:"vf", q:"L'évolution se déroule sur de très longues durées.", answer:true, explain:"Oui : sur des milliers et des millions d'années.", indice:"Ce n'est pas rapide."},
             {type:"qcm", q:"La sélection naturelle a été proposée par :", options:["Charles Darwin","Galilée","Marie Curie","Archimède"], answer:0, explain:"Charles Darwin.", indice:"Le naturaliste du XIXe siècle."}
+          ]
+        },
+        {
+          id:"s21", niveau:"4e", title:"La reproduction des êtres vivants",
+          carte:{centre:"La reproduction", branches:[{titre:"But", detail:"assurer la survie de l'espèce"},{titre:"Reproduction sexuée", detail:"cellule mâle + cellule femelle"},{titre:"Fécondation", detail:"donne une cellule-oeuf"},{titre:"Plantes à fleurs", detail:"pollinisation, puis graine"},{titre:"Reproduction asexuée", detail:"un seul parent (bouturage)"}]},
+          cours:"La <b>reproduction</b> assure la <b>survie de l'espèce</b>. Dans la <b>reproduction sexuée</b>, une cellule <b>mâle</b> (le <b>spermatozoïde</b>) et une cellule <b>femelle</b> (l'<b>ovule</b>) s'unissent : c'est la <b>fécondation</b>, qui donne une <b>cellule-oeuf</b>, origine d'un nouvel individu. Chez les <b>plantes à fleurs</b>, la <b>pollinisation</b> précède la formation d'une <b>graine</b>. La <b>reproduction asexuée</b> (ex. bouturage) ne fait intervenir qu'un seul parent.",
+          questions:[
+            {type:"qcm", q:"La reproduction permet :", options:["d'assurer la survie de l'espèce","de respirer","de digérer","de voir"], answer:0, explain:"Sans reproduction, l'espèce disparaîtrait.", indice:"Avoir une descendance."},
+            {type:"qcm", q:"Dans la reproduction sexuée, la cellule mâle est :", options:["le spermatozoïde","l'ovule","la graine","le pollen"], answer:0, explain:"La cellule reproductrice mâle est le spermatozoïde.", indice:"Cellule mâle des animaux."},
+            {type:"qcm", q:"La cellule femelle est :", options:["l'ovule","le spermatozoïde","la racine","la feuille"], answer:0, explain:"La cellule reproductrice femelle est l'ovule.", indice:"Cellule femelle."},
+            {type:"qcm", q:"La rencontre de la cellule mâle et de la cellule femelle s'appelle :", options:["la fécondation","la digestion","la respiration","la photosynthèse"], answer:0, explain:"Leur union est la fécondation.", indice:"Elle donne la cellule-oeuf."},
+            {type:"qcm", q:"La cellule-oeuf est issue de :", options:["la fécondation","la respiration","la digestion","la germination"], answer:0, explain:"La fécondation crée la cellule-oeuf.", indice:"Union mâle + femelle."},
+            {type:"vf", q:"La reproduction sexuée nécessite deux cellules (mâle et femelle).", answer:true, explain:"Oui : une cellule mâle et une cellule femelle.", indice:"Il en faut deux."},
+            {type:"qcm", q:"Chez les plantes à fleurs, le transport du pollen s'appelle :", options:["la pollinisation","la fécondation seule","la digestion","la respiration"], answer:0, explain:"Le pollen est transporté : c'est la pollinisation.", indice:"Pense aux abeilles et au vent."},
+            {type:"qcm", q:"Le bouturage est un exemple de reproduction :", options:["asexuée (un seul parent)","sexuée","minérale","impossible"], answer:0, explain:"Une seule plante donne une nouvelle plante : asexuée.", indice:"Sans cellule mâle ni femelle."},
+            {type:"vf", q:"Une graine peut donner une nouvelle plante.", answer:true, explain:"Oui : la graine germe et donne une plante.", indice:"Pense à une graine que l'on plante."},
+            {type:"qcm", q:"Après la fécondation chez les plantes à fleurs, il se forme :", options:["une graine","un fossile","une roche","une étoile"], answer:0, explain:"La fécondation conduit à la formation d'une graine.", indice:"Future nouvelle plante."},
+            {type:"vf", q:"La reproduction asexuée fait intervenir un seul parent.", answer:true, explain:"Oui : un seul individu suffit.", indice:"Un seul parent, pas deux."},
+            {type:"qcm", q:"Sans reproduction :", options:["l'espèce disparaîtrait","rien ne changerait","les roches fondraient","le Soleil s'éteindrait"], answer:0, explain:"La reproduction est essentielle à la survie de l'espèce.", indice:"Plus de descendants, plus d'espèce."}
+          ]
+        },
+        {
+          id:"s22", niveau:"4e", title:"Le son",
+          carte:{centre:"Le son", branches:[{titre:"Origine", detail:"une vibration"},{titre:"Propagation", detail:"dans l'air, l'eau, les solides"},{titre:"Pas dans le vide", detail:"il faut de la matière"},{titre:"Vitesse", detail:"environ 340 m/s dans l'air"},{titre:"Plus lent que la lumière", detail:"l'éclair avant le tonnerre"}]},
+          cours:"Un <b>son</b> est produit par une <b>vibration</b> (d'un objet, des cordes vocales). Il se <b>propage</b> dans un milieu matériel (<b>air</b>, eau, solides) mais <b>pas dans le vide</b>. Dans l'air, le son va à environ <b>340 m/s</b>, bien <b>plus lentement que la lumière</b> (c'est pourquoi on voit l'éclair avant d'entendre le tonnerre). On perçoit les sons grâce à l'<b>oreille</b> ; les sons trop forts peuvent l'abîmer.",
+          questions:[
+            {type:"qcm", q:"Un son est produit par :", options:["une vibration","une couleur","une odeur","une lumière"], answer:0, explain:"Le son naît d'une vibration.", indice:"Quelque chose qui vibre."},
+            {type:"qcm", q:"Le son a besoin d'un milieu pour se propager, par exemple :", options:["l'air","le vide","rien","l'obscurité"], answer:0, explain:"Le son se propage dans l'air (et autres milieux).", indice:"Il lui faut de la matière."},
+            {type:"vf", q:"Le son ne se propage pas dans le vide.", answer:true, explain:"Oui : sans matière, pas de son.", indice:"Dans l'espace, le silence."},
+            {type:"qcm", q:"Dans l'air, le son se déplace à environ :", options:["340 m/s","300000 km/s","10 m/s","1 km/h"], answer:0, explain:"Environ 340 m/s dans l'air.", indice:"Bien plus lent que la lumière."},
+            {type:"qcm", q:"Le son va :", options:["moins vite que la lumière","plus vite que la lumière","à la même vitesse","instantanément"], answer:0, explain:"Le son est beaucoup plus lent que la lumière.", indice:"On le voit puis on l'entend."},
+            {type:"vf", q:"On voit l'éclair avant d'entendre le tonnerre car la lumière va plus vite que le son.", answer:true, explain:"Oui : la lumière arrive avant le son.", indice:"Lumière rapide, son plus lent."},
+            {type:"qcm", q:"On perçoit les sons grâce à :", options:["l'oreille","l'oeil","le nez","la main"], answer:0, explain:"L'oreille est l'organe de l'audition.", indice:"Organe pour entendre."},
+            {type:"vf", q:"Les sons trop forts peuvent abîmer l'oreille.", answer:true, explain:"Oui : il faut protéger son audition.", indice:"Attention au volume."},
+            {type:"qcm", q:"Quand un objet vibre plus vite, le son est :", options:["plus aigu","plus grave","inaudible","plus lent"], answer:0, explain:"Une vibration rapide donne un son aigu.", indice:"Aigu = vibration rapide."},
+            {type:"qcm", q:"Le son se propage dans :", options:["l'air, l'eau et les solides","le vide uniquement","la lumière","l'obscurité"], answer:0, explain:"Dans tout milieu matériel.", indice:"Partout où il y a de la matière."},
+            {type:"vf", q:"Sans matière (dans le vide), le son ne peut pas se propager.", answer:true, explain:"Oui : il a besoin d'un support matériel.", indice:"Pas de matière, pas de son."},
+            {type:"qcm", q:"La vibration des cordes vocales produit :", options:["la voix (un son)","de la lumière","de la chaleur seule","une odeur"], answer:0, explain:"Les cordes vocales vibrent et produisent la voix.", indice:"Ta voix est un son."}
           ]
         }
       ]
