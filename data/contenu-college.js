@@ -45,7 +45,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"m1", title:"Les nombres relatifs",
+          id:"m1", niveau:"5e", title:"Les nombres relatifs",
           cours:"Un <b>nombre relatif</b> peut être positif (ex : +5) ou négatif (ex : -3). " +
                 "Pour <b>additionner</b> deux nombres de même signe, on additionne et on garde le signe. " +
                 "De signes différents : on soustrait et on garde le signe du plus grand. " +
@@ -64,7 +64,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"m2", title:"Les fractions",
+          id:"m2", niveau:"5e", title:"Les fractions",
           cours:"Pour <b>additionner</b> des fractions, il faut le <b>même dénominateur</b>. " +
                 "Ex : 1/2 + 1/3 → on met sur 6 : 3/6 + 2/6 = 5/6. " +
                 "Prendre une fraction « de » un nombre = multiplier : 3/4 de 20 = 3×20/4 = 15.",
@@ -82,7 +82,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"m3", title:"La proportionnalité & les pourcentages",
+          id:"m3", niveau:"5e", title:"La proportionnalité & les pourcentages",
           cours:"Deux grandeurs sont <b>proportionnelles</b> si on passe de l'une à l'autre en multipliant " +
                 "toujours par le même nombre (le coefficient). Un <b>pourcentage</b> : 25 % d'un nombre = " +
                 "25/100 × ce nombre. Ex : 25 % de 80 = 20.",
@@ -102,7 +102,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"m4", title:"Géométrie : angles & triangles",
+          id:"m4", niveau:"5e", title:"Géométrie : angles & triangles",
           cours:"Dans tout triangle, la <b>somme des angles vaut 180°</b>. " +
                 "L'<b>aire d'un triangle</b> = (base × hauteur) ÷ 2. " +
                 "Deux angles <b>complémentaires</b> font 90°, deux angles <b>supplémentaires</b> font 180°.",
@@ -270,7 +270,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"f1", title:"Les classes de mots",
+          id:"f1", niveau:"6e", title:"Les classes de mots",
           cours:"Chaque mot appartient à une <b>classe</b> : le <b>nom</b> (dragon), le <b>déterminant</b> (le, un, ma), " +
                 "l'<b>adjectif</b> (puissant), le <b>verbe</b> (voler), l'<b>adverbe</b> (vite), le <b>pronom</b> (il, elle).",
           questions:[
@@ -291,7 +291,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"f2", title:"Conjugaison : présent de l'indicatif",
+          id:"f2", niveau:"6e", title:"Conjugaison : présent de l'indicatif",
           cours:"Au <b>présent</b>, les verbes du 1ᵉʳ groupe (-er) se terminent par " +
                 "-e, -es, -e, -ons, -ez, -ent. Attention aux verbes irréguliers : " +
                 "être (je suis, tu es, il est…), avoir (j'ai, tu as, il a…), aller (je vais, tu vas, il va…).",
@@ -311,7 +311,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"f3", title:"Les figures de style",
+          id:"f3", niveau:"5e", title:"Les figures de style",
           cours:"Une <b>comparaison</b> rapproche deux éléments avec un mot-outil (comme, tel, semblable à) : " +
                 "« fort <b>comme</b> un lion ». Une <b>métaphore</b> fait la même chose <i>sans</i> mot-outil : " +
                 "« cet homme est un lion ». La <b>personnification</b> donne des traits humains à une chose : " +
@@ -484,7 +484,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"h1", title:"Le Moyen Âge : la féodalité",
+          id:"h1", niveau:"5e", title:"Le Moyen Âge : la féodalité",
           cours:"Au Moyen Âge (Ve–XVe s.), la <b>société féodale</b> repose sur des liens : le <b>seigneur</b> " +
                 "donne une terre (le fief) à son <b>vassal</b> qui jure fidélité. Les <b>paysans</b> travaillent " +
                 "la terre du seigneur. Le <b>château fort</b> protège et symbolise le pouvoir.",
@@ -503,7 +503,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"h2", title:"Naissance et expansion de l'islam",
+          id:"h2", niveau:"5e", title:"Naissance et expansion de l'islam",
           cours:"L'islam naît au VIIᵉ siècle en Arabie. En <b>622</b>, Mahomet quitte La Mecque pour Médine : " +
                 "c'est l'<b>Hégire</b>, point de départ du calendrier musulman. Le livre sacré est le <b>Coran</b>. " +
                 "L'empire musulman s'étend ensuite très rapidement.",
@@ -521,7 +521,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"h3", title:"Géo : richesse et pauvreté dans le monde",
+          id:"h3", niveau:"5e", title:"Géo : richesse et pauvreté dans le monde",
           cours:"Le monde est marqué par de fortes <b>inégalités</b> de développement. On mesure la richesse " +
                 "d'un pays avec le <b>PIB</b>, et le développement humain (santé, éducation, niveau de vie) " +
                 "avec l'<b>IDH</b>. Les écarts existent entre pays, mais aussi à l'intérieur d'un même pays.",
@@ -537,7 +537,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"h4", title:"EMC : respect et lutte contre le harcèlement",
+          id:"h4", niveau:"5e", title:"EMC : respect et lutte contre le harcèlement",
           cours:"En EMC, on apprend les valeurs de la République : <b>liberté, égalité, fraternité</b> et la " +
                 "<b>laïcité</b>. Le <b>respect</b> d'autrui est essentiel. Le <b>harcèlement</b> est interdit : " +
                 "face à une situation, il faut en parler à un adulte de confiance.",
@@ -697,7 +697,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"s1", title:"Physique-Chimie : les états de la matière",
+          id:"s1", niveau:"5e", title:"Physique-Chimie : les états de la matière",
           cours:"La matière existe en 3 <b>états</b> : <b>solide</b> (forme propre), <b>liquide</b> (prend la forme " +
                 "du récipient), <b>gaz</b> (occupe tout l'espace). Les changements d'état ont des noms : " +
                 "<b>fusion</b> (solide→liquide), <b>solidification</b> (liquide→solide), <b>vaporisation</b> " +
@@ -718,7 +718,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"s2", title:"Physique : les circuits électriques",
+          id:"s2", niveau:"5e", title:"Physique : les circuits électriques",
           cours:"Un <b>circuit</b> simple comprend un générateur (pile), des fils et un récepteur (lampe). " +
                 "En <b>série</b>, les composants sont sur une seule boucle : si une lampe s'éteint, l'autre aussi. " +
                 "En <b>dérivation</b> (parallèle), chaque lampe est sur sa propre branche : elles sont indépendantes.",
@@ -737,7 +737,7 @@ var CONTENT = {
           ]
         },
         {
-          id:"s3", title:"SVT : le corps humain et la digestion",
+          id:"s3", niveau:"5e", title:"SVT : le corps humain et la digestion",
           cours:"La <b>digestion</b> transforme les aliments en nutriments, qui passent dans le sang au niveau " +
                 "de l'<b>intestin grêle</b>. Le trajet : bouche → œsophage → estomac → intestin grêle → gros intestin. " +
                 "Les nutriments servent à fournir de l'énergie et à construire le corps.",
