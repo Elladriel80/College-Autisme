@@ -2307,32 +2307,43 @@ function wrapText(s,max){
   words.forEach(w=>{ if((cur+" "+w).trim().length>max){ if(cur)lines.push(cur); cur=w; } else cur=(cur+" "+w).trim(); });
   if(cur) lines.push(cur); return lines;
 }
-/* Génère une carte mentale radiale en SVG à partir des notions-clés de la leçon */
+/* Carte mentale radiale en SVG. Préfère le champ rédigé `lesson.carte`
+   ({ centre, branches:[{titre, detail?}] }, 4 à 6 branches qui enseignent
+   vraiment) ; à défaut, repli sur les notions-clés (mots en gras) du cours.
+   Statique (aucune animation) : compatible Mode calme. */
 function mindmapSVG(lesson){
   const sub=subjectById(lesson.subjectId); const color=sub.color;
-  const terms=extractKeyTerms(lesson.cours);
-  const cx=260, cy=170, rx=185, ry=120, n=Math.max(terms.length,1);
-  let nodes="";
-  terms.forEach((t,i)=>{
+  let centre, branches;
+  if(lesson.carte && Array.isArray(lesson.carte.branches) && lesson.carte.branches.length){
+    centre = lesson.carte.centre || lesson.title;
+    branches = lesson.carte.branches.slice(0,6);
+  } else {
+    centre = lesson.title;
+    branches = extractKeyTerms(lesson.cours).slice(0,6).map(t=>({titre:t}));
+  }
+  const n=Math.max(branches.length,1);
+  const W=720, H=470, cx=W/2, cy=H/2, rx=250, ry=156;
+  let links="", boxes="";
+  branches.forEach((b,i)=>{
     const ang=(-90 + i*(360/n))*Math.PI/180;
     const x=cx+rx*Math.cos(ang), y=cy+ry*Math.sin(ang);
-    const lines=wrapText(t,16);
-    const w=Math.min(160, Math.max(64, t.length*7+16)), h=18*lines.length+14;
-    nodes+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${color}" stroke-width="2" opacity="0.55"/>`;
-    nodes+=`<rect x="${x-w/2}" y="${y-h/2}" width="${w}" height="${h}" rx="10" fill="#2c2456" stroke="${color}" stroke-width="1.5"/>`;
-    lines.forEach((ln,li)=>{
-      const ty=y-(lines.length-1)*9+li*18+4;
-      nodes+=`<text x="${x}" y="${ty}" text-anchor="middle" font-size="12" fill="#f3eefc" font-weight="600">${esc(ln)}</text>`;
-    });
+    const titreLines=wrapText(b.titre||"",18);
+    const detailLines=b.detail?wrapText(b.detail,26):[];
+    const boxW=196;
+    const boxH=14 + titreLines.length*21 + (detailLines.length?6+detailLines.length*17:0) + 10;
+    links+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${color}" stroke-width="2.5" opacity="0.5"/>`;
+    boxes+=`<rect x="${x-boxW/2}" y="${y-boxH/2}" width="${boxW}" height="${boxH}" rx="12" fill="#2c2456" stroke="${color}" stroke-width="2"/>`;
+    let ty=y-boxH/2+24;
+    titreLines.forEach(ln=>{ boxes+=`<text x="${x}" y="${ty}" text-anchor="middle" font-size="15.5" fill="#f3eefc" font-weight="700">${esc(ln)}</text>`; ty+=21; });
+    if(detailLines.length){ ty+=4; detailLines.forEach(ln=>{ boxes+=`<text x="${x}" y="${ty}" text-anchor="middle" font-size="13.5" fill="#cfc8ee">${esc(ln)}</text>`; ty+=17; }); }
   });
-  const tl=wrapText(lesson.title,18); let title="";
-  tl.forEach((ln,li)=>{
-    const ty=cy-(tl.length-1)*10+li*20+5;
-    title+=`<text x="${cx}" y="${ty}" text-anchor="middle" font-size="15" fill="#1a1633" font-weight="800">${esc(ln)}</text>`;
-  });
-  return `<svg viewBox="0 0 520 340" width="100%" style="max-height:340px" xmlns="http://www.w3.org/2000/svg">
-    ${nodes}
-    <ellipse cx="${cx}" cy="${cy}" rx="98" ry="58" fill="${color}"/>
+  const cLines=wrapText(centre,15);
+  const cRx=124, cRy=Math.max(60, 30+cLines.length*16);
+  let title=""; let cty=cy-(cLines.length-1)*12;
+  cLines.forEach(ln=>{ title+=`<text x="${cx}" y="${cty+6}" text-anchor="middle" font-size="18" fill="#1a1633" font-weight="800">${esc(ln)}</text>`; cty+=24; });
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-height:470px" role="img" aria-label="Carte mentale de la leçon ${esc(centre)}" xmlns="http://www.w3.org/2000/svg">
+    ${links}${boxes}
+    <ellipse cx="${cx}" cy="${cy}" rx="${cRx}" ry="${cRy}" fill="${color}"/>
     ${title}
   </svg>`;
 }
