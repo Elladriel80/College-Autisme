@@ -2,6 +2,28 @@
 
 Toutes les évolutions notables de l'application sont consignées ici.
 
+## [Non publié] — Objectif 1 : montée en charge du contenu collège (2026-06-04)
+
+Le collège passe de **47 à 70 leçons** et de **217 à 508 questions**, par vagues vérifiées
+(audit `enseignant`, calculs recalculés, faits contrôlés, zéro tiret cadratin), testées en
+navigateur, build `dist/` régénéré et déployées sur Vercel à chaque lot.
+
+- **Niveaux fiabilisés** : les 14 leçons sans `niveau` sont corrigées ; la **5ᵉ**, jusque-là
+  vide, est désormais peuplée. Plus aucune leçon « sans niveau ».
+- **6ᵉ** : Histoire-Géo (Préhistoire, Mésopotamie & écriture, Rome), Maths (division
+  euclidienne & divisibilité, symétrie axiale), Français (homophones a/à·et/est·son/sont,
+  groupe nominal & accords), Sciences (mélanges & solutions, objets techniques).
+- **5ᵉ** : Maths (symétrie centrale, aires triangle/parallélogramme), Français (futur,
+  homophones ses/ces·on/ont·ou/où, passé composé), Sciences (photosynthèse).
+- **4ᵉ** : Histoire (XIXᵉ : industrialisation & colonisation), Français (accord du participe
+  passé, conditionnel présent), Sciences (mouvement & vitesse, masse volumique, chaîne
+  d'énergie / d'information).
+- **3ᵉ** : Maths (programmer avec Scratch : boucles, conditions, coordonnées).
+- **Gaps du brief comblés** : **Algorithmique/Scratch** (Maths 4ᵉ et 3ᵉ) et **Technologie**
+  (objets techniques 6ᵉ, chaîne d'énergie/information 4ᵉ), qui étaient à 0 %.
+
+Répartition par niveau : 6ᵉ=19, 5ᵉ=18, 4ᵉ=20, 3ᵉ=13.
+
 ## [Non publié] — Démarrage sur l'accueil + dépôt prêt pour Vercel (2026-06-04)
 
 ### Ergonomie de démarrage (`Royaume-du-Savoir.html`)
