@@ -496,6 +496,88 @@ var CONTENT = {
             {type:"vf", q:"Un exemple sert à illustrer un argument et à le rendre plus convaincant.", answer:true,
              explain:"Oui : l'exemple rend l'argument concret et crédible."}
           ]
+        },
+        {
+          id:"f12", niveau:"6e", title:"Les homophones a / à, et / est, son / sont",
+          cours:"Des mots se prononcent pareil mais s'écrivent différemment (les <b>homophones</b>). Petites astuces : " +
+                "<b>a</b> (verbe avoir) se remplace par « <b>avait</b> », sinon c'est <b>à</b> (préposition). " +
+                "<b>est</b> (verbe être) se remplace par « <b>était</b> », sinon c'est <b>et</b> (qui relie, comme « et puis »). " +
+                "<b>sont</b> (verbe être) se remplace par « <b>étaient</b> », sinon c'est <b>son</b> (déterminant : son vélo).",
+          questions:[
+            {type:"qcm", q:"« Il ___ mangé une pomme. »", options:["a","à"], answer:0, explain:"On peut dire « il avait mangé » : c'est le verbe avoir, donc « a ».", indice:"Essaie de remplacer par « avait »."},
+            {type:"qcm", q:"« Je vais ___ Paris. »", options:["à","a"], answer:0, explain:"« avait » ne marche pas : c'est la préposition « à ».", indice:"On ne peut pas dire « je vais avait Paris »."},
+            {type:"qcm", q:"« Léo ___ content. »", options:["est","et"], answer:0, explain:"On peut dire « Léo était content » : verbe être, donc « est ».", indice:"Remplace par « était »."},
+            {type:"qcm", q:"« un chat ___ un chien »", options:["et","est"], answer:0, explain:"« et » relie deux mots (= et puis).", indice:"« était » ne marche pas ici."},
+            {type:"qcm", q:"« ___ vélo est rouge. »", options:["Son","Sont"], answer:0, explain:"« son vélo » : déterminant possessif (un seul vélo).", indice:"« étaient » ne marche pas : ce n'est pas le verbe être."},
+            {type:"qcm", q:"« Les enfants ___ sages. »", options:["sont","son"], answer:0, explain:"On peut dire « les enfants étaient sages » : verbe être, donc « sont ».", indice:"Remplace par « étaient »."},
+            {type:"vf", q:"Pour choisir « a » ou « à », on essaie de remplacer par « avait » : si ça marche, c'est « a ».", answer:true, explain:"Oui : « avait » fonctionne uniquement pour le verbe avoir.", indice:"« a » = avoir ; « à » = préposition."},
+            {type:"saisie", q:"Complète avec le bon mot (verbe avoir) : « Elle ___ un chien. »", answer:["a"], explain:"« Elle avait un chien » fonctionne : on écrit « a ».", indice:"Verbe avoir = « a »."},
+            {type:"qcm", q:"« Il habite ___ la campagne. »", options:["à","a"], answer:0, explain:"Préposition de lieu : « à ».", indice:"« avait » est impossible ici."},
+            {type:"qcm", q:"« Le ciel ___ bleu ___ les oiseaux chantent. »", options:["est / et","et / est","a / à","à / a"], answer:0, explain:"Le ciel EST bleu (être) ET les oiseaux (relie).", indice:"Le premier se remplace par « était »."},
+            {type:"vf", q:"« sont » est le verbe « être » conjugué (ils / elles sont).", answer:true, explain:"Oui : « ils sont » = « ils étaient » au présent.", indice:"Pense à « être » au pluriel."},
+            {type:"qcm", q:"« Mes voisins ___ en vacances. »", options:["sont","son"], answer:0, explain:"« Mes voisins étaient en vacances » : verbe être, donc « sont ».", indice:"Remplace par « étaient »."}
+          ]
+        },
+        {
+          id:"f13", niveau:"6e", title:"Le groupe nominal et les accords",
+          cours:"Un <b>groupe nominal</b> (GN) est construit autour d'un <b>nom</b> (le noyau), souvent avec un <b>déterminant</b> (le, la, un, des...) et un ou des <b>adjectifs</b>. " +
+                "Dans le GN, le déterminant et l'adjectif <b>s'accordent</b> avec le nom en <b>genre</b> (masculin / féminin) et en <b>nombre</b> (singulier / pluriel). " +
+                "Le <b>pluriel</b> des noms se forme souvent en ajoutant <b>-s</b>, parfois <b>-x</b> (un château, des châteaux).",
+          questions:[
+            {type:"qcm", q:"Dans le GN « un grand jardin », le nom noyau est :", options:["jardin","grand","un","aucun"], answer:0, explain:"Le noyau est le nom : « jardin ».", indice:"Cherche le mot principal qui désigne la chose."},
+            {type:"qcm", q:"Pluriel de « un chat noir » :", options:["des chats noirs","des chat noirs","des chats noir","des chats noires"], answer:0, explain:"Tout s'accorde au pluriel masculin : des chats noirs.", indice:"Déterminant, nom ET adjectif prennent la marque du pluriel."},
+            {type:"qcm", q:"Féminin de « un ami gentil » :", options:["une amie gentille","une ami gentil","une amie gentil","un amie gentille"], answer:0, explain:"Au féminin : une amie gentille.", indice:"Le nom et l'adjectif passent au féminin."},
+            {type:"vf", q:"Dans un groupe nominal, l'adjectif s'accorde en genre et en nombre avec le nom.", answer:true, explain:"Oui : c'est la règle d'accord dans le GN.", indice:"L'adjectif suit le nom auquel il se rapporte."},
+            {type:"qcm", q:"« des fleurs ___ » (adjectif « bleu ») :", options:["bleues","bleu","bleue","bleus"], answer:0, explain:"« fleurs » est féminin pluriel : bleues.", indice:"Féminin pluriel : -es."},
+            {type:"saisie", q:"Mets au pluriel : « un château ».", answer:["des châteaux","châteaux","les châteaux"], explain:"Pluriel en -x : des châteaux.", indice:"Les noms en -eau prennent un -x au pluriel."},
+            {type:"qcm", q:"Pluriel de « un cheval » :", options:["des chevaux","des chevals","des chevaus","des chevales"], answer:0, explain:"Les noms en -al font souvent -aux : des chevaux.", indice:"Pense à « journal » qui donne « journaux »."},
+            {type:"qcm", q:"Dans « les petites filles », « petites » est :", options:["un adjectif","un nom","un verbe","un déterminant"], answer:0, explain:"« petites » qualifie « filles » : c'est un adjectif.", indice:"Le mot qui décrit le nom est l'adjectif."},
+            {type:"vf", q:"« le », « la », « les », « un », « une », « des » sont des déterminants.", answer:true, explain:"Oui : ils introduisent le nom dans le GN.", indice:"Ils se placent devant le nom."},
+            {type:"qcm", q:"« une voiture ___ » (adjectif « rapide ») :", options:["rapide","rapides","rapidé","rapide(s)"], answer:0, explain:"Singulier : une voiture rapide (rapide est déjà au singulier).", indice:"Un seul objet : pas de -s."},
+            {type:"qcm", q:"Accorde : « des garçons ___ » (poli) :", options:["polis","poli","polie","polies"], answer:0, explain:"Masculin pluriel : polis.", indice:"Masculin pluriel : -s."},
+            {type:"saisie", q:"Pluriel de « un chou ».", answer:["des choux","choux","les choux"], explain:"« chou » prend un -x au pluriel : des choux.", indice:"Comme bijou, caillou, genou, hibou..."}
+          ]
+        },
+        {
+          id:"f14", niveau:"5e", title:"Le futur de l'indicatif",
+          cours:"Le <b>futur</b> de l'indicatif exprime une action qui se passera <b>plus tard</b>. " +
+                "Ses <b>terminaisons</b> sont les mêmes pour tous les verbes : <b>-ai, -as, -a, -ons, -ez, -ont</b>. " +
+                "Pour les verbes en -er, on part en général de l'infinitif (chanter, je chanterai). Verbes utiles : être (je serai), avoir (j'aurai), aller (j'irai), faire (je ferai).",
+          questions:[
+            {type:"qcm", q:"Le futur exprime une action qui se passe :", options:["plus tard (dans l'avenir)","maintenant","hier","il y a longtemps"], answer:0, explain:"Le futur situe l'action après le moment où l'on parle.", indice:"Pense au mot « demain »."},
+            {type:"qcm", q:"« Demain, je ___ (manger) une pomme. »", options:["mangerai","mangeais","mange","mangé"], answer:0, explain:"Futur, 1re personne : je mangerai.", indice:"Infinitif « manger » + terminaison -ai."},
+            {type:"qcm", q:"Les terminaisons du futur sont :", options:["-ai, -as, -a, -ons, -ez, -ont","-e, -es, -e, -ons, -ez, -ent","-ais, -ais, -ait, -ions, -iez, -aient","-s, -s, -t, -ons, -ez, -ent"], answer:0, explain:"Elles sont identiques pour tous les verbes au futur.", indice:"Elles ressemblent au verbe « avoir » au présent (ai, as, a...)."},
+            {type:"qcm", q:"« Nous ___ (chanter) demain. »", options:["chanterons","chantions","chanterions","chantons"], answer:0, explain:"Futur, nous : chanterons (-ons).", indice:"Attention à ne pas confondre avec le conditionnel « chanterions »."},
+            {type:"saisie", q:"Conjugue « être » au futur, 1re personne du singulier : « je ___ ».", answer:["serai","je serai"], explain:"je serai.", indice:"Pas « je serais » (ça, c'est le conditionnel)."},
+            {type:"saisie", q:"Conjugue « avoir » au futur : « j'___ ».", answer:["aurai","j'aurai","aurai."], explain:"j'aurai.", indice:"Le radical du futur de « avoir » est « aur »."},
+            {type:"qcm", q:"« Tu ___ (aller) à l'école. » (futur)", options:["iras","allais","vas","irais"], answer:0, explain:"Futur de « aller », tu : iras.", indice:"Le radical du futur de « aller » est « ir »."},
+            {type:"vf", q:"Au futur, tous les verbes ont les terminaisons -ai, -as, -a, -ons, -ez, -ont.", answer:true, explain:"Oui : seule la base change selon le verbe.", indice:"Les terminaisons ne changent jamais au futur."},
+            {type:"qcm", q:"« Ils ___ (faire) leurs devoirs. » (futur)", options:["feront","faisaient","font","feraient"], answer:0, explain:"Futur de « faire », ils : feront.", indice:"Radical « fer » + -ont."},
+            {type:"qcm", q:"« Vous ___ (finir) bientôt. » (futur)", options:["finirez","finissez","finissiez","finiriez"], answer:0, explain:"Futur de « finir », vous : finirez.", indice:"Infinitif « finir » + -ez."},
+            {type:"vf", q:"« je mangerai » est au futur ; « je mangerais » (avec s) est au conditionnel.", answer:true, explain:"Oui : le -s final change le temps.", indice:"Le conditionnel se termine par -ais, -ais, -ait..."},
+            {type:"qcm", q:"« Elle ___ (venir) demain. » (futur)", options:["viendra","venait","vient","viendrait"], answer:0, explain:"Futur de « venir », elle : viendra.", indice:"Radical « viendr » + -a."}
+          ]
+        },
+        {
+          id:"f15", niveau:"5e", title:"Les homophones ses / ces, on / ont, ou / où",
+          cours:"Encore des homophones, avec leurs astuces : " +
+                "<b>ses</b> (à lui, à elle : ses livres) et <b>ces</b> (que l'on montre : ces livres-là). " +
+                "<b>on</b> (pronom, = il) se remplace par « <b>il</b> » ; <b>ont</b> (verbe avoir) se remplace par « <b>avaient</b> ». " +
+                "<b>ou</b> (= ou bien) et <b>où</b> (le lieu : la ville où je vis).",
+          questions:[
+            {type:"qcm", q:"« Il range ___ affaires. » (les siennes)", options:["ses","ces"], answer:0, explain:"« ses affaires » = les siennes (possessif).", indice:"On peut dire « ses propres affaires »."},
+            {type:"qcm", q:"« Regarde ___ montagnes ! » (celles-là)", options:["ces","ses"], answer:0, explain:"« ces montagnes » = celles que l'on montre (démonstratif).", indice:"On pourrait ajouter « -là » : ces montagnes-là."},
+            {type:"qcm", q:"« ___ va à la piscine. » (pronom)", options:["On","Ont"], answer:0, explain:"« On va » = « il va » : pronom « on ».", indice:"Remplace par « il »."},
+            {type:"qcm", q:"« Les enfants ___ fini. » (verbe avoir)", options:["ont","on"], answer:0, explain:"« Les enfants avaient fini » : verbe avoir, donc « ont ».", indice:"Remplace par « avaient »."},
+            {type:"qcm", q:"« Tu veux du thé ___ du café ? »", options:["ou","où"], answer:0, explain:"« ou » = « ou bien » (un choix).", indice:"Sans accent quand on peut dire « ou bien »."},
+            {type:"qcm", q:"« ___ vas-tu ? » (lieu)", options:["Où","Ou"], answer:0, explain:"« où » avec accent indique le lieu.", indice:"Il s'agit d'un endroit, pas d'un choix."},
+            {type:"vf", q:"Pour choisir « on » ou « ont », on remplace par « avaient » : si ça marche, c'est « ont ».", answer:true, explain:"Oui : « avaient » = verbe avoir = « ont ».", indice:"« on » se remplace par « il », pas par « avaient »."},
+            {type:"saisie", q:"Complète (pronom, = il) : « ___ a gagné ! »", answer:["On","on"], explain:"« On a gagné » = « il a gagné ».", indice:"Remplace par « il »."},
+            {type:"qcm", q:"« Mets ___ chaussures. » (les siennes)", options:["ses","ces"], answer:0, explain:"Possessif : ses chaussures (les siennes).", indice:"Ce sont SES chaussures à elle/lui."},
+            {type:"vf", q:"« où » avec un accent indique un lieu (la maison où je vis).", answer:true, explain:"Oui : « où » de lieu prend un accent.", indice:"Pense à « l'endroit où »."},
+            {type:"qcm", q:"« Ils ___ beaucoup d'amis. »", options:["ont","on"], answer:0, explain:"« Ils avaient beaucoup d'amis » : verbe avoir, donc « ont ».", indice:"Remplace par « avaient »."},
+            {type:"qcm", q:"« Je ne sais pas ___ il habite. » (lieu)", options:["où","ou"], answer:0, explain:"Lieu : « où » avec accent.", indice:"C'est l'endroit où il habite."}
+          ]
         }
       ]
     },
@@ -985,6 +1067,47 @@ var CONTENT = {
              explain:"Un gène est une portion d'ADN responsable d'un caractère."},
             {type:"vf", q:"L'hérédité, c'est la transmission de caractères des parents à leurs enfants.", answer:true,
              explain:"Oui : les caractères se transmettent de génération en génération."}
+          ]
+        },
+        {
+          id:"s12", niveau:"6e", title:"Mélanges et solutions",
+          cours:"Un <b>mélange homogène</b> est un mélange où l'on ne distingue plus les constituants (eau salée, eau sucrée). " +
+                "Un <b>mélange hétérogène</b> laisse voir les constituants (eau + huile, eau + sable). " +
+                "Quand un solide <b>se dissout</b> dans un liquide, on obtient une <b>solution</b> (le solide est le <b>soluté</b>, le liquide est le <b>solvant</b>). " +
+                "Pour séparer : la <b>filtration</b> retient un solide non dissous, l'<b>évaporation</b> récupère un solide dissous (le sel de l'eau salée).",
+          questions:[
+            {type:"qcm", q:"Eau + sel bien mélangés : on ne voit plus le sel. C'est un mélange :", options:["homogène","hétérogène","pur","solide"], answer:0, explain:"On ne distingue plus les constituants : mélange homogène.", indice:"« Homo » veut dire « pareil partout »."},
+            {type:"qcm", q:"Eau + huile : on voit deux couches. C'est un mélange :", options:["hétérogène","homogène","pur","gazeux"], answer:0, explain:"On distingue les constituants : mélange hétérogène.", indice:"« Hétéro » veut dire « différent »."},
+            {type:"vf", q:"Une solution, comme l'eau salée, est un mélange homogène.", answer:true, explain:"Oui : le soluté dissous ne se voit plus.", indice:"On ne distingue plus le sel dans l'eau."},
+            {type:"qcm", q:"Quand le sel disparaît dans l'eau, on dit qu'il se :", options:["dissout","évapore","congèle","filtre"], answer:0, explain:"Le sel se dissout : il se mélange à l'échelle invisible.", indice:"Le verbe vient de « dissolution »."},
+            {type:"qcm", q:"Pour séparer l'eau et le sable, on utilise la :", options:["filtration","évaporation","congélation","dissolution"], answer:0, explain:"Le filtre retient le sable (solide non dissous) et laisse passer l'eau.", indice:"On verse à travers un filtre."},
+            {type:"qcm", q:"Pour récupérer le sel dissous dans l'eau salée, on fait :", options:["évaporer l'eau","une filtration","congeler","ajouter du sucre"], answer:0, explain:"L'eau s'évapore, le sel reste au fond.", indice:"Pense aux marais salants au soleil."},
+            {type:"vf", q:"La filtration permet de séparer le sel dissous de l'eau.", answer:false, explain:"Non : le sel dissous traverse le filtre. Il faut faire évaporer l'eau.", indice:"Un filtre n'arrête que ce qui n'est pas dissous."},
+            {type:"qcm", q:"Dans l'eau sucrée, le sucre est :", options:["le soluté","le solvant","un filtre","un gaz"], answer:0, explain:"Le soluté est le solide qui se dissout (le sucre).", indice:"C'est ce qui est dissous."},
+            {type:"qcm", q:"Dans l'eau sucrée, l'eau joue le rôle de :", options:["solvant","soluté","solide","gaz"], answer:0, explain:"Le solvant est le liquide qui dissout (l'eau).", indice:"C'est ce qui dissout le sucre."},
+            {type:"vf", q:"L'air est un mélange de plusieurs gaz.", answer:true, explain:"Oui : surtout du diazote et du dioxygène.", indice:"L'air n'est pas un seul gaz pur."},
+            {type:"qcm", q:"Eau + sable : on laisse reposer, le sable tombe au fond, puis on verse doucement le liquide. C'est la :", options:["décantation","évaporation","dissolution","fusion"], answer:0, explain:"La décantation sépare en laissant reposer.", indice:"On laisse « décanter », c'est-à-dire reposer."},
+            {type:"vf", q:"Quand on dissout du sel dans l'eau, la masse totale (eau + sel) est conservée.", answer:true, explain:"Oui : rien ne disparaît, la masse se conserve.", indice:"Le sel est toujours là, simplement invisible."}
+          ]
+        },
+        {
+          id:"s13", niveau:"6e", title:"Les objets techniques (Technologie)",
+          cours:"Un <b>objet technique</b> est <b>fabriqué par l'être humain</b> pour <b>répondre à un besoin</b> (un vélo, un parapluie, une montre). " +
+                "Sa <b>fonction d'usage</b> est ce à quoi il sert ; sa <b>fonction d'estime</b> est ce qui plaît (forme, couleur). " +
+                "Il est fait de <b>matériaux</b> (métal, plastique, bois, verre...) choisis selon leurs <b>propriétés</b>. La liste des besoins et contraintes à respecter s'appelle le <b>cahier des charges</b>.",
+          questions:[
+            {type:"qcm", q:"Un objet technique est fabriqué pour :", options:["répondre à un besoin","décorer seulement","pousser tout seul","exister par hasard"], answer:0, explain:"Tout objet technique répond à un besoin humain.", indice:"On le crée parce qu'on en a besoin."},
+            {type:"vf", q:"Un arbre est un objet technique.", answer:false, explain:"Non : un arbre est naturel. Un objet technique est fabriqué par l'être humain.", indice:"Naturel ou fabriqué ?"},
+            {type:"qcm", q:"La « fonction d'usage » d'un objet, c'est :", options:["ce à quoi il sert","sa couleur","son prix","son poids"], answer:0, explain:"La fonction d'usage répond à « à quoi ça sert ? ».", indice:"Pense à l'utilité de l'objet."},
+            {type:"qcm", q:"La fonction d'usage d'un parapluie est de :", options:["protéger de la pluie","éclairer la nuit","mesurer le temps","faire du bruit"], answer:0, explain:"Un parapluie sert à se protéger de la pluie.", indice:"À quoi sert un parapluie quand il pleut ?"},
+            {type:"qcm", q:"La « fonction d'estime », c'est :", options:["ce qui plaît (forme, couleur)","ce à quoi il sert","son matériau","son poids"], answer:0, explain:"La fonction d'estime concerne le goût, l'esthétique.", indice:"C'est ce qui donne envie de le choisir, au-delà de l'utilité."},
+            {type:"qcm", q:"Le verre, le bois, le métal, le plastique sont des :", options:["matériaux","besoins","fonctions","énergies"], answer:0, explain:"Ce sont des matériaux qui servent à fabriquer les objets.", indice:"Ce sont les « matières » de fabrication."},
+            {type:"vf", q:"On choisit le matériau d'un objet selon ses propriétés (solidité, légèreté...).", answer:true, explain:"Oui : par exemple le plastique pour la légèreté.", indice:"Chaque matériau a ses avantages."},
+            {type:"qcm", q:"La liste des besoins et contraintes à respecter pour concevoir un objet s'appelle :", options:["le cahier des charges","le mode d'emploi","le ticket de caisse","le plan de la ville"], answer:0, explain:"Le cahier des charges fixe ce que l'objet doit respecter.", indice:"C'est un « cahier » de règles à suivre."},
+            {type:"vf", q:"Un objet technique peut être composé de plusieurs pièces assemblées.", answer:true, explain:"Oui : par exemple un vélo (roues, cadre, guidon...).", indice:"Pense à toutes les parties d'un vélo."},
+            {type:"qcm", q:"Un vélo sert principalement à :", options:["se déplacer","cuire des aliments","éclairer","mesurer le temps"], answer:0, explain:"La fonction d'usage du vélo est le déplacement.", indice:"À quoi sert un vélo ?"},
+            {type:"qcm", q:"Lequel est un objet technique ?", options:["une montre","un caillou","un nuage","une fleur"], answer:0, explain:"La montre est fabriquée pour donner l'heure ; les autres sont naturels.", indice:"Lequel a été fabriqué par l'être humain ?"},
+            {type:"vf", q:"Le plastique est souvent choisi parce qu'il est léger et peu coûteux.", answer:true, explain:"Oui : ce sont deux de ses propriétés utiles.", indice:"Léger et bon marché : pratique pour beaucoup d'objets."}
           ]
         }
       ]
