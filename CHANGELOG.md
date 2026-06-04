@@ -2,6 +2,26 @@
 
 Toutes les évolutions notables de l'application sont consignées ici.
 
+## [Non publié] — Démarrage sur l'accueil + dépôt prêt pour Vercel (2026-06-04)
+
+### Ergonomie de démarrage (`Royaume-du-Savoir.html`)
+
+- Au lancement, l'app **affiche désormais toujours la page d'accueil** (sélection de
+  profil). Fini la replongée automatique dans le dernier monde, qui empêchait de voir
+  l'accueil et le reste de l'app.
+- **Bouton « ▶ Reprendre »** sur chaque carte de profil pour retourner volontairement
+  là où l'enfant s'était arrêté (la carte reste aussi cliquable).
+- Le **dernier profil utilisé** est mis en avant (badge « ⏱️ Dernier profil »), via une
+  nouvelle clé `rds_last`. Compatibilité ascendante : à défaut, on retombe sur `rds_active`.
+- **Aucune perte de progression** : les sauvegardes par profil (`rds_save_*`) et les
+  préférences d'accessibilité (`applyPrefs()`) sont préservées.
+
+### Déploiement Vercel (statique)
+
+- Ajout de `vercel.json` (site statique, `cleanUrls`, en-têtes de sécurité, type MIME
+  des `data/*.js`) et de `.vercelignore` (ne publier que l'app, pas les docs/sauvegardes).
+- Procédure de connexion documentée dans le README. Auto-déploiement à chaque `push`.
+
 ## [Non publié] — Générateur de maths collège reconstruit (2026-06-04)
 
 Reconstruction, **uniquement via les outils d'édition fichier (jamais le shell)**,

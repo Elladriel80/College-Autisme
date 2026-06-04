@@ -113,6 +113,26 @@ Chaque leçon intègre une vidéo issue de chaînes francophones de qualité, cr
 modulaire) pour tester, puis lancer `node build.js` pour régénérer le `dist/`.
 Détails dans `CONTRIBUTING.md`.
 
+## ☁️ Déploiement (Vercel)
+
+Le site est **statique** : la version modulaire (`Royaume-du-Savoir.html` + `data/`)
+se sert telle quelle, sans étape de build côté serveur. Le dépôt est prêt pour
+Vercel (fichier `vercel.json`, et `.vercelignore` pour ne publier que l'app).
+
+Mise en place (à faire une seule fois, déploiement automatique à chaque `push` ensuite) :
+
+1. Sur [vercel.com](https://vercel.com), se connecter (compte GitHub).
+2. **Add New… > Project**, puis importer le dépôt `College-Autisme`.
+3. Framework Preset : **Other** ; Build Command : **vide** ; Output Directory : **`.`** (racine).
+   `vercel.json` est détecté automatiquement.
+4. **Deploy**. À chaque `git push` sur la branche de production, Vercel redéploie tout seul.
+
+En ligne de commande (alternative) : `npm i -g vercel`, puis `vercel` (préversion)
+ou `vercel --prod` depuis la racine du dépôt.
+
+> Le fichier unique `dist/Royaume-du-Savoir.html` reste destiné à l'usage **hors-ligne**
+> (double-clic) ; il n'est pas nécessaire au site déployé.
+
 ## 🗺️ Feuille de route
 
 - [x] Ajouter le programme de **3ᵉ** (année du brevet). ✅
