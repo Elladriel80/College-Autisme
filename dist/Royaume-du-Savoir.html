@@ -374,7 +374,7 @@
 <script>
 /* —— inliné depuis data/contenu-college.js (build.js) —— */
 /* =========================================================================
-   DONNÉES — CONTENU COLLÈGE (Le Royaume du Savoir)
+   DONNEES, CONTENU COLLEGE (Le Royaume du Savoir)
    -------------------------------------------------------------------------
    Ce fichier ne contient QUE des données (aucune logique de moteur).
    Une enseignante ou un enseignant peut ajouter une leçon ICI, sans toucher
@@ -994,7 +994,7 @@ var CONTENT = {
              explain:"Elle se termine en 1918 (armistice le 11 novembre)."},
             {type:"qcm", q:"L'armistice de la Première Guerre mondiale a été signé le :",
              options:["11 novembre 1918","14 juillet 1789","8 mai 1945","1er septembre 1939"], answer:0,
-             explain:"Le 11 novembre 1918 — d'où le jour férié de commémoration."},
+             explain:"Le 11 novembre 1918 (d'où le jour férié de commémoration)."},
             {type:"qcm", q:"Les soldats combattaient souvent depuis des :",
              options:["tranchées","châteaux forts","pyramides","gratte-ciels"], answer:0,
              explain:"La guerre des tranchées caractérise ce conflit."},
@@ -1039,6 +1039,75 @@ var CONTENT = {
              explain:"« Liberté, Égalité, Fraternité » est la devise républicaine."},
             {type:"vf", q:"La laïcité garantit la liberté de croire ou de ne pas croire, et la neutralité de l'État.", answer:true,
              explain:"Oui : c'est le principe de laïcité (loi de 1905)."}
+          ]
+        },
+        {
+          id:"h13", niveau:"6e", title:"La Préhistoire",
+          cours:"La <b>Préhistoire</b> est la très longue période qui va de l'apparition des premiers humains jusqu'à l'invention de l'<b>écriture</b> (vers 3300 av. J.-C.). " +
+                "Au <b>Paléolithique</b> (âge de la pierre <b>taillée</b>), les humains sont <b>nomades</b> : ils vivent de la <b>chasse</b>, de la pêche et de la <b>cueillette</b>, et maîtrisent le <b>feu</b>. " +
+                "Au <b>Néolithique</b> (âge de la pierre <b>polie</b>), une grande nouveauté apparaît : l'<b>agriculture</b> et l'<b>élevage</b>. Les humains se <b>sédentarisent</b> et fondent les premiers villages.",
+          questions:[
+            {type:"qcm", q:"La Préhistoire se termine avec l'invention de :", options:["l'écriture","l'imprimerie","la voiture","Internet"], answer:0, explain:"L'invention de l'écriture (vers 3300 av. J.-C.) marque la fin de la Préhistoire.", indice:"C'est ce qui permet de noter et de transmettre les mots."},
+            {type:"saisie", q:"Comment appelle-t-on la longue période AVANT l'écriture ?", answer:["la Préhistoire","Préhistoire","prehistoire","la prehistoire"], explain:"C'est la Préhistoire.", indice:"Le préfixe « pré » veut dire « avant »."},
+            {type:"qcm", q:"« Paléolithique » signifie l'âge de la pierre :", options:["taillée","polie","précieuse","fondue"], answer:0, explain:"Paléolithique = âge de la pierre taillée (outils éclatés).", indice:"C'est la pierre travaillée en la cassant, pas en la lissant."},
+            {type:"qcm", q:"« Néolithique » signifie l'âge de la pierre :", options:["polie","taillée","brûlée","peinte"], answer:0, explain:"Néolithique = âge de la pierre polie (outils lissés).", indice:"C'est l'inverse de « taillée » : la pierre est lissée."},
+            {type:"qcm", q:"Au Paléolithique, les humains se nourrissent surtout grâce à :", options:["la chasse et la cueillette","les supermarchés","l'agriculture","l'élevage"], answer:0, explain:"Ils chassent, pêchent et cueillent : ils ne produisent pas encore leur nourriture.", indice:"Ils prennent ce que la nature offre, sans cultiver."},
+            {type:"vf", q:"Au Paléolithique, les humains sont nomades : ils se déplacent souvent.", answer:true, explain:"Oui : ils suivent le gibier et les saisons.", indice:"« Nomade » veut dire qui n'a pas d'habitation fixe."},
+            {type:"qcm", q:"La grande nouveauté du Néolithique est l'apparition de :", options:["l'agriculture et l'élevage","l'électricité","l'écriture","l'imprimerie"], answer:0, explain:"C'est la « révolution néolithique » : on cultive et on élève des animaux.", indice:"Cela permet de produire soi-même sa nourriture."},
+            {type:"vf", q:"Au Néolithique, les humains se sédentarisent et fondent les premiers villages.", answer:true, explain:"Oui : en cultivant, ils restent au même endroit.", indice:"« Sédentaire » est le contraire de « nomade »."},
+            {type:"qcm", q:"Les peintures de la grotte de Lascaux datent de la :", options:["Préhistoire","Antiquité","Moyen Âge","époque moderne"], answer:0, explain:"Lascaux (Dordogne) est un art pariétal du Paléolithique, donc préhistorique.", indice:"C'est très ancien, bien avant l'écriture."},
+            {type:"vf", q:"Les hommes préhistoriques savaient maîtriser le feu.", answer:true, explain:"Oui : le feu sert à se chauffer, cuire et se protéger.", indice:"Pense aux foyers retrouvés par les archéologues."},
+            {type:"qcm", q:"L'espèce humaine actuelle (Homo sapiens) est apparue d'abord en :", options:["Afrique","Europe","Amérique","Australie"], answer:0, explain:"Homo sapiens apparaît en Afrique, puis migre vers les autres continents.", indice:"C'est le continent où l'on a trouvé les plus anciens fossiles."},
+            {type:"vf", q:"L'agriculture permet de produire sa nourriture au lieu de seulement la chasser ou la cueillir.", answer:true, explain:"Oui : c'est tout l'intérêt de cultiver et d'élever.", indice:"Produire soi-même plutôt que prélever dans la nature."},
+            {type:"qcm", q:"Les premiers outils du Paléolithique sont surtout en :", options:["pierre, os et bois","fer","plastique","or"], answer:0, explain:"On taille la pierre, on utilise os et bois ; les métaux viennent plus tard.", indice:"Quels matériaux trouve-t-on directement dans la nature ?"},
+            {type:"vf", q:"La poterie (récipients en terre cuite) se développe au Néolithique.", answer:true, explain:"Oui : avec la vie sédentaire, on fabrique des poteries pour stocker.", indice:"On en a besoin quand on reste au même endroit pour conserver les récoltes."},
+            {type:"saisie", q:"Quelle grande période commence APRÈS la Préhistoire, avec l'écriture ?", answer:["l'Antiquité","Antiquité","antiquite","l'antiquite"], explain:"Après la Préhistoire vient l'Antiquité.", indice:"C'est l'époque de l'Égypte des pharaons et de Rome."}
+          ]
+        },
+        {
+          id:"h14", niveau:"6e", title:"La Mésopotamie et la naissance de l'écriture",
+          cours:"Vers 3300 av. J.-C., en <b>Mésopotamie</b> (mot qui signifie « entre deux fleuves », le <b>Tigre</b> et l'<b>Euphrate</b>, dans l'actuel Irak), les <b>Sumériens</b> inventent l'<b>écriture</b>. " +
+                "C'est l'écriture <b>cunéiforme</b> (en forme de coins), tracée avec un roseau sur des <b>tablettes d'argile</b>. " +
+                "Elle sert d'abord à <b>compter</b> et à noter les échanges. Son invention marque le début de l'<b>Histoire</b>.",
+          questions:[
+            {type:"saisie", q:"Vers quelle année (av. J.-C.) l'écriture est-elle inventée ?", answer:["3300","-3300","3300 av. J.-C.","vers 3300"], explain:"L'écriture apparaît en Mésopotamie vers 3300 av. J.-C.", indice:"Il y a plus de 5000 ans."},
+            {type:"qcm", q:"La Mésopotamie se trouve entre deux fleuves :", options:["le Tigre et l'Euphrate","le Nil et le Rhône","la Seine et la Loire","le Gange et l'Indus"], answer:0, explain:"« Mésopotamie » veut dire « entre deux fleuves » : le Tigre et l'Euphrate.", indice:"Ces fleuves coulent dans l'actuel Irak."},
+            {type:"qcm", q:"La première écriture s'appelle l'écriture :", options:["cunéiforme","alphabétique","numérique","secrète"], answer:0, explain:"L'écriture des Sumériens est dite cunéiforme (en forme de coins).", indice:"Son nom vient du latin « cuneus » : le coin."},
+            {type:"qcm", q:"Sur quoi écrivait-on en Mésopotamie ?", options:["des tablettes d'argile","des feuilles de papier","des écrans","des plaques de métal"], answer:0, explain:"On gravait l'argile humide avec un roseau (calame), puis on la laissait sécher.", indice:"C'est une matière molle que l'on trouve près des fleuves."},
+            {type:"vf", q:"L'invention de l'écriture marque le début de l'Histoire.", answer:true, explain:"Oui : avant l'écriture, c'est la Préhistoire.", indice:"« Histoire » et « écriture » sont liées : on peut enfin lire des traces écrites."},
+            {type:"qcm", q:"Quel peuple a fondé les premières grandes cités (Ur, Uruk) ?", options:["les Sumériens","les Gaulois","les Vikings","les Aztèques"], answer:0, explain:"Les Sumériens fondent les premières cités-États de Mésopotamie.", indice:"Leur nom ressemble à la région de « Sumer »."},
+            {type:"vf", q:"La Mésopotamie correspond en partie à l'Irak actuel.", answer:true, explain:"Oui : c'est au Proche-Orient, autour du Tigre et de l'Euphrate.", indice:"Pense à la carte du Proche-Orient aujourd'hui."},
+            {type:"qcm", q:"À quoi servait d'abord l'écriture ?", options:["à compter et noter les échanges","à écrire des romans","à envoyer des messages","à faire de la publicité"], answer:0, explain:"Les premières tablettes sont surtout des comptes (quantités de grain, d'animaux).", indice:"Pense au commerce et aux stocks à gérer."},
+            {type:"qcm", q:"Le mot « Mésopotamie » signifie :", options:["entre deux fleuves","pays du soleil","terre du milieu","grande plaine"], answer:0, explain:"Du grec « mésos » (au milieu) et « potamos » (fleuve).", indice:"Regarde la composition du mot : « méso » et « potam »."},
+            {type:"qcm", q:"Le Code de Hammurabi est :", options:["un des plus anciens recueils de lois","une carte du monde","un livre de cuisine","un calendrier"], answer:0, explain:"Vers 1750 av. J.-C., le roi Hammurabi de Babylone fait graver un recueil de lois.", indice:"Il s'agit de règles écrites pour la société."},
+            {type:"saisie", q:"Comment appelle-t-on le grand temple mésopotamien en forme de pyramide à étages ?", answer:["ziggourat","une ziggourat","ziggurat","la ziggourat"], explain:"C'est la ziggourat, un temple à étages.", indice:"Le mot commence par « zig »."},
+            {type:"vf", q:"On écrivait le cunéiforme avec un roseau taillé appelé calame.", answer:true, explain:"Oui : le calame imprimait des signes en forme de coins dans l'argile.", indice:"C'est un outil végétal, pas un stylo moderne."},
+            {type:"qcm", q:"L'écriture cunéiforme est faite de signes en forme de :", options:["coins (clous)","ronds","fleurs","animaux"], answer:0, explain:"Les signes ressemblent à de petits coins ou clous.", indice:"« Cunéiforme » contient l'idée de « coin »."},
+            {type:"vf", q:"En Égypte, à la même époque, on utilisait une autre écriture : les hiéroglyphes.", answer:true, explain:"Oui : les hiéroglyphes égyptiens sont une autre écriture ancienne.", indice:"Pense aux dessins gravés sur les temples égyptiens."},
+            {type:"qcm", q:"La Mésopotamie se situe :", options:["au Proche-Orient","en Amérique","en Australie","au pôle Nord"], answer:0, explain:"C'est au Proche-Orient, autour du Tigre et de l'Euphrate.", indice:"C'est près de l'actuel Irak."}
+          ]
+        },
+        {
+          id:"h15", niveau:"6e", title:"Rome : de la République à l'Empire",
+          cours:"D'après la légende, <b>Rome</b> est fondée en <b>753 av. J.-C.</b> par <b>Romulus</b> (les jumeaux Romulus et Remus auraient été élevés par une <b>louve</b>). " +
+                "En <b>509 av. J.-C.</b>, Rome devient une <b>République</b>, dirigée par le <b>Sénat</b> et des <b>consuls</b>. Le général <b>Jules César</b> conquiert la <b>Gaule</b>. " +
+                "En <b>27 av. J.-C.</b>, <b>Auguste</b> devient le <b>premier empereur</b> : c'est le début de l'<b>Empire romain</b>, qui s'étend autour de la mer Méditerranée. La langue des Romains est le <b>latin</b>.",
+          questions:[
+            {type:"saisie", q:"Selon la légende, en quelle année (av. J.-C.) Rome est-elle fondée ?", answer:["753","-753","753 av. J.-C."], explain:"La fondation légendaire de Rome est datée de 753 av. J.-C.", indice:"C'est au VIIIᵉ siècle av. J.-C."},
+            {type:"qcm", q:"D'après la légende, Rome a été fondée par :", options:["Romulus","Jules César","Auguste","Napoléon"], answer:0, explain:"Romulus, l'un des deux jumeaux, est le fondateur légendaire.", indice:"Son nom ressemble beaucoup à « Rome »."},
+            {type:"qcm", q:"Dans la légende, les jumeaux Romulus et Remus sont élevés par :", options:["une louve","un aigle","un ours","un cheval"], answer:0, explain:"La louve qui allaite les jumeaux est un symbole de Rome.", indice:"C'est un animal sauvage qui hurle à la lune."},
+            {type:"saisie", q:"En quelle année (av. J.-C.) commence la République romaine ?", answer:["509","-509","509 av. J.-C."], explain:"La République est instaurée en 509 av. J.-C., après la royauté.", indice:"C'est à la fin du VIᵉ siècle av. J.-C."},
+            {type:"qcm", q:"Sous la République, Rome est dirigée notamment par :", options:["le Sénat et des consuls","un pharaon","un calife","un roi unique"], answer:0, explain:"Le Sénat et les magistrats (consuls) gouvernent la République.", indice:"Ce n'est pas un seul chef, mais une assemblée et des élus."},
+            {type:"qcm", q:"Quel général romain a conquis la Gaule ?", options:["Jules César","Charlemagne","Vercingétorix","Clovis"], answer:0, explain:"Jules César conquiert la Gaule (guerre des Gaules).", indice:"Il a aussi donné son nom au mois de juillet (Iulius)."},
+            {type:"qcm", q:"En 52 av. J.-C., César bat le chef gaulois Vercingétorix à :", options:["Alésia","Gergovie","Carthage","Marathon"], answer:0, explain:"La reddition de Vercingétorix a lieu à Alésia en 52 av. J.-C.", indice:"Le nom du lieu commence par « Alé »."},
+            {type:"qcm", q:"Qui devient le premier empereur romain en 27 av. J.-C. ?", options:["Auguste","Jules César","Néron","Romulus"], answer:0, explain:"Octave, devenu Auguste, est le premier empereur en 27 av. J.-C.", indice:"Un mois de l'année (le 8ᵉ) porte son nom."},
+            {type:"vf", q:"Jules César a été le tout premier empereur de Rome.", answer:false, explain:"Non : César était général et dictateur ; le premier empereur est Auguste (27 av. J.-C.).", indice:"Méfie-toi : César est célèbre, mais l'Empire commence après lui."},
+            {type:"qcm", q:"La langue des Romains était :", options:["le latin","le grec","le gaulois","l'arabe"], answer:0, explain:"Le latin est la langue de Rome ; il a donné le français.", indice:"Le français en est une « langue fille »."},
+            {type:"vf", q:"L'Empire romain s'étendait autour de la mer Méditerranée.", answer:true, explain:"Oui : la Méditerranée était surnommée « Mare Nostrum » (notre mer).", indice:"Pense à une mer entourée par l'Empire."},
+            {type:"qcm", q:"La diffusion du mode de vie romain (villes, routes, latin) s'appelle :", options:["la romanisation","la mondialisation","la colonisation grecque","la féodalité"], answer:0, explain:"La romanisation diffuse la culture romaine dans tout l'Empire.", indice:"Le mot contient « Rome »."},
+            {type:"qcm", q:"Le christianisme apparaît :", options:["dans l'Empire romain, au Iᵉ siècle","à la Préhistoire","au Moyen Âge","au XXᵉ siècle"], answer:0, explain:"Le christianisme naît au Iᵉ siècle en Judée, alors province romaine.", indice:"C'est à l'époque de l'Empire, pas avant Rome."},
+            {type:"vf", q:"Le Colisée est un grand amphithéâtre construit par les Romains.", answer:true, explain:"Oui : on y donnait des combats de gladiateurs et des spectacles.", indice:"C'est un monument célèbre encore visible à Rome."},
+            {type:"qcm", q:"Dans l'ordre, Rome a d'abord été une royauté, puis :", options:["une République, puis un Empire","un Empire, puis une République","une démocratie grecque","une colonie égyptienne"], answer:0, explain:"Royauté (753 av. J.-C.), puis République (509), puis Empire (27 av. J.-C.).", indice:"La République vient avant l'Empire d'Auguste."}
           ]
         }
       ]
