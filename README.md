@@ -4,7 +4,7 @@
 > 🐣 **Les Petits Malins** (les bases, dès le CP : lecture, calcul, langues, histoire) ou 🏰 **Le Royaume du Savoir** (collège, jusqu'au Brevet).
 > Une même aventure qui accompagne **tous les enfants** au fil de leur scolarité. Les deux univers cohabitent dans le même fichier `Royaume-du-Savoir.html` ; la progression de chaque enfant est enregistrée séparément sur l'appareil. Le monde des petits est aussi disponible seul dans `Petits-Malins.html`.
 >
-> 🎯 **But de l'application** : permettre à l'enfant/ado d'obtenir son **Brevet** dans de bonnes conditions. En fin de parcours, un **Brevet blanc** (examen multi-matières en conditions réelles, noté **/20** avec mentions, correction détaillée et meilleur score conservé) entraîne l'élève comme le jour J. L'app aura rempli sa mission le jour où ce résultat est atteint.
+> 🎯 **But de l'application** : permettre à l'enfant/ado d'obtenir son **Brevet** dans de bonnes conditions. En fin de parcours, un **Brevet blanc** (examen multi-matières **centré sur la 3ᵉ**, noté **/20** avec mentions, correction détaillée et meilleur score conservé) entraîne l'élève comme le jour J — avec un **minuteur optionnel** (conditions réelles) et une **question rédigée** d'entraînement. L'app aura rempli sa mission le jour où ce résultat est atteint.
 
 Application d'apprentissage **gamifiée** qui accompagne les enfants **du CP au Brevet**, pensée pour **tous les enfants** — et particulièrement adaptée aux enfants **autistes** (structure prévisible, une tâche à la fois, mode calme). L'objectif : évaluer son niveau, la faire progresser pas à pas sur le programme de l'Éducation nationale, avec un renforcement positif fort et un univers fantastique motivant.
 
@@ -39,12 +39,19 @@ Le monde des petits est désormais **intégré directement** dans le Royaume (pl
 
 | Matière | Région | Niveaux |
 |---|---|---|
-| Mathématiques | Les Tours de Calcul | 6ᵉ + 5ᵉ + 4ᵉ |
-| Français | La Bibliothèque Enchantée | 6ᵉ + 5ᵉ + 4ᵉ |
-| Histoire-Géo & EMC | Le Donjon du Temps | 6ᵉ + 5ᵉ + 4ᵉ |
-| Sciences (PC · SVT · Techno) | Le Laboratoire Alchimique | 6ᵉ + 5ᵉ + 4ᵉ |
+| Mathématiques | Les Tours de Calcul | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** |
+| Français | La Bibliothèque Enchantée | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** |
+| Histoire-Géo & EMC | Le Donjon du Temps | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** |
+| Sciences (PC · SVT · Techno) | Le Laboratoire Alchimique | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** |
 
-**35 leçons · 157 questions** à ce stade. Le niveau **6ᵉ** fait la jonction avec le monde des Petits Malins, pour une continuité **du CP au Brevet**. Dans le Royaume, chaque leçon propose une **carte mentale auto-générée** puis une **vidéo** (synthèse de ce qui vient d'être lu) ; chez les Petits Malins, la **carte mentale arrive en fin d'activité** comme récapitulatif. L'architecture permet d'ajouter facilement la **3ᵉ** et d'étoffer chaque leçon.
+**47 leçons · 217 questions** à ce stade. Le niveau **6ᵉ** fait la jonction avec le monde des Petits Malins, et la **3ᵉ** (année du Brevet) complète le parcours **du CP au Brevet**. Le niveau 3ᵉ couvre notamment : Thalès, fonctions linéaires/affines et notation scientifique (maths) ; figures de style, voix active/passive et argumentation (français) ; Première et Seconde Guerres mondiales, Vᵉ République et laïcité (histoire-géo-EMC) ; énergie, acides/bases & pH, génétique (sciences). Dans le Royaume, chaque leçon propose une **carte mentale auto-générée** puis une **vidéo** (synthèse de ce qui vient d'être lu) ; chez les Petits Malins, la **carte mentale arrive en fin d'activité** comme récapitulatif.
+
+### 🎓 Le Brevet blanc (conditions réelles)
+
+- **Centré sur la 3ᵉ** : le tirage privilégie les questions de 3ᵉ (le niveau de l'examen) tout en gardant un mélange collège (hors 6ᵉ).
+- **Minuteur optionnel** : on peut activer un compte à rebours (~1 min 15 par question) pour s'entraîner comme le jour J ; à l'expiration, la copie est rendue automatiquement. Par défaut, l'examen est **sans limite de temps** (plus rassurant). Choix de la **longueur** (standard ~12 questions / court ~8).
+- **Note /20** avec mention, calculée **uniquement sur les questions auto-corrigeables** (QCM, vrai/faux, saisie), avec correction détaillée.
+- **Question rédigée** d'entraînement : une question ouverte (zone de texte) **hors note** — après coup, l'élève compare sa réponse à une **réponse-modèle** et coche une **grille d'auto-évaluation** (on ne note pas automatiquement un texte libre).
 
 ## 🎬 Vidéos pédagogiques
 
@@ -59,7 +66,8 @@ Chaque leçon intègre une vidéo issue de chaînes francophones de qualité, cr
 
 ## 🗺️ Feuille de route
 
-- [ ] Ajouter le programme de **3ᵉ** (année du brevet).
+- [x] Ajouter le programme de **3ᵉ** (année du brevet). ✅
+- [x] **Brevet blanc en conditions réelles** : minuteur optionnel + question rédigée auto-évaluée. ✅
 - [ ] **Générateur d'exercices de maths** (nombres aléatoires → réservoir quasi infini).
 - [ ] Étoffer chaque leçon (15–30 questions par notion pour la répétition espacée).
 - [ ] Module **Anglais** (contrôle continu) et module **Préparer l'oral**.
