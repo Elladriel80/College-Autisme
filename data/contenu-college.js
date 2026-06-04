@@ -65,6 +65,7 @@ var CONTENT = {
         },
         {
           id:"m2", niveau:"5e", title:"Les fractions",
+          carte:{centre:"Les fractions", branches:[{titre:"Numérateur / dénominateur", detail:"3/4 : 3 parts sur 4"},{titre:"Même dénominateur", detail:"on additionne les numérateurs"},{titre:"Simplifier", detail:"diviser le haut et le bas par le même nombre"},{titre:"Fraction d'un nombre", detail:"3/4 de 20 = 20 ÷ 4 × 3 = 15"},{titre:"Comparer", detail:"à même dénominateur, regarder le numérateur"}]},
           cours:"Pour <b>additionner</b> des fractions, il faut le <b>même dénominateur</b>. " +
                 "Ex : 1/2 + 1/3 → on met sur 6 : 3/6 + 2/6 = 5/6. " +
                 "Prendre une fraction « de » un nombre = multiplier : 3/4 de 20 = 3×20/4 = 15.",
@@ -154,6 +155,7 @@ var CONTENT = {
         },
         {
           id:"m7", niveau:"4e", title:"Le théorème de Pythagore",
+          carte:{centre:"Théorème de Pythagore", branches:[{titre:"Triangle rectangle", detail:"il faut un angle droit"},{titre:"Hypoténuse", detail:"le plus grand côté, face à l'angle droit"},{titre:"Formule", detail:"hypoténuse² = côté² + côté²"},{titre:"Calculer un côté", detail:"3² + 4² = 25, donc 5"},{titre:"Réciproque", detail:"vérifier si l'angle est droit"}]},
           cours:"Dans un <b>triangle rectangle</b>, le côté opposé à l'angle droit est l'<b>hypoténuse</b> " +
                 "(le plus long). Le théorème de Pythagore dit : (hypoténuse)² = (côté)² + (côté)². " +
                 "Ex : côtés 3 et 4 → hypoténuse² = 9 + 16 = 25 → hypoténuse = 5.",
@@ -327,6 +329,7 @@ var CONTENT = {
         },
         {
           id:"m18", niveau:"4e", title:"Algorithmique et Scratch (initiation)",
+          carte:{centre:"Algorithmique et Scratch", branches:[{titre:"Algorithme", detail:"suite d'instructions ordonnées"},{titre:"Séquence", detail:"exécutées dans l'ordre, de haut en bas"},{titre:"Boucle", detail:"répéter des instructions"},{titre:"Variable", detail:"mémorise une valeur (un score)"},{titre:"Lutin", detail:"le personnage que l'on déplace"}]},
           cours:"Un <b>algorithme</b> est une suite d'<b>instructions</b> (des étapes) pour réaliser une tâche. Un <b>programme</b> est un algorithme écrit dans un langage compris par la machine ; dans <b>Scratch</b>, on programme en <b>emboîtant des blocs</b>. " +
                 "Les instructions s'exécutent <b>dans l'ordre</b>, de haut en bas (une <b>séquence</b>). Une <b>boucle</b> répète des instructions. Une <b>variable</b> mémorise une valeur (par exemple un score). Le personnage que l'on déplace est un <b>lutin</b>.",
           questions:[
@@ -578,6 +581,7 @@ var CONTENT = {
         },
         {
           id:"f12", niveau:"6e", title:"Les homophones a / à, et / est, son / sont",
+          carte:{centre:"a/à, et/est, son/sont", branches:[{titre:"a ou à", detail:"a = avait (avoir), sinon à"},{titre:"et ou est", detail:"est = était (être), sinon et"},{titre:"son ou sont", detail:"sont = étaient (être), sinon son"},{titre:"L'astuce", detail:"remplacer par le verbe à l'imparfait"}]},
           cours:"Des mots se prononcent pareil mais s'écrivent différemment (les <b>homophones</b>). Petites astuces : " +
                 "<b>a</b> (verbe avoir) se remplace par « <b>avait</b> », sinon c'est <b>à</b> (préposition). " +
                 "<b>est</b> (verbe être) se remplace par « <b>était</b> », sinon c'est <b>et</b> (qui relie, comme « et puis »). " +
@@ -660,6 +664,7 @@ var CONTENT = {
         },
         {
           id:"f16", niveau:"5e", title:"Le passé composé",
+          carte:{centre:"Le passé composé", branches:[{titre:"Action passée et finie", detail:"hier, j'ai mangé"},{titre:"Deux mots", detail:"auxiliaire + participe passé"},{titre:"Auxiliaire avoir", detail:"j'ai fini, tu as vu"},{titre:"Auxiliaire être", detail:"elle est allée (accord avec le sujet)"},{titre:"Participe passé", detail:"chanter → chanté, finir → fini"}]},
           cours:"Le <b>passé composé</b> exprime une action passée et <b>terminée</b>. Il est formé de deux mots : un <b>auxiliaire</b> (<b>être</b> ou <b>avoir</b>) au présent + le <b>participe passé</b> du verbe. " +
                 "Exemples : j'<b>ai mangé</b>, elle <b>est allée</b>. Avec l'auxiliaire <b>être</b>, le participe passé <b>s'accorde</b> avec le sujet (elle est allé<b>e</b>, ils sont parti<b>s</b>).",
           questions:[
@@ -873,6 +878,7 @@ var CONTENT = {
         },
         {
           id:"h10", niveau:"3e", title:"La Première Guerre mondiale (1914-1918)",
+          carte:{centre:"Première Guerre mondiale", branches:[{titre:"1914 à 1918", detail:"armistice le 11 novembre 1918"},{titre:"Guerre de tranchées", detail:"Verdun en 1916"},{titre:"Guerre totale", detail:"soldats, civils et économie mobilisés"},{titre:"Les camps", detail:"Triple Entente contre Empires centraux"},{titre:"Bilan", detail:"des millions de morts"}]},
           cours:"La <b>Première Guerre mondiale</b> oppose de 1914 à 1918 la Triple-Entente (France, Royaume-Uni, Russie) aux Empires centraux. " +
                 "Les soldats combattent dans des <b>tranchées</b>, notamment lors de la terrible bataille de <b>Verdun</b> (1916). " +
                 "L'<b>armistice</b> est signé le 11 novembre 1918.",
@@ -1001,6 +1007,7 @@ var CONTENT = {
         },
         {
           id:"h16", niveau:"4e", title:"Le XIXᵉ siècle : industrialisation et colonisation",
+          carte:{centre:"XIXᵉ : industrie et colonies", branches:[{titre:"Machine à vapeur", detail:"usines et chemin de fer"},{titre:"Charbon", detail:"l'énergie de l'industrie"},{titre:"Nouvelles classes", detail:"bourgeoisie et ouvriers"},{titre:"Exode rural", detail:"de la campagne vers la ville"},{titre:"Colonisation", detail:"empires en Afrique et en Asie"}]},
           cours:"Au <b>XIXᵉ siècle</b>, la <b>révolution industrielle</b> transforme l'Europe : la <b>machine à vapeur</b> (améliorée par James Watt) et le <b>charbon</b> font tourner les <b>usines</b> et les premiers <b>chemins de fer</b>. " +
                 "De nouvelles classes apparaissent : la <b>bourgeoisie</b> (patrons) et les <b>ouvriers</b> (le prolétariat), aux conditions de travail dures. Beaucoup de paysans partent en ville (l'<b>exode rural</b>). " +
                 "Les puissances européennes conquièrent des <b>colonies</b> en Afrique et en Asie : elles forment des <b>empires coloniaux</b>.",
@@ -1167,6 +1174,7 @@ var CONTENT = {
         },
         {
           id:"s9", niveau:"3e", title:"L'énergie et ses conversions",
+          carte:{centre:"L'énergie et ses conversions", branches:[{titre:"Des formes variées", detail:"cinétique, thermique, électrique, lumineuse"},{titre:"Unité", detail:"le joule (J)"},{titre:"Conversion", detail:"une forme se transforme en une autre"},{titre:"Conservation", detail:"l'énergie ne disparaît pas"},{titre:"Exemple", detail:"lampe : électrique → lumière + chaleur"}]},
           cours:"L'<b>énergie</b> existe sous plusieurs formes : cinétique (mouvement), thermique (chaleur), électrique, chimique, lumineuse… " +
                 "Elle peut se <b>convertir</b> d'une forme à une autre, mais elle se <b>conserve</b> (elle ne disparaît pas). Son unité est le <b>joule</b> (J).",
           questions:[
@@ -1249,6 +1257,7 @@ var CONTENT = {
         },
         {
           id:"s13", niveau:"6e", title:"Les objets techniques (Technologie)",
+          carte:{centre:"Les objets techniques", branches:[{titre:"Répond à un besoin", detail:"fabriqué par l'être humain"},{titre:"Fonction d'usage", detail:"à quoi ça sert"},{titre:"Fonction d'estime", detail:"ce qui plaît (forme, couleur)"},{titre:"Matériaux", detail:"métal, plastique, bois, verre"},{titre:"Cahier des charges", detail:"les contraintes à respecter"}]},
           cours:"Un <b>objet technique</b> est <b>fabriqué par l'être humain</b> pour <b>répondre à un besoin</b> (un vélo, un parapluie, une montre). " +
                 "Sa <b>fonction d'usage</b> est ce à quoi il sert ; sa <b>fonction d'estime</b> est ce qui plaît (forme, couleur). " +
                 "Il est fait de <b>matériaux</b> (métal, plastique, bois, verre...) choisis selon leurs <b>propriétés</b>. La liste des besoins et contraintes à respecter s'appelle le <b>cahier des charges</b>.",
@@ -1308,6 +1317,7 @@ var CONTENT = {
         },
         {
           id:"s16", niveau:"5e", title:"La nutrition des plantes (la photosynthèse)",
+          carte:{centre:"La photosynthèse", branches:[{titre:"Dans les feuilles", detail:"grâce à la chlorophylle (vert)"},{titre:"Besoin de lumière", detail:"rien dans le noir total"},{titre:"Absorbe CO₂ et eau", detail:"eau prise par les racines"},{titre:"Rejette O₂", detail:"le dioxygène que l'on respire"},{titre:"Fabrique du glucose", detail:"la plante est autotrophe"}]},
           cours:"Les plantes vertes fabriquent <b>elles-mêmes</b> leur matière : on dit qu'elles sont <b>autotrophes</b>. C'est la <b>photosynthèse</b>, qui a lieu surtout dans les <b>feuilles</b>, grâce à la <b>lumière</b> captée par un pigment vert, la <b>chlorophylle</b>. " +
                 "La plante prend dans l'air le <b>dioxyde de carbone (CO₂)</b>, et dans le sol l'<b>eau</b> et les <b>sels minéraux</b> (par les <b>racines</b>). Elle fabrique un sucre (le <b>glucose</b>) et rejette du <b>dioxygène (O₂)</b>.",
           questions:[
