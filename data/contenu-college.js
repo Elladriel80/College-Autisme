@@ -284,6 +284,46 @@ var CONTENT = {
             {type:"vf", q:"Dans une symétrie axiale, l'axe est une droite.", answer:true, explain:"Oui : l'axe de symétrie est toujours une droite.", indice:"C'est la ligne de pliage."},
             {type:"qcm", q:"Quand on plie la figure le long de son axe de symétrie, les deux parties :", options:["se superposent exactement","se chevauchent à moitié","s'éloignent","disparaissent"], answer:0, explain:"Elles coïncident parfaitement : c'est le signe d'une symétrie axiale.", indice:"Une symétrie « réussie » fait coïncider les deux moitiés."}
           ]
+        },
+        {
+          id:"m16", niveau:"5e", title:"La symétrie centrale",
+          cours:"La <b>symétrie centrale</b> par rapport à un point O (le <b>centre</b>) revient à un <b>demi-tour</b> (rotation d'un demi-tour) autour de O. " +
+                "Le symétrique d'un point A est le point A' tel que O est le <b>milieu</b> de [AA']. " +
+                "Elle <b>conserve</b> les longueurs, les angles et les aires. Le symétrique d'une droite est une droite <b>parallèle</b>. Un <b>parallélogramme</b> a un centre de symétrie : l'intersection de ses diagonales.",
+          questions:[
+            {type:"qcm", q:"La symétrie centrale correspond à un :", options:["demi-tour autour d'un point","pliage le long d'une droite","agrandissement","glissement"], answer:0, explain:"C'est une rotation d'un demi-tour autour du centre.", indice:"Pense à tourner la figure de 180 degrés."},
+            {type:"qcm", q:"Si A' est le symétrique de A par rapport au centre O, alors O est :", options:["le milieu de [AA']","une extrémité de [AA']","en dehors de [AA']","le double de A"], answer:0, explain:"Le centre est toujours au milieu du segment qui joint un point à son image.", indice:"O est pile au centre, entre A et A'."},
+            {type:"vf", q:"La symétrie centrale conserve les longueurs.", answer:true, explain:"Oui : la figure image a les mêmes dimensions.", indice:"Un demi-tour ne change pas les tailles."},
+            {type:"qcm", q:"La symétrie axiale est un pliage ; la symétrie centrale est un :", options:["demi-tour","agrandissement","glissement","découpage"], answer:0, explain:"Axiale = pliage ; centrale = demi-tour autour d'un point.", indice:"L'une plie, l'autre fait tourner."},
+            {type:"vf", q:"Un parallélogramme a un centre de symétrie : l'intersection de ses diagonales.", answer:true, explain:"Oui : ses diagonales se coupent en leur milieu, ce point est centre de symétrie.", indice:"Regarde où se croisent les diagonales."},
+            {type:"vf", q:"La symétrie centrale conserve les aires.", answer:true, explain:"Oui : la figure et son image ont la même aire.", indice:"La forme n'est ni agrandie ni réduite."},
+            {type:"qcm", q:"Le centre de symétrie d'un cercle est :", options:["son centre","un point du bord","un point extérieur","il n'en a pas"], answer:0, explain:"Le cercle est symétrique par rapport à son centre.", indice:"Quel point est « au milieu » du cercle ?"},
+            {type:"vf", q:"Le symétrique du point O par rapport à O est O lui-même.", answer:true, explain:"Oui : le centre est son propre symétrique.", indice:"Le centre ne bouge pas dans un demi-tour."},
+            {type:"qcm", q:"Le symétrique d'une droite par symétrie centrale est :", options:["une droite parallèle","un cercle","un point","un angle droit"], answer:0, explain:"L'image d'une droite est une droite qui lui est parallèle.", indice:"Une droite reste une droite, et elle ne se croise pas avec celle de départ."},
+            {type:"vf", q:"Après une symétrie centrale, la figure obtenue est superposable à la figure de départ.", answer:true, explain:"Oui : on la retrouve en faisant un demi-tour.", indice:"Tourne la figure d'un demi-tour pour vérifier."},
+            {type:"qcm", q:"Combien de centres de symétrie a un segment [AB] ?", options:["1 (son milieu)","2","0","une infinité"], answer:0, explain:"Le seul centre de symétrie d'un segment est son milieu.", indice:"Quel point partage le segment en deux parts égales ?"},
+            {type:"qcm", q:"Quelle transformation faut-il pour obtenir le symétrique d'un point par rapport à un centre ?", options:["un demi-tour autour du centre","un pliage","un agrandissement","une translation"], answer:0, explain:"On effectue un demi-tour autour du centre O.", indice:"180 degrés autour de O."}
+          ]
+        },
+        {
+          id:"m17", niveau:"5e", title:"Aire du triangle et du parallélogramme",
+          cours:"L'<b>aire d'un parallélogramme</b> est <b>base × hauteur</b>. " +
+                "L'<b>aire d'un triangle</b> est <b>(base × hauteur) ÷ 2</b> (la moitié de celle d'un parallélogramme de mêmes base et hauteur). " +
+                "La <b>hauteur</b> est toujours <b>perpendiculaire</b> à la base. L'aire se mesure en <b>cm²</b>.",
+          questions:[
+            {type:"qcm", q:"L'aire d'un parallélogramme est :", options:["base × hauteur","base + hauteur","(base × hauteur) ÷ 2","côté × côté ÷ 2"], answer:0, explain:"Aire du parallélogramme = base × hauteur.", indice:"Comme un rectangle « penché »."},
+            {type:"qcm", q:"L'aire d'un triangle est :", options:["(base × hauteur) ÷ 2","base × hauteur","base + hauteur","base × hauteur × 2"], answer:0, explain:"Aire du triangle = (base × hauteur) ÷ 2.", indice:"C'est la moitié de l'aire d'un parallélogramme."},
+            {type:"saisie", q:"Parallélogramme de base 6 cm et hauteur 4 cm : aire en cm² ?", answer:["24","24 cm²"], explain:"6 × 4 = 24 cm².", indice:"base × hauteur."},
+            {type:"saisie", q:"Triangle de base 8 cm et hauteur 3 cm : aire en cm² ?", answer:["12","12 cm²"], explain:"(8 × 3) ÷ 2 = 24 ÷ 2 = 12 cm².", indice:"Multiplie puis divise par 2."},
+            {type:"saisie", q:"Triangle de base 10 cm et hauteur 6 cm : aire en cm² ?", answer:["30","30 cm²"], explain:"(10 × 6) ÷ 2 = 60 ÷ 2 = 30 cm².", indice:"60 divisé par 2."},
+            {type:"qcm", q:"Un parallélogramme de base 5 cm et hauteur 2 cm a pour aire :", options:["10 cm²","7 cm²","20 cm²","14 cm²"], answer:0, explain:"5 × 2 = 10 cm².", indice:"base × hauteur."},
+            {type:"vf", q:"L'aire d'un triangle est la moitié de celle d'un parallélogramme de même base et même hauteur.", answer:true, explain:"Oui : c'est pourquoi on divise par 2.", indice:"Deux triangles identiques forment un parallélogramme."},
+            {type:"saisie", q:"Parallélogramme de base 7 cm et hauteur 3 cm : aire en cm² ?", answer:["21","21 cm²"], explain:"7 × 3 = 21 cm².", indice:"base × hauteur."},
+            {type:"qcm", q:"L'aire se mesure en :", options:["cm²","cm","cm³","kg"], answer:0, explain:"Une aire (surface) s'exprime en unités carrées, comme le cm².", indice:"Une surface, donc une unité « au carré »."},
+            {type:"saisie", q:"Triangle de base 12 cm et hauteur 5 cm : aire en cm² ?", answer:["30","30 cm²"], explain:"(12 × 5) ÷ 2 = 60 ÷ 2 = 30 cm².", indice:"60 divisé par 2."},
+            {type:"qcm", q:"Triangle de base 4 cm et hauteur 9 cm : aire =", options:["18 cm²","36 cm²","13 cm²","22 cm²"], answer:0, explain:"(4 × 9) ÷ 2 = 36 ÷ 2 = 18 cm².", indice:"36 divisé par 2."},
+            {type:"vf", q:"Pour calculer l'aire d'un triangle, la hauteur doit être perpendiculaire à la base.", answer:true, explain:"Oui : la hauteur forme un angle droit avec la base.", indice:"Hauteur et base font un angle droit."}
+          ]
         }
       ]
     },
@@ -861,6 +901,26 @@ var CONTENT = {
             {type:"vf", q:"Le Colisée est un grand amphithéâtre construit par les Romains.", answer:true, explain:"Oui : on y donnait des combats de gladiateurs et des spectacles.", indice:"C'est un monument célèbre encore visible à Rome."},
             {type:"qcm", q:"Dans l'ordre, Rome a d'abord été une royauté, puis :", options:["une République, puis un Empire","un Empire, puis une République","une démocratie grecque","une colonie égyptienne"], answer:0, explain:"Royauté (753 av. J.-C.), puis République (509), puis Empire (27 av. J.-C.).", indice:"La République vient avant l'Empire d'Auguste."}
           ]
+        },
+        {
+          id:"h16", niveau:"4e", title:"Le XIXᵉ siècle : industrialisation et colonisation",
+          cours:"Au <b>XIXᵉ siècle</b>, la <b>révolution industrielle</b> transforme l'Europe : la <b>machine à vapeur</b> (améliorée par James Watt) et le <b>charbon</b> font tourner les <b>usines</b> et les premiers <b>chemins de fer</b>. " +
+                "De nouvelles classes apparaissent : la <b>bourgeoisie</b> (patrons) et les <b>ouvriers</b> (le prolétariat), aux conditions de travail dures. Beaucoup de paysans partent en ville (l'<b>exode rural</b>). " +
+                "Les puissances européennes conquièrent des <b>colonies</b> en Afrique et en Asie : elles forment des <b>empires coloniaux</b>.",
+          questions:[
+            {type:"qcm", q:"La révolution industrielle se développe surtout grâce à :", options:["la machine à vapeur","l'ordinateur","l'imprimerie","la boussole"], answer:0, explain:"La machine à vapeur fait fonctionner usines et trains au XIXᵉ siècle.", indice:"C'est une machine qui utilise la vapeur d'eau."},
+            {type:"qcm", q:"Quelle source d'énergie est très utilisée dans l'industrie au XIXᵉ siècle ?", options:["le charbon","le solaire","l'éolien","le nucléaire"], answer:0, explain:"Le charbon alimente les machines à vapeur.", indice:"C'est une roche noire que l'on brûle."},
+            {type:"qcm", q:"Le grand nouveau moyen de transport du XIXᵉ siècle est :", options:["le chemin de fer (train)","l'avion","la voiture électrique","la fusée"], answer:0, explain:"Le train, tiré par des locomotives à vapeur, se développe.", indice:"Il roule sur des rails."},
+            {type:"vf", q:"Au XIXᵉ siècle, beaucoup de paysans quittent la campagne pour travailler en ville (exode rural).", answer:true, explain:"Oui : on appelle cela l'exode rural.", indice:"Ils vont chercher du travail dans les usines."},
+            {type:"qcm", q:"Les ouvriers d'usine forment une nouvelle classe sociale appelée :", options:["le prolétariat","la noblesse","le clergé","la chevalerie"], answer:0, explain:"Les ouvriers forment le prolétariat.", indice:"Ce mot désigne ceux qui travaillent à l'usine contre un salaire."},
+            {type:"qcm", q:"Les patrons d'usine et les commerçants riches forment :", options:["la bourgeoisie","la paysannerie","le clergé","l'armée"], answer:0, explain:"La bourgeoisie regroupe les patrons et grands commerçants.", indice:"C'est la classe aisée qui possède les usines."},
+            {type:"vf", q:"Au XIXᵉ siècle, les conditions de travail à l'usine étaient souvent dures (longues journées, travail des enfants).", answer:true, explain:"Oui : journées très longues, salaires faibles, travail des enfants.", indice:"Les protections des travailleurs n'existaient presque pas."},
+            {type:"qcm", q:"La colonisation au XIXᵉ siècle, c'est :", options:["la conquête de territoires (colonies) par les puissances européennes","la construction d'usines","la fin des rois","l'invention de l'écriture"], answer:0, explain:"Les Européens dominent et exploitent des territoires lointains.", indice:"Pense à des pays pris et dominés par l'Europe."},
+            {type:"qcm", q:"Sur quels continents les Européens ont-ils surtout des colonies au XIXᵉ siècle ?", options:["l'Afrique et l'Asie","l'Antarctique","l'Europe seulement","l'Amérique du Nord seulement"], answer:0, explain:"Les empires coloniaux s'étendent surtout en Afrique et en Asie.", indice:"Deux grands continents au sud et à l'est."},
+            {type:"saisie", q:"Quel inventeur est associé à l'amélioration de la machine à vapeur ? (nom de famille)", answer:["Watt","James Watt"], explain:"James Watt a perfectionné la machine à vapeur (l'unité « watt » porte son nom).", indice:"Une unité de puissance porte son nom."},
+            {type:"vf", q:"La machine à vapeur a permis de faire fonctionner des usines et des trains.", answer:true, explain:"Oui : c'est le moteur de la révolution industrielle.", indice:"Usines + locomotives."},
+            {type:"qcm", q:"L'ensemble des colonies d'un pays forme :", options:["un empire colonial","une république","une usine","une cathédrale"], answer:0, explain:"On parle d'empire colonial.", indice:"Un « empire » fait de colonies."}
+          ]
         }
       ]
     },
@@ -1108,6 +1168,26 @@ var CONTENT = {
             {type:"qcm", q:"Un vélo sert principalement à :", options:["se déplacer","cuire des aliments","éclairer","mesurer le temps"], answer:0, explain:"La fonction d'usage du vélo est le déplacement.", indice:"À quoi sert un vélo ?"},
             {type:"qcm", q:"Lequel est un objet technique ?", options:["une montre","un caillou","un nuage","une fleur"], answer:0, explain:"La montre est fabriquée pour donner l'heure ; les autres sont naturels.", indice:"Lequel a été fabriqué par l'être humain ?"},
             {type:"vf", q:"Le plastique est souvent choisi parce qu'il est léger et peu coûteux.", answer:true, explain:"Oui : ce sont deux de ses propriétés utiles.", indice:"Léger et bon marché : pratique pour beaucoup d'objets."}
+          ]
+        },
+        {
+          id:"s14", niveau:"4e", title:"Le mouvement et la vitesse",
+          cours:"Un objet est en <b>mouvement</b> quand sa <b>position change</b> au cours du temps (par rapport à un repère, le <b>référentiel</b>). Le mouvement est <b>relatif</b> : il dépend du repère choisi. " +
+                "La <b>vitesse</b> se calcule par <b>v = distance ÷ temps</b>. On l'exprime en <b>km/h</b> ou en <b>m/s</b>. " +
+                "Quand la vitesse reste constante, le mouvement est <b>uniforme</b>. Pour une distance : <b>distance = vitesse × temps</b>.",
+          questions:[
+            {type:"qcm", q:"La vitesse se calcule par :", options:["distance ÷ temps","distance × temps","temps ÷ distance","distance + temps"], answer:0, explain:"v = distance ÷ temps.", indice:"On partage la distance par la durée."},
+            {type:"saisie", q:"Une voiture parcourt 100 km en 2 h. Sa vitesse en km/h ?", answer:["50","50 km/h"], explain:"100 ÷ 2 = 50 km/h.", indice:"distance ÷ temps."},
+            {type:"saisie", q:"Un coureur parcourt 100 m en 20 s. Sa vitesse en m/s ?", answer:["5","5 m/s"], explain:"100 ÷ 20 = 5 m/s.", indice:"distance ÷ temps."},
+            {type:"qcm", q:"La vitesse peut s'exprimer en :", options:["km/h ou m/s","kg","cm²","litres"], answer:0, explain:"Une vitesse est une distance par durée : km/h, m/s.", indice:"Pense au compteur d'une voiture."},
+            {type:"vf", q:"Un objet est en mouvement si sa position change au cours du temps (par rapport à un repère).", answer:true, explain:"Oui : c'est la définition du mouvement.", indice:"Position qui change = mouvement."},
+            {type:"qcm", q:"Un cycliste roule à 20 km/h pendant 3 h. Distance parcourue ?", options:["60 km","23 km","17 km","40 km"], answer:0, explain:"distance = vitesse × temps = 20 × 3 = 60 km.", indice:"vitesse × temps."},
+            {type:"vf", q:"Le mouvement est relatif : il dépend du repère (référentiel) choisi.", answer:true, explain:"Oui : on bouge par rapport à quelque chose (le sol, un train...).", indice:"Assis dans un train, tu bouges par rapport au quai mais pas par rapport au siège."},
+            {type:"saisie", q:"Un train parcourt 150 km en 3 h. Sa vitesse moyenne en km/h ?", answer:["50","50 km/h"], explain:"150 ÷ 3 = 50 km/h.", indice:"distance ÷ temps."},
+            {type:"qcm", q:"Si la vitesse reste constante, le mouvement est dit :", options:["uniforme","accéléré","ralenti","immobile"], answer:0, explain:"Vitesse constante = mouvement uniforme.", indice:"« Uniforme » = toujours pareil."},
+            {type:"qcm", q:"Pour calculer une distance, on fait :", options:["vitesse × temps","vitesse ÷ temps","temps ÷ vitesse","vitesse + temps"], answer:0, explain:"distance = vitesse × temps.", indice:"On multiplie la vitesse par la durée."},
+            {type:"saisie", q:"Un piéton marche à 5 km/h pendant 2 h. Distance parcourue en km ?", answer:["10","10 km"], explain:"5 × 2 = 10 km.", indice:"vitesse × temps."},
+            {type:"vf", q:"Plus un objet va vite, plus il parcourt de distance pendant un même temps.", answer:true, explain:"Oui : à durée égale, une plus grande vitesse fait plus de distance.", indice:"Vite = loin en peu de temps."}
           ]
         }
       ]
