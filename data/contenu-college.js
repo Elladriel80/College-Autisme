@@ -420,6 +420,25 @@ var CONTENT = {
             {type:"saisie", q:"Rends irréductible la fraction 9/6.", answer:["3/2"], explain:"On divise par 3 : 9/6 = 3/2.", indice:"Divise par le PGCD (3)."},
             {type:"qcm", q:"La fraction 7/9 est-elle irréductible ?", options:["oui","non"], answer:0, explain:"7 et 9 n'ont que 1 comme diviseur commun : PGCD = 1, donc irréductible.", indice:"Cherche un diviseur commun à 7 et 9."}
           ]
+        },
+        {
+          id:"m22", niveau:"4e", title:"Agrandissement, réduction et échelle",
+          carte:{centre:"Agrandissement, réduction, échelle", branches:[{titre:"Agrandissement", detail:"longueurs × un nombre > 1"},{titre:"Réduction", detail:"longueurs × un nombre < 1"},{titre:"Angles conservés", detail:"la forme ne change pas"},{titre:"Échelle", detail:"1/100 : 1 cm = 100 cm réels"},{titre:"Aire", detail:"× k² (coefficient au carré)"}]},
+          cours:"Un <b>agrandissement</b> multiplie toutes les longueurs par un coefficient <b>plus grand que 1</b> ; une <b>réduction</b> par un coefficient <b>plus petit que 1</b>. Les <b>angles sont conservés</b> (la forme ne change pas). Une <b>échelle</b> compare le plan à la réalité : à l'échelle <b>1/100</b>, 1 cm sur le plan représente 100 cm réels. Pour les aires, on multiplie par le coefficient <b>au carré</b>.",
+          questions:[
+            {type:"qcm", q:"Un agrandissement multiplie les longueurs par un nombre :", options:["plus grand que 1","plus petit que 1","égal à 0","négatif"], answer:0, explain:"Agrandir = multiplier par k > 1.", indice:"Plus grand, donc coefficient supérieur à 1."},
+            {type:"qcm", q:"Une réduction multiplie les longueurs par un nombre :", options:["plus petit que 1","plus grand que 1","égal à 1","égal à 10"], answer:0, explain:"Réduire = multiplier par k < 1.", indice:"Plus petit, donc coefficient inférieur à 1."},
+            {type:"vf", q:"Dans un agrandissement ou une réduction, les angles sont conservés.", answer:true, explain:"Oui : seule la taille change, pas la forme.", indice:"La figure reste « la même », en plus grand ou plus petit."},
+            {type:"saisie", q:"On agrandit une figure 3 fois. Un côté de 4 cm devient ... cm ?", answer:["12","12 cm"], explain:"4 × 3 = 12 cm.", indice:"Multiplie la longueur par 3."},
+            {type:"saisie", q:"Réduction de coefficient 1/2. Un côté de 10 cm devient ... cm ?", answer:["5","5 cm"], explain:"10 × 1/2 = 5 cm.", indice:"La moitié de 10."},
+            {type:"qcm", q:"Une échelle 1/100 signifie :", options:["1 cm sur le plan = 100 cm en réalité","100 cm sur le plan = 1 cm réel","la figure est 100 fois plus petite que le plan","rien"], answer:0, explain:"À l'échelle 1/100, 1 cm représente 100 cm réels.", indice:"Le dénominateur indique combien de fois c'est plus grand en vrai."},
+            {type:"saisie", q:"À l'échelle 1/100, 3 cm sur le plan représentent ... cm en réalité ?", answer:["300","300 cm"], explain:"3 × 100 = 300 cm.", indice:"Multiplie par 100."},
+            {type:"qcm", q:"Pour un agrandissement de coefficient 2, l'aire est multipliée par :", options:["4","2","8","16"], answer:0, explain:"L'aire est multipliée par le coefficient au carré : 2² = 4.", indice:"Pour une aire, on met le coefficient au carré."},
+            {type:"vf", q:"Agrandir ou réduire une figure conserve sa forme (mêmes angles).", answer:true, explain:"Oui : la forme est préservée.", indice:"On garde les mêmes angles."},
+            {type:"saisie", q:"À l'échelle 1/50, 2 cm sur le plan représentent ... cm réels ?", answer:["100","100 cm"], explain:"2 × 50 = 100 cm.", indice:"Multiplie par 50."},
+            {type:"qcm", q:"Sur une carte, une échelle 1/25000 indique que :", options:["les distances réelles sont 25000 fois plus grandes","la carte est 25000 fois plus grande","il y a 25000 cartes","rien"], answer:0, explain:"1 cm sur la carte = 25000 cm réels.", indice:"Le dénominateur dit combien de fois la réalité est plus grande."},
+            {type:"saisie", q:"Agrandissement de coefficient 5 : un côté de 3 cm devient ... cm ?", answer:["15","15 cm"], explain:"3 × 5 = 15 cm.", indice:"Multiplie par 5."}
+          ]
         }
       ]
     },
@@ -809,6 +828,25 @@ var CONTENT = {
             {type:"saisie", q:"Subjonctif de « être » : « que je ___ ».", answer:["sois","que je sois"], explain:"que je sois.", indice:"Pas « je suis » (présent)."},
             {type:"vf", q:"« que je sois » est au subjonctif ; « je suis » est au présent de l'indicatif.", answer:true, explain:"Oui : le subjonctif suit « que », l'indicatif énonce un fait.", indice:"L'un exprime un souhait, l'autre un fait."}
           ]
+        },
+        {
+          id:"f20", niveau:"5e", title:"Les compléments : COD et COI",
+          carte:{centre:"COD et COI", branches:[{titre:"COD", detail:"complète le verbe sans préposition"},{titre:"Question COD", detail:"« qui ? » ou « quoi ? »"},{titre:"COI", detail:"avec une préposition (à, de)"},{titre:"Question COI", detail:"« à qui ? », « de quoi ? »"},{titre:"Exemples", detail:"mange une pomme (COD) / parle à Léo (COI)"}]},
+          cours:"Le <b>COD</b> (complément d'objet direct) complète le verbe <b>directement</b>, sans préposition : on le trouve avec « <b>qui ?</b> » ou « <b>quoi ?</b> » après le verbe (Il mange <b>une pomme</b>). Le <b>COI</b> (complément d'objet indirect) est relié au verbe par une <b>préposition</b> (à, de) : on le trouve avec « <b>à qui ?</b> », « <b>de quoi ?</b> » (Il parle <b>à son ami</b>).",
+          questions:[
+            {type:"qcm", q:"Le COD complète le verbe :", options:["directement, sans préposition","avec « à » ou « de »","avec un adjectif","jamais"], answer:0, explain:"Le COD suit le verbe sans préposition.", indice:"« direct » : pas de petit mot avant."},
+            {type:"qcm", q:"Pour trouver le COD, on pose la question :", options:["« qui ? » ou « quoi ? » après le verbe","« où ? »","« quand ? »","« comment ? »"], answer:0, explain:"COD : qui ? ou quoi ?", indice:"Il mange quoi ?"},
+            {type:"qcm", q:"Dans « Il mange une pomme », le COD est :", options:["une pomme","il","mange","ne"], answer:0, explain:"Il mange quoi ? une pomme : COD.", indice:"Pose la question « quoi ? »."},
+            {type:"qcm", q:"Le COI est relié au verbe par :", options:["une préposition (à, de)","rien","un adjectif","un point"], answer:0, explain:"COI : avec une préposition.", indice:"« indirect » : un petit mot relie au verbe."},
+            {type:"qcm", q:"Dans « Il parle à son ami », « à son ami » est :", options:["un COI","un COD","un sujet","un adjectif"], answer:0, explain:"Il parle à qui ? à son ami : COI.", indice:"Il y a la préposition « à »."},
+            {type:"qcm", q:"Pour trouver le COI, on pose :", options:["« à qui ? », « de quoi ? »","« quoi ? » seulement","« où ? »","« combien ? »"], answer:0, explain:"COI : à qui ? de quoi ?", indice:"La question contient une préposition."},
+            {type:"qcm", q:"Dans « Léa écrit une lettre », le COD est :", options:["une lettre","Léa","écrit","ne"], answer:0, explain:"Léa écrit quoi ? une lettre : COD.", indice:"Écrit quoi ?"},
+            {type:"vf", q:"Le COD se trouve juste après le verbe, sans préposition.", answer:true, explain:"Oui : il complète directement le verbe.", indice:"Pas de « à » ni « de » devant."},
+            {type:"qcm", q:"Dans « Je pense à mes vacances », « à mes vacances » est :", options:["un COI","un COD","un sujet","un verbe"], answer:0, explain:"Je pense à quoi ? à mes vacances : COI.", indice:"Préposition « à »."},
+            {type:"qcm", q:"« Il regarde la télévision. » Le COD est :", options:["la télévision","il","regarde","la"], answer:0, explain:"Il regarde quoi ? la télévision : COD.", indice:"Regarde quoi ?"},
+            {type:"vf", q:"Un COI est introduit par une préposition comme « à » ou « de ».", answer:true, explain:"Oui : c'est ce qui le rend « indirect ».", indice:"Cherche « à » ou « de »."},
+            {type:"qcm", q:"« Elle téléphone à sa mère. » « à sa mère » est :", options:["un COI","un COD","un sujet","un adjectif"], answer:0, explain:"Elle téléphone à qui ? à sa mère : COI.", indice:"Préposition « à »."}
+          ]
         }
       ]
     },
@@ -1165,6 +1203,44 @@ var CONTENT = {
             {type:"vf", q:"Berlin et l'Allemagne ont été divisées pendant la guerre froide.", answer:true, explain:"Oui : entre l'Ouest et l'Est.", indice:"Pense au mur de Berlin."},
             {type:"qcm", q:"La guerre froide oppose deux modèles :", options:["capitaliste et communiste","royaliste et impérial","antique et moderne","rural et urbain"], answer:0, explain:"Capitalisme contre communisme.", indice:"Deux façons d'organiser l'économie et la société."},
             {type:"vf", q:"La chute du mur de Berlin (1989) marque la fin de la guerre froide.", answer:true, explain:"Oui : elle annonce la fin de la division.", indice:"1989 : un tournant."}
+          ]
+        },
+        {
+          id:"h19", niveau:"3e", title:"La construction européenne",
+          carte:{centre:"La construction européenne", branches:[{titre:"Après 1945", detail:"s'unir pour la paix"},{titre:"CEE 1957", detail:"traité de Rome"},{titre:"Maastricht 1992", detail:"naissance de l'UE"},{titre:"L'euro", detail:"monnaie commune (2002)"},{titre:"27 pays", detail:"après le Brexit"}]},
+          cours:"Après <b>1945</b>, des pays européens choisissent de s'unir pour la <b>paix</b> et la coopération. La <b>CEE</b> naît en <b>1957</b> (traité de Rome) ; le traité de <b>Maastricht</b> (<b>1992</b>) crée l'<b>Union européenne</b>. L'<b>euro</b>, monnaie commune, est mis en circulation en <b>2002</b>. L'UE permet la <b>libre circulation</b> et compte aujourd'hui <b>27 pays</b> (après le départ du Royaume-Uni, le « Brexit »).",
+          questions:[
+            {type:"qcm", q:"Pourquoi l'Europe se construit-elle après 1945 ?", options:["pour maintenir la paix et coopérer","pour faire la guerre","pour coloniser","pour se diviser"], answer:0, explain:"Après deux guerres, l'union vise la paix.", indice:"Éviter une nouvelle guerre."},
+            {type:"qcm", q:"La monnaie commune à de nombreux pays de l'UE est :", options:["l'euro","le dollar","la livre","le yen"], answer:0, explain:"L'euro est la monnaie commune.", indice:"Tu l'utilises tous les jours en France."},
+            {type:"saisie", q:"En quelle année l'euro (pièces et billets) a-t-il été mis en circulation ?", answer:["2002"], explain:"L'euro est mis en circulation en 2002.", indice:"Début des années 2000."},
+            {type:"qcm", q:"Le traité qui crée l'Union européenne (1992) est le traité de :", options:["Maastricht","Rome","Versailles","Paris"], answer:0, explain:"Le traité de Maastricht (1992) fonde l'UE.", indice:"Une ville des Pays-Bas."},
+            {type:"vf", q:"L'UE permet la libre circulation des personnes entre de nombreux pays.", answer:true, explain:"Oui : on circule librement dans l'espace européen.", indice:"On voyage sans frontière entre ces pays."},
+            {type:"qcm", q:"Combien de pays compte l'UE aujourd'hui (après le Brexit) ?", options:["27","15","50","12"], answer:0, explain:"L'UE compte 27 pays.", indice:"Un peu moins de 30."},
+            {type:"qcm", q:"La construction européenne vise notamment :", options:["la paix et la coopération économique","la conquête de colonies","la fin des échanges","l'isolement"], answer:0, explain:"Paix et coopération économique.", indice:"S'entendre et commercer ensemble."},
+            {type:"vf", q:"Le Royaume-Uni a quitté l'Union européenne (le Brexit).", answer:true, explain:"Oui : c'est le Brexit.", indice:"« British exit »."},
+            {type:"qcm", q:"L'ancêtre de l'UE, créé en 1957, est :", options:["la CEE (Communauté économique européenne)","l'ONU","l'OTAN","la SDN"], answer:0, explain:"La CEE est créée en 1957 (traité de Rome).", indice:"Une « communauté économique »."},
+            {type:"vf", q:"L'euro est utilisé par plusieurs pays de l'Union européenne.", answer:true, explain:"Oui : la zone euro regroupe de nombreux pays.", indice:"Pas seulement la France."},
+            {type:"qcm", q:"L'Union européenne est :", options:["une union de pays européens","un pays unique","une ville","une entreprise"], answer:0, explain:"C'est une union d'États européens.", indice:"Plusieurs pays réunis."},
+            {type:"vf", q:"L'Union européenne favorise les échanges commerciaux entre ses pays.", answer:true, explain:"Oui : c'est un grand marché commun.", indice:"Le commerce circule plus facilement."}
+          ]
+        },
+        {
+          id:"h20", niveau:"3e", title:"La décolonisation",
+          carte:{centre:"La décolonisation", branches:[{titre:"Après 1945", detail:"les colonies veulent l'indépendance"},{titre:"Inde 1947", detail:"indépendance du Royaume-Uni"},{titre:"Algérie 1962", detail:"après la guerre d'Algérie"},{titre:"Afrique vers 1960", detail:"de nombreux pays indépendants"},{titre:"Fin", detail:"des empires coloniaux européens"}]},
+          cours:"Après <b>1945</b>, les colonies d'<b>Afrique</b> et d'<b>Asie</b> réclament et obtiennent leur <b>indépendance</b> : c'est la <b>décolonisation</b>. L'<b>Inde</b> devient indépendante en <b>1947</b> (du Royaume-Uni) ; l'<b>Algérie</b> en <b>1962</b> (après la guerre d'Algérie contre la France). De nombreux pays d'<b>Afrique</b> deviennent indépendants vers <b>1960</b>. C'est la fin des <b>empires coloniaux</b>.",
+          questions:[
+            {type:"qcm", q:"La décolonisation, c'est :", options:["l'accès des colonies à l'indépendance","la conquête de nouvelles colonies","une guerre mondiale","la construction de l'Europe"], answer:0, explain:"Les colonies deviennent des États indépendants.", indice:"« dé-colonisation » : l'inverse de coloniser."},
+            {type:"qcm", q:"La décolonisation a surtout lieu :", options:["après 1945","au Moyen Âge","avant 1789","en 1914"], answer:0, explain:"Surtout après la Seconde Guerre mondiale.", indice:"Seconde moitié du XXe siècle."},
+            {type:"qcm", q:"L'Inde devient indépendante (du Royaume-Uni) en :", options:["1947","1789","1914","2000"], answer:0, explain:"L'Inde est indépendante en 1947.", indice:"Juste après 1945."},
+            {type:"saisie", q:"En quelle année l'Algérie devient-elle indépendante ?", answer:["1962"], explain:"L'Algérie devient indépendante en 1962.", indice:"Début des années 1960."},
+            {type:"vf", q:"De nombreux pays d'Afrique deviennent indépendants vers 1960.", answer:true, explain:"Oui : 1960 est une grande année d'indépendances africaines.", indice:"Autour de 1960."},
+            {type:"qcm", q:"La guerre d'Algérie oppose l'Algérie à :", options:["la France","l'Allemagne","l'Italie","l'Espagne"], answer:0, explain:"L'Algérie était une colonie française.", indice:"Le pays colonisateur."},
+            {type:"qcm", q:"Les colonies se trouvaient surtout en :", options:["Afrique et en Asie","Antarctique","Europe seulement","Amérique du Nord seulement"], answer:0, explain:"Surtout en Afrique et en Asie.", indice:"Deux continents du Sud et de l'Est."},
+            {type:"vf", q:"Après la décolonisation, de nouveaux États indépendants apparaissent.", answer:true, explain:"Oui : de nombreux nouveaux pays naissent.", indice:"Les anciennes colonies deviennent des pays."},
+            {type:"qcm", q:"La décolonisation met fin :", options:["aux empires coloniaux européens","à la Première Guerre mondiale","à la Révolution française","au Moyen Âge"], answer:0, explain:"Les empires coloniaux disparaissent.", indice:"Plus d'empires faits de colonies."},
+            {type:"vf", q:"L'indépendance de l'Inde a lieu en 1947.", answer:true, explain:"Oui : 1947.", indice:"Deux ans après 1945."},
+            {type:"qcm", q:"Un pays qui obtient son indépendance devient :", options:["un État souverain","une colonie","une région française","une ville"], answer:0, explain:"Il se gouverne lui-même : il est souverain.", indice:"Il décide seul de son destin."},
+            {type:"vf", q:"La décolonisation se déroule surtout dans les années 1950-1960.", answer:true, explain:"Oui : ces deux décennies sont décisives.", indice:"Milieu du XXe siècle."}
           ]
         }
       ]
@@ -1527,6 +1603,44 @@ var CONTENT = {
             {type:"vf", q:"Le sang circule dans tout le corps grâce au coeur et aux vaisseaux.", answer:true, explain:"Oui : c'est la circulation sanguine.", indice:"Une pompe et des tuyaux."},
             {type:"qcm", q:"Le dioxygène passe de l'air au sang dans :", options:["les alvéoles des poumons","l'estomac","la bouche","les reins"], answer:0, explain:"L'échange air-sang se fait dans les alvéoles.", indice:"Au plus profond des poumons."},
             {type:"vf", q:"La respiration et la circulation travaillent ensemble pour apporter le dioxygène aux organes.", answer:true, explain:"Oui : l'une capte l'O₂, l'autre le distribue.", indice:"Deux fonctions complémentaires."}
+          ]
+        },
+        {
+          id:"s19", niveau:"6e", title:"Les écosystèmes et les chaînes alimentaires",
+          carte:{centre:"Écosystèmes et chaînes alimentaires", branches:[{titre:"Écosystème", detail:"un milieu + ses êtres vivants"},{titre:"Chaîne alimentaire", detail:"qui mange qui"},{titre:"La flèche", detail:"« est mangé par »"},{titre:"Producteurs", detail:"les plantes vertes"},{titre:"Consommateurs", detail:"herbivores, carnivores"}]},
+          cours:"Un <b>écosystème</b> est formé d'un <b>milieu de vie</b> et des <b>êtres vivants</b> qui y vivent, en relation les uns avec les autres. Une <b>chaîne alimentaire</b> montre « qui mange qui » : la <b>flèche</b> signifie « <b>est mangé par</b> » (herbe → lapin → renard). Les <b>plantes</b> sont des <b>producteurs</b>, les animaux des <b>consommateurs</b> (herbivores, carnivores) ; les <b>décomposeurs</b> recyclent la matière morte.",
+          questions:[
+            {type:"qcm", q:"Un écosystème est :", options:["un milieu de vie et les êtres vivants qui y vivent","une seule plante","un caillou","une étoile"], answer:0, explain:"Milieu + êtres vivants + leurs relations.", indice:"Un lieu et ce qui y vit."},
+            {type:"qcm", q:"Dans une chaîne alimentaire, la flèche signifie :", options:["« est mangé par »","« est plus grand que »","« habite »","« ressemble à »"], answer:0, explain:"La flèche va du mangé vers le mangeur.", indice:"herbe → lapin : l'herbe est mangée par le lapin."},
+            {type:"qcm", q:"Dans « herbe → lapin → renard », le renard mange :", options:["le lapin","l'herbe","le renard","rien"], answer:0, explain:"Le renard mange le lapin.", indice:"Suis la flèche juste avant le renard."},
+            {type:"qcm", q:"Les plantes vertes, qui fabriquent leur matière, sont des :", options:["producteurs","consommateurs","décomposeurs","prédateurs"], answer:0, explain:"Elles produisent leur matière : producteurs.", indice:"Elles « produisent » grâce à la photosynthèse."},
+            {type:"qcm", q:"Un animal qui mange des plantes est un :", options:["herbivore","carnivore","producteur","végétal"], answer:0, explain:"Mangeur de plantes : herbivore.", indice:"« herbi » comme herbe."},
+            {type:"qcm", q:"Un animal qui mange d'autres animaux est un :", options:["carnivore","herbivore","producteur","minéral"], answer:0, explain:"Mangeur de viande : carnivore.", indice:"« carni » comme la viande."},
+            {type:"vf", q:"Une chaîne alimentaire commence souvent par un végétal (producteur).", answer:true, explain:"Oui : la plante est à la base.", indice:"Tout part souvent de l'herbe ou des plantes."},
+            {type:"qcm", q:"Les êtres qui décomposent la matière morte sont les :", options:["décomposeurs","producteurs","herbivores","prédateurs"], answer:0, explain:"Ils recyclent la matière morte.", indice:"Ils « décomposent »."},
+            {type:"vf", q:"Dans un écosystème, les êtres vivants dépendent les uns des autres.", answer:true, explain:"Oui : ils sont reliés (alimentation, abri...).", indice:"Tout est en relation."},
+            {type:"qcm", q:"Dans « herbe → lapin → renard », le producteur est :", options:["l'herbe","le lapin","le renard","le sol"], answer:0, explain:"L'herbe (plante) est le producteur.", indice:"Le végétal du début."},
+            {type:"vf", q:"Si une espèce disparaît, cela peut perturber tout l'écosystème.", answer:true, explain:"Oui : les espèces sont liées entre elles.", indice:"Tout est connecté dans la chaîne."},
+            {type:"qcm", q:"Un écosystème comprend :", options:["un milieu et des êtres vivants","seulement des plantes","seulement des roches","seulement de l'eau"], answer:0, explain:"Un milieu (le biotope) et des êtres vivants.", indice:"Un lieu ET ses habitants."}
+          ]
+        },
+        {
+          id:"s20", niveau:"3e", title:"L'évolution des êtres vivants",
+          carte:{centre:"L'évolution", branches:[{titre:"Définition", detail:"les espèces changent au cours du temps"},{titre:"Les fossiles", detail:"traces d'espèces anciennes"},{titre:"Sélection naturelle", detail:"les mieux adaptés survivent"},{titre:"Darwin", detail:"a proposé cette théorie"},{titre:"Ancêtres communs", detail:"un lien entre toutes les espèces"}]},
+          cours:"L'<b>évolution</b> est la transformation des <b>espèces</b> au cours du <b>temps</b>. Les <b>fossiles</b> (traces d'êtres vivants anciens conservées dans les roches) montrent que les espèces ont changé. La <b>sélection naturelle</b> favorise les individus les <b>mieux adaptés</b> à leur milieu, qui survivent et se reproduisent davantage (idée de <b>Darwin</b>). Tous les êtres vivants ont des <b>ancêtres communs</b>.",
+          questions:[
+            {type:"qcm", q:"L'évolution, c'est :", options:["la transformation des espèces au cours du temps","la disparition de toute vie","la fabrication des roches","le déplacement des continents"], answer:0, explain:"Les espèces changent au fil du temps.", indice:"« évoluer » = changer."},
+            {type:"qcm", q:"Les traces d'êtres vivants anciens conservées dans les roches sont des :", options:["fossiles","cristaux","météorites","minéraux"], answer:0, explain:"Ce sont des fossiles.", indice:"On les trouve dans les couches de roche."},
+            {type:"vf", q:"Les fossiles montrent que les espèces ont changé au cours du temps.", answer:true, explain:"Oui : ils témoignent du passé du vivant.", indice:"Des espèces du passé, parfois disparues."},
+            {type:"qcm", q:"Le scientifique associé à la théorie de l'évolution est :", options:["Darwin","Newton","Einstein","Pasteur"], answer:0, explain:"Charles Darwin a proposé la sélection naturelle.", indice:"Son nom commence par D."},
+            {type:"qcm", q:"La sélection naturelle favorise :", options:["les individus les mieux adaptés à leur milieu","les plus grands seulement","le hasard total","les plus jeunes"], answer:0, explain:"Les mieux adaptés survivent et se reproduisent plus.", indice:"Mieux adapté = plus de chances de survie."},
+            {type:"vf", q:"Les espèces actuelles descendent d'espèces plus anciennes.", answer:true, explain:"Oui : elles ont des ancêtres.", indice:"Le vivant a une longue histoire."},
+            {type:"qcm", q:"Les êtres vivants ont :", options:["des ancêtres communs","aucun lien entre eux","une origine très récente","toujours existé identiques"], answer:0, explain:"Ils partagent des ancêtres communs.", indice:"Un arbre du vivant relie les espèces."},
+            {type:"vf", q:"Un individu mieux adapté a plus de chances de survivre et de se reproduire.", answer:true, explain:"Oui : c'est le principe de la sélection naturelle.", indice:"Adapté = avantage pour vivre et avoir des petits."},
+            {type:"qcm", q:"L'évolution explique :", options:["la diversité des êtres vivants","la couleur du ciel","les marées","les saisons"], answer:0, explain:"Elle explique la grande diversité du vivant.", indice:"Pourquoi il existe autant d'espèces."},
+            {type:"qcm", q:"Étudier les fossiles permet de connaître :", options:["des espèces du passé","l'avenir","la météo","les planètes"], answer:0, explain:"Les fossiles nous renseignent sur le passé du vivant.", indice:"Des espèces d'il y a longtemps."},
+            {type:"vf", q:"L'évolution se déroule sur de très longues durées.", answer:true, explain:"Oui : sur des milliers et des millions d'années.", indice:"Ce n'est pas rapide."},
+            {type:"qcm", q:"La sélection naturelle a été proposée par :", options:["Charles Darwin","Galilée","Marie Curie","Archimède"], answer:0, explain:"Charles Darwin.", indice:"Le naturaliste du XIXe siècle."}
           ]
         }
       ]
