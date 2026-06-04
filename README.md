@@ -14,11 +14,14 @@ Application d'apprentissage **gamifiée** qui accompagne les enfants **du CP au 
 
 ## ✨ Fonctionnalités
 
-- **Page d'accueil et comptes personnalisés** : plusieurs profils (ta fille, un frère/une sœur…), chacun avec sa progression, son avatar et un **code PIN optionnel**. Comptes enregistrés localement sur l'appareil, sans envoi de données.
+- **Démarrage toujours sur l'accueil** : au lancement, on voit la page d'accueil et la liste des profils (avec le monde de chacun) ; un bouton **« ▶ Reprendre »** par profil replonge volontairement là où l'enfant s'était arrêté (le dernier profil utilisé est mis en avant).
+- **Comptes personnalisés** : plusieurs profils (ta fille, un frère/une sœur…), chacun avec sa progression, son avatar et un **code PIN optionnel**. Comptes enregistrés localement sur l'appareil, sans envoi de données.
 - **Création d'avatar** (mage, fée, dragonne…) et nom de magicien·ne.
 - **Test de l'Oracle** : un diagnostic doux pour situer le niveau, sans mise en échec.
 - **Carte du royaume** : chaque matière est une région magique à explorer.
-- **Quêtes (leçons)** : un cours « grimoire », une **carte mentale** auto-générée, une **vidéo intégrée** d'une chaîne reconnue, puis des exercices.
+- **Quêtes (leçons)** : un cours « grimoire », une **carte mentale rédigée** (la notion au centre, 4 à 6 branches qui enseignent : idées-clés, méthode, exemples), une **vidéo intégrée** d'une chaîne reconnue, puis des exercices.
+- **Entraînement illimité de maths** : un générateur d'exercices (« 🎲 ») dont les réponses sont **calculées par le code** (donc toujours justes), réparti par niveau sur **16 thèmes** (décimaux, fractions, division euclidienne, volumes, calcul littéral, équations, Pythagore, Thalès, fonctions, notation scientifique, statistiques, probabilités, cosinus…).
+- **Accessibilité renforcée** : ✓/✗ en plus de la couleur (daltonisme), focus clavier visible, respect de `prefers-reduced-motion`, en plus du **Mode calme** et de la **police dyslexie**.
 - **Exercices variés** : QCM, vrai/faux, réponses à saisir — avec une explication bienveillante à chaque réponse.
 - **Gamification saine** : points d'expérience ⚡, niveaux de mage 🏅, cristaux 💎, séries de jours 🔥, étoiles, badges.
 - **Royaume qui se construit** : les cristaux gagnés servent à bâtir 10 constructions (château, tour, pont, bibliothèque, dragon, palais…). Plus on apprend, plus le royaume grandit.
@@ -35,16 +38,20 @@ Le monde des petits est désormais **intégré directement** dans le Royaume (pl
 - **Mode calme** propre aux petits : coupe confettis, animations et voix automatique (persistant par profil).
 - Score sauvegardé **par profil**. Le monde des petits reste aussi disponible seul dans `Petits-Malins.html`.
 
-## 📚 Contenu (programme Cycle 4)
+## 📚 Contenu (collège, du CP au Brevet)
 
-| Matière | Région | Niveaux |
-|---|---|---|
-| Mathématiques | Les Tours de Calcul | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** |
-| Français | La Bibliothèque Enchantée | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** |
-| Histoire-Géo & EMC | Le Donjon du Temps | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** |
-| Sciences (PC · SVT · Techno) | Le Laboratoire Alchimique | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** |
+| Matière | Région | Niveaux | Leçons |
+|---|---|---|---|
+| Mathématiques | Les Tours de Calcul | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** | 24 |
+| Français | La Bibliothèque Enchantée | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** | 24 |
+| Histoire-Géo & EMC | Le Donjon du Temps | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** | 22 |
+| Sciences (PC · SVT · Techno) | Le Laboratoire Alchimique | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** | 24 |
 
-**70 leçons · 508 questions** à ce stade (les 4 niveaux du collège, 6ᵉ → 3ᵉ, sont couverts ; **Algorithmique/Scratch** et **Technologie** sont désormais présents). Le niveau **6ᵉ** fait la jonction avec le monde des Petits Malins, et la **3ᵉ** (année du Brevet) complète le parcours **du CP au Brevet**. Le niveau 3ᵉ couvre notamment : Thalès, fonctions linéaires/affines et notation scientifique (maths) ; figures de style, voix active/passive et argumentation (français) ; Première et Seconde Guerres mondiales, Vᵉ République et laïcité (histoire-géo-EMC) ; énergie, acides/bases & pH, génétique (sciences). Dans le Royaume, chaque leçon propose une **carte mentale auto-générée** puis une **vidéo** (synthèse de ce qui vient d'être lu) ; chez les Petits Malins, la **carte mentale arrive en fin d'activité** comme récapitulatif.
+**94 leçons · 796 questions** à ce stade, réparties sur les 4 niveaux du collège (6ᵉ=22, 5ᵉ=25, 4ᵉ=27, 3ᵉ=20), **plus** des centaines de questions générées par l'Entraînement illimité de maths. **Chaque leçon a une carte mentale rédigée.** **Algorithmique/Scratch** et **Technologie** sont présents. Le niveau **6ᵉ** fait la jonction avec le monde des Petits Malins, et la **3ᵉ** (année du Brevet) complète le parcours. Quelques notions couvertes par niveau :
+- **Maths** : décimaux, fractions, division euclidienne, symétries, aires, priorités, repérage (6ᵉ-5ᵉ) ; calcul littéral, équations, Pythagore, puissances, agrandissement/échelle, Scratch (4ᵉ) ; Thalès, fonctions, notation scientifique, PGCD, probabilités, cosinus (3ᵉ).
+- **Français** : classes de mots, conjugaison, homophones, accords, types de phrases (6ᵉ-5ᵉ) ; passé composé, COD/COI, théâtre, registres ; discours rapporté, subordonnées, participe passé, conditionnel, subjonctif, poésie (4ᵉ) ; voix passive, argumentation (3ᵉ).
+- **Histoire-Géo-EMC** : Préhistoire, Mésopotamie, Égypte, Grèce, Rome, féodalité, islam (6ᵉ-5ᵉ) ; Lumières & Révolution, traite négrière, XIXᵉ siècle, urbanisation, mondialisation (4ᵉ) ; deux Guerres mondiales, totalitarismes, guerre froide, décolonisation, Vᵉ République, UE, aménager le territoire (3ᵉ).
+- **Sciences** : vivant, système solaire, mélanges, objets techniques, écosystèmes (6ᵉ) ; états et cycle de l'eau, circuits, digestion, respiration, photosynthèse (5ᵉ) ; atomes, lumière, son, mouvement, masse volumique, poids/masse, reproduction, chaîne d'énergie (4ᵉ) ; énergie, pH, génétique, évolution (3ᵉ).
 
 ### 🎓 Le Brevet blanc (conditions réelles)
 
@@ -137,8 +144,11 @@ ou `vercel --prod` depuis la racine du dépôt.
 
 - [x] Ajouter le programme de **3ᵉ** (année du brevet). ✅
 - [x] **Brevet blanc en conditions réelles** : minuteur optionnel + question rédigée auto-évaluée. ✅
-- [ ] **Générateur d'exercices de maths** (nombres aléatoires → réservoir quasi infini).
-- [ ] Étoffer chaque leçon (15–30 questions par notion pour la répétition espacée).
+- [x] **Générateur d'exercices de maths** (16 thèmes, réponses calculées). ✅
+- [x] **Cartes mentales rédigées** (4 à 6 branches qui enseignent) sur chaque leçon. ✅
+- [x] **Démarrage sur l'accueil** + bouton « Reprendre » par profil. ✅
+- [x] **Déploiement** automatique (Vercel) sur `royaume-savoir.vercel.app`. ✅
+- [ ] Continuer à étoffer le contenu (viser ~160 leçons, 15–30 questions par notion).
 - [ ] Module **Anglais** (contrôle continu) et module **Préparer l'oral**.
 
 ## ⚠️ Avertissement

@@ -2,6 +2,19 @@
 
 Toutes les évolutions notables de l'application sont consignées ici.
 
+## [Non publié] — Refonte 2026-06-04 : Collegica (synthèse)
+
+Synthèse de la session de refonte (détails dans les entrées suivantes) :
+
+- **Renommage** en **Collegica** (le monde collège garde « Le Royaume du Savoir », le primaire « Les Petits Malins »).
+- **Contenu** collège : **47 → 94 leçons**, **217 → 796 questions** (6ᵉ=22, 5ᵉ=25, 4ᵉ=27, 3ᵉ=20) ; 5ᵉ remplie, niveaux fiabilisés ; **Algorithmique/Scratch** et **Technologie** ajoutés.
+- **MATHGEN** étendu à **16 thèmes** (division euclidienne, volumes, probabilités, cosinus en plus), réponses vérifiées par 400 tirages par générateur.
+- **Cartes mentales** : nouveau rendu SVG + champ `carte` rédigé ; **100 % des leçons (94/94)** ont une carte (centre + 4 à 6 branches).
+- **Démarrage** toujours sur l'accueil + bouton **« Reprendre »** par profil (clé `rds_last`).
+- **Accessibilité** : `:focus-visible`, `prefers-reduced-motion`, ✓/✗ renforcé (daltonisme).
+- **Déploiement Vercel** auto sur `push` (`vercel.json` + `.vercelignore`), en ligne sur `royaume-savoir.vercel.app`.
+- **Qualité** : calculs recalculés justes, faits vérifiés (audit `enseignant`, 0 bloquant), zéro tiret cadratin, offline-first + `dist/` autonome préservés.
+
 ## [Non publié] — Objectif 1 : montée en charge du contenu collège (2026-06-04)
 
 Le collège passe de **47 à 70 leçons** et de **217 à 508 questions**, par vagues vérifiées
