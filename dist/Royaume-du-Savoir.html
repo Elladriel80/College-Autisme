@@ -614,6 +614,51 @@ var CONTENT = {
             {type:"vf", q:"La notation scientifique facilite l'écriture des très grands et très petits nombres.", answer:true,
              explain:"C'est justement son intérêt principal."}
           ]
+        },
+        {
+          id:"m14", niveau:"6e", title:"Division euclidienne et divisibilité",
+          cours:"La <b>division euclidienne</b> de a (le <b>dividende</b>) par b (le <b>diviseur</b>) s'écrit a = b × q + r, où q est le <b>quotient</b> et r le <b>reste</b>, avec 0 ≤ r < b (le reste est toujours plus petit que le diviseur). " +
+                "Un nombre est <b>divisible</b> par un autre quand le reste est 0. Critères utiles : divisible par <b>2</b> si le chiffre des unités est pair (0,2,4,6,8) ; par <b>5</b> si l'unité est 0 ou 5 ; par <b>10</b> si l'unité est 0 ; par <b>3</b> si la somme des chiffres est divisible par 3 ; par <b>9</b> si la somme des chiffres est divisible par 9.",
+          questions:[
+            {type:"saisie", q:"Division euclidienne de 17 par 5 : quel est le quotient ?", answer:["3"], explain:"17 = 5 × 3 + 2, donc le quotient est 3.", indice:"Combien de fois 5 entre-t-il dans 17 ?"},
+            {type:"saisie", q:"Division euclidienne de 17 par 5 : quel est le reste ?", answer:["2"], explain:"17 = 5 × 3 + 2, donc le reste est 2.", indice:"17 moins (5 × 3)."},
+            {type:"qcm", q:"Dans l'égalité 23 = 4 × 5 + 3, le reste est :", options:["3","4","5","23"], answer:0, explain:"Le reste est le nombre ajouté après le produit : ici 3.", indice:"C'est ce qui suit le signe « + »."},
+            {type:"vf", q:"Dans une division euclidienne, le reste est toujours plus petit que le diviseur.", answer:true, explain:"Oui : on a toujours 0 ≤ r < b.", indice:"Sinon, on pourrait encore enlever une fois le diviseur."},
+            {type:"qcm", q:"30 est un multiple de :", options:["6","7","8","9"], answer:0, explain:"30 = 6 × 5, donc 30 est un multiple de 6.", indice:"Cherche par quel nombre on peut multiplier pour tomber sur 30."},
+            {type:"qcm", q:"Un nombre est divisible par 2 si son chiffre des unités est :", options:["pair (0,2,4,6,8)","impair","égal à 5","égal à 1"], answer:0, explain:"Les nombres pairs se terminent par 0, 2, 4, 6 ou 8.", indice:"Pense aux nombres « pairs »."},
+            {type:"qcm", q:"Lequel de ces nombres est divisible par 5 ?", options:["45","32","18","27"], answer:0, explain:"45 = 5 × 9 ; il se termine par 5.", indice:"Un multiple de 5 finit par 0 ou 5."},
+            {type:"qcm", q:"Lequel de ces nombres est divisible par 3 ?", options:["24","25","26","28"], answer:0, explain:"2 + 4 = 6, divisible par 3, donc 24 l'est (24 = 3 × 8).", indice:"Additionne les chiffres et regarde si le total est dans la table de 3."},
+            {type:"vf", q:"100 est divisible par 10.", answer:true, explain:"Oui : 100 = 10 × 10, il se termine par 0.", indice:"Un multiple de 10 finit par 0."},
+            {type:"saisie", q:"Combien font 48 ÷ 6 (division exacte) ?", answer:["8"], explain:"6 × 8 = 48, donc 48 ÷ 6 = 8.", indice:"Cherche dans la table de 6."},
+            {type:"qcm", q:"Lequel de ces nombres est un diviseur de 12 ?", options:["4","5","7","8"], answer:0, explain:"12 = 4 × 3, donc 4 divise 12.", indice:"Cherche un nombre qui « tombe juste » dans 12."},
+            {type:"qcm", q:"Lequel est divisible par 9 ?", options:["81","82","84","88"], answer:0, explain:"8 + 1 = 9, divisible par 9, donc 81 = 9 × 9.", indice:"Additionne les chiffres et compare à la table de 9."},
+            {type:"vf", q:"7 est un nombre premier : il n'a que deux diviseurs, 1 et lui-même.", answer:true, explain:"Oui : 7 n'est divisible que par 1 et par 7.", indice:"Essaie de diviser 7 par 2, 3, 4... ça ne tombe jamais juste."},
+            {type:"saisie", q:"Division euclidienne de 100 par 7 : quel est le reste ?", answer:["2"], explain:"100 = 7 × 14 + 2 (car 7 × 14 = 98), donc le reste est 2.", indice:"Cherche le plus grand multiple de 7 sous 100, puis la différence."},
+            {type:"qcm", q:"Lequel de ces nombres n'est PAS divisible par 2 ?", options:["27","14","20","38"], answer:0, explain:"27 est impair (il finit par 7), il n'est donc pas divisible par 2.", indice:"Repère celui qui est impair."}
+          ]
+        },
+        {
+          id:"m15", niveau:"6e", title:"La symétrie axiale",
+          cours:"La <b>symétrie axiale</b> par rapport à une droite (l'<b>axe</b>) revient à un <b>pliage</b> le long de cet axe : la figure et son image se <b>superposent</b> exactement. " +
+                "Elle <b>conserve</b> les longueurs, les angles et l'alignement. Un point situé <b>sur</b> l'axe est son propre symétrique. " +
+                "Nombre d'axes de symétrie : le <b>carré</b> en a 4, le <b>rectangle</b> 2, le <b>losange</b> 2, le <b>triangle équilatéral</b> 3, le <b>cercle</b> une infinité.",
+          questions:[
+            {type:"qcm", q:"La symétrie axiale revient à faire un :", options:["pliage le long d'une droite","agrandissement","glissement","coloriage"], answer:0, explain:"On plie la figure le long de l'axe : les deux parties se superposent.", indice:"Pense à plier une feuille en deux."},
+            {type:"vf", q:"Par symétrie axiale, une figure et son image se superposent par pliage le long de l'axe.", answer:true, explain:"Oui : c'est la définition du pliage symétrique.", indice:"Si tu plies sur l'axe, les deux moitiés coïncident."},
+            {type:"qcm", q:"Combien d'axes de symétrie a un carré ?", options:["4","2","1","0"], answer:0, explain:"Le carré a 4 axes : ses 2 médianes et ses 2 diagonales.", indice:"Compte les médianes ET les diagonales."},
+            {type:"qcm", q:"Combien d'axes de symétrie a un rectangle (qui n'est pas un carré) ?", options:["2","4","1","0"], answer:0, explain:"Le rectangle a 2 axes : ses deux médianes (pas les diagonales).", indice:"Les diagonales du rectangle ne sont pas des axes de symétrie."},
+            {type:"qcm", q:"Combien d'axes de symétrie a un cercle ?", options:["une infinité","1","2","4"], answer:0, explain:"Toute droite passant par le centre est un axe : il y en a une infinité.", indice:"Pense à toutes les droites qui passent par le centre."},
+            {type:"qcm", q:"Combien d'axes de symétrie a un triangle équilatéral ?", options:["3","1","2","0"], answer:0, explain:"Il a 3 axes, un par sommet (les médiatrices des côtés).", indice:"Autant que de sommets."},
+            {type:"vf", q:"La symétrie axiale conserve les longueurs (les distances ne changent pas).", answer:true, explain:"Oui : une figure et son symétrique ont les mêmes mesures.", indice:"L'image a la même taille que la figure de départ."},
+            {type:"vf", q:"La symétrie axiale conserve les angles.", answer:true, explain:"Oui : les angles de l'image sont égaux à ceux de la figure.", indice:"La forme n'est pas déformée, juste retournée."},
+            {type:"qcm", q:"La lettre majuscule A possède un axe de symétrie :", options:["vertical","horizontal","diagonal","aucun"], answer:0, explain:"On peut plier le A le long d'un axe vertical : les deux moitiés coïncident.", indice:"Plie mentalement le A de haut en bas."},
+            {type:"qcm", q:"La lettre majuscule B possède un axe de symétrie :", options:["horizontal","vertical","diagonal","aucun"], answer:0, explain:"Le B se plie le long d'un axe horizontal (haut/bas identiques).", indice:"Regarde si le haut et le bas du B se ressemblent."},
+            {type:"qcm", q:"Laquelle de ces lettres majuscules n'a AUCUN axe de symétrie ?", options:["F","A","M","T"], answer:0, explain:"A, M et T ont un axe vertical ; F n'en a aucun.", indice:"Essaie de plier chaque lettre : laquelle ne coïncide jamais ?"},
+            {type:"vf", q:"Un point situé exactement sur l'axe de symétrie est son propre symétrique.", answer:true, explain:"Oui : il ne bouge pas, son image est lui-même.", indice:"Sur le pli, le point reste à la même place."},
+            {type:"qcm", q:"Combien d'axes de symétrie a un losange ?", options:["2","4","1","0"], answer:0, explain:"Le losange a 2 axes : ses deux diagonales.", indice:"Ce sont les diagonales du losange."},
+            {type:"vf", q:"Dans une symétrie axiale, l'axe est une droite.", answer:true, explain:"Oui : l'axe de symétrie est toujours une droite.", indice:"C'est la ligne de pliage."},
+            {type:"qcm", q:"Quand on plie la figure le long de son axe de symétrie, les deux parties :", options:["se superposent exactement","se chevauchent à moitié","s'éloignent","disparaissent"], answer:0, explain:"Elles coïncident parfaitement : c'est le signe d'une symétrie axiale.", indice:"Une symétrie « réussie » fait coïncider les deux moitiés."}
+          ]
         }
       ]
     },
