@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le Royaume du Savoir (Académie des Mages)</title>
+<title>Collegica, apprendre du CP au Brevet</title>
 <style>
   :root{
     --bg:#1a1633;        /* nuit profonde, violet */
@@ -349,7 +349,7 @@
 <body>
 <div class="wrap">
   <div class="topbar" id="topbar">
-    <div class="brand"><span class="logo">🪄</span><span>Le Royaume du Savoir</span></div>
+    <div class="brand"><span class="logo">🪄</span><span>Collegica</span></div>
     <div class="stats" id="stats"></div>
   </div>
   <div id="app"></div>
@@ -2422,7 +2422,7 @@ function goAfterLogin(){
 }
 function renderLanding(lastId){
   if(typeof stopExamTimer==="function") stopExamTimer();
-  setBrand("Le Royaume du Savoir");
+  setBrand("Collegica");
   renderStats();
   const profiles = loadProfiles();
   if(lastId && !profiles.some(p=>p.id===lastId)) lastId="";
@@ -2487,7 +2487,7 @@ function renderLanding(lastId){
   <div class="card center hero">
     <span class="tag">🎓 Apprendre en s'amusant, du CP au Brevet</span>
     <div style="font-size:58px" class="pop">🏰</div>
-    <h1>Le Royaume du Savoir</h1>
+    <h1>Collegica</h1>
     <p class="muted" style="max-width:680px;margin:0 auto 4px">
       Une seule aventure magique qui accompagne chaque enfant <b>du CP au Brevet</b>, à son rythme.
       Dès le CP, le monde « <b>Les Petits Malins</b> » pose les bases (lecture, calcul, langues, histoire) ;
@@ -3749,7 +3749,7 @@ function collectProgress(){
 }
 function exportProgress(){
   var payload={
-    app:"Le Royaume du Savoir",
+    app:"Collegica",
     type:"progression",
     version:1,
     exportedAt:new Date().toISOString(),

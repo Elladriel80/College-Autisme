@@ -1,6 +1,6 @@
-# 🪄 Le Royaume du Savoir
+# 🪄 Collegica
 
-> **Appli familiale (fusion) — du CP au Brevet.** À l'ouverture, on choisit un profil. Chaque profil appartient à un **monde** :
+> **Collegica, l'appli familiale du CP au Brevet.** À l'ouverture, on choisit un profil. Chaque profil appartient à un **monde** :
 > 🐣 **Les Petits Malins** (les bases, dès le CP : lecture, calcul, langues, histoire) ou 🏰 **Le Royaume du Savoir** (collège, jusqu'au Brevet).
 > Une même aventure qui accompagne **tous les enfants** au fil de leur scolarité. Les deux univers cohabitent dans le même fichier `Royaume-du-Savoir.html` ; la progression de chaque enfant est enregistrée séparément sur l'appareil. Le monde des petits est aussi disponible seul dans `Petits-Malins.html`.
 >
