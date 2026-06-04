@@ -324,6 +324,45 @@ var CONTENT = {
             {type:"qcm", q:"Triangle de base 4 cm et hauteur 9 cm : aire =", options:["18 cm²","36 cm²","13 cm²","22 cm²"], answer:0, explain:"(4 × 9) ÷ 2 = 36 ÷ 2 = 18 cm².", indice:"36 divisé par 2."},
             {type:"vf", q:"Pour calculer l'aire d'un triangle, la hauteur doit être perpendiculaire à la base.", answer:true, explain:"Oui : la hauteur forme un angle droit avec la base.", indice:"Hauteur et base font un angle droit."}
           ]
+        },
+        {
+          id:"m18", niveau:"4e", title:"Algorithmique et Scratch (initiation)",
+          cours:"Un <b>algorithme</b> est une suite d'<b>instructions</b> (des étapes) pour réaliser une tâche. Un <b>programme</b> est un algorithme écrit dans un langage compris par la machine ; dans <b>Scratch</b>, on programme en <b>emboîtant des blocs</b>. " +
+                "Les instructions s'exécutent <b>dans l'ordre</b>, de haut en bas (une <b>séquence</b>). Une <b>boucle</b> répète des instructions. Une <b>variable</b> mémorise une valeur (par exemple un score). Le personnage que l'on déplace est un <b>lutin</b>.",
+          questions:[
+            {type:"qcm", q:"Un algorithme est :", options:["une suite d'instructions pour réaliser une tâche","un dessin","un nombre","un bouton"], answer:0, explain:"C'est une suite d'étapes ordonnées pour accomplir une tâche.", indice:"Pense à une recette de cuisine étape par étape."},
+            {type:"qcm", q:"Dans Scratch, on programme surtout en :", options:["emboîtant des blocs","tapant seulement des chiffres","dessinant à main levée","parlant au micro"], answer:0, explain:"On assemble des blocs colorés qui s'emboîtent.", indice:"Les instructions sont des « briques » à clipser."},
+            {type:"vf", q:"Dans un programme, les instructions s'exécutent dans l'ordre, de haut en bas.", answer:true, explain:"Oui : c'est l'exécution séquentielle.", indice:"On lit le programme du haut vers le bas."},
+            {type:"qcm", q:"À quoi sert une « boucle » ?", options:["à répéter des instructions","à supprimer le programme","à colorier l'écran","à ralentir l'ordinateur"], answer:0, explain:"La boucle répète automatiquement des instructions.", indice:"Évite de recopier 10 fois la même chose."},
+            {type:"qcm", q:"Le bloc « répéter 10 fois » :", options:["exécute 10 fois les instructions à l'intérieur","s'exécute une seule fois","efface tout","ajoute 10 lutins"], answer:0, explain:"Tout ce qui est à l'intérieur est répété 10 fois.", indice:"Le nombre indique combien de répétitions."},
+            {type:"qcm", q:"Une « variable » sert à :", options:["mémoriser une valeur (comme un score)","dessiner un cercle","éteindre l'écran","déplacer la souris"], answer:0, explain:"Une variable garde une valeur en mémoire, par exemple le score.", indice:"C'est comme une boîte qui retient un nombre."},
+            {type:"qcm", q:"Dans Scratch, le personnage que l'on déplace s'appelle :", options:["un lutin","un fichier","un nuage","un bouton"], answer:0, explain:"On parle de lutin (sprite en anglais).", indice:"Le petit personnage sur la scène."},
+            {type:"vf", q:"Un programme est un algorithme écrit dans un langage compris par la machine.", answer:true, explain:"Oui : on traduit l'algorithme en instructions exécutables.", indice:"L'idée (algorithme) devient du code (programme)."},
+            {type:"qcm", q:"Pour démarrer un programme Scratch, on clique souvent sur :", options:["le drapeau vert","la croix rouge","l'imprimante","le clavier"], answer:0, explain:"Le drapeau vert lance le programme.", indice:"Vert = on démarre."},
+            {type:"qcm", q:"« Avancer de 10 pas » dans Scratch déplace :", options:["le lutin","tout l'écran","la souris","le son"], answer:0, explain:"Le lutin avance de 10 pas.", indice:"Quel élément se déplace sur la scène ?"},
+            {type:"vf", q:"Une séquence est une suite d'instructions exécutées l'une après l'autre.", answer:true, explain:"Oui : c'est l'enchaînement des instructions.", indice:"Les unes après les autres, dans l'ordre."},
+            {type:"qcm", q:"Pour répéter une action sans fin, on utilise :", options:["une boucle « répéter indéfiniment »","un bloc « stop »","une variable","un nouveau lutin"], answer:0, explain:"La boucle « répéter indéfiniment » tourne en continu.", indice:"Une boucle qui ne s'arrête pas toute seule."}
+          ]
+        },
+        {
+          id:"m19", niveau:"3e", title:"Programmer avec Scratch : boucles, conditions et coordonnées",
+          cours:"Une <b>condition</b> est un test qui est soit <b>vrai</b>, soit <b>faux</b>. Le bloc <b>« si ... alors »</b> exécute des instructions seulement si la condition est vraie ; <b>« si ... alors ... sinon »</b> traite aussi le cas faux. " +
+                "La boucle <b>« répéter jusqu'à ce que »</b> s'arrête quand la condition devient vraie. " +
+                "Sur la scène, la position d'un lutin est donnée par ses <b>coordonnées (x ; y)</b> : <b>x</b> est horizontal, <b>y</b> vertical, et le <b>centre</b> est (0 ; 0).",
+          questions:[
+            {type:"qcm", q:"Le bloc « si ... alors » exécute des instructions :", options:["seulement si la condition est vraie","toujours","jamais","au hasard"], answer:0, explain:"Les instructions ne se font que si le test est vrai.", indice:"« Si » introduit une condition."},
+            {type:"qcm", q:"Dans « si ... alors ... sinon », si la condition est fausse, on exécute :", options:["le bloc « sinon »","le bloc « alors »","rien du tout","les deux blocs"], answer:0, explain:"Le « sinon » gère le cas où la condition est fausse.", indice:"« Sinon » = l'autre cas."},
+            {type:"qcm", q:"Sur la scène Scratch, la position d'un lutin est donnée par :", options:["ses coordonnées (x ; y)","sa couleur","son nom","sa taille"], answer:0, explain:"On repère le lutin par ses coordonnées (x ; y).", indice:"Deux nombres : un horizontal, un vertical."},
+            {type:"qcm", q:"Dans un repère, x indique la position :", options:["horizontale","verticale","en profondeur","dans le temps"], answer:0, explain:"x est l'axe horizontal.", indice:"x = de gauche à droite."},
+            {type:"qcm", q:"y indique la position :", options:["verticale","horizontale","en diagonale","sonore"], answer:0, explain:"y est l'axe vertical.", indice:"y = de bas en haut."},
+            {type:"qcm", q:"Le centre de la scène a pour coordonnées :", options:["(0 ; 0)","(1 ; 1)","(10 ; 10)","(100 ; 100)"], answer:0, explain:"Le centre est l'origine du repère : (0 ; 0).", indice:"Au milieu, les deux valeurs sont nulles."},
+            {type:"vf", q:"Une boucle « répéter jusqu'à ce que » s'arrête quand la condition devient vraie.", answer:true, explain:"Oui : tant que la condition est fausse, la boucle continue.", indice:"Elle répète « jusqu'à » ce que ce soit vrai."},
+            {type:"qcm", q:"« si (score = 10) alors dire Gagné » : le lutin dit « Gagné » :", options:["quand le score vaut 10","tout le temps","jamais","quand on clique"], answer:0, explain:"L'instruction s'exécute seulement si score = 10.", indice:"La condition teste l'égalité du score à 10."},
+            {type:"vf", q:"Une condition est un test dont le résultat est soit vrai, soit faux.", answer:true, explain:"Oui : une condition est vraie ou fausse.", indice:"Comme une question à réponse oui/non."},
+            {type:"qcm", q:"Le bloc « aller à x: 100 y: 0 » place le lutin :", options:["à droite du centre, à la même hauteur","tout en haut de l'écran","hors de l'écran","au centre exact"], answer:0, explain:"x = 100 (à droite du centre), y = 0 (même hauteur que le centre).", indice:"x positif = vers la droite ; y = 0 = hauteur du centre."},
+            {type:"qcm", q:"Pour répéter des instructions tant qu'une condition n'est pas remplie, on utilise :", options:["« répéter jusqu'à ce que »","« avancer de 10 »","« changer de costume »","« dire bonjour »"], answer:0, explain:"C'est la boucle conditionnelle « répéter jusqu'à ce que ».", indice:"Une boucle pilotée par une condition."},
+            {type:"vf", q:"On peut combiner des boucles et des conditions dans un même programme.", answer:true, explain:"Oui : c'est même très courant (par exemple répéter un test).", indice:"Rien n'empêche de mélanger les deux."}
+          ]
         }
       ]
     },
@@ -1188,6 +1227,25 @@ var CONTENT = {
             {type:"qcm", q:"Pour calculer une distance, on fait :", options:["vitesse × temps","vitesse ÷ temps","temps ÷ vitesse","vitesse + temps"], answer:0, explain:"distance = vitesse × temps.", indice:"On multiplie la vitesse par la durée."},
             {type:"saisie", q:"Un piéton marche à 5 km/h pendant 2 h. Distance parcourue en km ?", answer:["10","10 km"], explain:"5 × 2 = 10 km.", indice:"vitesse × temps."},
             {type:"vf", q:"Plus un objet va vite, plus il parcourt de distance pendant un même temps.", answer:true, explain:"Oui : à durée égale, une plus grande vitesse fait plus de distance.", indice:"Vite = loin en peu de temps."}
+          ]
+        },
+        {
+          id:"s15", niveau:"4e", title:"La chaîne d'énergie et la chaîne d'information (Technologie)",
+          cours:"Un objet technique met en oeuvre deux chaînes. La <b>chaîne d'énergie</b> fournit et <b>transforme l'énergie</b> pour réaliser l'action (une <b>source</b> comme une pile ou le secteur, puis un <b>convertisseur</b> : un moteur, une lampe...). " +
+                "La <b>chaîne d'information</b> <b>acquiert</b>, <b>traite</b> puis <b>communique</b> une information : un <b>capteur</b> détecte (lumière, température, présence), une unité de traitement décide, un <b>actionneur</b> agit (moteur, lampe, sonnerie).",
+          questions:[
+            {type:"qcm", q:"La chaîne d'énergie sert à :", options:["fournir et transformer l'énergie pour réaliser une action","stocker des photos","mesurer le temps","colorier un objet"], answer:0, explain:"Elle apporte l'énergie et la convertit pour agir.", indice:"Pense à ce qui « fait bouger » l'objet."},
+            {type:"qcm", q:"Un moteur électrique convertit l'énergie électrique en énergie :", options:["mécanique (mouvement)","sonore","nucléaire","chimique"], answer:0, explain:"Le moteur transforme l'électricité en mouvement.", indice:"Un moteur fait tourner, donc bouger."},
+            {type:"qcm", q:"Une lampe convertit l'énergie électrique en énergie :", options:["lumineuse","mécanique","sonore","thermique seulement"], answer:0, explain:"La lampe produit de la lumière.", indice:"À quoi sert une lampe ?"},
+            {type:"qcm", q:"Un composant qui détecte une information (lumière, température, présence) est :", options:["un capteur","un actionneur","une pile","un fil"], answer:0, explain:"Le capteur détecte une grandeur et fournit une information.", indice:"Il « capte » quelque chose."},
+            {type:"qcm", q:"Un composant qui réalise l'action (moteur, lampe, sonnerie) est :", options:["un actionneur","un capteur","un écran tactile","un bouton"], answer:0, explain:"L'actionneur agit sur le monde réel.", indice:"Il « actionne » quelque chose."},
+            {type:"vf", q:"La chaîne d'information acquiert, traite puis communique une information.", answer:true, explain:"Oui : ce sont ses trois fonctions.", indice:"Capter, décider, transmettre."},
+            {type:"qcm", q:"Une pile ou le secteur jouent le rôle de :", options:["source d'énergie","capteur","actionneur","information"], answer:0, explain:"Ils fournissent l'énergie : ce sont des sources.", indice:"D'où vient l'énergie ?"},
+            {type:"qcm", q:"Un détecteur de luminosité est :", options:["un capteur","un actionneur","un moteur","une lampe"], answer:0, explain:"Il mesure la lumière : c'est un capteur.", indice:"Il détecte, donc il capte."},
+            {type:"qcm", q:"Un radiateur électrique convertit l'électricité en énergie :", options:["thermique (chaleur)","mécanique","lumineuse","sonore"], answer:0, explain:"Le radiateur produit de la chaleur.", indice:"À quoi sert un radiateur ?"},
+            {type:"vf", q:"Dans un objet technique, capteurs, unité de traitement et actionneurs travaillent ensemble.", answer:true, explain:"Oui : l'information circule entre eux pour piloter l'objet.", indice:"Détecter, décider, agir : une équipe."},
+            {type:"qcm", q:"Un haut-parleur convertit l'énergie électrique en énergie :", options:["sonore","lumineuse","thermique","chimique"], answer:0, explain:"Le haut-parleur produit du son.", indice:"À quoi sert un haut-parleur ?"},
+            {type:"vf", q:"Un capteur fournit une information, un actionneur réalise une action.", answer:true, explain:"Oui : c'est la différence entre les deux.", indice:"L'un informe, l'autre agit."}
           ]
         }
       ]
