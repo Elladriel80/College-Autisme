@@ -147,9 +147,20 @@
   .opt.wrong{border-color:var(--red-soft);background:rgba(255,157,157,.14)}
   /* Redondance non chromatique (daltonisme) : un symbole ✓/✗ EN PLUS de la couleur,
      comme chez Les Petits Malins. */
-  .opt.correct::after{content:" ✓"}
-  .opt.wrong::after{content:" ✗"}
+  .opt.correct::after{content:" ✓";font-weight:900;float:right;color:var(--green)}
+  .opt.wrong::after{content:" ✗";font-weight:900;float:right;color:var(--red-soft)}
   .opt:disabled{cursor:default}
+  /* Navigation clavier : un focus net et visible sur tous les éléments interactifs
+     (accessibilité clavier, demandée par l'audit). */
+  a:focus-visible, button:focus-visible, .opt:focus-visible, input:focus-visible,
+  select:focus-visible, [tabindex]:focus-visible{
+    outline:3px solid var(--gold); outline-offset:2px; border-radius:8px;
+  }
+  /* Respect de la préférence système « réduire les animations » (en plus du Mode calme). */
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important;
+       transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  }
   .feedback{margin-top:14px;border-radius:12px;padding:14px 16px;font-weight:600;display:none}
   .feedback.ok{display:block;background:rgba(111,220,140,.14);border:1px solid var(--green)}
   .feedback.no{display:block;background:rgba(255,157,157,.12);border:1px solid var(--red-soft)}
