@@ -768,6 +768,44 @@ var CONTENT = {
             {type:"qcm", q:"Pour répéter des instructions tant qu'une condition n'est pas remplie, on utilise :", options:["« répéter jusqu'à ce que »","« avancer de 10 »","« changer de costume »","« dire bonjour »"], answer:0, explain:"C'est la boucle conditionnelle « répéter jusqu'à ce que ».", indice:"Une boucle pilotée par une condition."},
             {type:"vf", q:"On peut combiner des boucles et des conditions dans un même programme.", answer:true, explain:"Oui : c'est même très courant (par exemple répéter un test).", indice:"Rien n'empêche de mélanger les deux."}
           ]
+        },
+        {
+          id:"m20", niveau:"5e", title:"Les priorités opératoires",
+          carte:{centre:"Les priorités opératoires", branches:[{titre:"1) Les parenthèses", detail:"toujours en premier"},{titre:"2) × et ÷", detail:"de gauche à droite"},{titre:"3) + et -", detail:"de gauche à droite"},{titre:"Exemple", detail:"3 + 4 × 2 = 3 + 8 = 11"},{titre:"Piège", detail:"on ne calcule pas toujours de gauche à droite"}]},
+          cours:"Dans un calcul, on respecte un ordre : d'abord les <b>parenthèses</b>, puis les <b>multiplications et divisions</b> (de gauche à droite), enfin les <b>additions et soustractions</b> (de gauche à droite). Exemple : 3 + 4 × 2 = 3 + 8 = 11.",
+          questions:[
+            {type:"qcm", q:"Sans parenthèses, on calcule d'abord :", options:["les multiplications et divisions","les additions","de gauche à droite tout le temps","les soustractions"], answer:0, explain:"× et ÷ passent avant + et -.", indice:"La multiplication est prioritaire sur l'addition."},
+            {type:"saisie", q:"Calcule : 3 + 4 × 2", answer:["11"], explain:"4 × 2 = 8, puis 3 + 8 = 11.", indice:"Fais la multiplication d'abord."},
+            {type:"saisie", q:"Calcule : (2 + 3) × 4", answer:["20"], explain:"La parenthèse d'abord : 2 + 3 = 5, puis 5 × 4 = 20.", indice:"Commence par la parenthèse."},
+            {type:"saisie", q:"Calcule : 10 - 2 × 3", answer:["4"], explain:"2 × 3 = 6, puis 10 - 6 = 4.", indice:"La multiplication avant la soustraction."},
+            {type:"saisie", q:"Calcule : 12 ÷ 3 + 1", answer:["5"], explain:"12 ÷ 3 = 4, puis 4 + 1 = 5.", indice:"La division avant l'addition."},
+            {type:"qcm", q:"Dans « 5 × (2 + 1) », on calcule en premier :", options:["la parenthèse (2 + 1)","5 × 2","rien","2 + 1 + 5"], answer:0, explain:"Toujours les parenthèses en premier.", indice:"Ce qui est entre parenthèses passe avant."},
+            {type:"saisie", q:"Calcule : 2 + 3 × 4", answer:["14"], explain:"3 × 4 = 12, puis 2 + 12 = 14.", indice:"Multiplication d'abord."},
+            {type:"saisie", q:"Calcule : 20 - (4 + 6)", answer:["10"], explain:"Parenthèse : 4 + 6 = 10, puis 20 - 10 = 10.", indice:"Commence par la parenthèse."},
+            {type:"vf", q:"Les parenthèses se calculent toujours en premier.", answer:true, explain:"Oui : c'est la première priorité.", indice:"Parenthèses d'abord."},
+            {type:"saisie", q:"Calcule : 6 + 8 ÷ 2", answer:["10"], explain:"8 ÷ 2 = 4, puis 6 + 4 = 10.", indice:"La division avant l'addition."},
+            {type:"qcm", q:"Calcule : 7 + 2 × 5", options:["17","45","35","20"], answer:0, explain:"2 × 5 = 10, puis 7 + 10 = 17.", indice:"Multiplication d'abord."},
+            {type:"saisie", q:"Calcule : 3 × 4 + 2 × 5", answer:["22"], explain:"3 × 4 = 12 et 2 × 5 = 10, puis 12 + 10 = 22.", indice:"Fais les deux multiplications, puis additionne."}
+          ]
+        },
+        {
+          id:"m21", niveau:"3e", title:"PGCD et fractions irréductibles",
+          carte:{centre:"PGCD et fractions irréductibles", branches:[{titre:"PGCD", detail:"plus grand commun diviseur"},{titre:"Irréductible", detail:"PGCD du haut et du bas = 1"},{titre:"Méthode", detail:"diviser par le PGCD"},{titre:"Exemple", detail:"12/18 = 2/3 (÷ 6)"},{titre:"Vérifier", detail:"plus aucun diviseur commun"}]},
+          cours:"Le <b>PGCD</b> de deux nombres est leur <b>plus grand commun diviseur</b>. Une fraction est <b>irréductible</b> lorsque son numérateur et son dénominateur n'ont plus de diviseur commun (leur PGCD vaut 1). Pour la rendre irréductible, on <b>divise</b> le haut et le bas par leur <b>PGCD</b>. Exemple : 12/18 = 2/3 (on divise par 6).",
+          questions:[
+            {type:"qcm", q:"PGCD signifie :", options:["plus grand commun diviseur","produit de grands chiffres","plus grand chiffre du dénominateur","petit groupe de calcul"], answer:0, explain:"PGCD = plus grand commun diviseur.", indice:"C'est le plus grand nombre qui divise les deux."},
+            {type:"saisie", q:"PGCD de 12 et 18 ?", answer:["6"], explain:"Diviseurs communs : 1, 2, 3, 6. Le plus grand est 6.", indice:"Cherche le plus grand nombre qui divise 12 et 18."},
+            {type:"saisie", q:"PGCD de 8 et 12 ?", answer:["4"], explain:"Diviseurs communs : 1, 2, 4. Le plus grand est 4.", indice:"Quel est le plus grand diviseur commun ?"},
+            {type:"saisie", q:"Rends irréductible la fraction 12/18 (sous la forme a/b).", answer:["2/3"], explain:"On divise par 6 : 12/18 = 2/3.", indice:"Divise le haut et le bas par leur PGCD (6)."},
+            {type:"saisie", q:"Rends irréductible la fraction 8/12.", answer:["2/3"], explain:"On divise par 4 : 8/12 = 2/3.", indice:"Divise par le PGCD (4)."},
+            {type:"qcm", q:"Une fraction est irréductible quand :", options:["on ne peut plus la simplifier (PGCD = 1)","le numérateur est pair","le dénominateur est grand","elle est plus petite que 1"], answer:0, explain:"Plus aucun diviseur commun : PGCD = 1.", indice:"On ne peut plus diviser en haut et en bas."},
+            {type:"saisie", q:"PGCD de 15 et 25 ?", answer:["5"], explain:"Diviseurs communs : 1, 5. Le plus grand est 5.", indice:"5 divise 15 et 25."},
+            {type:"saisie", q:"Rends irréductible la fraction 15/25.", answer:["3/5"], explain:"On divise par 5 : 15/25 = 3/5.", indice:"Divise par le PGCD (5)."},
+            {type:"vf", q:"Pour simplifier une fraction au maximum, on divise par le PGCD.", answer:true, explain:"Oui : diviser par le PGCD donne directement la fraction irréductible.", indice:"Le PGCD simplifie en une seule étape."},
+            {type:"saisie", q:"PGCD de 6 et 9 ?", answer:["3"], explain:"Diviseurs communs : 1, 3. Le plus grand est 3.", indice:"3 divise 6 et 9."},
+            {type:"saisie", q:"Rends irréductible la fraction 9/6.", answer:["3/2"], explain:"On divise par 3 : 9/6 = 3/2.", indice:"Divise par le PGCD (3)."},
+            {type:"qcm", q:"La fraction 7/9 est-elle irréductible ?", options:["oui","non"], answer:0, explain:"7 et 9 n'ont que 1 comme diviseur commun : PGCD = 1, donc irréductible.", indice:"Cherche un diviseur commun à 7 et 9."}
+          ]
         }
       ]
     },
@@ -1138,6 +1176,25 @@ var CONTENT = {
             {type:"qcm", q:"« Ils ___ (faire) un voyage s'ils pouvaient. »", options:["feraient","feront","font","faisaient"], answer:0, explain:"Conditionnel de faire, ils : feraient.", indice:"Radical « fer » + « -aient »."},
             {type:"qcm", q:"Le futur donne « je serai » ; le conditionnel donne « je ___ ».", options:["serais","serai","suis","étais"], answer:0, explain:"Conditionnel : serais (avec s).", indice:"Ajoute un « s » au futur."}
           ]
+        },
+        {
+          id:"f19", niveau:"4e", title:"Le subjonctif présent",
+          carte:{centre:"Le subjonctif présent", branches:[{titre:"Souhait, doute, obligation", detail:"il faut que, je veux que"},{titre:"Introduit par « que »", detail:"presque toujours"},{titre:"Terminaisons", detail:"-e, -es, -e, -ions, -iez, -ent"},{titre:"Verbes utiles", detail:"que je sois, que j'aie, que je fasse"},{titre:"Repère", detail:"que je sois (subjonctif) / je suis (présent)"}]},
+          cours:"Le <b>subjonctif présent</b> exprime un <b>souhait</b>, une <b>obligation</b> ou un <b>doute</b>. Il est presque toujours introduit par <b>« que »</b> (il faut que, je veux que, bien que, pour que). Terminaisons fréquentes : <b>-e, -es, -e, -ions, -iez, -ent</b>. À connaître : que je <b>sois</b> (être), que j'<b>aie</b> (avoir), que je <b>fasse</b> (faire), que j'<b>aille</b> (aller).",
+          questions:[
+            {type:"qcm", q:"Le subjonctif s'emploie souvent après :", options:["« il faut que », « je veux que »","« et », « ou »","« hier »","« très »"], answer:0, explain:"Ces expressions entraînent le subjonctif.", indice:"Pense à l'obligation : « il faut que »."},
+            {type:"qcm", q:"« Il faut que tu ___ (finir) tes devoirs. »", options:["finisses","finis","finiras","finissais"], answer:0, explain:"Subjonctif : que tu finisses.", indice:"Après « il faut que », on emploie le subjonctif."},
+            {type:"qcm", q:"« Je veux que tu ___ (être) à l'heure. »", options:["sois","es","seras","étais"], answer:0, explain:"Subjonctif de être : que tu sois.", indice:"que tu sois."},
+            {type:"qcm", q:"Terminaisons fréquentes du subjonctif présent :", options:["-e, -es, -e, -ions, -iez, -ent","-ai, -as, -a, -ons, -ez, -ont","-ais, -ais, -ait, -ions, -iez, -aient","-s, -s, -t, -ons, -ez, -ent"], answer:0, explain:"Ce sont les terminaisons du subjonctif présent.", indice:"Elles ressemblent au présent pour je/tu/il."},
+            {type:"saisie", q:"Subjonctif de « avoir » : « que j'___ ».", answer:["aie","que j'aie"], explain:"que j'aie.", indice:"À ne pas confondre avec « j'ai » (présent)."},
+            {type:"qcm", q:"« Bien qu'il ___ (faire) froid, il sort. »", options:["fasse","fait","fera","faisait"], answer:0, explain:"Subjonctif de faire : qu'il fasse.", indice:"Après « bien que », subjonctif."},
+            {type:"qcm", q:"« Pour que nous ___ (aller) plus vite. »", options:["allions","allons","irons","irions"], answer:0, explain:"Subjonctif de aller, nous : allions.", indice:"Après « pour que », subjonctif."},
+            {type:"vf", q:"Le subjonctif exprime souvent un souhait, une obligation ou un doute.", answer:true, explain:"Oui : il marque l'incertitude ou la volonté.", indice:"Ce n'est pas un fait certain et réalisé."},
+            {type:"qcm", q:"« Il faut que vous ___ (venir). »", options:["veniez","venez","viendrez","venait"], answer:0, explain:"Subjonctif de venir, vous : veniez.", indice:"Après « il faut que », subjonctif."},
+            {type:"qcm", q:"Le subjonctif est presque toujours introduit par :", options:["« que »","« et »","« ou »","« mais »"], answer:0, explain:"On le rencontre après « que ».", indice:"Cherche le petit mot juste avant le verbe."},
+            {type:"saisie", q:"Subjonctif de « être » : « que je ___ ».", answer:["sois","que je sois"], explain:"que je sois.", indice:"Pas « je suis » (présent)."},
+            {type:"vf", q:"« que je sois » est au subjonctif ; « je suis » est au présent de l'indicatif.", answer:true, explain:"Oui : le subjonctif suit « que », l'indicatif énonce un fait.", indice:"L'un exprime un souhait, l'autre un fait."}
+          ]
         }
       ]
     },
@@ -1456,6 +1513,44 @@ var CONTENT = {
             {type:"saisie", q:"Quel inventeur est associé à l'amélioration de la machine à vapeur ? (nom de famille)", answer:["Watt","James Watt"], explain:"James Watt a perfectionné la machine à vapeur (l'unité « watt » porte son nom).", indice:"Une unité de puissance porte son nom."},
             {type:"vf", q:"La machine à vapeur a permis de faire fonctionner des usines et des trains.", answer:true, explain:"Oui : c'est le moteur de la révolution industrielle.", indice:"Usines + locomotives."},
             {type:"qcm", q:"L'ensemble des colonies d'un pays forme :", options:["un empire colonial","une république","une usine","une cathédrale"], answer:0, explain:"On parle d'empire colonial.", indice:"Un « empire » fait de colonies."}
+          ]
+        },
+        {
+          id:"h17", niveau:"3e", title:"Les régimes totalitaires des années 1930",
+          carte:{centre:"Les totalitarismes", branches:[{titre:"Parti unique", detail:"un seul parti autorisé"},{titre:"Chef tout-puissant", detail:"culte du chef"},{titre:"Propagande et terreur", detail:"police politique"},{titre:"URSS / Italie / Allemagne", detail:"Staline, Mussolini, Hitler"},{titre:"Pas de libertés", detail:"ni presse, ni opposition"}]},
+          cours:"Dans l'<b>entre-deux-guerres</b> (années 1920-1930) naissent des <b>régimes totalitaires</b> : l'<b>URSS</b> de <b>Staline</b> (communisme), l'<b>Italie</b> de <b>Mussolini</b> (fascisme), l'<b>Allemagne</b> d'<b>Hitler</b> (nazisme). Points communs : <b>parti unique</b>, <b>chef</b> tout-puissant (culte du chef), <b>propagande</b>, <b>police politique</b> et <b>terreur</b>, aucune liberté. Le nazisme y ajoute le <b>racisme</b> et l'<b>antisémitisme</b>.",
+          questions:[
+            {type:"qcm", q:"Un régime totalitaire est dirigé par :", options:["un parti unique et un chef tout-puissant","un parlement élu","plusieurs partis libres","un roi conseillé"], answer:0, explain:"Parti unique et chef tout-puissant caractérisent le totalitarisme.", indice:"Un seul parti, un seul chef."},
+            {type:"qcm", q:"En URSS, le dictateur des années 1930 est :", options:["Staline","Churchill","de Gaulle","Roosevelt"], answer:0, explain:"Staline dirige l'URSS communiste.", indice:"Son nom commence par S."},
+            {type:"qcm", q:"En Allemagne, le régime nazi est dirigé par :", options:["Hitler","Mussolini","Lénine","Franco"], answer:0, explain:"Hitler dirige l'Allemagne nazie.", indice:"Chef du parti nazi."},
+            {type:"qcm", q:"En Italie, le fascisme est dirigé par :", options:["Mussolini","Hitler","Staline","Pétain"], answer:0, explain:"Mussolini dirige l'Italie fasciste.", indice:"On le surnommait « le Duce »."},
+            {type:"vf", q:"Dans un régime totalitaire, il n'y a pas de liberté d'expression.", answer:true, explain:"Oui : la presse est contrôlée, l'opposition interdite.", indice:"L'État contrôle tout."},
+            {type:"qcm", q:"Un outil clé des totalitarismes pour contrôler les esprits est :", options:["la propagande","le vote libre","la presse libre","le tourisme"], answer:0, explain:"La propagande diffuse partout le message du régime.", indice:"Affiches, radio, défilés au service du chef."},
+            {type:"qcm", q:"Le nazisme repose notamment sur :", options:["le racisme et l'antisémitisme","la liberté de la presse","la démocratie","le respect des minorités"], answer:0, explain:"Le nazisme est fondé sur le racisme et l'antisémitisme.", indice:"Une idéologie de haine envers certains groupes."},
+            {type:"vf", q:"Les régimes totalitaires utilisent une police politique et la terreur.", answer:true, explain:"Oui : pour faire taire toute opposition.", indice:"On surveille et on réprime la population."},
+            {type:"qcm", q:"Le régime de Staline en URSS est de type :", options:["communiste","fasciste","démocratique","royaliste"], answer:0, explain:"L'URSS est un régime communiste.", indice:"Idéologie de l'URSS."},
+            {type:"vf", q:"Dans un État totalitaire, un seul parti est autorisé.", answer:true, explain:"Oui : c'est le parti unique.", indice:"Pas de pluralisme politique."},
+            {type:"qcm", q:"Le « culte du chef » signifie que :", options:["le chef est admiré et présenté comme infaillible","le chef est élu chaque année","le chef partage le pouvoir","le chef reste inconnu"], answer:0, explain:"Le chef est glorifié par la propagande.", indice:"On l'admire comme s'il ne se trompait jamais."},
+            {type:"vf", q:"Les totalitarismes se développent surtout dans l'entre-deux-guerres.", answer:true, explain:"Oui : années 1920-1930.", indice:"Entre les deux guerres mondiales."}
+          ]
+        },
+        {
+          id:"h18", niveau:"3e", title:"La guerre froide",
+          carte:{centre:"La guerre froide", branches:[{titre:"États-Unis / URSS", detail:"deux blocs ennemis"},{titre:"Capitalisme / communisme", detail:"deux modèles opposés"},{titre:"« froide »", detail:"pas d'affrontement direct"},{titre:"Mur de Berlin", detail:"symbole, tombe en 1989"},{titre:"Fin", detail:"URSS disparaît en 1991"}]},
+          cours:"Après <b>1945</b>, le monde se divise en deux <b>blocs</b> ennemis : les <b>États-Unis</b> (bloc de l'Ouest, <b>capitaliste</b>) et l'<b>URSS</b> (bloc de l'Est, <b>communiste</b>). C'est la <b>guerre froide</b> : pas d'affrontement militaire direct entre eux, mais tensions, course aux armements et espionnage. Symbole de la division : le <b>mur de Berlin</b> (tombe en <b>1989</b>). L'<b>URSS</b> disparaît en <b>1991</b>.",
+          questions:[
+            {type:"qcm", q:"La guerre froide oppose :", options:["les États-Unis et l'URSS","la France et l'Allemagne","Rome et la Grèce","la Chine et le Japon"], answer:0, explain:"Deux superpuissances : USA et URSS.", indice:"Deux blocs après 1945."},
+            {type:"qcm", q:"Le bloc de l'Ouest, mené par les USA, est :", options:["capitaliste","communiste","fasciste","royaliste"], answer:0, explain:"Modèle capitaliste à l'Ouest.", indice:"Économie de marché."},
+            {type:"qcm", q:"Le bloc de l'Est, mené par l'URSS, est :", options:["communiste","capitaliste","démocratique libéral","monarchiste"], answer:0, explain:"Modèle communiste à l'Est.", indice:"Idéologie de l'URSS."},
+            {type:"qcm", q:"On l'appelle guerre « froide » car :", options:["il n'y a pas d'affrontement militaire direct entre les deux","il fait très froid","elle a lieu au pôle Nord","elle dure peu"], answer:0, explain:"Les deux blocs ne se combattent pas directement.", indice:"Tension forte, mais pas de bataille entre eux."},
+            {type:"qcm", q:"Le symbole de la division est :", options:["le mur de Berlin","la tour Eiffel","le Colisée","la Grande Muraille"], answer:0, explain:"Le mur de Berlin sépare la ville et les blocs.", indice:"Un mur dans une ville allemande."},
+            {type:"saisie", q:"En quelle année le mur de Berlin tombe-t-il ?", answer:["1989"], explain:"Le mur tombe en 1989.", indice:"Fin des années 1980."},
+            {type:"vf", q:"Pendant la guerre froide, les deux blocs se livrent une course aux armements.", answer:true, explain:"Oui : chacun veut être le plus puissant.", indice:"Ils fabriquent toujours plus d'armes."},
+            {type:"qcm", q:"La guerre froide commence environ :", options:["après 1945","en 1789","au Moyen Âge","en 2001"], answer:0, explain:"Elle débute après la Seconde Guerre mondiale.", indice:"Juste après 1945."},
+            {type:"qcm", q:"L'URSS disparaît en :", options:["1991","1945","1968","2001"], answer:0, explain:"L'URSS est dissoute en 1991.", indice:"Début des années 1990."},
+            {type:"vf", q:"Berlin et l'Allemagne ont été divisées pendant la guerre froide.", answer:true, explain:"Oui : entre l'Ouest et l'Est.", indice:"Pense au mur de Berlin."},
+            {type:"qcm", q:"La guerre froide oppose deux modèles :", options:["capitaliste et communiste","royaliste et impérial","antique et moderne","rural et urbain"], answer:0, explain:"Capitalisme contre communisme.", indice:"Deux façons d'organiser l'économie et la société."},
+            {type:"vf", q:"La chute du mur de Berlin (1989) marque la fin de la guerre froide.", answer:true, explain:"Oui : elle annonce la fin de la division.", indice:"1989 : un tournant."}
           ]
         }
       ]
@@ -1799,6 +1894,25 @@ var CONTENT = {
             {type:"qcm", q:"Pour calculer la masse, on fait :", options:["masse volumique × volume","masse volumique ÷ volume","volume ÷ masse volumique","masse volumique + volume"], answer:0, explain:"masse = masse volumique × volume.", indice:"On inverse la formule de la masse volumique."},
             {type:"saisie", q:"Un cube de volume 4 cm³ et de masse volumique 3 g/cm³ a une masse de combien de g ?", answer:["12","12 g"], explain:"3 × 4 = 12 g.", indice:"masse volumique × volume."},
             {type:"vf", q:"Un objet flotte sur l'eau si sa masse volumique est inférieure à celle de l'eau.", answer:true, explain:"Oui : moins dense que l'eau, il flotte.", indice:"Compare à 1 g/cm³."}
+          ]
+        },
+        {
+          id:"s18", niveau:"5e", title:"La respiration et la circulation",
+          carte:{centre:"Respiration et circulation", branches:[{titre:"Respirer", detail:"prendre du dioxygène (O₂)"},{titre:"Rejeter", detail:"du dioxyde de carbone (CO₂)"},{titre:"Les poumons", detail:"échanges dans les alvéoles"},{titre:"Le coeur", detail:"un muscle qui pompe le sang"},{titre:"Le sang", detail:"transporte l'O₂ aux organes"}]},
+          cours:"La <b>respiration</b> apporte du <b>dioxygène (O₂)</b> au corps et rejette du <b>dioxyde de carbone (CO₂)</b>. Les échanges gazeux se font dans les <b>poumons</b> (au niveau des <b>alvéoles</b>). Le <b>coeur</b>, un <b>muscle</b>, pompe le <b>sang</b> qui circule dans les <b>vaisseaux</b> (artères, veines) et transporte le dioxygène jusqu'aux organes. Respiration et circulation travaillent ensemble.",
+          questions:[
+            {type:"qcm", q:"La respiration apporte au corps :", options:["du dioxygène (O₂)","du sel","du sucre seul","de l'azote pur"], answer:0, explain:"On inspire du dioxygène, indispensable aux organes.", indice:"Le gaz que l'on respire."},
+            {type:"qcm", q:"La respiration rejette :", options:["du dioxyde de carbone (CO₂)","du dioxygène","de l'eau salée","du fer"], answer:0, explain:"On expire du dioxyde de carbone.", indice:"Le gaz que l'on souffle."},
+            {type:"qcm", q:"Les échanges gazeux se font dans :", options:["les poumons (alvéoles)","les reins","les muscles","les os"], answer:0, explain:"Les alvéoles des poumons permettent les échanges.", indice:"Organe de la respiration."},
+            {type:"qcm", q:"L'organe qui pompe le sang est :", options:["le coeur","l'estomac","le foie","le cerveau"], answer:0, explain:"Le coeur pompe le sang dans tout le corps.", indice:"Il bat dans la poitrine."},
+            {type:"qcm", q:"Le sang transporte notamment :", options:["le dioxygène vers les organes","la lumière","le son","les os"], answer:0, explain:"Le sang amène le dioxygène aux organes.", indice:"Il distribue l'O₂."},
+            {type:"vf", q:"À l'inspiration, l'air riche en dioxygène entre dans les poumons.", answer:true, explain:"Oui : on fait entrer du dioxygène.", indice:"Inspirer = faire entrer l'air."},
+            {type:"qcm", q:"Les vaisseaux qui partent du coeur sont les :", options:["artères","veines","nerfs","os"], answer:0, explain:"Les artères partent du coeur.", indice:"« A » comme partir du coeur."},
+            {type:"vf", q:"Le coeur est un muscle.", answer:true, explain:"Oui : un muscle qui se contracte pour pomper.", indice:"Il travaille sans arrêt."},
+            {type:"qcm", q:"À l'expiration, on rejette surtout :", options:["du dioxyde de carbone","du dioxygène pur","du sucre","du sel"], answer:0, explain:"On expire du CO₂.", indice:"Le déchet gazeux de la respiration."},
+            {type:"vf", q:"Le sang circule dans tout le corps grâce au coeur et aux vaisseaux.", answer:true, explain:"Oui : c'est la circulation sanguine.", indice:"Une pompe et des tuyaux."},
+            {type:"qcm", q:"Le dioxygène passe de l'air au sang dans :", options:["les alvéoles des poumons","l'estomac","la bouche","les reins"], answer:0, explain:"L'échange air-sang se fait dans les alvéoles.", indice:"Au plus profond des poumons."},
+            {type:"vf", q:"La respiration et la circulation travaillent ensemble pour apporter le dioxygène aux organes.", answer:true, explain:"Oui : l'une capte l'O₂, l'autre le distribue.", indice:"Deux fonctions complémentaires."}
           ]
         }
       ]
