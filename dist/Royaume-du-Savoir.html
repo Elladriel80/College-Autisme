@@ -5124,13 +5124,81 @@ var MATHGEN = (function(){
       explain:"Moyenne = (somme des valeurs) ÷ (nombre de valeurs) = "+total+" ÷ "+n+" = "+(total/n)+".",
       indice:"Additionne toutes les notes, puis divise la somme par "+n+"."};
   }
+  function genDivisionEuclid(){
+    var b=ri(3,9); var q=ri(4,20); var r=ri(0,b-1); var a=b*q+r;
+    if(pick(["quotient","reste"])==="quotient"){
+      return {type:"saisie",
+        q:"Division euclidienne de "+a+" par "+b+" : quel est le quotient entier ?",
+        answer:[String(q)],
+        explain:a+" = "+b+" × "+q+" + "+r+". Le quotient est "+q+" (reste "+r+").",
+        indice:"Cherche combien de fois "+b+" entre dans "+a+" sans dépasser."};
+    }
+    return {type:"saisie",
+      q:"Division euclidienne de "+a+" par "+b+" : quel est le reste ?",
+      answer:[String(r)],
+      explain:a+" = "+b+" × "+q+" + "+r+". Le reste est "+r+" (toujours inférieur à "+b+").",
+      indice:"Le reste est ce qui subsiste après "+b+" × quotient ; il est plus petit que "+b+"."};
+  }
+  function genVolume(){
+    if(pick(["pave","cube"])==="cube"){
+      var ar=ri(2,9); var v=ar*ar*ar;
+      return {type:"saisie",
+        q:"Volume d'un cube d'arête "+ar+" cm (en cm³) ?",
+        answer:[String(v), v+" cm³", v+" cm3"],
+        explain:"Volume du cube = arête³ = "+ar+" × "+ar+" × "+ar+" = "+v+" cm³.",
+        indice:"Multiplie l'arête par elle-même trois fois."};
+    }
+    var L=ri(2,12), l=ri(2,9), h=ri(2,9); var v2=L*l*h;
+    return {type:"saisie",
+      q:"Volume d'un pavé droit "+L+" cm × "+l+" cm × "+h+" cm (en cm³) ?",
+      answer:[String(v2), v2+" cm³", v2+" cm3"],
+      explain:"Volume du pavé droit = Longueur × largeur × hauteur = "+L+" × "+l+" × "+h+" = "+v2+" cm³.",
+      indice:"Multiplie les trois dimensions entre elles."};
+  }
+  function genProbabilite(){
+    if(pick(["de","urne"])==="de"){
+      var ev=pick([
+        {desc:"d'obtenir un 6", fav:1},
+        {desc:"d'obtenir un nombre pair", fav:3},
+        {desc:"d'obtenir un nombre impair", fav:3},
+        {desc:"d'obtenir un nombre supérieur ou égal à 5", fav:2},
+        {desc:"d'obtenir un multiple de 3", fav:2}
+      ]);
+      var g=pgcd(ev.fav,6); var sn=ev.fav/g, sd=6/g;
+      return {type:"saisie",
+        q:"On lance un dé équilibré à 6 faces. Probabilité "+ev.desc+" ? (fraction simplifiée a/b)",
+        answer:[sn+"/"+sd],
+        explain:"Probabilité = cas favorables ÷ cas possibles = "+ev.fav+"/6 = "+sn+"/"+sd+".",
+        indice:"Compte les faces favorables sur 6, puis simplifie la fraction."};
+    }
+    var rouge=ri(2,6), bleu=ri(2,6); var tot=rouge+bleu;
+    var coul=pick([{n:"rouge",f:rouge},{n:"bleue",f:bleu}]);
+    var g2=pgcd(coul.f,tot); var sn2=coul.f/g2, sd2=tot/g2;
+    return {type:"saisie",
+      q:"Un sac contient "+rouge+" billes rouges et "+bleu+" billes bleues. On en tire une au hasard. Probabilité qu'elle soit "+coul.n+" ? (fraction simplifiée a/b)",
+      answer:[sn2+"/"+sd2],
+      explain:"Il y a "+coul.f+" billes "+coul.n+"s sur "+tot+" : "+coul.f+"/"+tot+" = "+sn2+"/"+sd2+".",
+      indice:"Billes favorables ÷ nombre total de billes, puis simplifie."};
+  }
+  function genTrigoCos(){
+    var tr=pick([[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15]]);
+    var adj=pick([tr[0],tr[1]]); var hyp=tr[2];
+    var g=pgcd(adj,hyp); var sn=adj/g, sd=hyp/g;
+    return {type:"saisie",
+      q:"Triangle rectangle : le côté adjacent à l'angle aigu mesure "+adj+" et l'hypoténuse "+hyp+". Quel est le cosinus de cet angle ? (fraction simplifiée a/b)",
+      answer:[sn+"/"+sd],
+      explain:"cos = adjacent ÷ hypoténuse = "+adj+"/"+hyp+(g>1?(" = "+sn+"/"+sd):"")+".",
+      indice:"cos(angle) = côté adjacent ÷ hypoténuse, puis simplifie."};
+  }
 
   var THEMES = {
     "6e-5e":[
       {id:"decimaux", nom:"Opérations sur les décimaux", gen:genDecimaux},
       {id:"fractions", nom:"Fractions (même dénominateur, simplifier)", gen:genFraction},
       {id:"proportion", nom:"Proportionnalité & pourcentages", gen:genProportion},
-      {id:"perimAire", nom:"Périmètre & aire (rectangle, carré)", gen:genPerimetreAire}
+      {id:"perimAire", nom:"Périmètre & aire (rectangle, carré)", gen:genPerimetreAire},
+      {id:"divEuclid", nom:"Division euclidienne (quotient, reste)", gen:genDivisionEuclid},
+      {id:"volume", nom:"Volumes (cube, pavé droit)", gen:genVolume}
     ],
     "4e":[
       {id:"litteral", nom:"Calcul littéral (développer, réduire)", gen:genLitteral},
@@ -5142,7 +5210,9 @@ var MATHGEN = (function(){
       {id:"thales", nom:"Théorème de Thalès", gen:genThales},
       {id:"notationSci", nom:"Notation scientifique", gen:genNotationSci},
       {id:"fonctions", nom:"Fonctions linéaires & affines", gen:genFonction},
-      {id:"stats", nom:"Statistiques (moyenne)", gen:genStats}
+      {id:"stats", nom:"Statistiques (moyenne)", gen:genStats},
+      {id:"proba", nom:"Probabilités (dé, urne)", gen:genProbabilite},
+      {id:"trigo", nom:"Trigonométrie (cosinus)", gen:genTrigoCos}
     ]
   };
   function themesFor(niveau){ return THEMES[niveau]||[]; }
