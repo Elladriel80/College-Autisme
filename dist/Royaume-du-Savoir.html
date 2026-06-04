@@ -1032,6 +1032,64 @@ var CONTENT = {
             {type:"qcm", q:"« Ils ___ beaucoup d'amis. »", options:["ont","on"], answer:0, explain:"« Ils avaient beaucoup d'amis » : verbe avoir, donc « ont ».", indice:"Remplace par « avaient »."},
             {type:"qcm", q:"« Je ne sais pas ___ il habite. » (lieu)", options:["où","ou"], answer:0, explain:"Lieu : « où » avec accent.", indice:"C'est l'endroit où il habite."}
           ]
+        },
+        {
+          id:"f16", niveau:"5e", title:"Le passé composé",
+          cours:"Le <b>passé composé</b> exprime une action passée et <b>terminée</b>. Il est formé de deux mots : un <b>auxiliaire</b> (<b>être</b> ou <b>avoir</b>) au présent + le <b>participe passé</b> du verbe. " +
+                "Exemples : j'<b>ai mangé</b>, elle <b>est allée</b>. Avec l'auxiliaire <b>être</b>, le participe passé <b>s'accorde</b> avec le sujet (elle est allé<b>e</b>, ils sont parti<b>s</b>).",
+          questions:[
+            {type:"qcm", q:"Le passé composé exprime :", options:["une action passée et terminée","une action future","une action qui dure encore","un ordre"], answer:0, explain:"C'est une action déjà finie.", indice:"« composé » du passé : c'est terminé."},
+            {type:"qcm", q:"Le passé composé est formé de :", options:["auxiliaire (être / avoir) + participe passé","deux verbes à l'infinitif","un seul mot","un adjectif + un nom"], answer:0, explain:"Auxiliaire au présent + participe passé.", indice:"Deux mots : l'auxiliaire puis le verbe."},
+            {type:"qcm", q:"« J'___ mangé. » (auxiliaire avoir)", options:["ai","suis","as","est"], answer:0, explain:"Avec avoir : j'ai mangé.", indice:"Verbe avoir, 1re personne : « ai »."},
+            {type:"qcm", q:"« Elle ___ allée à l'école. » (auxiliaire)", options:["est","a","as","ai"], answer:0, explain:"Le verbe aller se conjugue avec être : elle est allée.", indice:"« aller » prend l'auxiliaire être."},
+            {type:"qcm", q:"Participe passé de « finir » :", options:["fini","finir","finit","finissant"], answer:0, explain:"Participe passé : fini.", indice:"« j'ai ... » : fini."},
+            {type:"qcm", q:"Participe passé de « manger » :", options:["mangé","manger","mangeait","mangeant"], answer:0, explain:"Participe passé : mangé.", indice:"« j'ai ... » : mangé."},
+            {type:"qcm", q:"« Ils ___ partis. » (auxiliaire être)", options:["sont","ont","est","sommes"], answer:0, explain:"« partir » avec être : ils sont partis.", indice:"Verbe être, 3e pers. pluriel."},
+            {type:"vf", q:"Avec l'auxiliaire « être », le participe passé s'accorde avec le sujet.", answer:true, explain:"Oui : elle est allée, ils sont allés.", indice:"Avec être, on accorde avec le sujet."},
+            {type:"qcm", q:"« Elle est ___ » (aller, bien accordé) :", options:["allée","allé","aller","allés"], answer:0, explain:"Sujet féminin singulier : allée.", indice:"Sujet « elle » : féminin singulier."},
+            {type:"saisie", q:"Complète : « j'ai ___ » (verbe chanter).", answer:["chanté"], explain:"Participe passé : chanté.", indice:"Verbe en -er : participe passé en -é."},
+            {type:"qcm", q:"« Nous avons ___ » (verbe voir) :", options:["vu","voir","voyu","voyait"], answer:0, explain:"Participe passé de voir : vu.", indice:"« j'ai ... » : vu."},
+            {type:"vf", q:"« j'ai mangé » est au passé composé (action terminée).", answer:true, explain:"Oui : auxiliaire avoir + participe passé.", indice:"Deux mots, action finie."}
+          ]
+        },
+        {
+          id:"f17", niveau:"4e", title:"L'accord du participe passé",
+          cours:"Avec l'auxiliaire <b>être</b>, le participe passé s'accorde avec le <b>sujet</b> (elle est venu<b>e</b>, ils sont venu<b>s</b>). " +
+                "Avec l'auxiliaire <b>avoir</b>, le participe passé <b>ne s'accorde jamais avec le sujet</b> : il s'accorde avec le <b>COD</b> (complément d'objet direct) <b>seulement si ce COD est placé avant</b> le verbe (les pommes qu'elle a mangé<b>es</b>). Si le COD est après, pas d'accord (elle a mangé des pommes).",
+          questions:[
+            {type:"qcm", q:"Avec l'auxiliaire « être », le participe passé s'accorde avec :", options:["le sujet","le COD","rien","l'auxiliaire"], answer:0, explain:"Avec être, accord avec le sujet.", indice:"elle est venue, ils sont venus."},
+            {type:"qcm", q:"« Elles sont ___ » (partir) :", options:["parties","parti","partis","partie"], answer:0, explain:"Sujet féminin pluriel : parties.", indice:"« elles » : féminin pluriel."},
+            {type:"qcm", q:"« Les garçons sont ___ » (venir) :", options:["venus","venu","venue","venues"], answer:0, explain:"Sujet masculin pluriel : venus.", indice:"« les garçons » : masculin pluriel."},
+            {type:"qcm", q:"Avec l'auxiliaire « avoir », accorde-t-on le participe passé avec le sujet ?", options:["non, jamais avec le sujet","oui, toujours","seulement au féminin","seulement au pluriel"], answer:0, explain:"Avec avoir, jamais d'accord avec le sujet.", indice:"L'accord se fait avec le COD, pas le sujet."},
+            {type:"qcm", q:"« Elle a ___ une pomme. » (manger, COD après le verbe)", options:["mangé","mangée","mangées","mangés"], answer:0, explain:"COD « une pomme » placé après : pas d'accord, mangé.", indice:"Le COD est après le verbe : pas d'accord."},
+            {type:"qcm", q:"« Les pommes qu'elle a ___ » (manger, COD avant le verbe)", options:["mangées","mangé","mangée","mangés"], answer:0, explain:"COD « pommes » (fém. pluriel) placé avant : mangées.", indice:"Le COD est avant : on accorde avec lui."},
+            {type:"vf", q:"Avec « avoir », on accorde le participe passé avec le COD seulement s'il est placé avant le verbe.", answer:true, explain:"Oui : c'est la règle clé de l'accord avec avoir.", indice:"COD avant = accord ; COD après = pas d'accord."},
+            {type:"qcm", q:"« Ils ont ___ un film. » (regarder, COD après)", options:["regardé","regardés","regardée","regardées"], answer:0, explain:"COD « un film » après le verbe : pas d'accord, regardé.", indice:"Avec avoir + COD après : pas d'accord."},
+            {type:"qcm", q:"« La lettre que j'ai ___ » (écrire, COD avant) :", options:["écrite","écrit","écrits","écrites"], answer:0, explain:"COD « lettre » (fém. sing.) avant : écrite.", indice:"COD féminin singulier placé avant."},
+            {type:"vf", q:"« Elle est tombée » : le participe passé s'accorde avec le sujet (auxiliaire être).", answer:true, explain:"Oui : sujet féminin singulier, tombée.", indice:"Avec être, accord avec le sujet."},
+            {type:"qcm", q:"« Nous sommes ___ » (arriver) :", options:["arrivés","arrivé","arrivée","arrivées"], answer:0, explain:"Sujet « nous » (masculin ou mixte pluriel) : arrivés.", indice:"« nous » pluriel : -s."},
+            {type:"vf", q:"Avec « avoir » et un COD placé après le verbe, le participe passé ne s'accorde pas.", answer:true, explain:"Oui : pas de COD avant, donc pas d'accord.", indice:"COD après le verbe : participe invariable."}
+          ]
+        },
+        {
+          id:"f18", niveau:"4e", title:"Le conditionnel présent",
+          cours:"Le <b>conditionnel présent</b> exprime un <b>souhait</b>, une <b>demande polie</b> ou une action soumise à une <b>condition</b> (Si j'avais le temps, je viendrais). " +
+                "Il se forme avec le <b>radical du futur</b> + les <b>terminaisons de l'imparfait</b> : <b>-ais, -ais, -ait, -ions, -iez, -aient</b>. " +
+                "Attention : « je mangerai » (sans s) est le <b>futur</b> ; « je mangerais » (avec s) est le <b>conditionnel</b>.",
+          questions:[
+            {type:"qcm", q:"Le conditionnel présent sert souvent à exprimer :", options:["un souhait, une politesse ou une condition","un ordre direct","une action terminée","une date"], answer:0, explain:"Souhait, politesse, hypothèse : c'est le conditionnel.", indice:"« Je voudrais... » est plus poli que « je veux »."},
+            {type:"qcm", q:"Les terminaisons du conditionnel présent sont :", options:["-ais, -ais, -ait, -ions, -iez, -aient","-ai, -as, -a, -ons, -ez, -ont","-e, -es, -e, -ons, -ez, -ent","-s, -s, -t, -ons, -ez, -ent"], answer:0, explain:"Ce sont les terminaisons de l'imparfait, sur le radical du futur.", indice:"Mêmes terminaisons que l'imparfait."},
+            {type:"qcm", q:"« Je ___ (aimer) un café, s'il vous plaît. » (politesse)", options:["aimerais","aimerai","aime","aimais"], answer:0, explain:"Conditionnel de politesse : aimerais.", indice:"Avec « s » : conditionnel."},
+            {type:"vf", q:"Le conditionnel se forme avec le radical du futur et les terminaisons de l'imparfait.", answer:true, explain:"Oui : radical du futur + terminaisons de l'imparfait.", indice:"Futur (radical) + imparfait (terminaisons)."},
+            {type:"qcm", q:"« Si j'avais le temps, je ___ (venir). »", options:["viendrais","viendrai","viens","venais"], answer:0, explain:"Hypothèse : conditionnel, viendrais.", indice:"Action soumise à condition : conditionnel."},
+            {type:"qcm", q:"« je mangerai » est au futur ; « je mangerais » est au :", options:["conditionnel","présent","imparfait","passé composé"], answer:0, explain:"Le « s » final fait passer au conditionnel.", indice:"Avec « s » : conditionnel."},
+            {type:"qcm", q:"« Tu ___ (être) gentil de m'aider. » (politesse)", options:["serais","seras","es","étais"], answer:0, explain:"Conditionnel de politesse : serais.", indice:"Demande polie : conditionnel."},
+            {type:"saisie", q:"Conjugue « avoir » au conditionnel présent, 3e personne du singulier : « il ___ ».", answer:["aurait"], explain:"il aurait.", indice:"Radical « aur » + terminaison « -ait »."},
+            {type:"qcm", q:"« Nous ___ (aller) volontiers. » (conditionnel)", options:["irions","irons","allions","allons"], answer:0, explain:"Conditionnel de aller, nous : irions.", indice:"Radical « ir » + « -ions »."},
+            {type:"vf", q:"« Pourriez-vous m'aider ? » : le conditionnel rend la demande plus polie.", answer:true, explain:"Oui : c'est un usage très courant du conditionnel.", indice:"Plus doux que « Pouvez-vous »."},
+            {type:"qcm", q:"« Ils ___ (faire) un voyage s'ils pouvaient. »", options:["feraient","feront","font","faisaient"], answer:0, explain:"Conditionnel de faire, ils : feraient.", indice:"Radical « fer » + « -aient »."},
+            {type:"qcm", q:"Le futur donne « je serai » ; le conditionnel donne « je ___ ».", options:["serais","serai","suis","étais"], answer:0, explain:"Conditionnel : serais (avec s).", indice:"Ajoute un « s » au futur."}
+          ]
         }
       ]
     },
@@ -1621,6 +1679,45 @@ var CONTENT = {
             {type:"vf", q:"Dans un objet technique, capteurs, unité de traitement et actionneurs travaillent ensemble.", answer:true, explain:"Oui : l'information circule entre eux pour piloter l'objet.", indice:"Détecter, décider, agir : une équipe."},
             {type:"qcm", q:"Un haut-parleur convertit l'énergie électrique en énergie :", options:["sonore","lumineuse","thermique","chimique"], answer:0, explain:"Le haut-parleur produit du son.", indice:"À quoi sert un haut-parleur ?"},
             {type:"vf", q:"Un capteur fournit une information, un actionneur réalise une action.", answer:true, explain:"Oui : c'est la différence entre les deux.", indice:"L'un informe, l'autre agit."}
+          ]
+        },
+        {
+          id:"s16", niveau:"5e", title:"La nutrition des plantes (la photosynthèse)",
+          cours:"Les plantes vertes fabriquent <b>elles-mêmes</b> leur matière : on dit qu'elles sont <b>autotrophes</b>. C'est la <b>photosynthèse</b>, qui a lieu surtout dans les <b>feuilles</b>, grâce à la <b>lumière</b> captée par un pigment vert, la <b>chlorophylle</b>. " +
+                "La plante prend dans l'air le <b>dioxyde de carbone (CO₂)</b>, et dans le sol l'<b>eau</b> et les <b>sels minéraux</b> (par les <b>racines</b>). Elle fabrique un sucre (le <b>glucose</b>) et rejette du <b>dioxygène (O₂)</b>.",
+          questions:[
+            {type:"qcm", q:"Les plantes vertes fabriquent leur matière grâce à :", options:["la photosynthèse","la digestion","la respiration seule","la fermentation"], answer:0, explain:"La photosynthèse produit la matière de la plante.", indice:"« photo » = lumière."},
+            {type:"qcm", q:"La photosynthèse a besoin de :", options:["lumière","obscurité totale","sucre déjà prêt","viande"], answer:0, explain:"Sans lumière, pas de photosynthèse.", indice:"« photo » signifie lumière."},
+            {type:"qcm", q:"Dans l'air, la plante prélève pour la photosynthèse :", options:["du dioxyde de carbone (CO₂)","du dioxygène uniquement","de l'hélium","du sel"], answer:0, explain:"Elle absorbe le CO₂ de l'air.", indice:"C'est le gaz que nous rejetons en respirant."},
+            {type:"qcm", q:"La photosynthèse rejette dans l'air :", options:["du dioxygène (O₂)","du dioxyde de carbone","du méthane","de la vapeur de sel"], answer:0, explain:"La plante libère du dioxygène (O₂).", indice:"C'est le gaz que nous respirons."},
+            {type:"qcm", q:"Le pigment vert qui capte la lumière s'appelle :", options:["la chlorophylle","l'amidon","le glucose","la sève"], answer:0, explain:"La chlorophylle donne sa couleur verte et capte la lumière.", indice:"Il rend les feuilles vertes."},
+            {type:"qcm", q:"Quelle partie de la plante absorbe l'eau et les sels minéraux ?", options:["les racines","les fleurs","les fruits","les pétales"], answer:0, explain:"Les racines puisent l'eau et les sels minéraux dans le sol.", indice:"La partie sous la terre."},
+            {type:"qcm", q:"Quelle partie capte surtout la lumière ?", options:["les feuilles","les racines","la tige seule","les graines"], answer:0, explain:"Les feuilles captent la lumière (et le CO₂).", indice:"Les parties vertes et plates."},
+            {type:"vf", q:"Les plantes vertes produisent leur propre matière organique : elles sont autotrophes.", answer:true, explain:"Oui : « auto » = soi-même.", indice:"Elles n'ont pas besoin de manger d'autres êtres vivants."},
+            {type:"vf", q:"La photosynthèse se déroule surtout dans les feuilles.", answer:true, explain:"Oui : c'est là que se trouve le plus de chlorophylle.", indice:"Les organes verts et exposés à la lumière."},
+            {type:"qcm", q:"Les besoins de la plante verte pour la photosynthèse sont :", options:["lumière, eau, CO₂ et sels minéraux","viande et sucre","obscurité et chaleur seules","plastique et fer"], answer:0, explain:"Lumière, eau, dioxyde de carbone et sels minéraux.", indice:"Tout vient de l'air, de l'eau et du sol, avec la lumière."},
+            {type:"vf", q:"La photosynthèse ne se fait pas dans le noir total.", answer:true, explain:"Oui : elle a besoin de lumière.", indice:"Pas de lumière, pas de photosynthèse."},
+            {type:"qcm", q:"La plante fabrique notamment un sucre, le :", options:["glucose","sel","plastique","fer"], answer:0, explain:"La photosynthèse produit du glucose.", indice:"Un sucre, source d'énergie de la plante."}
+          ]
+        },
+        {
+          id:"s17", niveau:"4e", title:"La masse volumique",
+          cours:"La <b>masse volumique</b> indique la masse contenue dans un certain volume. On la calcule par <b>masse ÷ volume</b>. " +
+                "Elle s'exprime en <b>g/cm³</b> ou en <b>kg/m³</b>. La masse volumique de l'<b>eau</b> est d'environ <b>1 g/cm³</b>. " +
+                "Un matériau <b>flotte</b> sur l'eau si sa masse volumique est <b>inférieure</b> à celle de l'eau, et <b>coule</b> si elle est <b>supérieure</b>.",
+          questions:[
+            {type:"qcm", q:"La masse volumique se calcule par :", options:["masse ÷ volume","masse × volume","volume ÷ masse","masse + volume"], answer:0, explain:"Masse volumique = masse ÷ volume.", indice:"On partage la masse par le volume."},
+            {type:"qcm", q:"La masse volumique de l'eau est environ :", options:["1 g/cm³","10 g/cm³","0,1 g/cm³","100 g/cm³"], answer:0, explain:"L'eau : environ 1 g/cm³.", indice:"1 g pour 1 cm³ d'eau."},
+            {type:"saisie", q:"Un objet de masse 20 g et de volume 10 cm³ : masse volumique en g/cm³ ?", answer:["2","2 g/cm³"], explain:"20 ÷ 10 = 2 g/cm³.", indice:"masse ÷ volume."},
+            {type:"saisie", q:"Masse 50 g, volume 25 cm³ : masse volumique en g/cm³ ?", answer:["2","2 g/cm³"], explain:"50 ÷ 25 = 2 g/cm³.", indice:"masse ÷ volume."},
+            {type:"qcm", q:"La masse volumique s'exprime en :", options:["g/cm³ ou kg/m³","g seulement","cm³ seulement","kg seulement"], answer:0, explain:"C'est une masse par volume : g/cm³, kg/m³.", indice:"Une masse divisée par un volume."},
+            {type:"qcm", q:"Un matériau de masse volumique 0,8 g/cm³ placé dans l'eau (1 g/cm³) va :", options:["flotter","couler","se dissoudre","s'évaporer"], answer:0, explain:"Moins dense que l'eau : il flotte.", indice:"Plus léger que l'eau pour un même volume."},
+            {type:"qcm", q:"Un matériau de masse volumique 3 g/cm³ dans l'eau va :", options:["couler","flotter","fondre","bouillir"], answer:0, explain:"Plus dense que l'eau : il coule.", indice:"Plus lourd que l'eau pour un même volume."},
+            {type:"saisie", q:"Masse 30 g, volume 6 cm³ : masse volumique en g/cm³ ?", answer:["5","5 g/cm³"], explain:"30 ÷ 6 = 5 g/cm³.", indice:"masse ÷ volume."},
+            {type:"vf", q:"Pour un même volume, un matériau plus dense (masse volumique plus grande) est plus lourd.", answer:true, explain:"Oui : plus de masse dans le même volume.", indice:"Densité plus grande = plus lourd à volume égal."},
+            {type:"qcm", q:"Pour calculer la masse, on fait :", options:["masse volumique × volume","masse volumique ÷ volume","volume ÷ masse volumique","masse volumique + volume"], answer:0, explain:"masse = masse volumique × volume.", indice:"On inverse la formule de la masse volumique."},
+            {type:"saisie", q:"Un cube de volume 4 cm³ et de masse volumique 3 g/cm³ a une masse de combien de g ?", answer:["12","12 g"], explain:"3 × 4 = 12 g.", indice:"masse volumique × volume."},
+            {type:"vf", q:"Un objet flotte sur l'eau si sa masse volumique est inférieure à celle de l'eau.", answer:true, explain:"Oui : moins dense que l'eau, il flotte.", indice:"Compare à 1 g/cm³."}
           ]
         }
       ]
