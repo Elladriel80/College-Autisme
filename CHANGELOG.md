@@ -2,6 +2,265 @@
 
 Toutes les évolutions notables de l'application sont consignées ici.
 
+## [Non publié] — Démarrage sur l'accueil + dépôt prêt pour Vercel (2026-06-04)
+
+### Ergonomie de démarrage (`Royaume-du-Savoir.html`)
+
+- Au lancement, l'app **affiche désormais toujours la page d'accueil** (sélection de
+  profil). Fini la replongée automatique dans le dernier monde, qui empêchait de voir
+  l'accueil et le reste de l'app.
+- **Bouton « ▶ Reprendre »** sur chaque carte de profil pour retourner volontairement
+  là où l'enfant s'était arrêté (la carte reste aussi cliquable).
+- Le **dernier profil utilisé** est mis en avant (badge « ⏱️ Dernier profil »), via une
+  nouvelle clé `rds_last`. Compatibilité ascendante : à défaut, on retombe sur `rds_active`.
+- **Aucune perte de progression** : les sauvegardes par profil (`rds_save_*`) et les
+  préférences d'accessibilité (`applyPrefs()`) sont préservées.
+
+### Déploiement Vercel (statique)
+
+- Ajout de `vercel.json` (site statique, `cleanUrls`, en-têtes de sécurité, type MIME
+  des `data/*.js`) et de `.vercelignore` (ne publier que l'app, pas les docs/sauvegardes).
+- Procédure de connexion documentée dans le README. Auto-déploiement à chaque `push`.
+
+## [Non publié] — Générateur de maths collège reconstruit (2026-06-04)
+
+Reconstruction, **uniquement via les outils d'édition fichier (jamais le shell)**,
+du « 🎲 Entraînement illimité » de maths du collège, perdu lors de l'incident.
+Sauvegarde complète `Royaume-du-Savoir.backup-20260604-avant-generateur-v2.html`
+écrite via Write avant toute modification (fin vérifiée `boot();</script></body></html>`).
+
+### Générateur d'exercices (`Royaume-du-Savoir.html`)
+
+- **Module `MATHGEN` (IIFE)** : un générateur par notion, réponse **calculée par le
+  code** (donc toujours juste), au format `CONTENT`
+  (`{type, q, options/answer, explain, indice}`). `MATHGEN.THEMES` indexé par niveau.
+  - **6ᵉ/5ᵉ** : opérations sur décimaux (+, −, ×), fractions même dénominateur
+    (somme/différence) et simplification, proportionnalité & pourcentages,
+    périmètre/aire rectangle & carré.
+  - **4ᵉ** : calcul littéral (développer/réduire), puissances, équations du 1er
+    degré (solution entière garantie), Pythagore (triplets entiers, hypoténuse ou côté).
+  - **3ᵉ** : Thalès (longueur manquante entière), notation scientifique, fonctions
+    linéaires/affines (calcul d'image), statistiques (moyenne entière garantie).
+- **`renderEntrainementIntro()`** : écran de choix niveau (6ᵉ/5ᵉ, 4ᵉ, 3ᵉ) + thème,
+  avec un bouton « 🎲 Tout mélanger » par niveau.
+- **`playEntrainement(niveau, themeId)`** : boucle illimitée (génère → rend via
+  `renderSingleQuestion` → recommence), une tâche à la fois. `addXP(10)` par réussite,
+  +2 cristaux toutes les 5 réussites (renderStats + toast), `touchStreak()` +
+  `checkBadges()` + `save()`. Bouton « ✓ J'arrête ici (bravo !) » sans pression →
+  écran de fin bienveillant (nb d'exercices, réussis) avec « 🎲 Continuer » et
+  « 🗺️ Retour à la carte ».
+- **Deux points d'entrée UI** : bouton « 🎲 Entraînement illimité » dans `renderMap`
+  ET dans `renderRegion` (affiché uniquement quand la matière = maths). Les questions
+  « saisie » réutilisent la 2ᵉ tentative guidée (champ `indice`). Aucun tiret
+  cadratin « — » dans les textes générés. Leçons existantes et Brevet blanc intacts.
+
+## [Non publié] — Récupération UX + accessibilité après incident shell (2026-06-04)
+
+Ré-application, **uniquement via les outils d'édition fichier (jamais le shell)**,
+des retouches d'interface et des 6 correctifs d'accessibilité perdus lors de
+l'incident de copie via le montage Linux. Checkpoint de sécurité
+`Royaume-du-Savoir.checkpoint-20260604-recovery.html` écrit avant toute
+modification.
+
+### Interface (`Royaume-du-Savoir.html`)
+
+- **Périmètre** : pied de page et phrase d'accueil élargis du collège à
+  « **Du CP au Brevet (primaire + collège)** ». Commentaires de code « Cycle 4 /
+  collège » mis à jour. Titre de page passé à « Le Royaume du Savoir (Académie
+  des Mages) ».
+- **Grille des fonctionnalités** : `.feat` en `repeat(3,minmax(0,1fr))` (objectif
+  3×2 sur 6 cartes) + media-query `max-width:560px` → 1 colonne.
+- **Tirets cadratins « — »** supprimés de tous les textes visibles (remplacés par
+  virgule, parenthèses ou « · »). Conservés uniquement dans les commentaires de
+  code non visibles.
+
+### Accessibilité (`Royaume-du-Savoir.html`)
+
+- **(a) Préférences persistées par profil** : `STATE.prefs = {calme, dys,
+  hideStreak}` ; `applyPrefs()`, `togglePref()`, `setPrefAndReflect()` (bascule
+  visuelle même sans profil, avec invitation à créer un profil). `applyPrefs()`
+  appelé dans `goAfterLogin` ; `logoutProfile` retire les classes `calme`/`dys`.
+- **(b) Liens au pied de page** : « Mode calme », « Police dyslexie » (`dysBtn`),
+  « Masquer la série 🔥 » (`streakBtn`), câblés sur `setPrefAndReflect`/`togglePref`.
+- **(c) Redondance non chromatique** côté Royaume : `.opt.correct::after{content:" ✓"}`
+  et `.opt.wrong::after{content:" ✗"}` (daltonisme), comme chez les Petits Malins.
+- **(d) 2ᵉ tentative guidée en saisie** (`renderSingleQuestion`) : 1ʳᵉ erreur =
+  indice formatif (`q.indice` sinon texte bienveillant) + relance (champ `.retry`),
+  sans invalider ; 2ᵉ erreur = correction révélée. **Le Brevet blanc (rendu EXAM
+  séparé) n'est pas affecté** (conditions réelles).
+- **(e) Police dyslexie** : `@font-face` OpenDyslexic via CDN (`font-display:swap`)
+  + repli `"Comic Neue","Comic Sans MS",Verdana` ; `body.dys` applique la police
+  et augmente interlettrage / word-spacing / interligne.
+- **(f) Série désactivable** : `renderStats` masque la pastille 🔥 quand
+  `prefs.hideStreak` est actif.
+
+### Contenu (`data/contenu-college.js`)
+
+- Vérifié : la **notation scientifique** (`m13`) indique bien « **1 ≤ a < 10** »
+  (borne 10 exclue) dans le cours et les explications — déjà conforme.
+- Vérifié : la leçon **fractions** (`m2`, question 5) utilise le distracteur
+  « **5/6** » (et non « 4/12 »), bonne réponse « 4/6 » — déjà conforme.
+
+> Rappel incident : aucune opération de fichier n'a été faite via le shell pour
+> cette session de récupération.
+
+## [Non publié] — Architecture open-source modulaire : contenu séparé, build fichier unique, export/import, licences (2026-06-04)
+
+Passage à une structure **modulaire** : le **contenu** (les données) est sorti du
+HTML pour qu'un·e enseignant·e puisse ajouter une leçon **sans toucher au code**.
+Le **moteur** reste dans `Royaume-du-Savoir.html` ; aucune fonction du moteur n'a
+été déplacée. Backup `Royaume-du-Savoir.backup-20260604-avant-modularisation.html`
+créé avant toute modification.
+
+> ⚠️ **Note importante de cette session.** Une fausse manœuvre de copie via le
+> montage Linux (périmé) a écrasé le fichier de travail par une version tronquée.
+> Le fichier a été **restauré depuis le dépôt git (HEAD)**, qui est complet et
+> fonctionnel. **Conséquence** : le **générateur de maths « Entraînement
+> illimité »** (entrée du 2026-06-04 ci-dessous), qui n'avait **pas encore été
+> commité**, n'était présent que dans la copie de travail écrasée et n'a **pas pu
+> être récupéré** (absent de git, des sauvegardes et des transcriptions). Les
+> boutons d'entrée du générateur faisaient partie de ces changements non commités
+> et ont disparu avec lui : l'app restaurée est donc **cohérente** (pas de bouton
+> pointant dans le vide), mais **sans le générateur**. À re-développer.
+
+### Ajouté
+
+- **`data/contenu-college.js`** — l'objet `CONTENT` (collège : maths, français,
+  histoire-géo, sciences) extrait **verbatim**, exposé en global (`var CONTENT` +
+  `window.CONTENT`). 47 leçons, mêmes `id`, mêmes données.
+- **`data/contenu-petits-malins.js`** — les **banques de données** des Petits
+  Malins (mots-images `MOTS`, phrases, textes de compréhension `TEXTES`,
+  vocabulaire FR/EN/ES/IT `VOCAB`/`NOMBRES`/`COULEURS`/`PHRASES_L`, langues,
+  leçons & quiz d'histoire `LECONS`/`QUIZ_PLUS`, chronologie `CHRONO`, cartes
+  mentales `CARTES`), regroupées dans l'objet global `PM_DATA`.
+- **`build.js`** + **`build.bat`** — build sans dépendance : inline les
+  `<script src="data/...">` dans le HTML et écrit `dist/Royaume-du-Savoir.html`
+  (fichier unique autonome, double-clic, hors-ligne).
+- **Export / Import de la progression** (pied de page) — « 💾 Exporter ma
+  progression » télécharge un JSON des clés `localStorage` `rds_*` + `pm_*` ;
+  « 📂 Importer » relit le JSON et restaure (confirmation avant écrasement, puis
+  rechargement). Sans serveur, RGPD-friendly.
+- **Licences** — `LICENSE` (MIT, code), `CONTENU-LICENCE.md` (contenu en
+  CC-BY 4.0), `CONTRIBUTING.md` (comment ajouter une leçon, lancer l'audit
+  `enseignant`, builder le fichier unique). `README.md` mis à jour (architecture,
+  build single-file, contribution).
+
+### Détails techniques
+
+- Le HTML charge `data/contenu-college.js` puis `data/contenu-petits-malins.js`
+  **avant** le `<script>` du moteur (balises classiques, pas `type=module`, pour
+  rester compatible `file://` et hors-ligne).
+- Côté moteur : la définition inline de `CONTENT` est **neutralisée** (commentée)
+  pour éviter toute donnée dupliquée à l'exécution ; les banques des Petits Malins
+  sont **reliées** à `PM_DATA` (`var MOTS = PM_DATA.MOTS;`, etc.) en gardant leurs
+  noms d'origine, donc aucune référence du moteur n'a changé.
+- **Non déplacé volontairement** : la banque `PROBLEMES` (problèmes de calcul des
+  Petits Malins) reste dans le HTML. Ce sont des fonctions génératrices qui
+  dépendent d'un utilitaire interne au module (`r`) ; les externaliser aurait
+  risqué de casser le module. `ALPHABET` (constante dérivée) reste aussi inline.
+- Vérifications : syntaxe des `data/*.js` validée (`node --check` + relecture),
+  chargement testé (CONTENT = 47 leçons, PM_DATA = 13 banques), fin du HTML
+  intacte (`boot();</script></body></html>`), ordre des balises script respecté.
+
+## [Non publié] — Générateur d'exercices de maths (collège) : « 🎲 Entraînement illimité » (2026-06-04)
+
+Ajout d'un mode d'entraînement génératif côté collège : des exercices de maths
+produits à la chaîne, avec **bonne réponse calculée par le code** (donc toujours
+juste), correction formative immédiate et **2ᵉ tentative guidée** réutilisée du
+moteur existant. Aucune régression : les 13 leçons existantes, le Brevet blanc,
+`STATE`, les clés `rds_*` / `pm_*` et le monde Petits Malins sont intacts. Backup
+`Royaume-du-Savoir.backup-20260604-avant-generateur.html` créé (copie identique au
+bit près) avant toute modification.
+
+### Ajouté
+
+- **Module `MATHGEN`** (IIFE, juste après `renderSingleQuestion`) : générateurs
+  par notion renvoyant un objet question au **même format que `CONTENT`**
+  (`{type, q, options/answer, explain, indice}`), donc rendus par
+  `renderSingleQuestion` (gère déjà qcm/vf/saisie, glyphes ✓/✗, mode calme, dys).
+- **Notions couvertes** (réponse recalculée et vérifiée à la main sur plusieurs
+  tirages) :
+  - **6ᵉ/5ᵉ** : opérations sur décimaux, fractions (somme/différence à même
+    dénominateur, simplification), proportionnalité & pourcentages, périmètres &
+    aires (rectangle/carré).
+  - **4ᵉ** : calcul littéral (développer/réduire), puissances, équations du 1er
+    degré (solution entière garantie), Pythagore (triplets entiers).
+  - **3ᵉ** : Thalès (longueur manquante, résultat entier), notation scientifique,
+    fonctions linéaires/affines (image), statistiques (moyenne entière garantie).
+- **`renderEntrainementIntro()`** : écran de choix du niveau (6ᵉ/5ᵉ, 4ᵉ, 3ᵉ) et
+  du thème, avec un bouton « 🎲 Tout mélanger » par niveau.
+- **`playEntrainement(niveau, theme)`** : boucle illimitée (génère, rend,
+  recommence), une tâche à la fois, ton bienveillant, bouton « ✓ J'arrête ici »
+  sans pression. XP (+10 par réussite via `addXP`) et cristaux (+2 toutes les 5
+  réussites) comme les autres exercices ; `touchStreak` / `checkBadges` appelés.
+- **Points d'entrée UI** : bouton « 🎲 Entraînement illimité » dans la barre de la
+  carte (`renderMap`) **et** dans la région Maths (`renderRegion`, affiché
+  uniquement pour `subId==="maths"`).
+
+### Vérification
+
+- Fin de fichier intacte (`boot();</script></body></html>`), accolades/parenthèses
+  équilibrées dans chaque fonction ajoutée (relecture des diffs via l'outil Read,
+  le montage Linux étant périmé : `wc`/`cat`/`node --check` non fiables ici).
+
+## [Non publié] — Corrections d'audit pédagogique : véracité + accessibilité (2026-06-04)
+
+Six corrections issues de l'audit `Audit-pedagogique-2026-06-04.md` (axes véracité
+et accessibilité, public autiste / dys / daltonien). Aucune régression : `STATE`,
+clés `rds_*` / `pm_*` et monde Petits Malins (rendu natif) préservés. Backup
+`Royaume-du-Savoir.backup-20260604-avant-corrections.html` créé avant toute
+modification. Syntaxe JS des sections ajoutées vérifiée (`node --check`).
+
+### Corrigé — Véracité (maths)
+
+1. **Notation scientifique (leçon `m13`)** — la définition « entre 1 et 10 »
+   (ambiguë, borne 10 incluse à tort) devient **« supérieur ou égal à 1 et
+   strictement inférieur à 10 » (1 ≤ a < 10)**, dans le cours **et** dans
+   l'option / l'explication du QCM. La borne 10 est exclue (on n'écrit jamais
+   `10 × 10ⁿ`).
+2. **Fractions (leçon `m2`, Q5 « 5/6 − 1/6 »)** — le distracteur incohérent
+   **« 4/12 »** (qui évoquait une addition des dénominateurs, hors-sujet sur une
+   soustraction à même dénominateur) est remplacé par **« 5/6 »** : erreur d'élève
+   plausible (oubli de soustraire). L'explication signale ce piège.
+
+### Ajouté — Accessibilité (Royaume + Petits Malins)
+
+3. **Redondance non colorée ✓/✗ au Royaume** — les options QCM/VF marquées
+   `.correct` / `.wrong` portent désormais un **glyphe ✓ / ✗** posé *sur* l'option
+   (CSS `::after`), en plus de la couleur. Indispensable pour les daltoniens et
+   les enfants ayant besoin de redondance — même logique que celle déjà en place
+   côté Petits Malins.
+4. **2ᵉ tentative guidée en saisie (Royaume)** — dans `renderSingleQuestion`
+   (quêtes + diagnostic), une réponse saisie fausse n'est plus invalidée
+   immédiatement : à la **1ʳᵉ erreur**, un **indice formatif** s'affiche et l'élève
+   peut **réessayer** ; ce n'est qu'à la **2ᵉ erreur** que la correction est
+   révélée. Le Brevet blanc (épreuve en conditions réelles) garde sa logique
+   propre et n'est **pas** affecté.
+5. **Option police dyslexie** — réglage activable et **persisté par profil**
+   (même mécanisme que le Mode calme), à côté de celui-ci. Bascule en
+   **OpenDyslexic** (CDN, `font-display:swap`) avec repli **Comic Neue / Comic
+   Sans / Verdana**, et augmente l'**interlettrage / interligne / espacement des
+   mots**. Présent au **Royaume** (classe `body.dys`, lien « Police dyslexie » du
+   pied de page) et chez **Petits Malins** (bouton « 🔤 Police dys », clé
+   `*_dys`, classe `#pmRoot.dys`), dans la version intégrée comme dans la version
+   autonome.
+6. **Streak (série 🔥) désactivable** — option **persistée par profil** (près du
+   Mode calme) qui **masque la série de jours** afin d'éviter une pression à se
+   reconnecter (déclencheur d'anxiété possible chez un public jeune / autiste).
+   Lien « Masquer la série 🔥 » du pied de page ; la pastille 🔥 disparaît de la
+   barre de stats quand l'option est active. (Petits Malins autonome n'a pas de
+   streak : sans objet.)
+
+### Détails techniques
+
+- `STATE.prefs = { calme, dys, hideStreak }` ajouté au `defaultState()` du
+  Royaume, sauvegardé avec le reste de l'état (`save()` / `loadState()`), appliqué
+  via `applyPrefs()` à la connexion (`goAfterLogin`) et réinitialisé à la
+  déconnexion. Le Mode calme du Royaume, jusque-là simple bascule de classe non
+  mémorisée, est désormais lui aussi **persisté par profil**.
+- Petits Malins : nouvel état `state.dys`, clé localStorage `*_dys`,
+  `toggleDys()` / `applyDys()` exportés, appliqués au montage.
+
 ## [Non publié] — Niveau 3ᵉ + Brevet blanc en conditions réelles (2026-06-03)
 
 Ajoute l'**année du Brevet (3ᵉ)** et rend le **Brevet blanc** plus proche de

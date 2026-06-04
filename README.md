@@ -53,6 +53,45 @@ Le monde des petits est désormais **intégré directement** dans le Royaume (pl
 - **Note /20** avec mention, calculée **uniquement sur les questions auto-corrigeables** (QCM, vrai/faux, saisie), avec correction détaillée.
 - **Question rédigée** d'entraînement : une question ouverte (zone de texte) **hors note** — après coup, l'élève compare sa réponse à une **réponse-modèle** et coche une **grille d'auto-évaluation** (on ne note pas automatiquement un texte libre).
 
+## 🏗️ Architecture (open-source, modulaire)
+
+Le projet sépare désormais le **moteur** (le code) du **contenu** (les données),
+pour qu'un·e enseignant·e puisse ajouter une leçon **sans toucher au code**.
+
+```
+Royaume-du-Savoir.html        ← le moteur (UI, logique, rendu)
+data/
+  contenu-college.js          ← objet global CONTENT (collège)
+  contenu-petits-malins.js    ← objet global PM_DATA (lecture, calcul, langues, histoire)
+build.js  /  build.bat        ← fabrique le fichier unique distribuable
+dist/
+  Royaume-du-Savoir.html      ← fichier unique autonome (généré par le build)
+```
+
+- **On développe en modulaire** : le HTML charge les données via deux balises
+  `<script src="data/...">` placées avant le moteur (chargement classique, pas de
+  module, pour fonctionner en double-clic `file://` et hors-ligne).
+- **On distribue le fichier de `dist/`** : `node build.js` (ou `build.bat`) inline
+  les données dans le HTML et écrit `dist/Royaume-du-Savoir.html`, un **seul
+  fichier** autonome à partager. C'est ce fichier que reçoit l'utilisateur final.
+
+Pour ajouter ou corriger une leçon, voir **`CONTRIBUTING.md`** (modèle d'objet
+leçon commenté, audit pédagogique, build).
+
+### 💾 Sauvegarder / transférer la progression
+
+En pied de page : **« 💾 Exporter ma progression »** télécharge un fichier JSON
+(profils + progression, depuis le stockage local de l'appareil) et **« 📂 Importer »**
+le relit pour restaurer. Tout reste sur l'appareil (aucun serveur, respectueux du
+RGPD). L'import demande une confirmation avant de remplacer la progression en
+place. Pratique pour changer d'ordinateur ou faire une copie de sécurité.
+
+### 📄 Licences
+
+- **Code** : MIT (`LICENSE`).
+- **Contenu pédagogique** (`data/*.js`) : Creative Commons **CC-BY 4.0**
+  (`CONTENU-LICENCE.md`).
+
 ## 🎬 Vidéos pédagogiques
 
 Chaque leçon intègre une vidéo issue de chaînes francophones de qualité, créditées à leurs auteurs :
@@ -60,9 +99,39 @@ Chaque leçon intègre une vidéo issue de chaînes francophones de qualité, cr
 
 ## 🚀 Utilisation
 
-1. Télécharger / ouvrir `Royaume-du-Savoir.html`.
-2. Double-cliquer pour l'ouvrir dans un navigateur (Chrome, Edge, Firefox).
-3. Créer son avatar et commencer l'aventure. La progression est sauvegardée localement.
+**Pour jouer (utilisateur final)** : utiliser le fichier unique
+`dist/Royaume-du-Savoir.html`.
+
+1. Télécharger / ouvrir `dist/Royaume-du-Savoir.html`.
+2. Double-cliquer pour l'ouvrir dans un navigateur (Chrome, Edge, Firefox). Aucune
+   installation, fonctionne hors-ligne.
+3. Créer son avatar et commencer l'aventure. La progression est sauvegardée
+   localement (et exportable, voir « Sauvegarder / transférer la progression »).
+
+**Pour développer / ajouter du contenu** : éditer `data/contenu-college.js` (ou
+`data/contenu-petits-malins.js`), ouvrir `Royaume-du-Savoir.html` (version
+modulaire) pour tester, puis lancer `node build.js` pour régénérer le `dist/`.
+Détails dans `CONTRIBUTING.md`.
+
+## ☁️ Déploiement (Vercel)
+
+Le site est **statique** : la version modulaire (`Royaume-du-Savoir.html` + `data/`)
+se sert telle quelle, sans étape de build côté serveur. Le dépôt est prêt pour
+Vercel (fichier `vercel.json`, et `.vercelignore` pour ne publier que l'app).
+
+Mise en place (à faire une seule fois, déploiement automatique à chaque `push` ensuite) :
+
+1. Sur [vercel.com](https://vercel.com), se connecter (compte GitHub).
+2. **Add New… > Project**, puis importer le dépôt `College-Autisme`.
+3. Framework Preset : **Other** ; Build Command : **vide** ; Output Directory : **`.`** (racine).
+   `vercel.json` est détecté automatiquement.
+4. **Deploy**. À chaque `git push` sur la branche de production, Vercel redéploie tout seul.
+
+En ligne de commande (alternative) : `npm i -g vercel`, puis `vercel` (préversion)
+ou `vercel --prod` depuis la racine du dépôt.
+
+> Le fichier unique `dist/Royaume-du-Savoir.html` reste destiné à l'usage **hors-ligne**
+> (double-clic) ; il n'est pas nécessaire au site déployé.
 
 ## 🗺️ Feuille de route
 

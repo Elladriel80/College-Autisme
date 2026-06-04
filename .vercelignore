@@ -1,0 +1,12 @@
+# Fichiers utiles au dépôt mais inutiles au site déployé.
+# (Garde le déploiement Vercel léger : on ne sert que l'app et ses données.)
+*.md
+*.checkpoint-*.html
+*.backup-*.html
+*.backup
+build.bat
+build.js
+push.bat
+.claude/
+enseignant/
+LICENSE
