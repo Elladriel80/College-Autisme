@@ -122,6 +122,18 @@
 
 /* Mode calme côté petits : plus aucune animation ni transition */
 #pmRoot.calme *{animation:none !important;transition:none !important;}
+/* Police adaptée dyslexie (OpenDyslexic via CDN, repli Comic Neue / Verdana). */
+@font-face{
+  font-family:'OpenDyslexic';
+  src:url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-regular.woff2') format('woff2'),
+      url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-regular.woff') format('woff');
+  font-weight:normal;font-style:normal;font-display:swap;
+}
+#pmRoot.dys, #pmRoot.dys button, #pmRoot.dys input{
+  font-family:'OpenDyslexic','Comic Neue','Comic Sans MS',Verdana,sans-serif !important;
+  letter-spacing:.04em;word-spacing:.06em;
+}
+#pmRoot.dys{line-height:1.7;}
 
 /* Confettis : ajoutés à <body>, donc nommés à part (pas de collision avec le Royaume) */
 .pm-confetti{position:fixed;top:-20px;font-size:26px;animation:pmfall 2.2s linear forwards;z-index:50;pointer-events:none;}
@@ -152,10 +164,10 @@ var PM = (function(){
   "use strict";
 
   /* ---------- état + persistance (clés namespacées par profil) -------- */
-  var KEY_SCORE='pm_score', KEY_AGE='pm_age', KEY_CALME='pm_calme';
+  var KEY_SCORE='pm_score', KEY_AGE='pm_age', KEY_CALME='pm_calme', KEY_DYS='pm_dys';
   var root=null;     // #pmRoot
   var app=null;      // #pmContent (zone de contenu remplacée à chaque vue)
-  var state={ age:'petit', score:0, vue:'accueil', calme:false };
+  var state={ age:'petit', score:0, vue:'accueil', calme:false, dys:false };
 
   function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
   function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
@@ -271,6 +283,7 @@ var PM = (function(){
       '</div>'+
       '<div class="pm-score">⭐ <span id="pmScore">'+state.score+'</span></div>'+
       '<button class="pm-calme" id="pmCalmeBtn" onclick="PM.toggleCalme()" aria-pressed="'+(state.calme?'true':'false')+'">'+(state.calme?'🌙 Mode calme ✓':'🔔 Mode calme')+'</button>'+
+      '<button class="pm-calme" id="pmDysBtn" onclick="PM.toggleDys()" aria-pressed="'+(state.dys?'true':'false')+'">'+(state.dys?'🔤 Police dys ✓':'🔤 Police dys')+'</button>'+
     '</div>';
   }
   function vueAccueil(){
@@ -304,6 +317,12 @@ var PM = (function(){
     if(state.calme){ try{ speechSynthesis.cancel(); }catch(e){} }
   }
   function toggleCalme(){ state.calme=!state.calme; lsSet(KEY_CALME, state.calme?'1':'0'); applyCalme(); }
+  function applyDys(){
+    if(root) root.classList.toggle('dys', state.dys);
+    var b=document.getElementById('pmDysBtn');
+    if(b){ b.textContent = state.dys?'🔤 Police dys ✓':'🔤 Police dys'; b.setAttribute('aria-pressed', state.dys?'true':'false'); }
+  }
+  function toggleDys(){ state.dys=!state.dys; lsSet(KEY_DYS, state.dys?'1':'0'); applyDys(); }
 
   /* ==================================================================
      MODULE LECTURE
@@ -950,19 +969,21 @@ var PM = (function(){
     root=rootEl;
     var pid=opts.profileId;
     var pref=(pid!=null && pid!=='') ? ('pm_'+pid) : (opts.keyPrefix||'pm');
-    KEY_SCORE=pref+'_score'; KEY_AGE=pref+'_age'; KEY_CALME=pref+'_calme';
+    KEY_SCORE=pref+'_score'; KEY_AGE=pref+'_age'; KEY_CALME=pref+'_calme'; KEY_DYS=pref+'_dys';
     var s=lsGet(KEY_SCORE); state.score = s? (parseInt(s,10)||0) : 0;
     var a=lsGet(KEY_AGE); state.age = (a==='grand'||a==='petit') ? a : 'petit';
     state.calme = lsGet(KEY_CALME)==='1';
+    state.dys = lsGet(KEY_DYS)==='1';
     prog={lecture:0,calcul:0,langues:0,histoire:0};
     root.innerHTML = controlsHTML() + '<div id="pmContent"></div>';
     app = root.querySelector('#pmContent');
     applyCalme();
+    applyDys();
     vueAccueil();
   }
 
   return {
-    mount:mount, dire:speak, setAge:setAge, toggleCalme:toggleCalme,
+    mount:mount, dire:speak, setAge:setAge, toggleCalme:toggleCalme, toggleDys:toggleDys,
     vueAccueil:vueAccueil, ouvrir:ouvrir, recapContinuer:recapContinuer,
     menuLecture:menuLecture, jeuLettres:jeuLettres, repLettre:repLettre,
     jeuSons:jeuSons, repSon:repSon, jeuMots:jeuMots, repMot:repMot,

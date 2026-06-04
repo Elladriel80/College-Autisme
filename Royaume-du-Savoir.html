@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le Royaume du Savoir — Académie des Mages</title>
+<title>Le Royaume du Savoir (Académie des Mages)</title>
 <style>
   :root{
     --bg:#1a1633;        /* nuit profonde, violet */
@@ -32,6 +32,29 @@
     line-height:1.5;
   }
   body.calme *{animation:none !important; transition:none !important}
+
+  /* Police dyslexie : OpenDyslexic depuis un CDN (font-display:swap pour ne pas
+     bloquer le rendu), avec repli sur des polices lisibles si le CDN est
+     indisponible (hors-ligne / file://). */
+  @font-face{
+    font-family:'OpenDyslexic';
+    font-style:normal;font-weight:400;font-display:swap;
+    src:url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-regular.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-regular.woff') format('woff');
+  }
+  @font-face{
+    font-family:'OpenDyslexic';
+    font-style:normal;font-weight:700;font-display:swap;
+    src:url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-bold.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-bold.woff') format('woff');
+  }
+  body.dys, body.dys *{
+    font-family:'OpenDyslexic','Comic Neue','Comic Sans MS',Verdana,sans-serif !important;
+    letter-spacing:.04em;
+    word-spacing:.12em;
+  }
+  body.dys{ line-height:1.8; }
+
   .wrap{max-width:1040px;margin:0 auto;padding:18px}
 
   /* Top bar */
@@ -81,6 +104,8 @@
   .avatar .nm{font-weight:700;margin-top:6px}
   input.text{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);
     background:var(--bg);color:var(--ink);font-size:16px}
+  /* 2ᵉ tentative guidée (saisie) : le champ reste actif, juste signalé en douceur */
+  input.text.retry{border-color:var(--gold);box-shadow:0 0 0 3px rgba(242,193,78,.2)}
 
   /* Map / regions */
   .regions{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
@@ -116,6 +141,10 @@
   .opt:hover{border-color:var(--teal)}
   .opt.correct{border-color:var(--green);background:rgba(111,220,140,.16)}
   .opt.wrong{border-color:var(--red-soft);background:rgba(255,157,157,.14)}
+  /* Redondance non chromatique (daltonisme) : un symbole ✓/✗ EN PLUS de la couleur,
+     comme chez Les Petits Malins. */
+  .opt.correct::after{content:" ✓"}
+  .opt.wrong::after{content:" ✗"}
   .opt:disabled{cursor:default}
   .feedback{margin-top:14px;border-radius:12px;padding:14px 16px;font-weight:600;display:none}
   .feedback.ok{display:block;background:rgba(111,220,140,.14);border:1px solid var(--green)}
@@ -190,7 +219,8 @@
     font-weight:800;background:linear-gradient(180deg,var(--gold-soft),var(--gold));color:#3a2a05}
   .step .si{font-size:30px}
   .step .st{font-weight:700;margin-top:4px}
-  .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+  .feat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+  @media(max-width:560px){ .feat{grid-template-columns:1fr} }
   .feat .f{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px}
   .feat .f .fi{font-size:26px}
   .feat .f .ft{font-weight:700;margin:4px 0 2px}
@@ -320,26 +350,43 @@
   </div>
   <div id="app"></div>
   <div class="footnote">
-    Programme du Cycle 4 (5ᵉ → 4ᵉ → 3ᵉ) de l'Éducation nationale française · Prototype ·
+    Du CP au Brevet (primaire + collège), programme de l'Éducation nationale française · Prototype ·
     <a class="link" id="resetBtn">Réinitialiser la progression</a> ·
-    <a class="link" id="calmeBtn">Mode calme (réduire animations)</a>
+    <a class="link" id="calmeBtn">Mode calme (réduire animations)</a> ·
+    <a class="link" id="dysBtn">Police dyslexie</a> ·
+    <a class="link" id="streakBtn">Masquer la série 🔥</a>
+  </div>
+  <div class="footnote">
+    <a class="link" id="exportBtn">💾 Exporter ma progression</a> ·
+    <a class="link" id="importBtn">📂 Importer</a>
+    <input type="file" id="importFile" accept="application/json,.json" style="display:none" />
   </div>
 </div>
 <div class="toast" id="toast"></div>
 
+<!-- DONNÉES (contenu) chargées AVANT le moteur. Chargement classique (pas de
+     type=module) pour fonctionner en double-clic file:// et hors-ligne.
+     Pour ajouter une leçon, voir CONTRIBUTING.md et data/contenu-college.js. -->
+<script src="data/contenu-college.js"></script>
+<script src="data/contenu-petits-malins.js"></script>
+
 <script>
 /* =========================================================================
-   LE ROYAUME DU SAVOIR — prototype d'apprentissage gamifié (Brevet / Cycle 4)
-   Conçu pour tous les enfants du collège (dont les enfants autistes) : structure prévisible, renforcement
+   LE ROYAUME DU SAVOIR — prototype d'apprentissage gamifié (du CP au Brevet)
+   Conçu pour tous les enfants (dont les enfants autistes) : structure prévisible, renforcement
    positif, thème fantastique, une tâche à la fois, encouragements constants.
    ========================================================================= */
 
 /* ----------------------------- CONTENU --------------------------------- */
-/* Chaque matière = une "région" du royaume. Chaque leçon = une "quête".
-   Types de questions : 'qcm' (un seul choix), 'vf' (vrai/faux),
-   'saisie' (réponse à taper, plusieurs formes acceptées).
-   Le contenu suit le programme de 5e (Cycle 4) et est facile à étendre. */
+/* Le contenu (objet global CONTENT) est désormais chargé depuis le fichier
+   data/contenu-college.js, via la balise <script src> placée AVANT ce moteur.
+   Pour ajouter ou corriger une leçon, on édite ce fichier de données, sans
+   toucher au code ci-dessous. Voir CONTRIBUTING.md.
+   Le moteur lit la variable globale CONTENT, exactement comme avant. */
 
+/* --- DÉFINITION INLINE DÉSACTIVÉE (déplacée dans data/contenu-college.js) ---
+   Le bloc « const CONTENT = { … } » d'origine est neutralisé par ce commentaire
+   pour éviter toute donnée dupliquée à l'exécution. NE PAS réactiver.
 const CONTENT = {
   subjects: [
     {
@@ -1203,6 +1250,7 @@ const CONTENT = {
     }
   ]
 };
+--- FIN DU BLOC INLINE DÉSACTIVÉ --- */
 
 /* Avatars (thème fantastique) */
 const AVATARS = [
@@ -1341,12 +1389,7 @@ var PM = (function(){
      après une série de bonnes réponses : « voici ce que tu as appris ».
      Plus aucun lien YouTube ouvert (retiré pour des raisons de sécurité).
      ================================================================== */
-  var CARTES = {
-    lecture:{titre:'La lecture', c:'#e11d48', noeuds:['Les voyelles a e i o u','Les consonnes','Les syllabes ba be bi','Lire des mots','Lire des phrases']},
-    calcul:{titre:'Le calcul', c:'#2563eb', noeuds:['Compter','Additionner +','Soustraire −','Multiplier ×','Diviser ÷']},
-    langues:{titre:'Les langues', c:'#059669', noeuds:['Anglais','Espagnol','Italien','Les nombres','Les couleurs']},
-    histoire:{titre:'Le temps', c:'#d97706', noeuds:['Prehistoire','Antiquite','Moyen Age','Temps modernes','Aujourd hui']}
-  };
+  var CARTES = PM_DATA.CARTES;   /* données dans data/contenu-petits-malins.js */
   function carteMentaleSVG(key){
     var d=CARTES[key]; var cx=260,cy=160,rx=190,ry=110,n=d.noeuds.length; var nodes="";
     d.noeuds.forEach(function(t,i){
@@ -1431,21 +1474,8 @@ var PM = (function(){
      MODULE LECTURE
      ================================================================== */
   var ALPHABET="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
-  var MOTS=[
-    {mot:'CHAT', img:'🐱'},{mot:'CHIEN', img:'🐶'},{mot:'POMME', img:'🍎'},
-    {mot:'SOLEIL', img:'☀️'},{mot:'LUNE', img:'🌙'},{mot:'FLEUR', img:'🌸'},
-    {mot:'MAISON', img:'🏠'},{mot:'VOITURE', img:'🚗'},{mot:'BALLON', img:'⚽'},
-    {mot:'POISSON', img:'🐟'},{mot:'GÂTEAU', img:'🎂'},{mot:'ÉTOILE', img:'⭐'},
-    {mot:'ARBRE', img:'🌳'},{mot:'OISEAU', img:'🐦'},{mot:'BANANE', img:'🍌'}
-  ];
-  var PHRASES=[
-    'Le chat dort sur le lit.',
-    'Maman fait un bon gâteau.',
-    'Le soleil brille très fort.',
-    'Mon chien court dans le jardin.',
-    'La fleur sent très bon.',
-    "Le poisson nage dans l'eau."
-  ];
+  var MOTS = PM_DATA.MOTS;         /* données dans data/contenu-petits-malins.js */
+  var PHRASES = PM_DATA.PHRASES;   /* données dans data/contenu-petits-malins.js */
 
   function menuLecture(){
     state.vue='lecture';
@@ -1592,7 +1622,9 @@ var PM = (function(){
   }
 
   /* Compréhension de texte (grands) */
-  var TEXTES=[
+  var TEXTES = PM_DATA.TEXTES;   /* données dans data/contenu-petits-malins.js */
+  /* (définition inline d'origine neutralisée ci-dessous)
+  var _TEXTES_INLINE=[
     {titre:'Le petit chat gris', em:'🐱',
      txt:"Minou est un petit chat gris. Tous les matins, il boit son lait dans un bol bleu. Il adore jouer avec une pelote de laine rouge. Le soir, fatigué, il dort en boule près du feu, dans la cuisine.",
      qs:[{q:'De quelle couleur est Minou ?', bon:'Gris', faux:['Noir','Blanc'], ind:'Relis la première phrase.'},
@@ -1610,6 +1642,7 @@ var PM = (function(){
          {q:'De quoi la graine a-t-elle besoin ?', bon:'D\'eau et de soleil', faux:['De chocolat','De musique'], ind:'« un peu d\'eau » et « au soleil ».'},
          {q:'De quelle couleur est la fleur ?', bon:'Jaune', faux:['Rouge','Bleue'], ind:'La toute dernière phrase.'}]}
   ];
+  --- fin neutralisation TEXTES --- */
   var _txtLu='', _qSeq=[], _qIdx=0, _qOpts=[], _qBon='', _qInd='', _quizMat='lecture', _quizFin=null;
   function jeuComprehension(){
     var t=choisir(TEXTES);
@@ -1642,7 +1675,7 @@ var PM = (function(){
     var fb=document.getElementById('fb');
     if(_qOpts[k]===_qBon){ btn.classList.add('bon'); fb.textContent='✅ Bonne réponse !'; fb.className='feedback ok'; gagner(4); bravo(); disableZone();
       document.getElementById('next').classList.remove('cacher');
-    } else { btn.classList.add('faux'); montrerBonne(_qBon); fb.textContent='🔎 La bonne réponse : '+_qBon+(_qInd?' — '+_qInd:''); fb.className='feedback non'; disableZone();
+    } else { btn.classList.add('faux'); montrerBonne(_qBon); fb.textContent='🔎 La bonne réponse : '+_qBon+(_qInd?' ('+_qInd+')':''); fb.className='feedback non'; disableZone();
       document.getElementById('next').classList.remove('cacher');
     }
   }
@@ -1670,7 +1703,7 @@ var PM = (function(){
       '</div>';
   }
 
-  var OBJETS=['🍎','🌟','🐶','🎈','🍓','🐠','🌸','🚗','⚽','🦋'];
+  var OBJETS = PM_DATA.OBJETS;   /* données dans data/contenu-petits-malins.js */
   function jeuCompter(){
     var max = state.age==='petit'?6:10;
     var n = 1+r(max);
@@ -1817,7 +1850,13 @@ var PM = (function(){
   /* ==================================================================
      MODULE LANGUES
      ================================================================== */
-  var LANGUES={
+  var LANGUES   = PM_DATA.LANGUES;    /* données dans data/contenu-petits-malins.js */
+  var VOCAB     = PM_DATA.VOCAB;
+  var NOMBRES   = PM_DATA.NOMBRES;
+  var COULEURS  = PM_DATA.COULEURS;
+  var PHRASES_L = PM_DATA.PHRASES_L;
+  /* (définitions inline d'origine neutralisées ci-dessous)
+  var _LANGUES_INLINE={
     en:{nom:'Anglais', drap:'🇬🇧', code:'en-GB', salut:'Hello!'},
     es:{nom:'Espagnol', drap:'🇪🇸', code:'es-ES', salut:'¡Hola!'},
     it:{nom:'Italien', drap:'🇮🇹', code:'it-IT', salut:'Ciao!'}
@@ -1867,6 +1906,7 @@ var PM = (function(){
     {img:'👍',fr:'Oui',          en:'Yes',           es:'Sí',            it:'Sì'},
     {img:'👎',fr:'Non',          en:'No',            es:'No',            it:'No'}
   ];
+  --- fin neutralisation LANGUES/VOCAB/NOMBRES/COULEURS/PHRASES_L --- */
   var LISTES={base:VOCAB, nombres:NOMBRES, couleurs:COULEURS, phrases:PHRASES_L};
   var langueCur='en', catCur='base', vocabIdx=0, _listeVocab=[];
 
@@ -1950,7 +1990,11 @@ var PM = (function(){
   /* ==================================================================
      MODULE HISTOIRE
      ================================================================== */
-  var LECONS=[
+  var LECONS    = PM_DATA.LECONS;     /* données dans data/contenu-petits-malins.js */
+  var QUIZ_PLUS = PM_DATA.QUIZ_PLUS;
+  var CHRONO    = PM_DATA.CHRONO;
+  /* (définitions inline d'origine neutralisées ci-dessous)
+  var _LECONS_INLINE=[
     {titre:'La Préhistoire', ill:'🦣',
      texte:"Il y a très très longtemps, les hommes vivaient dans des grottes. On les appelle les hommes préhistoriques. Ils ont découvert le <b>feu</b> pour se réchauffer et cuire la nourriture, et ils chassaient des animaux comme le mammouth. Ils dessinaient sur les murs des grottes !",
      quiz:{q:'Où vivaient les hommes préhistoriques ?', bon:'Dans des grottes', faux:['Dans des châteaux','Dans des immeubles'], ind:'Avant les maisons…'}, age:'petit'},
@@ -2006,6 +2050,7 @@ var PM = (function(){
     {e:'Christophe Colomb (1492)', o:5, em:'⛵'},
     {e:'La Tour Eiffel (1889)', o:6, em:'🗼'}
   ];
+  --- fin neutralisation LECONS/QUIZ_PLUS/CHRONO --- */
 
   function menuHistoire(){
     state.vue='histoire';
@@ -2122,8 +2167,50 @@ function defaultState(){
     xp:0, crystals:0, streak:0, lastDay:null,
     scores:{},            // lessonId -> {stars, best}
     diagnosticDone:false, diagnostic:{}, // subjectId -> {right,total}
-    badges:[], buildings:[], brevet:0
+    badges:[], buildings:[], brevet:0,
+    // Préférences d'accessibilité, mémorisées par profil :
+    //  calme = réduit les animations · dys = police adaptée dyslexie ·
+    //  hideStreak = masque la pastille de série 🔥
+    prefs:{ calme:false, dys:false, hideStreak:false }
   };
+}
+
+/* ------------------------- PRÉFÉRENCES D'ACCESSIBILITÉ -----------------
+   Persistées dans l'état du profil (même mécanisme que le reste : save()).
+   applyPrefs() reflète l'état dans le DOM (classes body.calme / body.dys et
+   visibilité de la série). togglePref bascule + sauvegarde + toast.
+   setPrefAndReflect permet de basculer visuellement même sans profil connecté
+   (la préférence n'est alors PAS mémorisée : on invite à créer un profil). */
+function getPrefs(){
+  if(!STATE.prefs) STATE.prefs={calme:false, dys:false, hideStreak:false};
+  return STATE.prefs;
+}
+function applyPrefs(){
+  var p=getPrefs();
+  document.body.classList.toggle("calme", !!p.calme);
+  document.body.classList.toggle("dys", !!p.dys);
+  // La pastille de série est rendue par renderStats ; on la rafraîchit si besoin.
+  if(typeof renderStats==="function" && STATE.setup && ACTIVE) renderStats();
+}
+function togglePref(key, onMsg, offMsg){
+  var p=getPrefs();
+  p[key]=!p[key];
+  applyPrefs();
+  save();
+  toast(p[key]?(onMsg||"Réglage activé"):(offMsg||"Réglage désactivé"));
+}
+function setPrefAndReflect(key, onMsg, offMsg){
+  // Sans profil connecté : on bascule l'affichage mais on ne mémorise pas.
+  if(!ACTIVE){
+    var on = !document.body.classList.contains(key==="dys"?"dys":key==="calme"?"calme":"__none__");
+    if(key==="calme") document.body.classList.toggle("calme");
+    else if(key==="dys") document.body.classList.toggle("dys");
+    var nowOn = (key==="calme")? document.body.classList.contains("calme")
+              : (key==="dys")? document.body.classList.contains("dys") : on;
+    toast((nowOn?(onMsg||"Réglage activé"):(offMsg||"Réglage désactivé"))+" · crée un profil pour mémoriser");
+    return;
+  }
+  togglePref(key, onMsg, offMsg);
 }
 function loadProfiles(){
   try{ return JSON.parse(localStorage.getItem(PROFILES_KEY)) || []; }catch(e){ return []; }
@@ -2140,7 +2227,7 @@ function loadState(){
 }
 function save(){ if(!ACTIVE) return; try{ localStorage.setItem(SAVE_PREFIX+ACTIVE, JSON.stringify(STATE)); }catch(e){} }
 function setActive(id){ ACTIVE=id; try{ localStorage.setItem(ACTIVE_KEY, id||""); }catch(e){} }
-function logoutProfile(){ ACTIVE=null; try{ localStorage.removeItem(ACTIVE_KEY); }catch(e){} STATE=defaultState(); }
+function logoutProfile(){ ACTIVE=null; try{ localStorage.removeItem(ACTIVE_KEY); }catch(e){} STATE=defaultState(); document.body.classList.remove("calme","dys"); }
 function createProfile(name, avatar, pin, world){
   const id = "p"+Date.now()+Math.floor(Math.random()*1000);
   const list = loadProfiles();
@@ -2302,7 +2389,7 @@ function renderStats(){
       <span class="lvlbar"><i style="width:${li.pct}%"></i></span></div>
     <div class="chip" title="Cristaux"><span class="ic">💎</span> ${STATE.crystals}</div>
     <div class="chip" title="Points d'expérience"><span class="ic">⚡</span> ${STATE.xp} XP</div>
-    <div class="chip" title="Série de jours"><span class="ic">🔥</span> ${STATE.streak||0} j</div>
+    ${(getPrefs().hideStreak)?"":`<div class="chip" title="Série de jours"><span class="ic">🔥</span> ${STATE.streak||0} j</div>`}
     <button class="btn ghost small" id="homeBtn">🗺️ Carte</button>
     <button class="btn ghost small" id="switchBtn">👤 Changer</button>`;
   const hb=document.getElementById("homeBtn"); if(hb) hb.onclick=renderMap;
@@ -2322,6 +2409,7 @@ function toast(msg, big){
 /* ---- Page d'accueil + sélection de profil ---- */
 function goAfterLogin(){
   var ap = profileById(ACTIVE);
+  applyPrefs();                    // reflète les préférences d'accessibilité du profil
   if(ap && (ap.world||"royaume")==="petits"){ renderPetitsWorld(); return; }
   setBrand("Le Royaume du Savoir");
   renderStats();
@@ -2368,7 +2456,7 @@ function renderLanding(){
     ["📺","Vidéos de cours","Une vidéo d'une chaîne reconnue (Yvan Monka, Les Bons Profs…) dans chaque leçon."],
     ["🏰","Royaume à bâtir","Les cristaux gagnés servent à construire un royaume qui s'agrandit."],
     ["🏅","Badges & niveaux","XP, niveaux de mage, séries de jours et badges à débloquer."],
-    ["🌙","Adapté à chaque enfant","Structure claire et prévisible, une tâche à la fois, ton bienveillant et mode calme — pensé aussi pour les enfants autistes."]
+    ["🌙","Adapté à chaque enfant","Structure claire et prévisible, une tâche à la fois, ton bienveillant et mode calme, pensé aussi pour les enfants autistes."]
   ].map(f=>`<div class="f"><div class="fi">${f[0]}</div><div class="ft">${f[1]}</div>
       <div class="small muted">${f[2]}</div></div>`).join("");
 
@@ -2392,7 +2480,7 @@ function renderLanding(){
     <p class="muted" style="max-width:680px;margin:0 auto 4px">
       Une seule aventure magique qui accompagne chaque enfant <b>du CP au Brevet</b>, à son rythme.
       Dès le CP, le monde « <b>Les Petits Malins</b> » pose les bases (lecture, calcul, langues, histoire) ;
-      au collège, « <b>Le Royaume du Savoir</b> » prend le relais — de la 6ᵉ à la 3ᵉ, jusqu'au Brevet.
+      au collège, « <b>Le Royaume du Savoir</b> » prend le relais jusqu'au Brevet.
       Conçue pour <b>tous les enfants</b> : un apprentissage clair, motivant et rassurant, et particulièrement adaptée aux enfants autistes.
     </p>
     ${heroCTA}
@@ -2603,7 +2691,7 @@ function renderDiagnosticIntro(){
     <p class="muted" style="max-width:620px;margin:0 auto">
       Avant de commencer ton aventure, l'Oracle va te poser <b>une petite question par matière</b>
       pour découvrir tes points forts. Ce n'est pas une note : c'est juste pour bien te guider.
-      Réponds tranquillement — chaque réponse fait briller une étoile ⭐.
+      Réponds tranquillement : chaque réponse fait briller une étoile ⭐.
     </p>
     <div style="margin-top:18px">
       <button class="btn big" id="goDiag">Commencer le test 🔮</button>
@@ -2620,7 +2708,7 @@ function runDiagnostic(){
     if(i>=items.length){ finish(); return; }
     const it=items[i];
     renderSingleQuestion({
-      header:`🔮 Test de l'Oracle — ${it.icon} ${it.subjectName}`,
+      header:`🔮 Test de l'Oracle · ${it.icon} ${it.subjectName}`,
       sub:`Question ${i+1} sur ${items.length}`,
       question:it.q,
       onAnswer:(correct)=>{
@@ -2636,13 +2724,13 @@ function runDiagnostic(){
       const r=result[s.id]; const ok=r&&r.right>0;
       return `<div class="quest"><div class="qix">${s.icon}</div>
         <div class="qmeta"><div class="qt">${s.name}</div>
-        <div class="small muted">${ok?"Belle base ! On consolidera ✨":"À travailler en priorité — on va t'aider 💪"}</div></div>
+        <div class="small muted">${ok?"Belle base ! On consolidera ✨":"À travailler en priorité (on va t'aider) 💪"}</div></div>
         <div class="stars">${ok?"⭐":"☆"}</div></div>`;
     }).join("");
     app.innerHTML=`
       <div class="card">
         <h1 class="center">✨ Ton profil de départ</h1>
-        <p class="center muted">L'Oracle a parlé. Voici où tu en es — et tout va progresser !</p>
+        <p class="center muted">L'Oracle a parlé. Voici où tu en es : tout va progresser !</p>
         <div class="quests" style="margin-top:14px">${lines}</div>
         <div class="center" style="margin-top:18px">
           <button class="btn big" id="toMap">Découvrir le royaume 🗺️</button>
@@ -2712,7 +2800,7 @@ function tickTimer(){
   if(rem<=0){ if(el) el.textContent="⏱️ 0:00"; examTimeUp(); return; }
   if(el) el.textContent="⏱️ "+fmtTime(rem);
 }
-function examTimeUp(){ stopExamTimer(); toast("⏱️ Temps écoulé — voici ton résultat."); renderExamResult(); }
+function examTimeUp(){ stopExamTimer(); toast("⏱️ Temps écoulé : voici ton résultat."); renderExamResult(); }
 function renderBrevetIntro(){
   stopExamTimer();
   renderStats();
@@ -2731,7 +2819,7 @@ function renderBrevetIntro(){
     +'  <label class="small"><input type="radio" name="exLen" value="court"> Court (~8 questions)</label></div>'
     +'  <label class="small" style="display:flex;align-items:flex-start;gap:8px;margin-top:14px">'
     +'    <input type="checkbox" id="exTimerOpt"> <span><b>Activer le minuteur</b> (comme le jour J). '
-    +'    Sinon, tu t\'entraînes <b>sans limite de temps</b>, tranquillement — conseillé pour débuter. 🌙</span></label>'
+    +'    Sinon, tu t\'entraînes <b>sans limite de temps</b>, tranquillement (conseillé pour débuter). 🌙</span></label>'
     +'</div>'
     +'<div class="row" style="justify-content:center;margin-top:18px">'
     +'<button class="btn big" id="startEx">Commencer l\'examen →</button>'
@@ -2789,7 +2877,7 @@ function renderExamResult(){
   var n=EXAM.length, correct=0, bySub={};
   EXAM.forEach(function(q,i){ var ok=_correct(q,EXAM_ANS[i]); if(ok) correct++; var b=bySub[q.subjectName]=bySub[q.subjectName]||{ok:0,t:0,icon:q.subjectIcon}; b.t++; if(ok) b.ok++; });
   var note=Math.round(correct/n*20);
-  var mention=note>=16?"Mention Très Bien 🌟":note>=14?"Mention Bien ✨":note>=12?"Mention Assez Bien 👏":note>=10?"Admis·e ! 🎉":"Pas encore — on révise et on retente 💪";
+  var mention=note>=16?"Mention Très Bien 🌟":note>=14?"Mention Bien ✨":note>=12?"Mention Assez Bien 👏":note>=10?"Admis·e ! 🎉":"Pas encore : on révise et on retente 💪";
   var admis=note>=10;
   if(note>(STATE.brevet||0)) STATE.brevet=note;
   STATE.xp=(STATE.xp||0)+correct*5; STATE.crystals=(STATE.crystals||0)+(admis?15:correct); save();
@@ -2804,9 +2892,9 @@ function renderExamResult(){
   if(EXAM_REDAC){
     var rd=EXAM_REDAC;
     var crit=rd.criteres.map(function(c){ return '<label class="small" style="display:flex;gap:8px;align-items:flex-start;margin:4px 0"><input type="checkbox" class="redac-crit"> <span>'+esc(c)+'</span></label>'; }).join("");
-    redacBlock='<div class="card"><div class="section-title">✍️ Ta rédaction (entraînement — hors note /20)</div>'
+    redacBlock='<div class="card"><div class="section-title">✍️ Ta rédaction (entraînement, hors note /20)</div>'
       +'<div class="small muted" style="margin-bottom:8px">'+esc(rd.q)+'</div>'
-      +'<div class="quest" style="align-items:flex-start"><div class="qix">📝</div><div class="qmeta"><div class="small" style="font-weight:800">Ta réponse :</div><div class="small">'+(EXAM_REDAC_ANS&&EXAM_REDAC_ANS.trim()?esc(EXAM_REDAC_ANS):"(tu n\'as rien écrit cette fois — ce n\'est pas grave !)")+'</div></div></div>'
+      +'<div class="quest" style="align-items:flex-start"><div class="qix">📝</div><div class="qmeta"><div class="small" style="font-weight:800">Ta réponse :</div><div class="small">'+(EXAM_REDAC_ANS&&EXAM_REDAC_ANS.trim()?esc(EXAM_REDAC_ANS):"(tu n\'as rien écrit cette fois, ce n\'est pas grave !)")+'</div></div></div>'
       +'<div class="quest" style="align-items:flex-start;margin-top:8px"><div class="qix">💡</div><div class="qmeta"><div class="small" style="font-weight:800;color:#16a34a">Réponse-modèle :</div><div class="small">'+esc(rd.modele)+'</div></div></div>'
       +'<div class="section-title" style="margin-top:12px">Je m\'auto-évalue</div><div>'+crit+'</div>'
       +'<p class="small muted">Coche ce que tu as réussi. Cette partie ne change <b>pas</b> ta note /20 : elle t\'entraîne à <b>rédiger</b>, comme au Brevet.</p></div>';
@@ -2850,6 +2938,7 @@ function renderMap(){
         <div class="spacer"></div>
         <button class="btn ghost" id="kingdomBtn">🏰 Mon royaume</button>
         <button class="btn ghost" id="badgesBtn">🏅 Mes badges</button>
+        <button class="btn ghost" id="entrainBtn">🎲 Entraînement illimité</button>
         <button class="btn ghost" id="brevetBtn">🎓 Brevet blanc</button>
       </div>
       <div class="grid regions" style="margin-top:16px">${regions}</div>
@@ -2860,6 +2949,7 @@ function renderMap(){
   document.getElementById("badgesBtn").onclick=renderBadges;
   document.getElementById("brevetBtn").onclick=renderBrevetIntro;
   document.getElementById("kingdomBtn").onclick=renderKingdom;
+  document.getElementById("entrainBtn").onclick=renderEntrainementIntro;
 }
 
 /* ---- Mon Royaume : décor évolutif + boutique ---- */
@@ -2948,6 +3038,8 @@ function renderRegion(subId){
     prevDone = done; // la suivante n'est déverrouillée que si celle-ci est faite
     return html;
   }).join("");
+  const entrainBtn = (subId==="maths")
+    ? `<button class="btn ghost" id="entrainRegion">🎲 Entraînement illimité</button>` : "";
   app.innerHTML=`
     <div class="card">
       <div class="row">
@@ -2955,11 +3047,14 @@ function renderRegion(subId){
         <div><h2 style="margin-bottom:2px">${sub.region}</h2>
           <div class="small muted">${sub.name}</div></div>
         <div class="spacer"></div>
+        ${entrainBtn}
         <button class="btn ghost" id="back">← Carte</button>
       </div>
       <div class="quests" style="margin-top:16px">${items}</div>
     </div>`;
   document.getElementById("back").onclick=renderMap;
+  const erb=document.getElementById("entrainRegion");
+  if(erb) erb.onclick=renderEntrainementIntro;
   app.querySelectorAll(".quest").forEach(q=>{
     if(q.dataset.l){ q.style.cursor="pointer"; q.onclick=()=>renderLesson(q.dataset.l); }
   });
@@ -3122,15 +3217,35 @@ function renderSingleQuestion(cfg){
     });
   } else if(q.type==="saisie"){
     const inp=document.getElementById("saisie");
+    const valBtn=document.getElementById("valid");
     const norm=s=>String(s).trim().toLowerCase().replace(/\s+/g,"").replace(",",".");
+    let tries=0;   // 2ᵉ tentative guidée : on n'invalide qu'à la 2ᵉ erreur
     function validate(){
       const user=norm(inp.value);
       if(user==="") return;
       const ok = q.answer.map(norm).includes(user);
-      inp.disabled=true; document.getElementById("valid").disabled=true;
-      reveal(ok);
+      if(ok){
+        inp.disabled=true; valBtn.disabled=true;
+        inp.classList.remove("retry");
+        reveal(true);
+        return;
+      }
+      tries++;
+      if(tries===1){
+        // 1ʳᵉ erreur : on ne ferme PAS. Indice formatif + nouvelle tentative.
+        const indice = q.indice || "Pas tout à fait. Relis bien l'énoncé, vérifie le format de ta réponse (chiffres, unité, virgule) et réessaie : tu y es presque !";
+        fb.className="feedback no";
+        fb.innerHTML=`<span class="lab">💡 Indice :</span>${indice}`;
+        inp.classList.add("retry");
+        inp.focus(); inp.select();
+        return;
+      }
+      // 2ᵉ erreur : on révèle la correction.
+      inp.disabled=true; valBtn.disabled=true;
+      inp.classList.remove("retry");
+      reveal(false);
     }
-    document.getElementById("valid").onclick=validate;
+    valBtn.onclick=validate;
     inp.addEventListener("keydown",e=>{ if(e.key==="Enter") validate(); });
     inp.focus();
   }
@@ -3171,6 +3286,399 @@ function renderBadges(){
   document.getElementById("back").onclick=renderMap;
 }
 
+/* =====================================================================
+   GÉNÉRATEUR D'EXERCICES DE MATHS — « 🎲 Entraînement illimité » (collège)
+   ---------------------------------------------------------------------
+   Module MATHGEN (IIFE) : un générateur par notion, par niveau. Chaque
+   générateur renvoie un objet question au MÊME format que CONTENT :
+     {type:"qcm|vf|saisie", q, options/answer, explain, indice}
+   La réponse est CALCULÉE par le code → elle est toujours juste.
+   Les questions « saisie » bénéficient de la 2ᵉ tentative guidée déjà en
+   place (champ `indice`). Pas de tiret cadratin « — » dans les textes.
+   ===================================================================== */
+var MATHGEN = (function(){
+  "use strict";
+  function ri(min,max){ return Math.floor(Math.random()*(max-min+1))+min; } // entier dans [min,max]
+  function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+  function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  function pgcd(a,b){ a=Math.abs(a); b=Math.abs(b); while(b){ var t=b; b=a%b; a=t; } return a||1; }
+  // format décimal FR (virgule), sans zéros parasites
+  function dec(x){ var s=(Math.round(x*100)/100).toString().replace(".",","); return s; }
+  // Construit un QCM en mêlant la bonne réponse à des distracteurs (valeurs uniques)
+  function qcm(q, bonne, distracteurs, explain, indice){
+    var opts=[String(bonne)];
+    distracteurs.forEach(function(d){ d=String(d); if(opts.indexOf(d)<0) opts.push(d); });
+    opts=opts.slice(0,4);
+    while(opts.length<3){ var f=String(ri(1,99)); if(opts.indexOf(f)<0) opts.push(f); }
+    opts=shuffle(opts);
+    return {type:"qcm", q:q, options:opts, answer:opts.indexOf(String(bonne)), explain:explain, indice:indice};
+  }
+
+  /* ----------------------- 6ᵉ / 5ᵉ ----------------------- */
+  function genDecimaux(){
+    var op=pick(["+","-","×"]);
+    var a,b,res;
+    if(op==="+"){ a=ri(10,200)/10; b=ri(10,200)/10; res=Math.round((a+b)*10)/10; }
+    else if(op==="-"){ a=ri(50,250)/10; b=ri(10,Math.round(a*10)-5)/10; res=Math.round((a-b)*10)/10; }
+    else { a=ri(11,99)/10; b=ri(2,9); res=Math.round(a*b*10)/10; } // décimal × entier
+    var bAff = (op==="×") ? String(b) : dec(b);
+    return {type:"saisie",
+      q:"Calcule : "+dec(a)+" "+op+" "+bAff+" = ? (réponds avec une virgule si besoin)",
+      answer:[dec(res), dec(res).replace(",",".")],
+      explain:"On pose le calcul : "+dec(a)+" "+op+" "+bAff+" = "+dec(res)+".",
+      indice:"Aligne les virgules (ou multiplie comme des entiers puis place la virgule). Le résultat attendu est un nombre décimal."};
+  }
+  function genFraction(){
+    var d=pick([4,5,6,7,8,9,10,12]);
+    var t=pick(["somme","diff","simpl"]);
+    if(t==="simpl"){
+      var k=ri(2,6); var n0=ri(1,d-1); // n0/d simplifiable
+      var num=n0*k, den=d*k;
+      var g=pgcd(num,den); var sn=num/g, sd=den/g;
+      return {type:"saisie",
+        q:"Simplifie la fraction "+num+"/"+den+" (écris-la sous la forme a/b la plus simple).",
+        answer:[sn+"/"+sd],
+        explain:"On divise en haut et en bas par "+g+" : "+num+"/"+den+" = "+sn+"/"+sd+".",
+        indice:"Cherche le plus grand nombre qui divise à la fois "+num+" et "+den+", puis divise les deux."};
+    }
+    var x=ri(1,d-1), y=ri(1,d-1);
+    if(t==="somme"){
+      var s=x+y; // sur d
+      return {type:"saisie",
+        q:"Calcule "+x+"/"+d+" + "+y+"/"+d+" (garde le même dénominateur, ne simplifie pas).",
+        answer:[s+"/"+d],
+        explain:"Même dénominateur : on additionne les numérateurs, "+x+" + "+y+" = "+s+", et on garde "+d+". Donc "+s+"/"+d+".",
+        indice:"Le dénominateur ne change pas : additionne seulement les numérateurs."};
+    }
+    if(x<y){ var tmp=x; x=y; y=tmp; }
+    var diff=x-y;
+    return {type:"saisie",
+      q:"Calcule "+x+"/"+d+" - "+y+"/"+d+" (garde le même dénominateur, ne simplifie pas).",
+      answer:[diff+"/"+d],
+      explain:"Même dénominateur : on soustrait les numérateurs, "+x+" - "+y+" = "+diff+", et on garde "+d+". Donc "+diff+"/"+d+".",
+      indice:"Le dénominateur reste "+d+" : calcule seulement "+x+" - "+y+" en haut."};
+  }
+  function genProportion(){
+    var t=pick(["pourcent","prix"]);
+    if(t==="pourcent"){
+      var p=pick([10,20,25,50,75]); var base=pick([20,40,60,80,100,120,160,200,240]);
+      var res=base*p/100;
+      return {type:"saisie",
+        q:"Calcule "+p+" % de "+base+".",
+        answer:[String(res)],
+        explain:p+" % de "+base+" = "+p+"/100 × "+base+" = "+res+".",
+        indice:p+" % veut dire "+p+" pour 100. Multiplie "+base+" par "+p+" puis divise par 100."};
+    }
+    var unit=ri(2,9); var n1=ri(2,6); var n2=ri(3,8);
+    var total1=unit*n1, total2=unit*n2;
+    return qcm(
+      n1+" objets identiques coûtent "+total1+" €. Combien coûtent "+n2+" objets (même prix unitaire) ?",
+      total2+" €",
+      [(total2+unit)+" €", (total2-unit)+" €", (total1+n2)+" €"],
+      "1 objet coûte "+total1+" ÷ "+n1+" = "+unit+" €. Donc "+n2+" objets coûtent "+n2+" × "+unit+" = "+total2+" €.",
+      "Trouve d'abord le prix d'un seul objet, puis multiplie.");
+  }
+  function genPerimetreAire(){
+    var carre=Math.random()<0.4;
+    var quoi=pick(["perimetre","aire"]);
+    if(carre){
+      var c=ri(3,15);
+      if(quoi==="perimetre") return {type:"saisie",
+        q:"Un carré a un côté de "+c+" cm. Quel est son périmètre (en cm) ?",
+        answer:[String(4*c), 4*c+" cm"],
+        explain:"Périmètre du carré = 4 × côté = 4 × "+c+" = "+(4*c)+" cm.",
+        indice:"Un carré a 4 côtés égaux : multiplie le côté par 4."};
+      return {type:"saisie",
+        q:"Un carré a un côté de "+c+" cm. Quelle est son aire (en cm²) ?",
+        answer:[String(c*c), c*c+" cm²"],
+        explain:"Aire du carré = côté × côté = "+c+" × "+c+" = "+(c*c)+" cm².",
+        indice:"Aire d'un carré = côté multiplié par lui-même."};
+    }
+    var L=ri(4,18), l=ri(2,L-1);
+    if(quoi==="perimetre") return {type:"saisie",
+      q:"Un rectangle mesure "+L+" cm sur "+l+" cm. Quel est son périmètre (en cm) ?",
+      answer:[String(2*(L+l)), 2*(L+l)+" cm"],
+      explain:"Périmètre = 2 × (Longueur + largeur) = 2 × ("+L+" + "+l+") = "+(2*(L+l))+" cm.",
+      indice:"Additionne longueur et largeur, puis multiplie par 2."};
+    return {type:"saisie",
+      q:"Un rectangle mesure "+L+" cm sur "+l+" cm. Quelle est son aire (en cm²) ?",
+      answer:[String(L*l), L*l+" cm²"],
+      explain:"Aire = Longueur × largeur = "+L+" × "+l+" = "+(L*l)+" cm².",
+      indice:"Aire d'un rectangle = longueur multipliée par largeur."};
+  }
+
+  /* ----------------------- 4ᵉ ----------------------- */
+  function genLitteral(){
+    var t=pick(["dev","red"]);
+    if(t==="dev"){
+      var k=ri(2,9), a=ri(2,9), signe=pick(["+","-"]), b=ri(2,9);
+      var prod=k*b;
+      var expr=k+"("+a+"x "+signe+" "+b+")";
+      var res=(k*a)+"x "+signe+" "+prod;
+      return qcm(
+        "Développe et réduis : "+expr+".",
+        res,
+        [(k*a)+"x "+signe+" "+b, (k+a)+"x "+signe+" "+prod, (k*a)+"x "+(signe==="+"?"-":"+")+" "+prod],
+        "On distribue : "+k+"×"+a+"x = "+(k*a)+"x et "+k+"×"+b+" = "+prod+". Donc "+res+".",
+        "Multiplie le nombre devant la parenthèse par CHAQUE terme à l'intérieur.");
+    }
+    var c1=ri(2,9), c2=ri(2,9);
+    return {type:"saisie",
+      q:"Réduis l'expression : "+c1+"x + "+c2+"x = ? (écris ta réponse, par exemple 5x)",
+      answer:[(c1+c2)+"x"],
+      explain:"On additionne les coefficients : ("+c1+" + "+c2+")x = "+(c1+c2)+"x.",
+      indice:"Additionne juste les nombres devant les x, et garde la lettre x."};
+  }
+  function genPuissance(){
+    var base=pick([2,3,4,5,10]);
+    var exp=(base===2)?ri(2,7):(base===10)?ri(2,5):ri(2,3);
+    var res=Math.pow(base,exp);
+    var expSup={2:"²",3:"³",4:"⁴",5:"⁵",6:"⁶",7:"⁷"}[exp]||("^"+exp);
+    return {type:"saisie",
+      q:"Combien vaut "+base+expSup+" ?",
+      answer:[String(res)],
+      explain:base+expSup+" = "+new Array(exp+1).join(base+"×").slice(0,-1)+" = "+res+".",
+      indice:"Une puissance, c'est une multiplication répétée : multiplie "+base+" par lui-même "+exp+" fois."};
+  }
+  function genEquation(){
+    var t=pick(["ax+b","x+b","ax"]);
+    var x=ri(1,12);
+    if(t==="ax+b"){
+      var a=ri(2,6), b=ri(1,15), c=a*x+b;
+      return {type:"saisie",
+        q:"Résous l'équation : "+a+"x + "+b+" = "+c+". x = ?",
+        answer:[String(x)],
+        explain:a+"x = "+c+" - "+b+" = "+(c-b)+", donc x = "+(c-b)+" ÷ "+a+" = "+x+".",
+        indice:"D'abord enlève "+b+" des deux côtés, puis divise par "+a+"."};
+    }
+    if(t==="x+b"){
+      var b2=ri(2,20), c2=x+b2;
+      return {type:"saisie",
+        q:"Résous l'équation : x + "+b2+" = "+c2+". x = ?",
+        answer:[String(x)],
+        explain:"x = "+c2+" - "+b2+" = "+x+".",
+        indice:"Pour isoler x, retire "+b2+" de chaque côté du signe égal."};
+    }
+    var a3=ri(2,9), c3=a3*x;
+    return {type:"saisie",
+      q:"Résous l'équation : "+a3+"x = "+c3+". x = ?",
+      answer:[String(x)],
+      explain:"x = "+c3+" ÷ "+a3+" = "+x+".",
+      indice:"Divise les deux côtés par "+a3+" pour trouver x."};
+  }
+  // Triplets pythagoriciens entiers (multiples de triplets de base)
+  var TRIPLETS=[[3,4,5],[5,12,13],[6,8,10],[8,15,17],[9,12,15],[7,24,25],[20,21,29],[12,16,20]];
+  function genPythagore(){
+    var base=pick(TRIPLETS); var k=pick([1,1,2,3]);
+    var a=base[0]*k, b=base[1]*k, h=base[2]*k;
+    if(Math.random()<0.6){
+      return {type:"saisie",
+        q:"Triangle rectangle : les deux côtés de l'angle droit mesurent "+a+" et "+b+". Quelle est la longueur de l'hypoténuse ?",
+        answer:[String(h)],
+        explain:"hypoténuse² = "+a+"² + "+b+"² = "+(a*a)+" + "+(b*b)+" = "+(a*a+b*b)+", donc hypoténuse = √"+(a*a+b*b)+" = "+h+".",
+        indice:"Additionne les carrés des deux côtés, puis prends la racine carrée du résultat."};
+    }
+    return {type:"saisie",
+      q:"Triangle rectangle : l'hypoténuse mesure "+h+" et un côté de l'angle droit mesure "+a+". Quelle est la longueur de l'autre côté ?",
+      answer:[String(b)],
+      explain:"côté² = "+h+"² - "+a+"² = "+(h*h)+" - "+(a*a)+" = "+(h*h-a*a)+", donc côté = √"+(h*h-a*a)+" = "+b+".",
+      indice:"Ici on soustrait : (hypoténuse)² moins (côté connu)², puis racine carrée."};
+  }
+
+  /* ----------------------- 3ᵉ ----------------------- */
+  function genThales(){
+    // AB/AB' = AC/AC' ; on garantit un résultat entier
+    var ab=ri(2,6); var k=ri(2,5); var abp=ab*k; // AB' = k×AB
+    var ac=ri(2,8); var acp=ac*k;                // AC' = k×AC (entier)
+    return {type:"saisie",
+      q:"Configuration de Thalès : AB/AB' = AC/AC'. On donne AB = "+ab+", AB' = "+abp+" et AC = "+ac+". Combien vaut AC' ?",
+      answer:[String(acp)],
+      explain:ab+"/"+abp+" = "+ac+"/AC'. Le rapport vaut "+ab+"/"+abp+" = 1/"+k+", donc AC' = "+ac+" × "+abp+" ÷ "+ab+" = "+acp+".",
+      indice:"Utilise l'égalité des rapports : AC' = AC × AB' ÷ AB."};
+  }
+  function genNotationSci(){
+    var t=pick(["valeur","ecrire"]);
+    if(t==="valeur"){
+      var a=ri(1,9), n=ri(2,5); var res=a*Math.pow(10,n);
+      var sup={2:"²",3:"³",4:"⁴",5:"⁵"}[n];
+      return {type:"saisie",
+        q:"Combien vaut "+a+" × 10"+sup+" ? (écris le nombre en entier)",
+        answer:[String(res)],
+        explain:a+" × 10"+sup+" = "+a+" suivi de "+n+" zéros = "+res+".",
+        indice:"10"+sup+" = 1 suivi de "+n+" zéros. Multiplie "+a+" par ce nombre."};
+    }
+    var a2=ri(1,9), n2=ri(3,6); var d2=ri(0,9);
+    var nb=(a2*10+d2)*Math.pow(10,n2-1); // ex: 3,2 × 10^4
+    var sup2={3:"³",4:"⁴",5:"⁵",6:"⁶"}[n2];
+    var mant=d2===0?String(a2):(a2+","+d2);
+    return qcm(
+      "Quelle est la notation scientifique de "+nb.toLocaleString("fr-FR").replace(/ /g," ")+" ?",
+      mant+" × 10"+sup2,
+      [mant+" × 10"+({3:"²",4:"³",5:"⁴",6:"⁵"}[n2]), (a2+(d2?","+d2:""))+" × 10"+({3:"⁴",4:"⁵",5:"⁶",6:"⁷"}[n2]), (a2*10+d2)+" × 10"+({3:"²",4:"³",5:"⁴",6:"⁵"}[n2])],
+      "On écrit a × 10ⁿ avec 1 ≤ a < 10 : ici a = "+mant+" et la puissance est 10"+sup2+".",
+      "Place la virgule après le 1er chiffre (a entre 1 et 10), puis compte les déplacements pour la puissance de 10.");
+  }
+  function genFonction(){
+    var affine=Math.random()<0.5;
+    var a=ri(2,6), x=ri(2,9);
+    if(!affine){
+      return {type:"saisie",
+        q:"Soit la fonction linéaire f(x) = "+a+"x. Combien vaut f("+x+") ?",
+        answer:[String(a*x)],
+        explain:"f("+x+") = "+a+" × "+x+" = "+(a*x)+".",
+        indice:"Remplace x par "+x+" puis multiplie par "+a+"."};
+    }
+    var b=ri(1,12);
+    return {type:"saisie",
+      q:"Soit la fonction affine g(x) = "+a+"x + "+b+". Combien vaut g("+x+") ?",
+      answer:[String(a*x+b)],
+      explain:"g("+x+") = "+a+" × "+x+" + "+b+" = "+(a*x)+" + "+b+" = "+(a*x+b)+".",
+      indice:"Calcule d'abord "+a+" × "+x+", puis ajoute "+b+"."};
+  }
+  function genStats(){
+    var n=pick([4,5]);
+    var moy=ri(6,16);
+    // on construit n valeurs de moyenne entière exactement = moy
+    var vals=[]; var somme=0;
+    for(var i=0;i<n-1;i++){ var v=ri(Math.max(0,moy-5),moy+5); vals.push(v); somme+=v; }
+    var derniere=moy*n-somme;
+    // garantir que la dernière valeur reste raisonnable et positive
+    if(derniere<0){ vals=[]; somme=0; for(i=0;i<n;i++){ vals.push(moy); } }
+    else vals.push(derniere);
+    var total=vals.reduce(function(s,v){ return s+v; },0);
+    return {type:"saisie",
+      q:"Calcule la moyenne de cette série de "+n+" notes : "+vals.join(" ; ")+".",
+      answer:[String(total/n)],
+      explain:"Moyenne = (somme des valeurs) ÷ (nombre de valeurs) = "+total+" ÷ "+n+" = "+(total/n)+".",
+      indice:"Additionne toutes les notes, puis divise la somme par "+n+"."};
+  }
+
+  var THEMES = {
+    "6e-5e":[
+      {id:"decimaux", nom:"Opérations sur les décimaux", gen:genDecimaux},
+      {id:"fractions", nom:"Fractions (même dénominateur, simplifier)", gen:genFraction},
+      {id:"proportion", nom:"Proportionnalité & pourcentages", gen:genProportion},
+      {id:"perimAire", nom:"Périmètre & aire (rectangle, carré)", gen:genPerimetreAire}
+    ],
+    "4e":[
+      {id:"litteral", nom:"Calcul littéral (développer, réduire)", gen:genLitteral},
+      {id:"puissances", nom:"Puissances", gen:genPuissance},
+      {id:"equations", nom:"Équations du 1er degré", gen:genEquation},
+      {id:"pythagore", nom:"Théorème de Pythagore", gen:genPythagore}
+    ],
+    "3e":[
+      {id:"thales", nom:"Théorème de Thalès", gen:genThales},
+      {id:"notationSci", nom:"Notation scientifique", gen:genNotationSci},
+      {id:"fonctions", nom:"Fonctions linéaires & affines", gen:genFonction},
+      {id:"stats", nom:"Statistiques (moyenne)", gen:genStats}
+    ]
+  };
+  function themesFor(niveau){ return THEMES[niveau]||[]; }
+  function themeById(niveau, id){ return themesFor(niveau).find(function(t){ return t.id===id; }); }
+  // « Tout mélanger » : un thème au hasard parmi le niveau
+  function genMix(niveau){ var ths=themesFor(niveau); return pick(ths).gen(); }
+
+  return { THEMES:THEMES, themesFor:themesFor, themeById:themeById, genMix:genMix };
+})();
+
+/* ---- Écran d'intro de l'Entraînement illimité (choix niveau + thème) ---- */
+function renderEntrainementIntro(){
+  if(typeof stopExamTimer==="function") stopExamTimer();
+  setBrand("Le Royaume du Savoir");
+  renderStats();
+  var niveaux=[
+    {k:"6e-5e", nom:"6ᵉ / 5ᵉ", emo:"🌱"},
+    {k:"4e", nom:"4ᵉ", emo:"🌿"},
+    {k:"3e", nom:"3ᵉ", emo:"🌳"}
+  ];
+  var blocs=niveaux.map(function(nv){
+    var themes=MATHGEN.themesFor(nv.k);
+    var boutons=themes.map(function(t){
+      return '<button class="btn ghost" data-niv="'+nv.k+'" data-theme="'+t.id+'" style="text-align:left">'+t.nom+'</button>';
+    }).join("");
+    return '<div class="card" style="margin-top:14px">'
+      +'<div class="row"><div style="font-size:26px">'+nv.emo+'</div>'
+      +'<h3 style="margin:0">Niveau '+nv.nom+'</h3><div class="spacer"></div>'
+      +'<button class="btn" data-niv="'+nv.k+'" data-theme="__mix__">🎲 Tout mélanger</button></div>'
+      +'<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:12px">'+boutons+'</div>'
+      +'</div>';
+  }).join("");
+  app.innerHTML=
+    '<div class="card">'
+    +'<div class="row"><div style="font-size:38px">🎲</div>'
+    +'<div><h2 style="margin-bottom:2px">Entraînement illimité (maths)</h2>'
+    +'<div class="small muted">Des exercices générés à l\'infini, corrigés en douceur. Tu t\'arrêtes quand tu veux : aucune pression.</div></div>'
+    +'<div class="spacer"></div><button class="btn ghost" id="backEnt">← Carte</button></div>'
+    +'<p class="small muted" style="margin-top:10px">Choisis un niveau et une notion, ou clique sur « 🎲 Tout mélanger » pour varier.</p>'
+    +'</div>'+blocs;
+  document.getElementById("backEnt").onclick=renderMap;
+  app.querySelectorAll("[data-theme]").forEach(function(b){
+    b.onclick=function(){
+      var niv=b.dataset.niv, th=b.dataset.theme;
+      playEntrainement(niv, th==="__mix__"?null:th);
+    };
+  });
+}
+
+/* ---- Boucle illimitée : génère → rend → recommence (une tâche à la fois) ---- */
+function playEntrainement(niveau, themeId){
+  var nbFait=0, nbReussi=0;
+  var theme = themeId ? MATHGEN.themeById(niveau, themeId) : null;
+  var niveauNom={"6e-5e":"6ᵉ/5ᵉ","4e":"4ᵉ","3e":"3ᵉ"}[niveau]||niveau;
+  var titre = theme ? theme.nom : "🎲 Tout mélanger";
+  function prochaine(){
+    var question = theme ? theme.gen() : MATHGEN.genMix(niveau);
+    renderSingleQuestion({
+      header:"🎲 Entraînement "+niveauNom+" · "+titre,
+      sub:"Exercice "+(nbFait+1),
+      question:question,
+      onAnswer:function(correct){
+        nbFait++;
+        if(correct){
+          nbReussi++;
+          addXP(10,"+10 XP");
+          if(nbReussi%5===0){
+            STATE.crystals=(STATE.crystals||0)+2;
+            renderStats();
+            toast("💎 +2 cristaux ! "+nbReussi+" exercices réussis 🎉", true);
+          }
+          if(typeof touchStreak==="function") touchStreak();
+          if(typeof checkBadges==="function") checkBadges();
+        }
+        save();
+      },
+      onNext:prochaine,
+      lastLabel:"Exercice suivant 🎲"
+    });
+    // Bouton « J'arrête ici » ajouté sous la question (sans pression)
+    var nw=document.getElementById("nextWrap");
+    if(nw){
+      var stop=document.createElement("div");
+      stop.style.marginTop="10px";
+      stop.innerHTML='<button class="btn ghost" id="stopEnt">✓ J\'arrête ici (bravo !)</button>';
+      nw.parentNode.appendChild(stop);
+      var sb=document.getElementById("stopEnt");
+      if(sb) sb.onclick=function(){ finEntrainement(); };
+    }
+  }
+  function finEntrainement(){
+    save();
+    var av=AVATARS.find(function(a){ return a.id===STATE.avatar; });
+    app.innerHTML=
+      '<div class="card center">'
+      +'<div class="pop" style="font-size:56px">'+(av?av.face:"🧙‍♀️")+'</div>'
+      +'<h1>Bravo, '+esc(STATE.name)+' ! 🌟</h1>'
+      +'<p style="font-size:19px;font-weight:700">Tu t\'es entraîné(e) en '+niveauNom+' sur « '+titre+' ».</p>'
+      +'<p class="muted">Tu as fait <b>'+nbFait+'</b> exercice(s) et réussi <b>'+nbReussi+'</b>. Chaque essai te fait progresser. 💪</p>'
+      +'<div class="row" style="justify-content:center;margin-top:18px">'
+      +'<button class="btn" id="contEnt">🎲 Continuer</button>'
+      +'<button class="btn ghost" id="mapEnt">🗺️ Retour à la carte</button></div></div>';
+    document.getElementById("contEnt").onclick=function(){ playEntrainement(niveau, themeId); };
+    document.getElementById("mapEnt").onclick=renderMap;
+  }
+  prochaine();
+}
+
 /* ---- Boot ---- */
 function boot(){
   let active="";
@@ -3194,9 +3702,97 @@ document.getElementById("resetBtn").onclick=()=>{
     save(); boot();
   }
 };
+/* Réglages d'accessibilité du pied de page : mode calme, police dyslexie,
+   masquer la série. Persistés par profil via setPrefAndReflect/togglePref. */
 document.getElementById("calmeBtn").onclick=()=>{
-  document.body.classList.toggle("calme");
-  toast(document.body.classList.contains("calme")?"🌙 Mode calme activé":"✨ Animations réactivées");
+  setPrefAndReflect("calme","🌙 Mode calme activé","✨ Animations réactivées");
+};
+var _dysBtn=document.getElementById("dysBtn");
+if(_dysBtn) _dysBtn.onclick=()=>{
+  setPrefAndReflect("dys","🔤 Police dyslexie activée","🔤 Police standard rétablie");
+};
+var _streakBtn=document.getElementById("streakBtn");
+if(_streakBtn) _streakBtn.onclick=()=>{
+  if(!ACTIVE){ toast("Crée un profil pour mémoriser ce réglage."); return; }
+  togglePref("hideStreak","🔥 Série masquée","🔥 Série réaffichée");
+};
+
+/* ---- Export / Import de la progression (sans serveur, RGPD-friendly) ----
+   Tout reste sur l'appareil. On sauvegarde et on restaure les clés localStorage
+   déjà utilisées par l'app : les comptes/progression du Royaume (rds_*) et du
+   module Petits Malins (pm_*). Un simple fichier JSON, à garder précieusement. */
+function collectProgress(){
+  var data={};
+  try{
+    for(var i=0;i<localStorage.length;i++){
+      var k=localStorage.key(i);
+      if(k && (k.indexOf("rds_")===0 || k.indexOf("pm_")===0)){
+        data[k]=localStorage.getItem(k);
+      }
+    }
+  }catch(e){}
+  return data;
+}
+function exportProgress(){
+  var payload={
+    app:"Le Royaume du Savoir",
+    type:"progression",
+    version:1,
+    exportedAt:new Date().toISOString(),
+    data:collectProgress()
+  };
+  var nbKeys=Object.keys(payload.data).length;
+  if(nbKeys===0){ toast("ℹ️ Aucune progression à exporter pour l'instant."); return; }
+  try{
+    var blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement("a");
+    var stamp=new Date().toISOString().slice(0,10);
+    a.href=url; a.download="royaume-progression-"+stamp+".json";
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); },0);
+    toast("💾 Progression exportée ("+nbKeys+" élément(s)).");
+  }catch(e){
+    toast("⚠️ Export impossible sur ce navigateur.");
+  }
+}
+function importProgress(file){
+  var reader=new FileReader();
+  reader.onload=function(){
+    var payload;
+    try{ payload=JSON.parse(reader.result); }
+    catch(e){ toast("⚠️ Fichier illisible (JSON invalide)."); return; }
+    var data=(payload && payload.data) ? payload.data : payload;
+    if(!data || typeof data!=="object"){ toast("⚠️ Ce fichier ne contient pas de progression."); return; }
+    var keys=Object.keys(data).filter(function(k){ return k.indexOf("rds_")===0 || k.indexOf("pm_")===0; });
+    if(keys.length===0){ toast("⚠️ Aucune progression reconnue dans ce fichier."); return; }
+    if(!confirm("Importer cette progression ?\n\nCela va REMPLACER la progression actuelle de cet appareil ("+keys.length+" élément(s)). Cette action est irréversible.")){
+      return;
+    }
+    try{
+      // On retire d'abord les clés existantes de l'app, puis on restaure celles du fichier.
+      var toRemove=[];
+      for(var i=0;i<localStorage.length;i++){
+        var ek=localStorage.key(i);
+        if(ek && (ek.indexOf("rds_")===0 || ek.indexOf("pm_")===0)) toRemove.push(ek);
+      }
+      toRemove.forEach(function(k){ localStorage.removeItem(k); });
+      keys.forEach(function(k){ localStorage.setItem(k, String(data[k])); });
+      toast("📂 Progression importée. Rechargement…");
+      setTimeout(function(){ location.reload(); }, 700);
+    }catch(e){
+      toast("⚠️ Import impossible (stockage indisponible).");
+    }
+  };
+  reader.onerror=function(){ toast("⚠️ Lecture du fichier impossible."); };
+  reader.readAsText(file);
+}
+document.getElementById("exportBtn").onclick=exportProgress;
+document.getElementById("importBtn").onclick=function(){ document.getElementById("importFile").click(); };
+document.getElementById("importFile").onchange=function(e){
+  var f=e.target.files && e.target.files[0];
+  if(f) importProgress(f);
+  e.target.value=""; // permet de réimporter le même fichier ensuite
 };
 
 boot();
