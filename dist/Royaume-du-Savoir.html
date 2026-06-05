@@ -863,6 +863,44 @@ var CONTENT = {
             {type:"vf", q:"Sur un diagramme en bâtons, plus le bâton est haut, plus l'effectif est grand.", answer:true, explain:"Oui : la hauteur représente l'effectif.", indice:"Haut = beaucoup."},
             {type:"qcm", q:"Les axes d'un graphique servent à :", options:["repérer et lire les valeurs","décorer","colorier","mesurer la température"], answer:0, explain:"Les axes permettent de lire les données.", indice:"Comme un repère."}
           ]
+        },
+        {
+          id:"m25", niveau:"3e", title:"Les équations-produits",
+          carte:{centre:"Les équations-produits", branches:[{titre:"Forme A × B = 0", detail:"un produit égal à zéro"},{titre:"Règle clé", detail:"A = 0 ou B = 0"},{titre:"Deux solutions", detail:"une par facteur"},{titre:"Exemple", detail:"(x-2)(x+3)=0 : x=2 ou x=-3"},{titre:"Astuce", detail:"on annule chaque facteur"}]},
+          cours:"Une <b>équation-produit</b> est de la forme <b>A × B = 0</b>. Un produit est nul <b>si et seulement si l'un de ses facteurs est nul</b> : A × B = 0 équivaut à <b>A = 0 ou B = 0</b>. On résout donc en annulant chaque facteur. Exemple : (x - 2)(x + 3) = 0 donne x = 2 <b>ou</b> x = -3.",
+          questions:[
+            {type:"qcm", q:"Un produit de facteurs est nul :", options:["si l'un au moins des facteurs est nul","si tous les facteurs valent 1","jamais","seulement si les deux sont négatifs"], answer:0, explain:"Un produit vaut 0 dès qu'un facteur vaut 0.", indice:"Que faut-il pour qu'une multiplication donne 0 ?"},
+            {type:"qcm", q:"« A × B = 0 » équivaut à :", options:["A = 0 ou B = 0","A = 0 et B = 0","A = B","A + B = 0"], answer:0, explain:"On annule l'un OU l'autre facteur.", indice:"« ou », pas « et »."},
+            {type:"qcm", q:"Solutions de (x - 2)(x + 3) = 0 :", options:["x = 2 ou x = -3","x = -2 ou x = 3","x = 2 et x = 3","x = 6"], answer:0, explain:"x - 2 = 0 donne 2 ; x + 3 = 0 donne -3.", indice:"Annule chaque parenthèse."},
+            {type:"saisie", q:"Une solution de (x - 5)(x + 1) = 0 est x = 5. Quelle est l'autre ?", answer:["-1"], explain:"x + 1 = 0 donne x = -1.", indice:"Annule le second facteur : x + 1 = 0."},
+            {type:"qcm", q:"(x - 4)(x - 7) = 0 a pour solutions :", options:["4 et 7","-4 et -7","11","28"], answer:0, explain:"x - 4 = 0 et x - 7 = 0.", indice:"Chaque facteur s'annule pour sa valeur."},
+            {type:"qcm", q:"Les solutions de x(x - 3) = 0 sont :", options:["0 et 3","3 seulement","-3","0 seulement"], answer:0, explain:"x = 0 ou x - 3 = 0 (x = 3).", indice:"Le premier facteur est x lui-même."},
+            {type:"vf", q:"Un produit est nul dès qu'un seul de ses facteurs est nul.", answer:true, explain:"Oui : il suffit d'un facteur nul.", indice:"Un seul zéro suffit."},
+            {type:"qcm", q:"Solutions de (x + 2)(x - 6) = 0 :", options:["-2 et 6","2 et -6","8","-12"], answer:0, explain:"x + 2 = 0 (−2) ou x - 6 = 0 (6).", indice:"Annule chaque facteur."},
+            {type:"saisie", q:"(x - 8)(x + 8) = 0 : une solution est 8. Quelle est l'autre ?", answer:["-8"], explain:"x + 8 = 0 donne x = -8.", indice:"Annule x + 8."},
+            {type:"vf", q:"Une équation-produit a en général deux solutions.", answer:true, explain:"Oui : une par facteur.", indice:"Deux facteurs, deux valeurs qui les annulent."},
+            {type:"qcm", q:"Si (2x)(x - 1) = 0, alors :", options:["x = 0 ou x = 1","x = 2 ou x = 1","x = -1","x = 0,5"], answer:0, explain:"2x = 0 donne x = 0 ; x - 1 = 0 donne 1.", indice:"2x = 0 donne x = 0."},
+            {type:"saisie", q:"Solution positive de (x - 9)(x + 4) = 0 ?", answer:["9"], explain:"x - 9 = 0 donne 9 (l'autre, -4, est négative).", indice:"Annule x - 9."}
+          ]
+        },
+        {
+          id:"m26", niveau:"3e", title:"Les nombres premiers",
+          carte:{centre:"Les nombres premiers", branches:[{titre:"Définition", detail:"exactement 2 diviseurs : 1 et lui-même"},{titre:"Les premiers", detail:"2, 3, 5, 7, 11, 13..."},{titre:"1 n'est pas premier", detail:"un seul diviseur"},{titre:"Décomposition", detail:"12 = 2 × 2 × 3"},{titre:"Le seul pair premier", detail:"c'est 2"}]},
+          cours:"Un <b>nombre premier</b> est un entier qui a <b>exactement deux diviseurs</b> : 1 et lui-même. Les premiers sont 2, 3, 5, 7, 11, 13, ... <b>1 n'est pas premier</b> (il n'a qu'un diviseur). Tout entier se <b>décompose</b> en produit de facteurs premiers : par exemple 12 = 2 × 2 × 3.",
+          questions:[
+            {type:"qcm", q:"Un nombre premier a :", options:["exactement deux diviseurs (1 et lui-même)","trois diviseurs","aucun diviseur","beaucoup de diviseurs"], answer:0, explain:"Deux diviseurs seulement.", indice:"1 et le nombre lui-même."},
+            {type:"qcm", q:"Le plus petit nombre premier est :", options:["2","0","1","3"], answer:0, explain:"2 est le plus petit (et le seul pair) premier.", indice:"Plus petit que 3."},
+            {type:"vf", q:"1 est un nombre premier.", answer:false, explain:"Non : 1 n'a qu'un seul diviseur, il n'est pas premier.", indice:"Combien de diviseurs a 1 ?"},
+            {type:"qcm", q:"Lequel est premier ?", options:["7","9","15","21"], answer:0, explain:"7 n'a que 1 et 7 ; 9 = 3×3, 15 = 3×5, 21 = 3×7.", indice:"Cherche celui qui n'a pas d'autre diviseur."},
+            {type:"qcm", q:"Lequel n'est PAS premier ?", options:["9","2","5","11"], answer:0, explain:"9 = 3 × 3 : il a un diviseur de plus.", indice:"Lequel se décompose ?"},
+            {type:"qcm", q:"12 décomposé en facteurs premiers :", options:["2 × 2 × 3","3 × 4","2 × 6","12 × 1"], answer:0, explain:"12 = 2 × 2 × 3 (tous premiers).", indice:"Tous les facteurs doivent être premiers."},
+            {type:"qcm", q:"2, 3, 5, 7, 11 sont des nombres :", options:["premiers","pairs","carrés","négatifs"], answer:0, explain:"Ce sont les premiers nombres premiers.", indice:"Deux diviseurs chacun."},
+            {type:"vf", q:"13 est un nombre premier.", answer:true, explain:"Oui : seuls 1 et 13 le divisent.", indice:"Cherche un autre diviseur que 1 et 13."},
+            {type:"qcm", q:"15 se décompose en :", options:["3 × 5","2 × 7","15 × 1","4 × 4"], answer:0, explain:"15 = 3 × 5 (deux premiers).", indice:"Deux nombres premiers dont le produit fait 15."},
+            {type:"vf", q:"Un nombre premier n'est divisible que par 1 et par lui-même.", answer:true, explain:"Oui : c'est sa définition.", indice:"Deux diviseurs seulement."},
+            {type:"qcm", q:"Lequel est premier ?", options:["11","12","14","16"], answer:0, explain:"11 n'a que 1 et 11 ; les autres sont pairs.", indice:"Évite les nombres pairs (sauf 2)."},
+            {type:"saisie", q:"Calcule 2 × 3 × 5.", answer:["30"], explain:"2 × 3 × 5 = 30.", indice:"6 × 5."}
+          ]
         }
       ]
     },
@@ -1347,6 +1385,25 @@ var CONTENT = {
             {type:"qcm", q:"Avec un professeur, on évite le langage :", options:["familier","courant","soutenu","poli"], answer:0, explain:"On reste correct : pas de familier.", indice:"Le registre relâché est à éviter."},
             {type:"vf", q:"« voiture » est du langage courant, « bagnole » du langage familier.", answer:true, explain:"Oui : même sens, registres différents.", indice:"Deux mots pour la même chose."}
           ]
+        },
+        {
+          id:"f25", niveau:"4e", title:"Le schéma narratif",
+          carte:{centre:"Le schéma narratif", branches:[{titre:"1. Situation initiale", detail:"le début, l'équilibre"},{titre:"2. Élément perturbateur", detail:"déclenche l'histoire"},{titre:"3. Péripéties", detail:"les actions, les aventures"},{titre:"4. Dénouement", detail:"la résolution du problème"},{titre:"5. Situation finale", detail:"le nouvel équilibre"}]},
+          cours:"Le <b>schéma narratif</b> décrit les <b>cinq étapes</b> d'un récit : la <b>situation initiale</b> (le début), l'<b>élément perturbateur</b> (l'événement qui lance l'histoire), les <b>péripéties</b> (les actions et aventures), le <b>dénouement</b> (la résolution du problème) et la <b>situation finale</b> (le nouvel équilibre).",
+          questions:[
+            {type:"qcm", q:"Le schéma narratif décrit :", options:["les étapes d'un récit","les rimes d'un poème","les personnages d'un théâtre","la grammaire d'une phrase"], answer:0, explain:"Ce sont les étapes d'une histoire.", indice:"« narratif » vient de « raconter »."},
+            {type:"qcm", q:"La 1re étape est :", options:["la situation initiale","le dénouement","les péripéties","la situation finale"], answer:0, explain:"On commence par la situation initiale.", indice:"Le tout début de l'histoire."},
+            {type:"qcm", q:"L'événement qui lance l'histoire est :", options:["l'élément perturbateur","la situation finale","le dénouement","le décor"], answer:0, explain:"L'élément perturbateur déclenche l'action.", indice:"Ce qui rompt l'équilibre du début."},
+            {type:"qcm", q:"Les actions et aventures sont :", options:["les péripéties","la situation initiale","le titre","la morale"], answer:0, explain:"Les péripéties forment le coeur du récit.", indice:"Le milieu mouvementé de l'histoire."},
+            {type:"qcm", q:"La fin des problèmes est :", options:["le dénouement","l'élément perturbateur","la situation initiale","le prologue"], answer:0, explain:"Le dénouement résout l'intrigue.", indice:"« dénouer » = défaire le noeud."},
+            {type:"qcm", q:"La dernière étape est :", options:["la situation finale","les péripéties","l'élément perturbateur","la situation initiale"], answer:0, explain:"On termine par la situation finale.", indice:"Le nouvel équilibre, à la fin."},
+            {type:"vf", q:"Le schéma narratif comporte cinq étapes.", answer:true, explain:"Oui : de la situation initiale à la situation finale.", indice:"Compte-les : 1, 2, 3, 4, 5."},
+            {type:"qcm", q:"« Il était une fois une princesse heureuse » correspond à :", options:["la situation initiale","le dénouement","les péripéties","la situation finale"], answer:0, explain:"C'est le début, l'équilibre de départ.", indice:"« Il était une fois » ouvre le récit."},
+            {type:"qcm", q:"« Un dragon enleva la princesse » correspond à :", options:["l'élément perturbateur","la situation finale","le dénouement","la situation initiale"], answer:0, explain:"Cet événement déclenche l'histoire.", indice:"Quelque chose vient troubler le calme."},
+            {type:"vf", q:"Les péripéties se situent au milieu du récit.", answer:true, explain:"Oui : entre l'élément perturbateur et le dénouement.", indice:"Le coeur de l'action."},
+            {type:"qcm", q:"L'ordre correct est :", options:["situation initiale, élément perturbateur, péripéties, dénouement, situation finale","péripéties, dénouement, situation initiale...","dénouement, péripéties, début...","situation finale, péripéties, début..."], answer:0, explain:"C'est l'ordre des cinq étapes.", indice:"On part de l'équilibre et on y revient."},
+            {type:"vf", q:"Le dénouement résout le problème posé par l'élément perturbateur.", answer:true, explain:"Oui : il dénoue l'intrigue.", indice:"La solution répond au problème de départ."}
+          ]
         }
       ]
     },
@@ -1779,6 +1836,25 @@ var CONTENT = {
             {type:"qcm", q:"Relier les régions par de bons transports permet de :", options:["réduire leur isolement","les couper du reste","augmenter les inégalités","supprimer les villes"], answer:0, explain:"De bons transports désenclavent les régions.", indice:"Moins isolées."},
             {type:"qcm", q:"Une grande ville qui concentre activités et population est :", options:["une métropole","un hameau","un désert","une île déserte"], answer:0, explain:"C'est une métropole.", indice:"Très grande ville attractive."},
             {type:"vf", q:"L'aménagement cherche à mieux répartir les activités et les services.", answer:true, explain:"Oui : pour que chacun y ait accès.", indice:"Répartir plus justement."}
+          ]
+        },
+        {
+          id:"h23", niveau:"6e", title:"Les débuts du judaïsme et du christianisme",
+          carte:{centre:"Judaïsme et christianisme", branches:[{titre:"Monothéisme", detail:"croire en un seul Dieu"},{titre:"Judaïsme", detail:"un des plus anciens, la Bible hébraïque"},{titre:"Christianisme", detail:"Ier siècle, autour de Jésus"},{titre:"Les Évangiles", detail:"racontent la vie de Jésus"},{titre:"Diffusion", detail:"dans l'Empire romain"}]},
+          cours:"Le <b>judaïsme</b> est l'un des plus anciens <b>monothéismes</b> (croyance en un <b>seul Dieu</b>) ; son texte est la <b>Bible hébraïque</b>. Le <b>christianisme</b> naît au <b>Ier siècle</b>, autour de <b>Jésus</b> ; les <b>Évangiles</b> racontent sa vie. Il se diffuse d'abord dans l'<b>Empire romain</b>. Les deux religions sont monothéistes.",
+          questions:[
+            {type:"qcm", q:"Le judaïsme est une religion :", options:["monothéiste (un seul Dieu)","polythéiste (plusieurs dieux)","sans dieu","de la nature"], answer:0, explain:"C'est un monothéisme.", indice:"« mono » = un seul."},
+            {type:"qcm", q:"« Monothéiste » signifie :", options:["croire en un seul Dieu","croire en plusieurs dieux","ne croire en rien","prier le Soleil"], answer:0, explain:"Un seul Dieu.", indice:"« mono » = un."},
+            {type:"qcm", q:"Le christianisme naît :", options:["au Ier siècle, autour de Jésus","au Moyen Âge","à la Préhistoire","au XIXe siècle"], answer:0, explain:"Au Ier siècle, autour de Jésus.", indice:"Début de notre ère."},
+            {type:"qcm", q:"Les chrétiens croient en :", options:["Jésus-Christ","Zeus","Râ","plusieurs dieux"], answer:0, explain:"Ils croient en Jésus-Christ.", indice:"Le christianisme vient de son nom."},
+            {type:"qcm", q:"Les récits de la vie de Jésus sont dans :", options:["les Évangiles","l'Odyssée","le Coran seul","les hiéroglyphes"], answer:0, explain:"Les Évangiles racontent la vie de Jésus.", indice:"Le mot signifie « bonne nouvelle »."},
+            {type:"vf", q:"Le judaïsme est l'un des plus anciens monothéismes.", answer:true, explain:"Oui : il est très ancien.", indice:"Avant le christianisme."},
+            {type:"qcm", q:"Le christianisme se diffuse d'abord dans :", options:["l'Empire romain","l'Égypte ancienne","la Chine","l'Amérique"], answer:0, explain:"Dans l'Empire romain.", indice:"L'empire de la Méditerranée à cette époque."},
+            {type:"vf", q:"Judaïsme et christianisme sont deux religions monothéistes.", answer:true, explain:"Oui : un seul Dieu pour les deux.", indice:"Tous deux « mono »."},
+            {type:"qcm", q:"Le livre sacré du judaïsme est :", options:["la Bible hébraïque","l'Iliade","le livre des morts","aucun"], answer:0, explain:"La Bible hébraïque.", indice:"Un texte très ancien."},
+            {type:"qcm", q:"Un point commun du judaïsme et du christianisme est :", options:["la croyance en un seul Dieu","l'absence de Dieu","de nombreux dieux","le culte des pharaons"], answer:0, explain:"Tous deux monothéistes.", indice:"Le nombre de dieux."},
+            {type:"vf", q:"Le christianisme est né dans la région de la Méditerranée orientale.", answer:true, explain:"Oui, en Judée, au Proche-Orient.", indice:"À l'est de la Méditerranée."},
+            {type:"qcm", q:"La Bible des chrétiens comprend l'Ancien Testament et :", options:["le Nouveau Testament","le Coran","les Védas","rien d'autre"], answer:0, explain:"Ancien et Nouveau Testament.", indice:"Deux parties : « ancien » et « nouveau »."}
           ]
         }
       ]
@@ -2255,6 +2331,44 @@ var CONTENT = {
             {type:"saisie", q:"Masse 5 kg, g ≈ 10 N/kg : poids ≈ ... N ?", answer:["50","50 N"], explain:"5 × 10 = 50 N.", indice:"Multiplie par 10."},
             {type:"qcm", q:"La masse est :", options:["la quantité de matière","une force","une vitesse","une couleur"], answer:0, explain:"La masse mesure la quantité de matière.", indice:"Combien il y a de matière."},
             {type:"vf", q:"Le poids et la masse sont deux grandeurs différentes.", answer:true, explain:"Oui : l'une est une force, l'autre une quantité de matière.", indice:"À ne pas confondre."}
+          ]
+        },
+        {
+          id:"s25", niveau:"4e", title:"Les transformations chimiques",
+          carte:{centre:"Les transformations chimiques", branches:[{titre:"Nouvelles substances", detail:"il se forme d'autres corps"},{titre:"Réactifs", detail:"les corps de départ"},{titre:"Produits", detail:"les corps formés"},{titre:"Masse conservée", detail:"Lavoisier"},{titre:"Différent d'un état", detail:"fondre = physique"}]},
+          cours:"Lors d'une <b>transformation chimique</b>, des <b>réactifs</b> (corps de départ) se transforment en <b>produits</b> (nouvelles substances). La <b>masse totale se conserve</b> (loi de <b>Lavoisier</b> : « rien ne se perd, rien ne se crée, tout se transforme »). C'est différent d'un simple <b>changement d'état</b> (fondre, bouillir), qui est une transformation <b>physique</b>. Exemples : combustion, rouille.",
+          questions:[
+            {type:"qcm", q:"Lors d'une transformation chimique :", options:["de nouvelles substances se forment","rien ne change","l'eau gèle simplement","les couleurs disparaissent"], answer:0, explain:"On obtient de nouveaux corps.", indice:"« chimique » : la matière change de nature."},
+            {type:"qcm", q:"Les substances de départ sont les :", options:["réactifs","produits","mélanges","états"], answer:0, explain:"Ce sont les réactifs.", indice:"Ce qui « réagit » au départ."},
+            {type:"qcm", q:"Les substances formées sont les :", options:["produits","réactifs","solvants","gaz seuls"], answer:0, explain:"Ce sont les produits.", indice:"Ce qui est « produit » à la fin."},
+            {type:"vf", q:"Lors d'une transformation chimique, la masse totale se conserve.", answer:true, explain:"Oui : loi de Lavoisier.", indice:"Rien ne se perd, rien ne se crée."},
+            {type:"qcm", q:"« Rien ne se perd, rien ne se crée, tout se transforme » est attribué à :", options:["Lavoisier","Newton","Darwin","Pythagore"], answer:0, explain:"À Lavoisier.", indice:"Un chimiste célèbre."},
+            {type:"qcm", q:"La combustion du carbone produit :", options:["du dioxyde de carbone (CO₂)","de l'or","du sel","de l'eau salée"], answer:0, explain:"Carbone + dioxygène donne du CO₂.", indice:"Le gaz rejeté quand ça brûle."},
+            {type:"vf", q:"Une transformation chimique forme de nouvelles substances, contrairement à un changement d'état.", answer:true, explain:"Oui : le changement d'état est physique.", indice:"Chimique = nouvelle matière ; physique = même matière."},
+            {type:"qcm", q:"Faire fondre de la glace est :", options:["un changement d'état (physique)","une transformation chimique","une combustion","une explosion"], answer:0, explain:"C'est physique : l'eau reste de l'eau.", indice:"La matière reste la même (H₂O)."},
+            {type:"qcm", q:"Le fer qui rouille est :", options:["une transformation chimique","un changement d'état","un mélange","une dissolution"], answer:0, explain:"La rouille est une nouvelle substance : transformation chimique.", indice:"Le fer devient un autre corps."},
+            {type:"vf", q:"Lors d'une combustion, du dioxygène est consommé.", answer:true, explain:"Oui : il faut du dioxygène pour brûler.", indice:"Sans air (dioxygène), pas de combustion."},
+            {type:"qcm", q:"Dans une transformation chimique, les atomes sont :", options:["conservés (ni créés ni détruits)","détruits","créés à partir de rien","transformés en énergie"], answer:0, explain:"Les atomes se réorganisent mais sont conservés.", indice:"Ils changent juste d'arrangement."},
+            {type:"vf", q:"La masse des produits est égale à la masse des réactifs.", answer:true, explain:"Oui : conservation de la masse.", indice:"Avant = après, en masse."}
+          ]
+        },
+        {
+          id:"s26", niveau:"6e", title:"Classer les êtres vivants",
+          carte:{centre:"Classer les êtres vivants", branches:[{titre:"Selon des attributs", detail:"ce qu'ils possèdent"},{titre:"Groupes emboîtés", detail:"un groupe dans un plus grand"},{titre:"Vertébrés", detail:"ont une colonne vertébrale"},{titre:"Mammifères", detail:"poils, allaitent"},{titre:"Oiseaux", detail:"des plumes"}]},
+          cours:"On <b>classe</b> les êtres vivants selon leurs <b>attributs</b> (les caractères qu'ils <b>possèdent</b> : poils, plumes, écailles...). Ceux qui partagent des attributs sont réunis dans un même <b>groupe</b>, et les groupes sont <b>emboîtés</b>. Par exemple, les <b>vertébrés</b> ont une colonne vertébrale ; parmi eux, les <b>mammifères</b> ont des poils et allaitent, les <b>oiseaux</b> ont des plumes.",
+          questions:[
+            {type:"qcm", q:"On classe les êtres vivants selon :", options:["leurs attributs (caractères) communs","leur prénom","leur prix","leur taille uniquement"], answer:0, explain:"D'après ce qu'ils possèdent.", indice:"Les caractères que l'on observe."},
+            {type:"qcm", q:"Les animaux qui ont une colonne vertébrale sont les :", options:["vertébrés","invertébrés","végétaux","minéraux"], answer:0, explain:"Ce sont les vertébrés.", indice:"« vertèbre » est dans le mot."},
+            {type:"qcm", q:"Les mammifères ont :", options:["des poils et allaitent leurs petits","des plumes","des écailles seulement","des racines"], answer:0, explain:"Poils et allaitement caractérisent les mammifères.", indice:"Pense au chat, au chien."},
+            {type:"qcm", q:"Les oiseaux ont :", options:["des plumes","des poils","des écailles","des nageoires seulement"], answer:0, explain:"Les plumes sont l'attribut des oiseaux.", indice:"Ce qui les couvre."},
+            {type:"vf", q:"On regroupe ensemble les êtres vivants qui partagent des attributs.", answer:true, explain:"Oui : mêmes attributs, même groupe.", indice:"Ce qu'ils ont en commun."},
+            {type:"qcm", q:"Un attribut est :", options:["un caractère que l'on observe (poils, plumes...)","un nom inventé","une couleur préférée","un numéro"], answer:0, explain:"C'est un caractère observable.", indice:"Quelque chose que l'être vivant possède."},
+            {type:"qcm", q:"Le chat et le chien sont tous deux des :", options:["mammifères","oiseaux","poissons","reptiles"], answer:0, explain:"Ils ont des poils et allaitent : mammifères.", indice:"Ils ont des poils."},
+            {type:"vf", q:"La classification se fait d'après ce que les êtres vivants possèdent.", answer:true, explain:"Oui : on classe d'après les attributs présents.", indice:"Ce qu'ils ont, pas ce qu'ils n'ont pas."},
+            {type:"qcm", q:"Les poissons possèdent :", options:["des nageoires et des écailles","des plumes","des poils","des racines"], answer:0, explain:"Nageoires et écailles caractérisent les poissons.", indice:"Ils vivent dans l'eau."},
+            {type:"qcm", q:"Un groupe inclus dans un groupe plus grand : on parle de groupes :", options:["emboîtés","séparés","mélangés","égaux"], answer:0, explain:"Les groupes sont emboîtés les uns dans les autres.", indice:"Comme des boîtes l'une dans l'autre."},
+            {type:"vf", q:"Les vertébrés ont une colonne vertébrale.", answer:true, explain:"Oui : c'est leur attribut commun.", indice:"C'est dans leur nom."},
+            {type:"qcm", q:"L'aigle, parce qu'il a des plumes, est un :", options:["oiseau","mammifère","poisson","reptile"], answer:0, explain:"Les plumes en font un oiseau.", indice:"Quel groupe a des plumes ?"}
           ]
         }
       ]

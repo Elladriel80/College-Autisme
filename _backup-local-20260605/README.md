@@ -42,12 +42,12 @@ Le monde des petits est désormais **intégré directement** dans le Royaume (pl
 
 | Matière | Région | Niveaux | Leçons |
 |---|---|---|---|
-| Mathématiques | Les Tours de Calcul | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** | 26 |
-| Français | La Bibliothèque Enchantée | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** | 25 |
-| Histoire-Géo & EMC | Le Donjon du Temps | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** | 23 |
-| Sciences (PC · SVT · Techno) | Le Laboratoire Alchimique | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** | 26 |
+| Mathématiques | Les Tours de Calcul | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** | 24 |
+| Français | La Bibliothèque Enchantée | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** | 24 |
+| Histoire-Géo & EMC | Le Donjon du Temps | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** | 22 |
+| Sciences (PC · SVT · Techno) | Le Laboratoire Alchimique | 6ᵉ → 5ᵉ → 4ᵉ → **3ᵉ** | 24 |
 
-**100 leçons · 868 questions** à ce stade, réparties sur les 4 niveaux du collège (6ᵉ=24, 5ᵉ=25, 4ᵉ=29, 3ᵉ=22), **plus** des centaines de questions générées par l'Entraînement illimité de maths. **Chaque leçon a une carte mentale rédigée.** **Algorithmique/Scratch** et **Technologie** sont présents. Le niveau **6ᵉ** fait la jonction avec le monde des Petits Malins, et la **3ᵉ** (année du Brevet) complète le parcours. Quelques notions couvertes par niveau :
+**94 leçons · 796 questions** à ce stade, réparties sur les 4 niveaux du collège (6ᵉ=22, 5ᵉ=25, 4ᵉ=27, 3ᵉ=20), **plus** des centaines de questions générées par l'Entraînement illimité de maths. **Chaque leçon a une carte mentale rédigée.** **Algorithmique/Scratch** et **Technologie** sont présents. Le niveau **6ᵉ** fait la jonction avec le monde des Petits Malins, et la **3ᵉ** (année du Brevet) complète le parcours. Quelques notions couvertes par niveau :
 - **Maths** : décimaux, fractions, division euclidienne, symétries, aires, priorités, repérage (6ᵉ-5ᵉ) ; calcul littéral, équations, Pythagore, puissances, agrandissement/échelle, Scratch (4ᵉ) ; Thalès, fonctions, notation scientifique, PGCD, probabilités, cosinus (3ᵉ).
 - **Français** : classes de mots, conjugaison, homophones, accords, types de phrases (6ᵉ-5ᵉ) ; passé composé, COD/COI, théâtre, registres ; discours rapporté, subordonnées, participe passé, conditionnel, subjonctif, poésie (4ᵉ) ; voix passive, argumentation (3ᵉ).
 - **Histoire-Géo-EMC** : Préhistoire, Mésopotamie, Égypte, Grèce, Rome, féodalité, islam (6ᵉ-5ᵉ) ; Lumières & Révolution, traite négrière, XIXᵉ siècle, urbanisation, mondialisation (4ᵉ) ; deux Guerres mondiales, totalitarismes, guerre froide, décolonisation, Vᵉ République, UE, aménager le territoire (3ᵉ).
@@ -56,101 +56,4 @@ Le monde des petits est désormais **intégré directement** dans le Royaume (pl
 ### 🎓 Le Brevet blanc (conditions réelles)
 
 - **Centré sur la 3ᵉ** : le tirage privilégie les questions de 3ᵉ (le niveau de l'examen) tout en gardant un mélange collège (hors 6ᵉ).
-- **Minuteur optionnel** : on peut activer un compte à rebours (~1 min 15 par question) pour s'entraîner comme le jour J ; à l'expiration, la copie est rendue automatiquement. Par défaut, l'examen est **sans limite de temps** (plus rassurant). Choix de la **longueur** (standard ~12 questions / court ~8).
-- **Note /20** avec mention, calculée **uniquement sur les questions auto-corrigeables** (QCM, vrai/faux, saisie), avec correction détaillée.
-- **Question rédigée** d'entraînement : une question ouverte (zone de texte) **hors note** — après coup, l'élève compare sa réponse à une **réponse-modèle** et coche une **grille d'auto-évaluation** (on ne note pas automatiquement un texte libre).
-
-## 🏗️ Architecture (open-source, modulaire)
-
-Le projet sépare désormais le **moteur** (le code) du **contenu** (les données),
-pour qu'un·e enseignant·e puisse ajouter une leçon **sans toucher au code**.
-
-```
-Royaume-du-Savoir.html        ← le moteur (UI, logique, rendu)
-data/
-  contenu-college.js          ← objet global CONTENT (collège)
-  contenu-petits-malins.js    ← objet global PM_DATA (lecture, calcul, langues, histoire)
-build.js  /  build.bat        ← fabrique le fichier unique distribuable
-dist/
-  Royaume-du-Savoir.html      ← fichier unique autonome (généré par le build)
-```
-
-- **On développe en modulaire** : le HTML charge les données via deux balises
-  `<script src="data/...">` placées avant le moteur (chargement classique, pas de
-  module, pour fonctionner en double-clic `file://` et hors-ligne).
-- **On distribue le fichier de `dist/`** : `node build.js` (ou `build.bat`) inline
-  les données dans le HTML et écrit `dist/Royaume-du-Savoir.html`, un **seul
-  fichier** autonome à partager. C'est ce fichier que reçoit l'utilisateur final.
-
-Pour ajouter ou corriger une leçon, voir **`CONTRIBUTING.md`** (modèle d'objet
-leçon commenté, audit pédagogique, build).
-
-### 💾 Sauvegarder / transférer la progression
-
-En pied de page : **« 💾 Exporter ma progression »** télécharge un fichier JSON
-(profils + progression, depuis le stockage local de l'appareil) et **« 📂 Importer »**
-le relit pour restaurer. Tout reste sur l'appareil (aucun serveur, respectueux du
-RGPD). L'import demande une confirmation avant de remplacer la progression en
-place. Pratique pour changer d'ordinateur ou faire une copie de sécurité.
-
-### 📄 Licences
-
-- **Code** : MIT (`LICENSE`).
-- **Contenu pédagogique** (`data/*.js`) : Creative Commons **CC-BY 4.0**
-  (`CONTENU-LICENCE.md`).
-
-## 🎬 Vidéos pédagogiques
-
-Chaque leçon intègre une vidéo issue de chaînes francophones de qualité, créditées à leurs auteurs :
-**Yvan Monka (M@ths et tiques)**, **jaicompris / Yannick Sayer**, **Les Bons Profs**, **SchoolMouv**, **Mathrix**, **Madame SVT**, **Pass Education** et d'autres enseignants. Les vidéos sont intégrées via le lecteur YouTube ; tous les droits appartiennent à leurs créateurs.
-
-## 🚀 Utilisation
-
-**Pour jouer (utilisateur final)** : utiliser le fichier unique
-`dist/Royaume-du-Savoir.html`.
-
-1. Télécharger / ouvrir `dist/Royaume-du-Savoir.html`.
-2. Double-cliquer pour l'ouvrir dans un navigateur (Chrome, Edge, Firefox). Aucune
-   installation, fonctionne hors-ligne.
-3. Créer son avatar et commencer l'aventure. La progression est sauvegardée
-   localement (et exportable, voir « Sauvegarder / transférer la progression »).
-
-**Pour développer / ajouter du contenu** : éditer `data/contenu-college.js` (ou
-`data/contenu-petits-malins.js`), ouvrir `Royaume-du-Savoir.html` (version
-modulaire) pour tester, puis lancer `node build.js` pour régénérer le `dist/`.
-Détails dans `CONTRIBUTING.md`.
-
-## ☁️ Déploiement (Vercel)
-
-Le site est **statique** : la version modulaire (`Royaume-du-Savoir.html` + `data/`)
-se sert telle quelle, sans étape de build côté serveur. Le dépôt est prêt pour
-Vercel (fichier `vercel.json`, et `.vercelignore` pour ne publier que l'app).
-
-Mise en place (à faire une seule fois, déploiement automatique à chaque `push` ensuite) :
-
-1. Sur [vercel.com](https://vercel.com), se connecter (compte GitHub).
-2. **Add New… > Project**, puis importer le dépôt `College-Autisme`.
-3. Framework Preset : **Other** ; Build Command : **vide** ; Output Directory : **`.`** (racine).
-   `vercel.json` est détecté automatiquement.
-4. **Deploy**. À chaque `git push` sur la branche de production, Vercel redéploie tout seul.
-
-En ligne de commande (alternative) : `npm i -g vercel`, puis `vercel` (préversion)
-ou `vercel --prod` depuis la racine du dépôt.
-
-> Le fichier unique `dist/Royaume-du-Savoir.html` reste destiné à l'usage **hors-ligne**
-> (double-clic) ; il n'est pas nécessaire au site déployé.
-
-## 🗺️ Feuille de route
-
-- [x] Ajouter le programme de **3ᵉ** (année du brevet). ✅
-- [x] **Brevet blanc en conditions réelles** : minuteur optionnel + question rédigée auto-évaluée. ✅
-- [x] **Générateur d'exercices de maths** (16 thèmes, réponses calculées). ✅
-- [x] **Cartes mentales rédigées** (4 à 6 branches qui enseignent) sur chaque leçon. ✅
-- [x] **Démarrage sur l'accueil** + bouton « Reprendre » par profil. ✅
-- [x] **Déploiement** automatique (Vercel) sur `royaume-savoir.vercel.app`. ✅
-- [ ] Continuer à étoffer le contenu (viser ~160 leçons, 15–30 questions par notion).
-- [ ] Module **Anglais** (contrôle continu) et module **Préparer l'oral**.
-
-## ⚠️ Avertissement
-
-Prototype éducatif. Les contenus suivent le programme de l'Éducation nationale mais gagnent à être relus par un·e enseignant·e avant un usage intensif. Les vidéos pointent vers des contenus tiers susceptibles d'évoluer.
+- **Minuteur optionnel** : on peut activer un compte à rebours (~1 min 15 par question) pour s'entraîner comme le jour J ; à l'expiration, la copie est rendue au
