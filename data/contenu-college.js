@@ -2242,6 +2242,121 @@ var CONTENT = {
             {type:"qcm", q:"« They ___ go to school by bus. » (toujours)", options:["always","is always","are always","being always"], answer:0, explain:"They always go (adverbe avant le verbe).", indice:"always devant « go »."},
             {type:"vf", q:"On dit « She is always happy » (adverbe après be).", answer:true, explain:"Oui : avec be, l'adverbe suit le verbe.", indice:"is + always + happy."}
           ]
+        },
+        {
+          id:"ang12", niveau:"3e", theme:"rencontres-cultures", cecrl:"A2-B1", activites:["CE","EE"],
+          title:"Le present perfect",
+          carte:{centre:"Le present perfect", branches:[{titre:"Forme", detail:"have / has + participe passé"},{titre:"Expérience", detail:"ever / never"},{titre:"since / for", detail:"depuis (un point / une durée)"},{titre:"Participes irréguliers", detail:"seen, gone, done, been"},{titre:"Question", detail:"Have you ...?"}]},
+          cours:"Le <b>present perfect</b> se forme avec <b>have / has</b> + <b>participe passé</b> (I have seen, she has gone). On l'emploie pour une <b>expérience</b> (ever, never), un lien avec le présent, ou avec <b>since</b> (un point de départ) et <b>for</b> (une durée). Participes irréguliers : see → seen, go → gone, do → done, be → been, eat → eaten. Exemple résolu : « Je n'ai jamais mangé de sushi » = <b>I have never eaten sushi</b>.",
+          questions:[
+            {type:"qcm", q:"Le present perfect se forme avec :", options:["have / has + participe passé","be + verbe-ing","did + base","will + base"], answer:0, explain:"have/has + participe passé.", indice:"Deux mots : un auxiliaire + le participe passé."},
+            {type:"qcm", q:"« I have ___ this film. » (see)", options:["seen","saw","see","seeing"], answer:0, explain:"Participe passé de see : seen.", indice:"seen, pas saw."},
+            {type:"qcm", q:"« She ___ finished her homework. »", options:["has","have","is","did"], answer:0, explain:"he/she/it : has.", indice:"Avec she : has."},
+            {type:"qcm", q:"« They ___ visited London. »", options:["have","has","are","did"], answer:0, explain:"they have.", indice:"Avec they : have."},
+            {type:"qcm", q:"Participe passé de « go » :", options:["gone","went","goed","going"], answer:0, explain:"go → gone (participe passé).", indice:"« went » est le prétérit, pas le participe."},
+            {type:"qcm", q:"Participe passé de « do » :", options:["done","did","doed","doing"], answer:0, explain:"do → done.", indice:"« did » est le prétérit."},
+            {type:"qcm", q:"« Have you ___ been to Spain? » (déjà)", options:["ever","never","yet","ago"], answer:0, explain:"ever = déjà (dans une question d'expérience).", indice:"« déjà » dans une question : ever."},
+            {type:"qcm", q:"Négatif : « I ___ seen it. » (n'ai pas vu)", options:["haven't","hasn't","didn't","don't"], answer:0, explain:"I haven't seen.", indice:"Avec I : haven't."},
+            {type:"saisie", q:"Participe passé de « eat ».", answer:["eaten"], explain:"eat → eaten.", indice:"Participe en -en."},
+            {type:"qcm", q:"« He has ___ his keys. » (lose)", options:["lost","losed","lose","losing"], answer:0, explain:"lose → lost.", indice:"Participe passé irrégulier."},
+            {type:"vf", q:"« I have never eaten sushi » est au present perfect.", answer:true, explain:"Oui : have + participe passé.", indice:"have + eaten."},
+            {type:"qcm", q:"Participe passé de « be » :", options:["been","was","were","being"], answer:0, explain:"be → been.", indice:"« I have been »."},
+            {type:"qcm", q:"« We have lived here ___ 2010. »", options:["since","for","ago","during"], answer:0, explain:"since + point de départ (2010).", indice:"Une date précise : since."},
+            {type:"qcm", q:"« She has worked here ___ five years. »", options:["for","since","ago","during"], answer:0, explain:"for + durée (five years).", indice:"Une durée : for."},
+            {type:"qcm", q:"Question : « ___ you finished? »", options:["Have","Has","Did","Are"], answer:0, explain:"Have you finished?", indice:"Avec you : Have."}
+          ]
+        },
+        {
+          id:"ang13", niveau:"3e", theme:"ecole-societe", cecrl:"A2-B1", activites:["EOC","EE"],
+          title:"Les modaux : must, should, might",
+          carte:{centre:"must / should / might", branches:[{titre:"must", detail:"obligation"},{titre:"should", detail:"conseil (devrait)"},{titre:"might", detail:"possibilité"},{titre:"+ base verbale", detail:"sans to, sans -s"},{titre:"Exemple", detail:"You should rest"}]},
+          cours:"Les <b>modaux</b> expriment une nuance. <b>must</b> = <b>obligation</b> (You must wear a seatbelt). <b>should</b> = <b>conseil</b> (You should rest = tu devrais te reposer). <b>might</b> = <b>possibilité</b> (It might rain). Un modal est suivi de la <b>base verbale</b> (sans « to », sans -s). Exemple résolu : « Tu devrais dormir » = <b>You should sleep</b>.",
+          questions:[
+            {type:"qcm", q:"« must » exprime :", options:["une obligation","un conseil","une possibilité","le passé"], answer:0, explain:"must = obligation.", indice:"C'est obligatoire."},
+            {type:"qcm", q:"« should » exprime :", options:["un conseil","une obligation","le passé","une capacité"], answer:0, explain:"should = conseil (devrait).", indice:"On recommande quelque chose."},
+            {type:"qcm", q:"« might » exprime :", options:["une possibilité","une certitude","une obligation","le passé"], answer:0, explain:"might = peut-être, possibilité.", indice:"Ce n'est pas sûr."},
+            {type:"qcm", q:"Après un modal, le verbe est :", options:["à la base verbale","au présent en -s","avec to","au prétérit"], answer:0, explain:"modal + base verbale.", indice:"Pas de « to », pas de « -s »."},
+            {type:"qcm", q:"« You ___ wear a seatbelt. » (obligation)", options:["must","should","might","can to"], answer:0, explain:"must wear (obligation).", indice:"C'est obligatoire."},
+            {type:"qcm", q:"« You ___ rest, you are tired. » (conseil)", options:["should","must not","might","do"], answer:0, explain:"should rest (conseil).", indice:"On donne un conseil."},
+            {type:"qcm", q:"« It ___ rain later. » (possibilité)", options:["might","must","should","will surely"], answer:0, explain:"might rain (c'est possible).", indice:"Ce n'est pas certain."},
+            {type:"vf", q:"« You must to go » est correct.", answer:false, explain:"Non : « You must go » (modal + base, sans « to »).", indice:"Un modal n'est jamais suivi de « to »."},
+            {type:"qcm", q:"« She ___ study more. » (conseil)", options:["should","might not","must to","cans"], answer:0, explain:"should study (conseil).", indice:"On lui conseille."},
+            {type:"qcm", q:"Traduction de « Tu devrais dormir. »", options:["You should sleep.","You must sleep.","You should to sleep.","You might sleep."], answer:0, explain:"should = devrais : You should sleep.", indice:"« devrait » = should."},
+            {type:"qcm", q:"« must » est suivi de :", options:["la base verbale","un verbe en -ing","un verbe en -s","« to » + verbe"], answer:0, explain:"must + base.", indice:"Comme « must go »."},
+            {type:"vf", q:"« should » sert à donner un conseil.", answer:true, explain:"Oui : you should = tu devrais.", indice:"Un conseil, pas une obligation."},
+            {type:"qcm", q:"« We ___ help others. » (conseil)", options:["should","might","must not","do"], answer:0, explain:"should help (conseil).", indice:"On recommande d'aider."},
+            {type:"qcm", q:"« He ___ be late. » (c'est possible)", options:["might","must always","should not","is"], answer:0, explain:"might be late (possibilité).", indice:"Peut-être en retard."},
+            {type:"qcm", q:"Après « should », on n'écrit jamais :", options:["to","le verbe","un sujet","un point"], answer:0, explain:"should + base, jamais « to ».", indice:"Pas de « to » après un modal."}
+          ]
+        },
+        {
+          id:"ang14", niveau:"3e", theme:"voyages-migrations", cecrl:"A2-B1", activites:["CE","EE"],
+          title:"Le conditionnel de type 1 (if + présent, will)",
+          carte:{centre:"Conditionnel type 1", branches:[{titre:"Sens", detail:"condition possible dans le futur"},{titre:"Structure", detail:"If + présent, ... will + base"},{titre:"Après if", detail:"présent simple (pas de will)"},{titre:"Résultat", detail:"will + base verbale"},{titre:"Exemple", detail:"If it rains, I will stay home"}]},
+          cours:"Le <b>conditionnel de type 1</b> (first conditional) parle d'une <b>condition possible</b> dans le futur. Structure : <b>If + présent simple</b>, ... <b>will + base verbale</b>. Après <b>if</b>, on met le <b>présent</b> (pas « will »). Exemple résolu : « S'il pleut, je resterai à la maison » = <b>If it rains, I will stay home</b>.",
+          questions:[
+            {type:"qcm", q:"Le conditionnel de type 1 parle d' :", options:["une condition possible dans le futur","un fait passé","une habitude","une chose impossible"], answer:0, explain:"Condition réaliste pour le futur.", indice:"Quelque chose qui peut arriver."},
+            {type:"qcm", q:"Structure : If + présent simple, ...", options:["will + base","would + base","prétérit + will","present continuous"], answer:0, explain:"... will + base verbale.", indice:"La conséquence est au futur avec will."},
+            {type:"qcm", q:"« If it ___ , I will stay home. » (rain)", options:["rains","will rain","rained","raining"], answer:0, explain:"Après if : présent simple (it rains).", indice:"Pas de « will » après if."},
+            {type:"qcm", q:"« If you study, you ___ pass. »", options:["will","would","are","did"], answer:0, explain:"Conséquence : you will pass.", indice:"will pour le résultat."},
+            {type:"qcm", q:"Dans la partie « if », le verbe est au :", options:["présent simple","futur","prétérit","conditionnel"], answer:0, explain:"Présent simple après if.", indice:"Jamais « will » juste après if."},
+            {type:"qcm", q:"« If she ___ time, she will help. » (have)", options:["has","will have","had","having"], answer:0, explain:"Après if : présent (she has).", indice:"Présent simple, 3e personne."},
+            {type:"vf", q:"« If it rains, I will take an umbrella » est un conditionnel de type 1.", answer:true, explain:"Oui : If + présent, will + base.", indice:"Une condition réaliste."},
+            {type:"qcm", q:"« We will go out if it ___ sunny. » (be)", options:["is","will be","was","being"], answer:0, explain:"Après if : présent (it is).", indice:"Présent de be : is."},
+            {type:"qcm", q:"Traduction de « Si tu cours, tu seras fatigué. »", options:["If you run, you will be tired.","If you will run, you are tired.","If you ran, you will be tired.","If you run, you are tired."], answer:0, explain:"If + présent (run), will + base (will be).", indice:"Présent après if, will pour le résultat."},
+            {type:"qcm", q:"« If we recycle, we ___ help the planet. »", options:["will","would","did","are"], answer:0, explain:"will help (résultat).", indice:"Conséquence au futur."},
+            {type:"vf", q:"Dans « If + présent, will + base », on n'utilise pas « will » après « if ».", answer:true, explain:"Oui : after if, présent simple.", indice:"will est dans la conséquence, pas après if."},
+            {type:"qcm", q:"« If I ___ you, I will call. » (see)", options:["see","will see","saw","seeing"], answer:0, explain:"Après if : présent (I see).", indice:"Présent simple après if."},
+            {type:"qcm", q:"« You will be late if you ___ now. » (not leave)", options:["don't leave","won't leave","didn't leave","not leave"], answer:0, explain:"Après if : présent négatif (don't leave).", indice:"Présent simple négatif."},
+            {type:"qcm", q:"La partie « will » exprime :", options:["le résultat (la conséquence)","la cause","le passé","une habitude"], answer:0, explain:"will donne la conséquence.", indice:"Ce qui se passera si la condition est remplie."},
+            {type:"qcm", q:"« If the weather is bad, we ___ stay inside. »", options:["will","would","are","do"], answer:0, explain:"will stay (résultat).", indice:"Conséquence au futur."}
+          ]
+        },
+        {
+          id:"ang15", niveau:"3e", theme:"langages", cecrl:"A2-B1", activites:["CE","EE"],
+          title:"La voix passive (introduction)",
+          carte:{centre:"La voix passive", branches:[{titre:"Forme", detail:"be + participe passé"},{titre:"Présent", detail:"is / are + participe passé"},{titre:"Passé", detail:"was / were + participe passé"},{titre:"L'objet devient sujet", detail:"English is spoken"},{titre:"Exemple", detail:"The cake was eaten"}]},
+          cours:"La <b>voix passive</b> met en avant l'action subie. Elle se forme avec <b>be + participe passé</b>. Présent : <b>is / are</b> + participe passé (English <b>is spoken</b>). Passé : <b>was / were</b> + participe passé (The cake <b>was eaten</b>). L'objet de l'action devient le <b>sujet</b>. Exemple résolu : « Le français est parlé en France » = <b>French is spoken in France</b>.",
+          questions:[
+            {type:"qcm", q:"La voix passive se forme avec :", options:["be + participe passé","have + base","did + base","will + ing"], answer:0, explain:"be + participe passé.", indice:"L'auxiliaire est « be »."},
+            {type:"qcm", q:"« English ___ spoken in many countries. »", options:["is","has","does","will"], answer:0, explain:"is spoken (passif présent).", indice:"be au présent : is."},
+            {type:"qcm", q:"« The cake ___ eaten yesterday. » (passif passé)", options:["was","is","were","has"], answer:0, explain:"was eaten (passif passé, singulier).", indice:"be au passé, singulier : was."},
+            {type:"qcm", q:"Au passif, l'objet de l'action devient :", options:["le sujet","le verbe","un adverbe","un complément de temps"], answer:0, explain:"L'objet passe en position sujet.", indice:"Ce qui subit l'action devient le sujet."},
+            {type:"qcm", q:"« The books ___ sold quickly. » (passif présent, pluriel)", options:["are","is","was","has"], answer:0, explain:"are sold (pluriel).", indice:"be au présent, pluriel : are."},
+            {type:"qcm", q:"Participe passé de « make » :", options:["made","maked","make","making"], answer:0, explain:"make → made.", indice:"Participe passé irrégulier."},
+            {type:"qcm", q:"« This house ___ built in 1990. » (passif passé)", options:["was","is","were","has"], answer:0, explain:"was built (singulier, passé).", indice:"be au passé, singulier : was."},
+            {type:"vf", q:"« The car is washed every week » est au passif.", answer:true, explain:"Oui : is + participe passé.", indice:"be + washed."},
+            {type:"qcm", q:"« These cars ___ made in Japan. » (passif présent, pluriel)", options:["are","is","was","has"], answer:0, explain:"are made (pluriel).", indice:"Pluriel au présent : are."},
+            {type:"qcm", q:"Traduction de « Le français est parlé en France. »", options:["French is spoken in France.","French speaks in France.","French is speak in France.","French spoken in France."], answer:0, explain:"is + spoken (participe passé).", indice:"be + participe passé de speak (spoken)."},
+            {type:"qcm", q:"« The letters ___ sent last week. » (passif passé, pluriel)", options:["were","was","are","has"], answer:0, explain:"were sent (pluriel, passé).", indice:"be au passé, pluriel : were."},
+            {type:"vf", q:"Au passif, on emploie le verbe « be » + participe passé.", answer:true, explain:"Oui : c'est la structure du passif.", indice:"be + participe passé."},
+            {type:"qcm", q:"Participe passé de « write » :", options:["written","wrote","writed","writing"], answer:0, explain:"write → written.", indice:"« wrote » est le prétérit."},
+            {type:"qcm", q:"« The song ___ written by a famous artist. » (passif passé)", options:["was","is","were","does"], answer:0, explain:"was written (singulier, passé).", indice:"be au passé, singulier : was."},
+            {type:"qcm", q:"« Rice ___ grown in Asia. » (passif présent)", options:["is","are","was","has"], answer:0, explain:"is grown (singulier, présent).", indice:"be au présent, singulier : is."}
+          ]
+        },
+        {
+          id:"ang16", niveau:"3e", theme:"rencontres-cultures", cecrl:"A2-B1", activites:["CE","EE"],
+          title:"Le discours indirect (introduction)",
+          carte:{centre:"Le discours indirect", branches:[{titre:"Sens", detail:"rapporter des paroles"},{titre:"He said (that)...", detail:"souvent « that »"},{titre:"Avec said", detail:"le présent recule au prétérit"},{titre:"can → could", detail:"will → would"},{titre:"Exemple", detail:"He said he was tired"}]},
+          cours:"Le <b>discours indirect</b> (reported speech) sert à <b>rapporter des paroles</b> sans les citer. On utilise souvent <b>say</b> / <b>said</b> + (that). Avec <b>said</b>, les temps <b>reculent</b> : le présent devient le <b>prétérit</b> (« I am tired » → He said he <b>was</b> tired), <b>can → could</b>, <b>will → would</b>, <b>have → had</b>. Exemple résolu : « She said, 'I like tea.' » → <b>She said she liked tea</b>.",
+          questions:[
+            {type:"qcm", q:"Le discours indirect sert à :", options:["rapporter ce que quelqu'un a dit","poser une question directe","donner un ordre","citer entre guillemets"], answer:0, explain:"On rapporte les paroles.", indice:"On raconte ce qui a été dit."},
+            {type:"qcm", q:"« I am happy. » → « He says (that) he ___ happy. »", options:["is","are","am","was"], answer:0, explain:"Avec « says » (présent), pas de changement : he is.", indice:"Avec « says », le temps ne recule pas."},
+            {type:"qcm", q:"Avec « He said », le présent devient :", options:["le prétérit","le futur","le présent","l'impératif"], answer:0, explain:"Le présent recule au prétérit.", indice:"On recule d'un temps."},
+            {type:"qcm", q:"« She is tired. » → « He said she ___ tired. »", options:["was","is","are","will be"], answer:0, explain:"is → was (avec said).", indice:"Le présent recule : was."},
+            {type:"qcm", q:"« She said, 'I like tea.' » → « She said she ___ tea. »", options:["liked","likes","like","will like"], answer:0, explain:"like → liked (avec said).", indice:"Présent → prétérit."},
+            {type:"qcm", q:"On introduit souvent le discours indirect par :", options:["that (souvent omis)","what","who","which"], answer:0, explain:"He said (that)...", indice:"Un petit mot souvent sous-entendu."},
+            {type:"qcm", q:"« I can swim. » → « He said he ___ swim. »", options:["could","can","cans","will can"], answer:0, explain:"can → could.", indice:"Le modal recule aussi."},
+            {type:"vf", q:"Avec « said », « I am » devient « he was ».", answer:true, explain:"Oui : le présent recule au prétérit.", indice:"am → was."},
+            {type:"qcm", q:"« I will come. » → « Tom said he ___ come. »", options:["would","will","was","did"], answer:0, explain:"will → would.", indice:"will recule en would."},
+            {type:"qcm", q:"On utilise « tell » avec :", options:["un complément (tell me, tell her)","jamais de complément","seulement « that »","un point final"], answer:0, explain:"tell + quelqu'un (tell me).", indice:"« tell » est suivi de la personne."},
+            {type:"qcm", q:"« We are ready. » → « They said they ___ ready. »", options:["were","are","was","will be"], answer:0, explain:"are → were (avec said).", indice:"Présent pluriel → prétérit : were."},
+            {type:"vf", q:"Le discours indirect rapporte des paroles sans les citer mot pour mot.", answer:true, explain:"Oui : on les reformule.", indice:"Pas de guillemets."},
+            {type:"qcm", q:"« I have a dog. » → « She said she ___ a dog. »", options:["had","has","have","will have"], answer:0, explain:"have → had (avec said).", indice:"Le verbe recule : had."},
+            {type:"qcm", q:"Après « He said », « play » (présent) devient :", options:["played","plays","play","will play"], answer:0, explain:"play → played.", indice:"Présent → prétérit."},
+            {type:"qcm", q:"« He says he ___ busy. » (présent, pas de changement)", options:["is","was","are","will be"], answer:0, explain:"Avec « says », pas de recul : he is busy.", indice:"« says » au présent : le temps ne change pas."}
+          ]
         }
       ]
     }
