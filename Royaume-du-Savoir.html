@@ -3070,10 +3070,16 @@ function renderKingdom(){
 }
 
 /* ---- Liste des quêtes d'une matière ---- */
+/* Ordre des niveaux pour une progression cohérente (du plus simple au Brevet). */
+const NIVEAU_ORDER={cp:0,ce1:1,ce2:2,cm1:3,cm2:4,"6e":5,"5e":6,"4e":7,"3e":8};
+function niveauRank(n){ return (NIVEAU_ORDER[n]!==undefined)?NIVEAU_ORDER[n]:99; }
 function renderRegion(subId){
   const sub=subjectById(subId);
+  // Tri stable par niveau : toutes les 6e, puis 5e, 4e, 3e (l'ordre du fichier
+  // est conservé à l'intérieur d'un même niveau).
+  const lessons=sub.lessons.slice().sort((a,b)=>niveauRank(a.niveau)-niveauRank(b.niveau));
   let prevDone=true, curNiveau=null;
-  const items=sub.lessons.map((l,idx)=>{
+  const items=lessons.map((l,idx)=>{
     const niveau = l.niveau || "5e";
     let header="";
     if(niveau!==curNiveau){
