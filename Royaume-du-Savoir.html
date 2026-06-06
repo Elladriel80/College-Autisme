@@ -2361,20 +2361,19 @@ function mindmapSVG(lesson){
     ${title}
   </svg>`;
 }
-/* Chaînes YouTube de qualité par matière (recherche ciblée = toujours à jour) */
+/* Chaînes de qualité recommandées par matière.
+   AFFICHÉES EN TEXTE, sans lien sortant : la liste de vidéos est FERMÉE.
+   On n'embarque que des vidéos vérifiées (LESSON_VIDEOS) ; aucun renvoi
+   vers une recherche YouTube (contenu non validé, risque pour un enfant). */
 const VIDEO_CHANNELS = {
-  maths:[{nm:"J'ai compris Maths", q:"jaicompris maths"},{nm:"Yvan Monka (maths et tiques)", q:"Yvan Monka maths et tiques"}],
-  francais:[{nm:"Les Bons Profs", q:"les bons profs français collège"},{nm:"Lumni", q:"Lumni français collège"}],
-  histgeo:[{nm:"Les Bons Profs", q:"les bons profs histoire géographie collège"},{nm:"Lumni", q:"Lumni histoire géographie collège"}],
-  sciences:[{nm:"Les Bons Profs", q:"les bons profs physique chimie SVT collège"},{nm:"Lumni", q:"Lumni sciences collège"}]
+  maths:["Yvan Monka (maths et tiques)","J'ai compris Maths"],
+  francais:["Les Bons Profs","Lumni"],
+  histgeo:["Les Bons Profs","Lumni"],
+  sciences:["Les Bons Profs","Lumni"]
 };
-function videoButtons(lesson){
+function channelNames(lesson){
   const chans=VIDEO_CHANNELS[lesson.subjectId]||[];
-  const niveau=lesson.niveau||"5e";
-  return chans.map(c=>{
-    const url="https://www.youtube.com/results?search_query="+encodeURIComponent(c.q+" "+lesson.title+" "+niveau);
-    return `<a class="btn ghost" href="${url}" target="_blank" rel="noopener">🔎 ${c.nm}</a>`;
-  }).join("");
+  return chans.length ? chans.join(" · ") : "";
 }
 /* Vidéo vérifiée par leçon (identifiants YouTube réels, chaînes de qualité).
    Maths : Yvan Monka & J'ai compris · Français : Les Bons Profs & chaînes reconnues
@@ -2398,11 +2397,10 @@ function videoSection(lesson){
           loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen></iframe>
       </div>
-      <p class="small muted" style="margin:8px 0 4px">Tu veux d'autres explications ? Ouvre une chaîne de qualité :</p>
-      <div class="row">${videoButtons(lesson)}</div>`;
+      <p class="small muted" style="margin:8px 0 4px">🎬 Vidéo vérifiée, d'une chaîne de qualité.</p>`;
   }
-  return `<p class="small muted" style="margin:2px 0 8px">Voici des chaînes de qualité (s'ouvrent dans ton navigateur) :</p>
-    <div class="row">${videoButtons(lesson)}</div>`;
+  const chans=channelNames(lesson);
+  return `<p class="small muted" style="margin:2px 0 8px">Pas encore de vidéo validée pour cette leçon.${chans?` Chaînes recommandées : ${chans}.`:""}</p>`;
 }
 
 /* ------------------------------- UI ------------------------------------ */
@@ -2474,16 +2472,29 @@ function renderLanding(lastId){
       <div style="margin-top:8px"><a class="link small" id="manageAcc">Gérer les comptes</a></div>`
     : `<div style="margin-top:20px"><button class="btn big" id="newAcc">✨ Créer mon compte</button></div>`;
 
-  // Les 4 matières
+  // Les matières du collège (Le Royaume du Savoir)
   const subjectsHTML = CONTENT.subjects.map(s=>{
     const nb = s.lessons.length;
     return `<div class="region" style="cursor:default;border-color:${s.color}">
-        <div class="rico">${s.icon}</div>
+        <div class="rico" aria-hidden="true">${s.icon}</div>
         <h3>${s.region}</h3>
         <div class="small muted">${s.name}</div>
         <div class="pct" style="color:${s.color}">${nb} quêtes</div>
       </div>`;
   }).join("");
+
+  // Les domaines de la primaire (Les Petits Malins)
+  const primaireDomains = [
+    {icon:"📖", titre:"Lecture",  desc:"Lettres, sons, mots et phrases",   color:"#e11d48"},
+    {icon:"🔢", titre:"Calcul",   desc:"Compter, +, −, ×, ÷ et problèmes", color:"#2563eb"},
+    {icon:"🗣️", titre:"Langues",  desc:"Anglais, espagnol, italien",       color:"#059669"},
+    {icon:"⏳", titre:"Le temps", desc:"De la préhistoire à aujourd'hui",  color:"#d97706"}
+  ];
+  const primaireHTML = primaireDomains.map(d=>`<div class="region" style="cursor:default;border-color:${d.color}">
+        <div class="rico" aria-hidden="true">${d.icon}</div>
+        <h3>${d.titre}</h3>
+        <div class="small muted">${d.desc}</div>
+      </div>`).join("");
 
   // Fonctionnalités
   const feats = [
@@ -2538,8 +2549,15 @@ function renderLanding(lastId){
   </div>
 
   <div class="card">
-    <div class="section-title">📚 Ce que l'on travaille</div>
-    <p class="muted small">Les matières du collège, chacune une région magique à explorer (les 4 du Brevet, plus l'anglais en contrôle continu).</p>
+    <div class="section-title">📚 Ce que tu explores</div>
+    <p class="muted small">De la primaire à la troisième, chaque matière est une région magique à explorer.</p>
+
+    <h3 style="margin:18px 0 2px">🐣 Les Petits Malins · la primaire</h3>
+    <p class="muted small">Pour bien démarrer : lire, écrire, compter et découvrir le monde, à ton rythme.</p>
+    <div class="grid regions" style="margin-top:12px">${primaireHTML}</div>
+
+    <h3 style="margin:22px 0 2px">🏰 Le Royaume du Savoir · le collège</h3>
+    <p class="muted small">Les matières du collège : les quatre épreuves écrites du Brevet, et l'anglais que tu travailles toute l'année.</p>
     <div class="grid regions" style="margin-top:12px">${subjectsHTML}</div>
   </div>
 
@@ -3052,10 +3070,16 @@ function renderKingdom(){
 }
 
 /* ---- Liste des quêtes d'une matière ---- */
+/* Ordre des niveaux pour une progression cohérente (du plus simple au Brevet). */
+const NIVEAU_ORDER={cp:0,ce1:1,ce2:2,cm1:3,cm2:4,"6e":5,"5e":6,"4e":7,"3e":8};
+function niveauRank(n){ return (NIVEAU_ORDER[n]!==undefined)?NIVEAU_ORDER[n]:99; }
 function renderRegion(subId){
   const sub=subjectById(subId);
+  // Tri stable par niveau : toutes les 6e, puis 5e, 4e, 3e (l'ordre du fichier
+  // est conservé à l'intérieur d'un même niveau).
+  const lessons=sub.lessons.slice().sort((a,b)=>niveauRank(a.niveau)-niveauRank(b.niveau));
   let prevDone=true, curNiveau=null;
-  const items=sub.lessons.map((l,idx)=>{
+  const items=lessons.map((l,idx)=>{
     const niveau = l.niveau || "5e";
     let header="";
     if(niveau!==curNiveau){
@@ -3080,6 +3104,11 @@ function renderRegion(subId){
   }).join("");
   const entrainBtn = (subId==="maths")
     ? `<button class="btn ghost" id="entrainRegion">🎲 Entraînement illimité</button>` : "";
+  // Barre de changement rapide de matière (1 clic, sans repasser par la carte).
+  const switcher = CONTENT.subjects.map(x=>{
+    const active = x.id===subId;
+    return `<button class="btn ${active?'':'ghost'} small" data-go="${x.id}" aria-label="Matière : ${x.name}"${active?' aria-current="true" disabled':''}>${x.icon} ${x.name}</button>`;
+  }).join("");
   app.innerHTML=`
     <div class="card">
       <div class="row">
@@ -3090,11 +3119,16 @@ function renderRegion(subId){
         ${entrainBtn}
         <button class="btn ghost" id="back">← Carte</button>
       </div>
+      <div class="row" style="margin-top:10px;flex-wrap:wrap;gap:8px">
+        <span class="small muted" style="width:100%;margin-bottom:2px">Changer de matière :</span>
+        ${switcher}
+      </div>
       <div class="quests" style="margin-top:16px">${items}</div>
     </div>`;
   document.getElementById("back").onclick=renderMap;
   const erb=document.getElementById("entrainRegion");
   if(erb) erb.onclick=renderEntrainementIntro;
+  app.querySelectorAll("[data-go]").forEach(b=>{ b.onclick=()=>renderRegion(b.dataset.go); });
   app.querySelectorAll(".quest").forEach(q=>{
     if(q.dataset.l){ q.style.cursor="pointer"; q.onclick=()=>renderLesson(q.dataset.l); }
   });
