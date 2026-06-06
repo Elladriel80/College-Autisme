@@ -3098,6 +3098,11 @@ function renderRegion(subId){
   }).join("");
   const entrainBtn = (subId==="maths")
     ? `<button class="btn ghost" id="entrainRegion">🎲 Entraînement illimité</button>` : "";
+  // Barre de changement rapide de matière (1 clic, sans repasser par la carte).
+  const switcher = CONTENT.subjects.map(x=>{
+    const active = x.id===subId;
+    return `<button class="btn ${active?'':'ghost'} small" data-go="${x.id}" aria-label="Matière : ${x.name}"${active?' aria-current="true" disabled':''}>${x.icon} ${x.name}</button>`;
+  }).join("");
   app.innerHTML=`
     <div class="card">
       <div class="row">
@@ -3108,11 +3113,16 @@ function renderRegion(subId){
         ${entrainBtn}
         <button class="btn ghost" id="back">← Carte</button>
       </div>
+      <div class="row" style="margin-top:10px;flex-wrap:wrap;gap:8px">
+        <span class="small muted" style="width:100%;margin-bottom:2px">Changer de matière :</span>
+        ${switcher}
+      </div>
       <div class="quests" style="margin-top:16px">${items}</div>
     </div>`;
   document.getElementById("back").onclick=renderMap;
   const erb=document.getElementById("entrainRegion");
   if(erb) erb.onclick=renderEntrainementIntro;
+  app.querySelectorAll("[data-go]").forEach(b=>{ b.onclick=()=>renderRegion(b.dataset.go); });
   app.querySelectorAll(".quest").forEach(q=>{
     if(q.dataset.l){ q.style.cursor="pointer"; q.onclick=()=>renderLesson(q.dataset.l); }
   });
