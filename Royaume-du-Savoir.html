@@ -1293,7 +1293,10 @@ const BADGES = [
   {id:"maths", icon:"🗼", nm:"Tours de Calcul", test:s=>regionComplete(s,"maths")},
   {id:"francais", icon:"📜", nm:"Bibliothèque", test:s=>regionComplete(s,"francais")},
   {id:"explorateur", icon:"🗺️", nm:"Touche-à-tout", test:s=>subjectsTouched(s)>=3},
-  {id:"brevet", icon:"🎓", nm:"Brevet blanc réussi", test:s=>(s.brevet||0)>=10}
+  {id:"brevet", icon:"🎓", nm:"Brevet blanc réussi", test:s=>(s.brevet||0)>=10},
+  {id:"anglais", icon:"🌍", nm:"Portail des Langues", test:s=>regionComplete(s,"anglais")},
+  {id:"anglophone", icon:"🇬🇧", nm:"Explorateur anglophone", test:s=>Object.keys(s.scores||{}).filter(function(k){return /^ang[0-9]/.test(k)&&s.scores[k]&&s.scores[k].stars>0;}).length>=8},
+  {id:"irreguliers", icon:"🔤", nm:"Verbes irréguliers", test:s=>{var v=(s.scores||{}).ang8;return !!(v&&v.stars===3);}}
 ];
 
 /* Constructions du royaume (achetées avec des cristaux 💎) */

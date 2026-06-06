@@ -2357,6 +2357,52 @@ var CONTENT = {
             {type:"qcm", q:"Après « He said », « play » (présent) devient :", options:["played","plays","play","will play"], answer:0, explain:"play → played.", indice:"Présent → prétérit."},
             {type:"qcm", q:"« He says he ___ busy. » (présent, pas de changement)", options:["is","was","are","will be"], answer:0, explain:"Avec « says », pas de recul : he is busy.", indice:"« says » au présent : le temps ne change pas."}
           ]
+        },
+        {
+          id:"ang17", niveau:"5e", theme:"langages", cecrl:"A1", activites:["CE","EOC"],
+          title:"Les nombres, les jours et les mois (lexique)",
+          carte:{centre:"Nombres, jours, mois", branches:[{titre:"Nombres", detail:"ten = 10, twenty = 20"},{titre:"Jours", detail:"Monday ... Sunday"},{titre:"Mois", detail:"January ... December"},{titre:"Majuscule", detail:"jours et mois en majuscule"},{titre:"12 mois", detail:"twelve months"}]},
+          cours:"Lexique de base : les <b>nombres</b> (ten = 10, twenty = 20, thirty = 30), les <b>jours</b> (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday) et les <b>mois</b> (January ... December). En anglais, les <b>jours et les mois</b> prennent toujours une <b>majuscule</b>. Exemple résolu : « lundi » = <b>Monday</b>.",
+          questions:[
+            {type:"qcm", q:"« three » = ", options:["3","2","4","13"], answer:0, explain:"three = 3.", indice:"Un petit nombre."},
+            {type:"qcm", q:"« 12 » en anglais :", options:["twelve","twenty","twceve","two"], answer:0, explain:"12 = twelve.", indice:"Attention, pas « twenty » (20)."},
+            {type:"qcm", q:"« lundi » en anglais :", options:["Monday","Sunday","Tuesday","Friday"], answer:0, explain:"lundi = Monday.", indice:"Le jour de la lune (moon)."},
+            {type:"qcm", q:"« Saturday » = ", options:["samedi","dimanche","vendredi","lundi"], answer:0, explain:"Saturday = samedi.", indice:"Le jour avant Sunday."},
+            {type:"qcm", q:"« janvier » en anglais :", options:["January","June","July","March"], answer:0, explain:"janvier = January.", indice:"Le premier mois."},
+            {type:"qcm", q:"« December » = ", options:["décembre","octobre","septembre","novembre"], answer:0, explain:"December = décembre.", indice:"Le dernier mois."},
+            {type:"saisie", q:"« ten » = quel chiffre ?", answer:["10"], explain:"ten = 10.", indice:"Un nombre rond."},
+            {type:"qcm", q:"« twenty » = ", options:["20","12","2","22"], answer:0, explain:"twenty = 20.", indice:"Pas « twelve » (12)."},
+            {type:"qcm", q:"« mercredi » en anglais :", options:["Wednesday","Thursday","Tuesday","Sunday"], answer:0, explain:"mercredi = Wednesday.", indice:"Le jour du milieu de la semaine."},
+            {type:"qcm", q:"Combien y a-t-il de « months » dans une année ?", options:["twelve","ten","seven","twenty"], answer:0, explain:"12 mois = twelve months.", indice:"twelve = 12."},
+            {type:"vf", q:"En anglais, les jours et les mois prennent une majuscule.", answer:true, explain:"Oui : Monday, January...", indice:"Toujours une majuscule."},
+            {type:"qcm", q:"« août » en anglais :", options:["August","April","October","autumn"], answer:0, explain:"août = August.", indice:"Attention : « autumn » = automne."},
+            {type:"qcm", q:"« fifteen » = ", options:["15","50","5","14"], answer:0, explain:"fifteen = 15.", indice:"Pas « fifty » (50)."},
+            {type:"qcm", q:"« Friday » = ", options:["vendredi","jeudi","mercredi","samedi"], answer:0, explain:"Friday = vendredi.", indice:"Le jour avant Saturday."},
+            {type:"qcm", q:"« thirty » = ", options:["30","13","3","33"], answer:0, explain:"thirty = 30.", indice:"Pas « thirteen » (13)."}
+          ]
+        },
+        {
+          id:"ang18", niveau:"4e", theme:"langages", cecrl:"A2", activites:["CE","EE"],
+          title:"Le pluriel des noms",
+          carte:{centre:"Le pluriel des noms", branches:[{titre:"Régulier", detail:"+ -s (cats)"},{titre:"Après s, x, ch, sh", detail:"+ -es (boxes, watches)"},{titre:"Consonne + y", detail:"y devient ies (baby → babies)"},{titre:"Irréguliers", detail:"man → men, child → children"},{titre:"foot → feet", detail:"tooth → teeth"}]},
+          cours:"Le <b>pluriel</b> des noms se forme en général avec <b>-s</b> (cat → cats). Après <b>s, x, ch, sh</b> : <b>-es</b> (box → boxes, watch → watches). <b>Consonne + y</b> : le y devient <b>-ies</b> (baby → babies). Certains sont <b>irréguliers</b> : man → <b>men</b>, woman → <b>women</b>, child → <b>children</b>, foot → <b>feet</b>, tooth → <b>teeth</b>, person → <b>people</b>. Exemple résolu : « un enfant / des enfants » = a child / <b>children</b>.",
+          questions:[
+            {type:"qcm", q:"Pluriel de « cat » :", options:["cats","cates","cat","caties"], answer:0, explain:"cat → cats (+ -s).", indice:"Pluriel régulier : -s."},
+            {type:"qcm", q:"Pluriel de « box » :", options:["boxes","boxs","box","boxies"], answer:0, explain:"Après x : -es. box → boxes.", indice:"Mot en -x : on ajoute -es."},
+            {type:"qcm", q:"Pluriel de « baby » :", options:["babies","babys","babes","baby"], answer:0, explain:"Consonne + y : y → ies. baby → babies.", indice:"Le y devient ies."},
+            {type:"qcm", q:"Pluriel de « man » :", options:["men","mans","mens","man"], answer:0, explain:"Irrégulier : man → men.", indice:"Forme irrégulière."},
+            {type:"qcm", q:"Pluriel de « child » :", options:["children","childs","childrens","childes"], answer:0, explain:"Irrégulier : child → children.", indice:"Pluriel très particulier."},
+            {type:"qcm", q:"Pluriel de « foot » :", options:["feet","foots","feets","foot"], answer:0, explain:"Irrégulier : foot → feet.", indice:"Le « oo » devient « ee »."},
+            {type:"qcm", q:"Après s, x, ch, sh, le pluriel prend :", options:["-es","-s","-ies","rien"], answer:0, explain:"On ajoute -es.", indice:"Comme boxes, watches."},
+            {type:"saisie", q:"Pluriel de « dog ».", answer:["dogs"], explain:"dog → dogs.", indice:"Pluriel régulier : -s."},
+            {type:"qcm", q:"Pluriel de « watch » :", options:["watches","watchs","watchies","watch"], answer:0, explain:"Après ch : -es. watch → watches.", indice:"Mot en -ch : on ajoute -es."},
+            {type:"qcm", q:"Pluriel de « woman » :", options:["women","womans","womens","woman"], answer:0, explain:"Irrégulier : woman → women.", indice:"Forme irrégulière (le a devient e à l'oral)."},
+            {type:"vf", q:"Le pluriel de « child » est « children ».", answer:true, explain:"Oui : pluriel irrégulier.", indice:"Pas « childs »."},
+            {type:"qcm", q:"Pluriel de « city » :", options:["cities","citys","cityes","city"], answer:0, explain:"Consonne + y : city → cities.", indice:"Le y devient ies."},
+            {type:"qcm", q:"Pluriel de « tooth » :", options:["teeth","tooths","teeths","tooth"], answer:0, explain:"Irrégulier : tooth → teeth.", indice:"Comme foot → feet."},
+            {type:"qcm", q:"Pluriel de « person » (le plus courant) :", options:["people","persons","peoples","person"], answer:0, explain:"person → people (pluriel courant).", indice:"Un mot complètement différent."},
+            {type:"saisie", q:"Pluriel de « book ».", answer:["books"], explain:"book → books.", indice:"Pluriel régulier : -s."}
+          ]
         }
       ]
     }
