@@ -1986,6 +1986,34 @@ var CONTENT = {
           ]
         }
       ]
+    },
+    {
+      id:"anglais", name:"Anglais", region:"Le Portail des Langues", icon:"🌍", color:"#8b80f9",
+      lessons:[
+        {
+          id:"ang1", niveau:"5e", theme:"langages", cecrl:"A1-A2", activites:["CE","EE"],
+          title:"Le présent simple (present simple)",
+          carte:{centre:"Le présent simple", branches:[{titre:"Habitudes, vérités générales", detail:"I play every day"},{titre:"I / you / we / they + base", detail:"I play, they live"},{titre:"he / she / it + -s", detail:"she plays"},{titre:"Négatif", detail:"don't / doesn't"},{titre:"Question", detail:"Do / Does ...?"}]},
+          cours:"Le <b>présent simple</b> (present simple) sert à parler d'<b>habitudes</b> et de <b>vérités générales</b>. Avec <b>I, you, we, they</b>, on emploie la <b>base verbale</b> (I play = je joue). Avec <b>he, she, it</b>, on ajoute <b>-s</b> (she play<b>s</b> = elle joue). Forme négative : <b>don't</b> / <b>doesn't</b> (he doesn't play). Question : <b>do</b> / <b>does</b> (Does she play?). Exemple résolu : « Elle aime les chats » = <b>She likes cats</b> (he/she/it, donc like + s).",
+          questions:[
+            {type:"qcm", q:"« She ___ tennis every day. » (play)", options:["plays","play","playing","played"], answer:0, explain:"he/she/it + verbe + s : she plays.", indice:"3e personne du singulier : on ajoute -s."},
+            {type:"qcm", q:"« I ___ to school. » (go)", options:["go","goes","going","gone"], answer:0, explain:"Avec I, on garde la base verbale : I go.", indice:"I + base verbale (pas de -s)."},
+            {type:"qcm", q:"« He ___ football. » (play)", options:["plays","play","playes","plaies"], answer:0, explain:"he + play + s : he plays.", indice:"3e personne du singulier : -s."},
+            {type:"qcm", q:"Forme négative : « She ___ like coffee. »", options:["doesn't","don't","isn't","not"], answer:0, explain:"he/she/it : doesn't + base. She doesn't like.", indice:"Avec she, on utilise doesn't."},
+            {type:"qcm", q:"« They ___ in London. » (live)", options:["live","lives","living","lived"], answer:0, explain:"they + base : they live.", indice:"they + base verbale."},
+            {type:"qcm", q:"Question : « ___ you speak English? »", options:["Do","Does","Are","Is"], answer:0, explain:"Avec you : Do you speak...?", indice:"Avec I/you/we/they : Do."},
+            {type:"qcm", q:"Question : « ___ she like music? »", options:["Does","Do","Is","Are"], answer:0, explain:"Avec she : Does she like...?", indice:"Avec he/she/it : Does."},
+            {type:"saisie", q:"Complète au présent simple : « He ___ (watch) TV. »", answer:["watches"], explain:"watch + es (verbes en -ch prennent -es) : he watches.", indice:"Les verbes en -ch ajoutent -es."},
+            {type:"saisie", q:"Complète au présent simple : « We ___ (study) English. »", answer:["study"], explain:"we + base : we study.", indice:"we + base verbale."},
+            {type:"qcm", q:"« My sister ___ a cat. » (have)", options:["has","have","haves","having"], answer:0, explain:"he/she/it : have devient has. She has a cat.", indice:"have, 3e personne : has."},
+            {type:"vf", q:"« He plays » est correct au présent simple (3e personne).", answer:true, explain:"Oui : he + play + s.", indice:"3e personne du singulier : -s."},
+            {type:"vf", q:"« She go to school » est de l'anglais correct.", answer:false, explain:"Non : il faut « She goes » (he/she/it + s).", indice:"Il manque le -s à la 3e personne."},
+            {type:"qcm", q:"Traduction de « Elle aime les chiens. »", options:["She likes dogs.","She like dogs.","She liking dogs.","He likes dogs."], answer:0, explain:"she + like + s : She likes dogs.", indice:"3e personne : -s au verbe."},
+            {type:"saisie", q:"Mets au présent simple (3e personne) : « He ___ (go) to bed early. »", answer:["goes"], explain:"go + es : he goes.", indice:"go prend -es à la 3e personne."},
+            {type:"qcm", q:"« Water ___ at 100°C. » (boil, vérité générale)", options:["boils","boil","is boiling","boiled"], answer:0, explain:"Vérité générale, it : water boils.", indice:"it + verbe + s."}
+          ]
+        }
+      ]
     }
   ]
 };
