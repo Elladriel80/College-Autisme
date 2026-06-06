@@ -2536,7 +2536,7 @@ function renderLanding(lastId){
 
   <div class="card">
     <div class="section-title">📚 Ce que l'on travaille</div>
-    <p class="muted small">Les 4 matières évaluées au Brevet, chacune une région magique à explorer.</p>
+    <p class="muted small">Les matières du collège, chacune une région magique à explorer (les 4 du Brevet, plus l'anglais en contrôle continu).</p>
     <div class="grid regions" style="margin-top:12px">${subjectsHTML}</div>
   </div>
 
@@ -2790,6 +2790,7 @@ function _norm(s){return String(s).toLowerCase().trim().replace(/\s+/g,"").repla
 function collegeQuestions(){
   var out=[];
   CONTENT.subjects.forEach(function(s){
+    if(s.id==="anglais") return;   // l'anglais est en contrôle continu : pas d'épreuve écrite au DNB
     s.lessons.forEach(function(l){
       var niv=l.niveau||"5e"; if(niv==="6e") return;
       l.questions.forEach(function(q){ out.push(Object.assign({},q,{subject:s.id,subjectName:s.name,subjectIcon:s.icon,niveau:niv})); });
